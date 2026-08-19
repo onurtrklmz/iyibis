@@ -1,43 +1,53 @@
-# İYİBİS — GitHub Repository
+# İYİBİS GitHub Online BETA 2.51
 
-Bu depo İYİBİS kaynak kodlarının GitHub sürümüdür.
+## Neden önceki sürümde Aile/Saha açılmadı?
 
-## Ana giriş dosyası
+GitHub Pages statik hostingdir. `google.script.run` çalıştıramaz.
+Bu nedenle AilePanel.html ve SahaMenu.html GitHub'dan doğrudan çalıştırılmaz.
 
-GitHub / standart web sunucusu kök giriş dosyası:
+## Doğru çalışma modeli
 
-`index.html`
+GitHub Pages:
+- index.html
+- style.css
+- config.js
+- app.js
 
-Eski `Portal.html` adı kullanılmaz.
+Google Apps Script:
+- Aile Otomasyonu
+- Saha Otomasyonu
+- Saha Tespit
+- Ayni Yardım
+- Yayın İzni
+- Google Sheets / Drive backend
 
-Projede İYİBİS ana sayfasına dönen bağlantılar `index.html` hedefler.
+## Zorunlu ayar
 
-## Dosyalar
+`config.js` dosyasını açın:
 
-- `index.html` — İYİBİS ana portal
-- `AilePanel.html` — Aile Otomasyonu
-- `SahaMenu.html` — Saha Otomasyonu ana menüsü
-- `SahaTespit.html` — Saha Tespit Formu
-- `AyniYardim.html` — Ayni Yardım Formu
-- `YayinIzni.html` — Video / Fotoğraf Yayın İzni
-- `Code.gs` — Google Apps Script backend kaynağı
-- `appsscript.json` — Apps Script manifest
+    APPS_SCRIPT_EXEC_URL: ""
 
-## Mimari not
+yerine Google Apps Script üretim `/exec` adresinizi yazın.
 
-Formlar ve paneller halen `google.script.run` / Google Apps Script backend işlevlerine
-bağlıdır. Bu repository kaynak kod ve geçiş sürümü olarak tutulmalıdır.
+Örnek:
 
-`index.html` GitHub Pages veya standart hosting için ana giriş dosyasıdır.
+    APPS_SCRIPT_EXEC_URL: "https://script.google.com/macros/s/AKfycb.../exec"
 
-## Güvenlik
+Sonra GitHub'a commit edin.
 
-Repository PRIVATE tutulmalıdır. `Code.gs` Google Sheets/Drive kimlikleri ve uygulama
-yapılandırmaları içerir.
+## Linkler
 
-Google Sheets ve Drive dosyaları public paylaşılmamalıdır.
+- Aile -> `/exec?app=aile`
+- Saha -> `/exec?app=saha`
+- Saha Tespit -> `/exec?app=saha-tespit`
+- Ayni Yardım -> `/exec?app=ayni-yardim`
+- Yayın İzni -> `/exec?app=yayin-izni`
 
-## Sürüm
+İYİBİS ana sayfa -> GitHub `index.html`
 
-GitHub paket: BETA 2.50
-Backend snapshot: BETA 2.49
+## Önemli
+
+`Code.gs` ve diğer uygulama HTML'leri kaynak arşivi olarak repoda durabilir, fakat
+GitHub Pages bunları uygulama olarak çalıştırmaz.
+
+Repo PRIVATE ise GitHub Pages planınıza göre yayın erişimi kısıtlı olabilir.
