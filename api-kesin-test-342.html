@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>İYİBİS API Kesin Test 3.4.2</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:760px;margin:40px auto;padding:20px;line-height:1.5}
+button{padding:12px 18px;font-weight:700;cursor:pointer}
+pre{background:#f1f5f9;padding:16px;border-radius:10px;white-space:pre-wrap;overflow:auto}
+code{background:#f1f5f9;padding:2px 5px}
+</style>
+</head>
+<body>
+<h1>İYİBİS API Kesin Test — 3.4.2</h1>
+<p>Bu dosya <strong>config.js, api-client.js veya bridge-client.js kullanmaz.</strong></p>
+<p>Worker: <code>https://iyibis-api.gaziantepiyilikhareketi6.workers.dev/</code></p>
+<p>Çağrılan metod: <code>webApiHealth</code></p>
+<button id="btn">Doğrudan Worker → Apps Script Testi</button>
+<pre id="out">Henüz çalıştırılmadı.</pre>
+<script>
+document.getElementById('btn').addEventListener('click', async function(){
+  const out=document.getElementById('out');
+  out.textContent='İstek gönderiliyor...\nMethod: webApiHealth\nWorker: https://iyibis-api.gaziantepiyilikhareketi6.workers.dev/';
+  try {
+    const r=await fetch('https://iyibis-api.gaziantepiyilikhareketi6.workers.dev/',{
+      method:'POST',
+      mode:'cors',
+      credentials:'omit',
+      cache:'no-store',
+      headers:{'Content-Type':'application/json;charset=UTF-8'},
+      body:JSON.stringify({method:'webApiHealth',args:[]})
+    });
+    const text=await r.text();
+    out.textContent='HTTP '+r.status+'\n\nRAW RESPONSE:\n'+text;
+  } catch(e) {
+    out.textContent='FETCH HATASI\n\n'+(e&&e.message?e.message:String(e));
+  }
+});
+</script>
+</body></html>
