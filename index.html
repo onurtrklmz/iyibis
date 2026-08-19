@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>İYİBİS | İyilik Bilgi Yönetim Sistemi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="brand-mark">İYİBİS</div>
+      <div>
+        <h1>İyilik Bilgi Yönetim Sistemi</h1>
+        <p>Gaziantep İyilik Hareketi yönetim otomasyonları</p>
+      </div>
+    </header>
+
+    <section class="grid">
+      <a class="card primary" href="index.html">
+        <span class="icon">◆</span>
+        <span><strong>İYİBİS Ana Sayfa</strong><small>Merkezi giriş ekranı</small></span>
+      </a>
+
+      <a class="card" data-app="aile" href="#">
+        <span class="icon">⌂</span>
+        <span><strong>Aile Otomasyonu</strong><small>Aktif aileler, başvurular ve değerlendirmeler</small></span>
+      </a>
+
+      <a class="card" data-app="saha" href="#">
+        <span class="icon">◎</span>
+        <span><strong>Saha Otomasyonu</strong><small>Saha formları ve teslim işlemleri</small></span>
+      </a>
+
+      <a class="card compact" data-app="saha-tespit" href="#">
+        <span class="icon">▣</span>
+        <span><strong>Saha Tespit</strong><small>Saha tespit formu</small></span>
+      </a>
+
+      <a class="card compact" data-app="ayni-yardim" href="#">
+        <span class="icon">□</span>
+        <span><strong>Ayni Yardım</strong><small>Teslim tutanağı</small></span>
+      </a>
+
+      <a class="card compact" data-app="yayin-izni" href="#">
+        <span class="icon">◉</span>
+        <span><strong>Video / Fotoğraf İzni</strong><small>Yayın izin formu</small></span>
+      </a>
+    </section>
+
+    <div id="config-warning" class="warning" hidden>
+      <strong>Kurulum eksik:</strong> <code>config.js</code> içindeki
+      <code>APPS_SCRIPT_EXEC_URL</code> alanına Google Apps Script üretim
+      <code>/exec</code> adresini yazın.
+    </div>
+
+    <footer>
+      <span>İYİBİS BETA 2.51</span>
+      <span id="backend-status">Backend: kontrol ediliyor…</span>
+    </footer>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
