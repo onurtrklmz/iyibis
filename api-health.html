@@ -1,6 +1,0 @@
-<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>İYİBİS API Health</title><script src="config-v343.js?v=343"></script><script src="api-client-v343.js?v=343"></script></head>
-<body style="font-family:Arial;max-width:720px;margin:40px auto;padding:20px"><h1>İYİBİS API Health — BETA 3.4.3</h1>
-<button id="b">Test</button><pre id="o">Bekliyor…</pre>
-<script>document.getElementById('b').onclick=async function(){try{var x=await IYIBIS_API.call('webApiHealth',[]);document.getElementById('o').textContent=JSON.stringify(x,null,2)}catch(e){document.getElementById('o').textContent='HATA: '+e.message}}</script>
-</body></html>
