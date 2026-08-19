@@ -812,6 +812,108 @@
 }
 </style>
 
+
+<style id="iyibis-web-applications-fit-v42">
+/* BETA 4.2 — YALNIZ Web'den Yeni Başvurular tablosunu yatayda sayfaya sığdırır. */
+#tab-web .iyibis-scroll-list {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+#tab-web #web-applications-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+}
+
+#tab-web #web-applications-table th,
+#tab-web #web-applications-table td {
+    min-width: 0 !important;
+    max-width: none !important;
+    padding-left: .45rem !important;
+    padding-right: .45rem !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal !important;
+    vertical-align: top;
+}
+
+/* Tailwind whitespace-nowrap sınıflarının bu tabloyu genişletmesini engelle. */
+#tab-web #web-applications-table .whitespace-nowrap {
+    white-space: normal !important;
+}
+
+/* Adres ve uzun açıklamalar hücre içinde kalsın. */
+#tab-web #web-applications-table .truncate {
+    white-space: normal !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* İşlem düğmeleri hücre dışına taşmasın. */
+#tab-web #web-table-body td:last-child > div,
+#tab-web #web-table-body td:last-child .flex {
+    max-width: 100%;
+    flex-wrap: wrap !important;
+}
+
+#tab-web #web-table-body td:last-child .flex {
+    justify-content: flex-end;
+}
+
+#tab-web #web-table-body td:last-child button {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding-left: .42rem !important;
+    padding-right: .42rem !important;
+    font-size: .68rem !important;
+}
+
+/* Masaüstü sütun dağılımı — toplam %100 */
+#tab-web #web-applications-table th:nth-child(1),
+#tab-web #web-applications-table td:nth-child(1) { width: 9% !important; }
+
+#tab-web #web-applications-table th:nth-child(2),
+#tab-web #web-applications-table td:nth-child(2) { width: 14% !important; }
+
+#tab-web #web-applications-table th:nth-child(3),
+#tab-web #web-applications-table td:nth-child(3) { width: 16% !important; }
+
+#tab-web #web-applications-table th:nth-child(4),
+#tab-web #web-applications-table td:nth-child(4) { width: 10% !important; }
+
+#tab-web #web-applications-table th:nth-child(5),
+#tab-web #web-applications-table td:nth-child(5) { width: 12% !important; }
+
+#tab-web #web-applications-table th:nth-child(6),
+#tab-web #web-applications-table td:nth-child(6) { width: 18% !important; }
+
+#tab-web #web-applications-table th:nth-child(7),
+#tab-web #web-applications-table td:nth-child(7) { width: 9% !important; }
+
+#tab-web #web-applications-table th:nth-child(8),
+#tab-web #web-applications-table td:nth-child(8) { width: 12% !important; }
+
+/* Dar ekranda da sayfanın kendisini yatay büyütme. */
+@media (max-width: 640px) {
+    #tab-web #web-applications-table {
+        font-size: .66rem !important;
+    }
+    #tab-web #web-applications-table th,
+    #tab-web #web-applications-table td {
+        padding-left: .3rem !important;
+        padding-right: .3rem !important;
+    }
+    #tab-web #web-table-body td:last-child button {
+        padding-left: .3rem !important;
+        padding-right: .3rem !important;
+        font-size: .62rem !important;
+    }
+}
+</style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
