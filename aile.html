@@ -870,6 +870,158 @@
   }
 }
 </style>
+
+<style id="iyibis-mobile-tables-menu-logout-v42">
+/* ===== BETA 4.2 — Mobil tablo / sekme / logout iyileştirmeleri ===== */
+
+@media (max-width: 768px) {
+  /* Sayfanın kendisi yatay taşmasın */
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  /* Aktif Aileler ve Web Başvuruları: tablo kendi içinde yatay kaysın */
+  #tab-mevcut .table-container,
+  #tab-mevcut .overflow-x-auto,
+  #tab-web .iyibis-scroll-list,
+  #tab-web .overflow-x-auto {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  #tab-mevcut table,
+  #tab-web #web-applications-table {
+    width: max-content !important;
+    min-width: 980px !important;
+    max-width: none !important;
+    table-layout: auto !important;
+    font-size: .72rem !important;
+  }
+
+  #tab-mevcut th,
+  #tab-mevcut td,
+  #tab-web #web-applications-table th,
+  #tab-web #web-applications-table td {
+    width: auto !important;
+    min-width: 110px !important;
+    max-width: 240px !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    padding-left: .55rem !important;
+    padding-right: .55rem !important;
+  }
+
+  #tab-mevcut th:first-child,
+  #tab-mevcut td:first-child,
+  #tab-web #web-applications-table th:first-child,
+  #tab-web #web-applications-table td:first-child {
+    min-width: 90px !important;
+  }
+
+  #tab-mevcut th:nth-child(2),
+  #tab-mevcut td:nth-child(2),
+  #tab-web #web-applications-table th:nth-child(2),
+  #tab-web #web-applications-table td:nth-child(2) {
+    min-width: 155px !important;
+  }
+
+  #tab-mevcut th:last-child,
+  #tab-mevcut td:last-child,
+  #tab-web #web-applications-table th:last-child,
+  #tab-web #web-applications-table td:last-child {
+    min-width: 150px !important;
+  }
+
+  /* Web başvurularındaki işlem butonları mobilde sıkışmasın */
+  #tab-web #web-table-body td:last-child > div,
+  #tab-web #web-table-body td:last-child > div > div {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+    max-width: none !important;
+    gap: .3rem !important;
+  }
+
+  #tab-web #web-table-body td:last-child button {
+    width: auto !important;
+    min-width: max-content !important;
+    white-space: nowrap !important;
+    font-size: .66rem !important;
+    padding: .38rem .5rem !important;
+  }
+
+  /* Mobil sekme hamburger düğmesi */
+  #mobileTabMenuButton {
+    display: inline-flex !important;
+  }
+
+  #desktopTabNav {
+    display: none !important;
+  }
+
+  #mobileTabMenuPanel {
+    position: fixed;
+    top: 4.5rem;
+    left: .75rem;
+    right: .75rem;
+    z-index: 70;
+    max-height: calc(100dvh - 5.5rem);
+    overflow-y: auto;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: .85rem;
+    box-shadow: 0 18px 50px rgba(15,23,42,.26);
+    padding: .55rem;
+  }
+
+  #mobileTabMenuPanel.hidden {
+    display: none !important;
+  }
+
+  #mobileTabMenuPanel button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    text-align: left;
+    padding: .78rem .85rem;
+    border-radius: .6rem;
+    color: #e2e8f0;
+    font-size: .84rem;
+    font-weight: 700;
+  }
+
+  #mobileTabMenuPanel button:hover,
+  #mobileTabMenuPanel button.active {
+    background: #1e293b;
+    color: #fff;
+  }
+}
+
+@media (min-width: 769px) {
+  #mobileTabMenuButton,
+  #mobileTabMenuPanel {
+    display: none !important;
+  }
+}
+</style>
+
+
+<style id="iyibis-logout-mobile-visibility-v42">
+@media (max-width:640px){
+  #logoutBtn{color:#fff!important;white-space:nowrap!important;padding:.5rem .65rem!important}
+  #logoutBtnLabel{display:inline!important;color:#fff!important;font-size:.68rem!important}
+  #logoutBtn .fa-door-open{color:#fff!important}
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -1163,14 +1315,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <!-- Session Controls -->
                 <div class="flex items-center gap-2 mobile-header-actions">
                     <a href="#" onclick="return goToIyibisHome(event)" class="iyibis-top-home-link inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-sky-300 hover:text-sky-700 hover:bg-sky-50 transition whitespace-nowrap" title="İYİBİS Ana Sayfası"><i class="fa-solid fa-house"></i><span>İYİBİS</span></a>
-                <button onclick="lockApplication()" class="inline-flex items-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg border border-slate-700 transition">
-                        <i class="fa-solid fa-lock mr-1.5"></i><span class="hidden sm:inline">Oturumu Kapat</span>
+                <button id="logoutBtn" onclick="iyibisLogoutWithLoading(event)" class="inline-flex items-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold rounded-lg border border-slate-700 transition">
+                        <i class="fa-solid fa-door-open mr-1.5" aria-hidden="true"></i><span id="logoutBtnLabel" class="inline">Oturumu Kapat</span>
                     </button>
                 </div>
             </div>
 
             <!-- TABS NAVIGATION -->
-            <div class="flex space-x-1 sm:space-x-4 border-t border-slate-800/80 pt-1 overflow-x-auto custom-scroll">
+            
+<button id="mobileTabMenuButton" type="button" onclick="toggleMobileTabMenu()"
+        class="hidden items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold border border-slate-700">
+  <i class="fa-solid fa-bars"></i>
+  <span>Menü</span>
+</button>
+<div id="mobileTabMenuPanel" class="hidden">
+<button type="button" onclick="switchTab('tab-mevcut'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-users text-emerald-400"></i>
+                    <span>Aktif Aileler</span>
+                    <span id="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
+                </button>
+<button type="button" onclick="switchTab('tab-red'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-ban text-rose-400"></i>
+                    <span>Ret Listesi</span>
+                    <span id="badge-count-red" class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700">0</span>
+                </button>
+<button type="button" onclick="switchTab('tab-web'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-globe text-sky-400"></i>
+                    <span>Web Yeni Başvurular</span>
+                    <span id="badge-count-web" class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50">0</span>
+                </button>
+<button type="button" onclick="switchTab('tab-saha'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-person-walking-arrow-right text-amber-400"></i>
+                    <span>Saha Ziyareti</span>
+                    <span id="badge-count-saha" class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50">0</span>
+                </button>
+<button type="button" onclick="switchTab('tab-stats'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-chart-pie text-indigo-400"></i>
+                    <span>İstatistik Veriler</span>
+                </button>
+<button type="button" onclick="switchTab('tab-system'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-gear text-cyan-400"></i>
+                    <span>Sistem &amp; Ayarlar</span>
+                </button>
+</div>
+<div class="flex space-x-1 sm:space-x-4 border-t border-slate-800/80 pt-1 overflow-x-auto custom-scroll" id="desktopTabNav">
                 <button onclick="switchTab('tab-mevcut')" id="nav-tab-mevcut" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-users text-emerald-400"></i>
                     <span>Aktif Aileler</span>
@@ -5654,6 +5842,53 @@ document.addEventListener('click', function(ev) {
     var tabBtn = ev.target && ev.target.closest ? ev.target.closest('[data-tab="settings"], [onclick*="settings"], [onclick*="ayar"]') : null;
     if (tabBtn) setTimeout(refreshDriveStorageStatus, 150);
 });
+</script>
+
+
+<script id="iyibis-mobile-nav-logout-v42">
+function toggleMobileTabMenu() {
+  var panel = document.getElementById('mobileTabMenuPanel');
+  if (!panel) return;
+  panel.classList.toggle('hidden');
+}
+
+function closeMobileTabMenu() {
+  var panel = document.getElementById('mobileTabMenuPanel');
+  if (panel) panel.classList.add('hidden');
+}
+
+document.addEventListener('click', function(ev) {
+  var panel = document.getElementById('mobileTabMenuPanel');
+  var btn = document.getElementById('mobileTabMenuButton');
+  if (!panel || panel.classList.contains('hidden')) return;
+  if (panel.contains(ev.target) || (btn && btn.contains(ev.target))) return;
+  panel.classList.add('hidden');
+});
+
+async function iyibisLogoutWithLoading(event) {
+  if (event) event.preventDefault();
+  var btn = document.getElementById('logoutBtn');
+  var label = document.getElementById('logoutBtnLabel');
+  if (!btn) return;
+
+  if (btn.dataset.busy === '1') return;
+  btn.dataset.busy = '1';
+  btn.disabled = true;
+  btn.classList.add('opacity-70','cursor-wait');
+
+  var oldHtml = label ? label.innerHTML : '';
+  if (label) label.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Yükleniyor...';
+
+  try {
+    await (async function() { lockApplication() })();
+  } catch (err) {
+    btn.disabled = false;
+    btn.dataset.busy = '0';
+    btn.classList.remove('opacity-70','cursor-wait');
+    if (label) label.innerHTML = oldHtml || 'Oturumu Kapat';
+    throw err;
+  }
+}
 </script>
 
 </body>
