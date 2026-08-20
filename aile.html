@@ -1651,6 +1651,31 @@ body {
   transform: none !important;
 }
 </style>
+
+<style id="iyibis-assistance-history-visibility-v42">
+@media (prefers-color-scheme: dark) {
+  #assistance-history > div {
+    background: #17191b !important;
+    border-color: #30363d !important;
+  }
+  #assistance-history .text-slate-900 {
+    color: #f3f4f6 !important;
+  }
+  #assistance-history .text-slate-500 {
+    color: #aeb4bb !important;
+  }
+  #assistance-history .bg-amber-50 {
+    background: #493214 !important;
+    color: #fcd34d !important;
+    border-color: #a16207 !important;
+  }
+  #assistance-history .bg-emerald-50 {
+    background: #12372c !important;
+    color: #6ee7b7 !important;
+    border-color: #2f855a !important;
+  }
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -4113,16 +4138,89 @@ updateBadges();
     renderMevcutTable();
     renderDashboardStats();
 }
+function getAssistanceEntriesForFamily_(item) {
+    var keys = [];
+    var tc = normalizeTC(item && item.tc);
+    var name = normalizeName(item && item.ad_soyad);
+
+    if (tc) keys.push(tc);
+    if (name) keys.push('NAME:' + name);
+
+    var merged = [];
+    var seen = {};
+
+    keys.forEach(function(key) {
+        (workflowState.assistance[key] || []).forEach(function(e) {
+            var sig = [
+                e.id || '',
+                e.date || '',
+                e.content || '',
+                e.marketValue || '',
+                e.pdfUrl || '',
+                e.source || ''
+            ].join('|');
+
+            // ID bulunmayan geçmiş kayıtlarda içerik imzasını kullan.
+            if (!e.id) {
+                sig = [
+                    e.date || '',
+                    e.content || '',
+                    e.marketValue || '',
+                    e.pdfUrl || '',
+                    e.source || ''
+                ].join('|');
+            }
+
+            if (seen[sig]) return;
+            seen[sig] = true;
+            merged.push(e);
+        });
+    });
+
+    return merged.sort(function(a, b) {
+        return String(b.date || '').localeCompare(String(a.date || ''));
+    });
+}
+
 function renderAssistanceHistory(item) {
     var container = document.getElementById('assistance-history');
-    var key = familyKey(item);
-    var entries = (workflowState.assistance[key] || []).slice().sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
+    var entries = getAssistanceEntriesForFamily_(item);
+
     if (!entries.length) {
-        container.innerHTML = '<div class="text-center py-5 text-slate-400 bg-slate-50 rounded-lg border border-slate-200">Henüz yapılandırılmış yardım kaydı bulunmuyor.</div>';
+        container.innerHTML = '<div class="text-center py-5 text-slate-400 bg-slate-50 rounded-lg border border-slate-200">Henüz kayıtlı yardım bulunmuyor.</div>';
         return;
     }
-    container.innerHTML = entries.map(function (e) { return "\n                <div class=\"p-3 border border-slate-200 rounded-lg bg-white\">\n                    <div class=\"flex flex-col sm:flex-row sm:items-start justify-between gap-2\">\n                        <div>\n                            <div class=\"font-bold text-slate-900\">".concat(escapeHtml(e.content || '-'), "</div>\n                            <div class=\"text-slate-500 mt-1\">").concat(escapeHtml(e.date || '-'), " ").concat(e.marketValue ? '• Rayiç: ' + escapeHtml(e.marketValue) : '', "</div>\n                        </div>\n                        ").concat(e.pdfUrl ? "<a href=\"".concat(escapeAttr(e.pdfUrl), "\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-sky-700 font-semibold\"><i class=\"fa-solid fa-file-pdf mr-1\"></i>Tutanak</a>") : (e.pdfName ? "<span class=\"text-slate-500 pdf-name\"><i class=\"fa-solid fa-file-pdf mr-1\"></i>".concat(escapeHtml(e.pdfName), "</span>") : ''), "\n                    </div>\n                </div>\n            "); }).join('');
+
+    container.innerHTML = entries.map(function(e) {
+        var isHistory = String(e.source || '').toLocaleUpperCase('tr-TR').indexOf('YARDIM GEÇMİŞİ') >= 0;
+        var sourceBadge = isHistory
+            ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">Geçmiş Yardım</span>'
+            : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">Yeni Sistem Kaydı</span>';
+
+        return `
+            <div class="p-3 border border-slate-200 rounded-lg bg-white">
+                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                    <div class="min-w-0">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <div class="font-bold text-slate-900">${escapeHtml(e.content || '-')}</div>
+                            ${sourceBadge}
+                        </div>
+                        <div class="text-slate-500">
+                            ${escapeHtml(e.date || '-')}
+                            ${e.marketValue ? ' • Rayiç: ' + escapeHtml(e.marketValue) : ''}
+                        </div>
+                    </div>
+                    ${e.pdfUrl
+                        ? `<a href="${escapeAttr(e.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="text-sky-700 font-semibold whitespace-nowrap"><i class="fa-solid fa-file-pdf mr-1"></i>Tutanak</a>`
+                        : (e.pdfName
+                            ? `<span class="text-slate-500 pdf-name whitespace-nowrap"><i class="fa-solid fa-file-pdf mr-1"></i>${escapeHtml(e.pdfName)}</span>`
+                            : '')}
+                </div>
+            </div>
+        `;
+    }).join('');
 }
+
 function openAssistanceModal(id) {
     var item = appState.mevcut.find(function (x) { return x.id === id; });
     if (!item)
@@ -5691,10 +5789,36 @@ function clearCentralBusy() {
 }
 function mapCentralAssistanceToWorkflow(payload) {
     workflowState.assistance = {};
-    (payload.assistance || []).forEach(function (a) {
-        var key = normalizeTC(a.tc) || ('NAME:' + normalizeName(a.ad_soyad));
+
+    function addAssistanceAlias_(key, entry) {
+        if (!key) return;
         workflowState.assistance[key] = workflowState.assistance[key] || [];
-        workflowState.assistance[key].push({
+
+        var sig = [
+            entry.id || '',
+            entry.date || '',
+            entry.content || '',
+            entry.marketValue || '',
+            entry.pdfUrl || '',
+            entry.source || ''
+        ].join('|');
+
+        var exists = workflowState.assistance[key].some(function(x) {
+            return [
+                x.id || '',
+                x.date || '',
+                x.content || '',
+                x.marketValue || '',
+                x.pdfUrl || '',
+                x.source || ''
+            ].join('|') === sig;
+        });
+
+        if (!exists) workflowState.assistance[key].push(entry);
+    }
+
+    (payload.assistance || []).forEach(function (a) {
+        var entry = {
             id: a.id || '',
             date: a.yardim_tarihi || '',
             content: a.yardim_icerigi || '',
@@ -5704,9 +5828,19 @@ function mapCentralAssistanceToWorkflow(payload) {
             source: a.kaynak || 'Merkezi Sistem',
             createdAt: a.kayit_zamani || '',
             by: a.kullanici || ''
-        });
+        };
+
+        var tcKey = normalizeTC(a.tc);
+        var nameKey = a.ad_soyad ? ('NAME:' + normalizeName(a.ad_soyad)) : '';
+
+        // Geçmiş kayıtları olabildiğince dayanıklı eşleştirmek için
+        // hem TCKN hem ad-soyad anahtarı altında indeksle.
+        addAssistanceAlias_(tcKey, entry);
+        addAssistanceAlias_(nameKey, entry);
     });
+
     window.workflowState = workflowState;
+
     workflowState.documents = {};
     (payload.documents || []).forEach(function (d) {
         var key = normalizeTC(d.tc) || ('NAME:' + normalizeName(d.ad_soyad));
