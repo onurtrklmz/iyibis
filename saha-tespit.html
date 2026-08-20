@@ -416,13 +416,30 @@
 }
 </style>
 
+
+<style id="iyibis-form-navbar-round-logo-v42">
+/* Tepe bardaki dernek logosu tüm temalarda yuvarlak görünür. */
+.app-navbar .nav-logo-svg {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+}
+</style>
 </head>
 <body>
 
   <header class="app-navbar no-print">
     <div class="nav-inner">
       <a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-brand">
-        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="40" height="40" class="nav-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:40px;height:40px;object-fit:contain;display:block;">
+        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="40" height="40" class="nav-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:40px;height:40px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
         <div class="nav-brand-text">
           <span class="brand-title">Gaziantep İyilik Hareketi</span>
           <span class="brand-sub">Saha Otomasyonu</span>
