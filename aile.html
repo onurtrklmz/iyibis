@@ -1240,6 +1240,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         if (typeof startIdleSessionGuard_ === 'function') {
                             startIdleSessionGuard_();
                         }
+                        if (typeof preloadDriveStorageStatus_ === 'function') {
+                            preloadDriveStorageStatus_();
+                        }
                         return [3 /*break*/, 5];
                     case 4:
                         err_1 = _c.sent();
@@ -1825,8 +1828,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                 </div>
                             </div>
                         </div>
-                        <button id="drive-storage-refresh-btn" type="button" onclick="refreshDriveStorageStatus()"
-                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-600 transition">
+                        <button id="drive-storage-refresh-btn" type="button" onclick="refreshDriveStorageStatus(true)"
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-emerald-300 bg-emerald-100 hover:bg-emerald-200 text-xs font-bold text-emerald-800 transition shadow-sm">
                             <i class="fa-solid fa-rotate"></i>
                             <span id="drive-storage-refresh-label">Yenile</span>
                         </button>
@@ -5725,10 +5728,22 @@ window.IYIBIS_SINGLE_SCRIPT_READY = true;
    şifre istemeden merkezi oturumu geri yükle. */
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(restorePersistentCentralSession_, 0);
+        setTimeout(function() {
+            Promise.resolve(restorePersistentCentralSession_()).finally(function() {
+                if (window.centralSessionToken && typeof preloadDriveStorageStatus_ === 'function') {
+                    preloadDriveStorageStatus_();
+                }
+            });
+        }, 0);
     });
 } else {
-    setTimeout(restorePersistentCentralSession_, 0);
+    setTimeout(function() {
+        Promise.resolve(restorePersistentCentralSession_()).finally(function() {
+            if (window.centralSessionToken && typeof preloadDriveStorageStatus_ === 'function') {
+                preloadDriveStorageStatus_();
+            }
+        });
+    }, 0);
 }
 
 
@@ -5753,6 +5768,9 @@ function goToIyibisHome(event) {
 </div>
 
 <script id="iyibis-drive-storage-v42">
+var iyibisDriveStorageCache = null;
+var iyibisDriveStorageLoadingPromise = null;
+
 function formatStorageBytes_(bytes) {
     var n = Number(bytes || 0);
     if (!isFinite(n) || n < 0) n = 0;
@@ -5762,9 +5780,9 @@ function formatStorageBytes_(bytes) {
     return mb.toFixed(mb >= 10 ? 0 : 1).replace('.', ',') + ' MB';
 }
 
-async function refreshDriveStorageStatus() {
-    var btn = document.getElementById('drive-storage-refresh-btn');
-    var label = document.getElementById('drive-storage-refresh-label');
+function renderDriveStorageStatus_(result) {
+    if (!result) return;
+
     var usedEl = document.getElementById('drive-storage-used');
     var limitEl = document.getElementById('drive-storage-limit');
     var pctEl = document.getElementById('drive-storage-percent');
@@ -5773,74 +5791,136 @@ async function refreshDriveStorageStatus() {
     var updated = document.getElementById('drive-storage-updated');
     var icon = document.getElementById('drive-storage-icon');
 
-    if (!btn || !label || !usedEl || !limitEl || !pctEl || !bar || !msg) return;
+    if (!usedEl || !limitEl || !pctEl || !bar || !msg || !icon) return;
 
-    btn.disabled = true;
-    btn.classList.add('opacity-60','cursor-wait');
-    label.textContent = 'Yükleniyor...';
+    var percent = Number(result.percent || 0);
+    usedEl.textContent = formatStorageBytes_(result.usedBytes);
+    limitEl.textContent = result.limitBytes > 0 ? formatStorageBytes_(result.limitBytes) : 'Sınırsız';
+    pctEl.textContent = percent.toFixed(1).replace('.0','').replace('.',',') + '%';
+    bar.style.width = Math.max(0, Math.min(100, percent)) + '%';
 
-    try {
-        var result;
-        if (typeof window.iyibisServerCall === 'function') {
-            result = await window.iyibisServerCall('getDriveStorageStatus', centralSessionToken);
-        } else if (typeof serverCall === 'function') {
-            result = await serverCall('getDriveStorageStatus', centralSessionToken);
-        } else if (window.IYIBIS_API && typeof window.IYIBIS_API.call === 'function') {
-            result = await window.IYIBIS_API.call('getDriveStorageStatus', [centralSessionToken]);
-        } else {
-            throw new Error('Backend çağrı katmanı hazır değil.');
-        }
+    pctEl.className = 'text-2xl font-extrabold';
+    bar.className = 'h-full rounded-full transition-all duration-300';
+    icon.className = 'w-9 h-9 rounded-lg flex items-center justify-center shrink-0';
 
-        if (!result || result.ok === false) throw new Error((result && result.error) || 'Depolama bilgisi alınamadı.');
+    if (percent >= 85) {
+        pctEl.classList.add('text-red-600');
+        bar.classList.add('bg-red-500');
+        icon.classList.add('bg-red-50','text-red-600');
+        msg.className = 'mt-3 text-xs font-semibold text-red-600';
+        msg.textContent = 'Kritik: Depolama alanı %85’in üzerinde. Ücretli depolama planına geçişi geciktirmeyin.';
+    } else if (percent >= 70) {
+        pctEl.classList.add('text-amber-600');
+        bar.classList.add('bg-amber-500');
+        icon.classList.add('bg-amber-50','text-amber-600');
+        msg.className = 'mt-3 text-xs font-semibold text-amber-600';
+        msg.textContent = 'Uyarı: Depolama alanı %70’in üzerinde. Kapasite artırımı planlanmalı.';
+    } else {
+        pctEl.classList.add('text-emerald-600');
+        bar.classList.add('bg-emerald-500');
+        icon.classList.add('bg-emerald-50','text-emerald-600');
+        msg.className = 'mt-3 text-xs text-emerald-700';
+        msg.textContent = 'Depolama kapasitesi normal seviyede.';
+    }
 
-        var percent = Number(result.percent || 0);
-        usedEl.textContent = formatStorageBytes_(result.usedBytes);
-        limitEl.textContent = result.limitBytes > 0 ? formatStorageBytes_(result.limitBytes) : 'Sınırsız';
-        pctEl.textContent = percent.toFixed(1).replace('.0','').replace('.',',') + '%';
-        bar.style.width = Math.max(0, Math.min(100, percent)) + '%';
-
-        pctEl.className = 'text-2xl font-extrabold';
-        bar.className = 'h-full rounded-full transition-all duration-300';
-        icon.className = 'w-9 h-9 rounded-lg flex items-center justify-center shrink-0';
-
-        if (percent >= 85) {
-            pctEl.classList.add('text-red-600');
-            bar.classList.add('bg-red-500');
-            icon.classList.add('bg-red-50','text-red-600');
-            msg.className = 'mt-3 text-xs font-semibold text-red-600';
-            msg.textContent = 'Kritik: Depolama alanı %85’in üzerinde. Ücretli depolama planına geçişi geciktirmeyin.';
-        } else if (percent >= 70) {
-            pctEl.classList.add('text-amber-600');
-            bar.classList.add('bg-amber-500');
-            icon.classList.add('bg-amber-50','text-amber-600');
-            msg.className = 'mt-3 text-xs font-semibold text-amber-600';
-            msg.textContent = 'Uyarı: Depolama alanı %70’in üzerinde. Kapasite artırımı planlanmalı.';
-        } else {
-            pctEl.classList.add('text-emerald-600');
-            bar.classList.add('bg-emerald-500');
-            icon.classList.add('bg-emerald-50','text-emerald-600');
-            msg.className = 'mt-3 text-xs text-emerald-700';
-            msg.textContent = 'Depolama kapasitesi normal seviyede.';
-        }
-
-        if (updated && result.updatedAt) {
-            var dt = new Date(result.updatedAt);
-            updated.textContent = 'Son kontrol: ' + dt.toLocaleString('tr-TR');
-        }
-    } catch (err) {
-        msg.className = 'mt-3 text-xs font-semibold text-rose-600';
-        msg.textContent = 'Depolama bilgisi alınamadı: ' + (err && err.message ? err.message : String(err));
-    } finally {
-        btn.disabled = false;
-        btn.classList.remove('opacity-60','cursor-wait');
-        label.textContent = 'Yenile';
+    if (updated && result.updatedAt) {
+        var dt = new Date(result.updatedAt);
+        updated.textContent = 'Son kontrol: ' + dt.toLocaleString('tr-TR');
     }
 }
 
-// Ayarlar sekmesi açıldığında depolama bilgisini ilk kez otomatik yükle.
+async function requestDriveStorageStatus_() {
+    var result;
+    if (typeof window.iyibisServerCall === 'function') {
+        result = await window.iyibisServerCall('getDriveStorageStatus', centralSessionToken);
+    } else if (typeof serverCall === 'function') {
+        result = await serverCall('getDriveStorageStatus', centralSessionToken);
+    } else if (window.IYIBIS_API && typeof window.IYIBIS_API.call === 'function') {
+        result = await window.IYIBIS_API.call('getDriveStorageStatus', [centralSessionToken]);
+    } else {
+        throw new Error('Backend çağrı katmanı hazır değil.');
+    }
+
+    if (!result || result.ok === false) {
+        throw new Error((result && result.error) || 'Depolama bilgisi alınamadı.');
+    }
+
+    iyibisDriveStorageCache = result;
+    renderDriveStorageStatus_(result);
+    return result;
+}
+
+/* force=true yalnız kullanıcı Yenile butonuna bastığında kullanılır.
+   force=false ise mevcut cache varsa yeni backend çağrısı yapılmaz. */
+async function refreshDriveStorageStatus(force) {
+    var btn = document.getElementById('drive-storage-refresh-btn');
+    var label = document.getElementById('drive-storage-refresh-label');
+    var msg = document.getElementById('drive-storage-message');
+
+    if (!force && iyibisDriveStorageCache) {
+        renderDriveStorageStatus_(iyibisDriveStorageCache);
+        return iyibisDriveStorageCache;
+    }
+
+    if (iyibisDriveStorageLoadingPromise) {
+        return iyibisDriveStorageLoadingPromise;
+    }
+
+    if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-60','cursor-wait');
+    }
+    if (label) label.textContent = 'Yükleniyor...';
+    if (msg && !iyibisDriveStorageCache) {
+        msg.className = 'mt-3 text-xs text-slate-500';
+        msg.textContent = 'Depolama bilgisi hesaplanıyor...';
+    }
+
+    iyibisDriveStorageLoadingPromise = requestDriveStorageStatus_();
+
+    try {
+        return await iyibisDriveStorageLoadingPromise;
+    } catch (err) {
+        if (msg) {
+            msg.className = 'mt-3 text-xs font-semibold text-rose-600';
+            msg.textContent = 'Depolama bilgisi alınamadı: ' + (err && err.message ? err.message : String(err));
+        }
+        return null;
+    } finally {
+        iyibisDriveStorageLoadingPromise = null;
+        if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-60','cursor-wait');
+        }
+        if (label) label.textContent = 'Yenile';
+    }
+}
+
+/* Başarılı girişten hemen sonra arka planda bir kez hesapla.
+   Kart görünür olmak zorunda değildir; sonuç bellekte tutulur. */
+function preloadDriveStorageStatus_() {
+    if (!centralSessionToken || iyibisDriveStorageCache || iyibisDriveStorageLoadingPromise) return;
+    setTimeout(function() {
+        refreshDriveStorageStatus(false);
+    }, 250);
+}
+
+/* Ayarlar sekmesine geçildiğinde yalnız cache'i göster.
+   Giriş sonrası sorgu henüz bitmemişse onu bekler; yeni sorgu başlatmaz. */
 document.addEventListener('click', function(ev) {
-    var tabBtn = ev.target && ev.target.closest ? ev.target.closest('[data-tab="settings"], [onclick*="settings"], [onclick*="ayar"]') : null;
-    if (tabBtn) setTimeout(refreshDriveStorageStatus, 150);
+    var tabBtn = ev.target && ev.target.closest
+        ? ev.target.closest('[onclick*="tab-system"], [data-tab="settings"], [onclick*="settings"], [onclick*="ayar"]')
+        : null;
+
+    if (!tabBtn) return;
+
+    setTimeout(function() {
+        if (iyibisDriveStorageCache) {
+            renderDriveStorageStatus_(iyibisDriveStorageCache);
+        } else if (!iyibisDriveStorageLoadingPromise) {
+            refreshDriveStorageStatus(false);
+        }
+    }, 80);
 });
 </script>
 
