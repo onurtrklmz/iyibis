@@ -14,6 +14,64 @@ h1{font-size:34px;margin:0}.sub{color:#94a3b8;margin-top:8px}.beta{display:inlin
   <script src="config-beta42.js"></script>
   <script src="api-client-beta42.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
+
+<style id="iyibis-brand-theme-v42">
+:root{
+  --iyibis-red:#991b1b;
+  --iyibis-red-dark:#7f1d1d;
+  --iyibis-red-2:#b4232d;
+  --iyibis-bg:#f6f9fb;
+  --iyibis-surface:#ffffff;
+  --iyibis-border:#dce3eb;
+  --iyibis-text:#1e293b;
+  --iyibis-muted:#64748b;
+}
+body{
+  background:linear-gradient(180deg,#ffffff 0%,var(--iyibis-bg) 100%)!important;
+  color:var(--iyibis-text)!important;
+}
+.wrap{max-width:900px!important}
+.brand{margin-bottom:28px!important}
+.logo{
+  border-color:var(--iyibis-red)!important;
+  box-shadow:0 10px 28px rgba(153,27,27,.14)!important;
+}
+h1{color:var(--iyibis-red)!important;font-weight:850!important;letter-spacing:-.02em}
+.sub{color:var(--iyibis-muted)!important}
+.beta{
+  background:#fff1f2!important;
+  border:1px solid #fecdd3!important;
+  color:var(--iyibis-red)!important;
+  box-shadow:none!important;
+}
+.card{
+  color:var(--iyibis-text)!important;
+  background:rgba(255,255,255,.96)!important;
+  border:1px solid var(--iyibis-border)!important;
+  box-shadow:0 10px 28px rgba(15,23,42,.06)!important;
+}
+.card:hover{
+  background:#fff!important;
+  border-color:#d7a1a6!important;
+  box-shadow:0 14px 34px rgba(153,27,27,.10)!important;
+}
+.card h2{color:var(--iyibis-red)!important}
+.card p{color:var(--iyibis-muted)!important}
+.family .go,.field .go{color:var(--iyibis-red)!important}
+.card::after{
+  content:"";
+  display:block;
+  height:3px;
+  margin-top:18px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--iyibis-red),#d37f8a);
+  opacity:.85;
+}
+@media(max-width:680px){
+  body{padding:18px!important}
+  .card{padding:22px!important}
+}
+</style>
 </head>
 <body><main class="wrap"><div class="brand"><div class="logo"><img src="gaziantep-iyilik-hareketi-logo.jpeg" alt="Gaziantep İyilik Hareketi Derneği Logosu"></div><h1>İYİBİS</h1><div class="sub">İyilik Bilgi Yönetim Sistemi, Gaziantep İyilik Hareketi Derneği</div><span class="beta">BETA 4.2</span></div>
 <div class="grid"><a class="card family" href="aile.html"><div style="font-size:30px">👨‍👩‍👧‍👦</div><h2>Aile Otomasyonu</h2><p>Başvurular, saha değerlendirmesi, aktif aileler, ret listesi ve yardım kayıtlarının merkezi yönetimi.</p><div class="go">Aile Otomasyonunu Aç →</div></a>

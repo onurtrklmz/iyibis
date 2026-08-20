@@ -1213,6 +1213,95 @@
   }
 }
 </style>
+
+<style id="iyibis-brand-theme-v42">
+:root{
+  --iyibis-red:#991b1b;
+  --iyibis-red-2:#b4232d;
+  --iyibis-red-dark:#7f1d1d;
+  --iyibis-bg:#f6f9fb;
+  --iyibis-surface:#ffffff;
+  --iyibis-border:#dce3eb;
+  --iyibis-text:#1e293b;
+  --iyibis-muted:#64748b;
+}
+body{background:var(--iyibis-bg)!important;color:var(--iyibis-text)}
+
+/* Login: form ekranlarıyla aynı kırmızı-beyaz dil */
+#accessGate{
+  background:linear-gradient(180deg,#ffffff 0%,var(--iyibis-bg) 100%)!important;
+}
+#accessGate .iyibis-login-card{
+  border:1px solid var(--iyibis-border)!important;
+  box-shadow:0 18px 50px rgba(15,23,42,.09)!important;
+}
+#accessGate .iyibis-login-title{color:var(--iyibis-red)!important}
+#accessGate .iyibis-login-version{
+  background:#fff1f2!important;
+  color:var(--iyibis-red)!important;
+  border:1px solid #fecdd3!important;
+}
+#accessGate .iyibis-login-version-row:before,
+#accessGate .iyibis-login-version-row:after{background:#fecdd3!important}
+#accessGate #accessSubmitBtn{
+  background:linear-gradient(90deg,var(--iyibis-red-2),var(--iyibis-red-dark))!important;
+  box-shadow:0 8px 20px rgba(153,27,27,.16)!important;
+}
+#accessGate #accessUsername:focus,
+#accessGate #accessPassword:focus{
+  border-color:var(--iyibis-red)!important;
+  --tw-ring-color:rgba(153,27,27,.14)!important;
+}
+
+/* Portal üst bar: lacivert yerine dernek bordosu; bilgi renkleri korunur */
+header.bg-slate-900{
+  background:linear-gradient(135deg,#6f171a 0%,var(--iyibis-red-dark) 48%,var(--iyibis-red) 100%)!important;
+  border-bottom-color:#5f1418!important;
+  box-shadow:0 6px 20px rgba(70,12,18,.18)!important;
+}
+header .iyibis-top-home-link{
+  color:#fff!important;
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+}
+header .iyibis-top-home-link:hover{
+  color:#fff!important;
+  background:rgba(255,255,255,.16)!important;
+}
+header #logoutBtn{
+  background:rgba(15,23,42,.20)!important;
+  border-color:rgba(255,255,255,.22)!important;
+  color:#fff!important;
+}
+header #logoutBtn:hover{background:rgba(15,23,42,.34)!important}
+#mobileTabMenuButton{
+  background:#fff!important;
+  color:var(--iyibis-red-dark)!important;
+  border-color:#fecdd3!important;
+}
+#mobileTabMenuButton:hover{background:#fff1f2!important}
+#mobileTabMenuPanel{
+  background:#fff!important;
+  border-color:var(--iyibis-border)!important;
+  box-shadow:0 18px 50px rgba(15,23,42,.18)!important;
+}
+#mobileTabMenuPanel button{color:var(--iyibis-text)!important}
+#mobileTabMenuPanel button:hover,
+#mobileTabMenuPanel button.active{
+  background:#fff1f2!important;
+  color:var(--iyibis-red)!important;
+}
+
+/* Sistem kartları ve ana yüzey */
+main .bg-white,
+#tab-system .bg-white{
+  border-color:var(--iyibis-border)!important;
+}
+#drive-storage-card{
+  border-color:var(--iyibis-border)!important;
+  box-shadow:0 8px 24px rgba(15,23,42,.05)!important;
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 

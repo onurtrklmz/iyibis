@@ -433,6 +433,101 @@
   -webkit-clip-path: circle(50%) !important;
 }
 </style>
+
+<style id="iyibis-brand-theme-v42">
+:root{
+  --gih-red:#991b1b!important;
+  --gih-red-dark:#7f1d1d!important;
+  --gih-gray-bg:#f6f9fb!important;
+  --gih-border:#dce3eb!important;
+  --gih-dark:#1e293b!important;
+  --iyibis-red:#991b1b;
+  --iyibis-red-dark:#7f1d1d;
+  --iyibis-bg:#f6f9fb;
+  --iyibis-border:#dce3eb;
+  --iyibis-text:#1e293b;
+  --iyibis-muted:#64748b;
+}
+body{background:linear-gradient(180deg,#ffffff 0%,var(--iyibis-bg) 100%)!important;color:var(--iyibis-text)!important}
+.app-navbar{
+  background:rgba(255,255,255,.98)!important;
+  border-bottom-color:var(--iyibis-red)!important;
+  box-shadow:0 4px 14px rgba(15,23,42,.06)!important;
+}
+.brand-title{color:var(--iyibis-red)!important}
+.brand-sub{color:var(--iyibis-muted)!important}
+.nav-link{color:#334155!important}
+.nav-link:hover{background:#fff1f2!important;color:var(--iyibis-red)!important}
+.nav-link.active{
+  background:linear-gradient(135deg,var(--iyibis-red),var(--iyibis-red-dark))!important;
+  box-shadow:0 5px 14px rgba(153,27,27,.18)!important;
+}
+.form-card{
+  background:#fff!important;
+  border-color:var(--iyibis-border)!important;
+  box-shadow:0 10px 30px rgba(15,23,42,.06)!important;
+}
+.section-title,
+.header-titles h1{color:var(--iyibis-red)!important}
+input,select,textarea{
+  border-color:#cfd8e3!important;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--iyibis-red)!important;
+  box-shadow:0 0 0 3px rgba(153,27,27,.08)!important;
+}
+@media(max-width:768px){
+  .nav-links{background:#fff!important;border-bottom-color:var(--iyibis-red)!important}
+}
+</style>
+
+<style id="iyibis-saha-ayni-header-exact-v42">
+/* Ayni Yardım formunun üst başlık yapısı birebir uygulanmıştır. */
+.form-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 18px; margin-bottom: 20px; flex-wrap: wrap; }
+.header-logo-title { display: flex; align-items: center; gap: 14px; }
+.header-titles h1 { font-size: 1.35rem; color: #8b1d24; font-weight: 800; line-height: 1.2; }
+.header-titles p { font-size: 0.88rem; color: #64748b; margin-top: 3px; }
+.header-date-box { display: flex; flex-direction: column; gap: 4px; min-width: 170px; }
+.header-date-box label { font-size: 0.82rem; font-weight: 700; color: #8b1d24; }
+.native-date-box { width: 100%; }
+.native-date-box input[type="date"] {
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      width: 100%;
+      outline: none;
+      background: #ffffff;
+      color: #0f172a;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+.native-date-box input[type="date"]:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+/* Saha formunun genel genişliğine uyum; Ayni Yardım başlık davranışı korunur. */
+.form-header .doc-logo-svg {
+  width:75px!important;
+  height:75px!important;
+  object-fit:contain!important;
+  display:block!important;
+}
+@media (max-width: 640px) {
+  .form-header {
+    align-items:flex-start!important;
+  }
+  .header-logo-title {
+    width:100%;
+    align-items:center;
+  }
+  .header-date-box {
+    width:100%;
+    min-width:0;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -466,31 +561,37 @@ function toggleAppMenu() {
 </script>
 
 <div class="container">
-  <header class="form-header">
-    <h1>Gaziantep İyilik Hareketi Derneği Saha Tespit Formu</h1>
-    <p>Hane İhtiyaç İnceleme ve Saha Mülakat Kayıt Sistemi</p>
-  </header>
-
   <form id="sahaForm" autocomplete="off">
+    <!-- Başlık ve Logo: Ayni Yardım formu yapısı -->
+    <div class="form-header">
+      <div class="header-logo-title">
+        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:contain;display:block;">
+        <div class="header-titles">
+          <h1>Gaziantep İyilik Hareketi Derneği</h1>
+          <p>Saha Tespit Formu - Hane İhtiyaç İnceleme ve Saha Mülakat Kayıt Sistemi</p>
+        </div>
+      </div>
+      <div class="header-date-box">
+        <label>Tanzim Tarihi:</label>
+        <div class="native-date-box">
+          <input type="date" name="ziyaret_tarihi" id="ziyaret_tarihi" required
+                 onclick="this.showPicker && this.showPicker()"
+                 aria-label="Tanzim Tarihi">
+        </div>
+      </div>
+    </div>
     <!-- 1. Ziyaret Tarihi, Konum ve İletişim Bilgileri -->
     <div class="section-title">1. Ziyaret Tarihi, Konum, Adres ve İletişim Bilgileri</div>
     
-    <div class="grid" style="align-items: end; margin-bottom: 6px;">
-      <div class="form-group" style="margin-bottom: 0;">
-        <label>📅 Ziyaret / Tanzim Tarihi * (Tıklayıp takvimden seçebilirsiniz)</label>
-        <input type="date" name="ziyaret_tarihi" id="ziyaret_tarihi" required onclick="this.showPicker && this.showPicker()">
-      </div>
-
-      <div class="form-group" style="margin-bottom: 0;">
-        <div class="gps-box">
-          <div class="gps-header">
-            <label style="color:#166534; font-weight:700; margin:0;">📍 Hane GPS Konumu:</label>
-            <button type="button" class="btn-gps" onclick="konumAl()">📍 Konumumu Al</button>
-          </div>
-          <div id="gpsStatus" class="gps-status">Henüz konum alınmadı. Butona basarak alabilirsiniz.</div>
-          <input type="hidden" name="gps_koordinat" id="gpsKoordinat">
-          <input type="hidden" name="gps_link" id="gpsLink">
+    <div class="form-group saha-gps-full">
+      <div class="gps-box">
+        <div class="gps-header">
+          <label style="color:#166534; font-weight:700; margin:0;">📍 Hane GPS Konumu:</label>
+          <button type="button" class="btn-gps" onclick="konumAl()">📍 Konumumu Al</button>
         </div>
+        <div id="gpsStatus" class="gps-status">Henüz konum alınmadı. Butona basarak alabilirsiniz.</div>
+        <input type="hidden" name="gps_koordinat" id="gpsKoordinat">
+        <input type="hidden" name="gps_link" id="gpsLink">
       </div>
     </div>
 
