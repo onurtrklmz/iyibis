@@ -1377,6 +1377,89 @@ header #last-sync-time {
   color: #e2e8f0 !important;
 }
 </style>
+
+<style id="iyibis-flat-dark-mode-v42">
+/* BETA 4.2 — Koyu modda beyazdan siyaha gradient yok.
+   Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #101214 !important;
+    background-image: none !important;
+    color-scheme: dark;
+  }
+
+  body {
+    background: #101214 !important;
+    background-color: #101214 !important;
+    background-image: none !important;
+  }
+}
+</style>
+
+<style id="iyibis-aile-dark-surfaces-v42">
+@media (prefers-color-scheme: dark) {
+  body, main {
+    background:#101214 !important;
+    background-image:none !important;
+  }
+
+  /* Login ekranında da gradient yerine sabit koyu zemin */
+  #accessGate {
+    background:#101214 !important;
+    background-image:none !important;
+  }
+
+  #accessGate .iyibis-login-card {
+    background:#17191b !important;
+    border-color:#30363d !important;
+    color:#e5e7eb !important;
+  }
+
+  #accessGate .iyibis-login-subtitle,
+  #accessGate label {
+    color:#c9cdd2 !important;
+  }
+
+  #accessGate input {
+    background:#202326 !important;
+    color:#e5e7eb !important;
+    border-color:#374151 !important;
+  }
+
+  /* Portal içerik yüzeyleri */
+  main .bg-white,
+  #tab-system .bg-white,
+  #drive-storage-card {
+    background:#17191b !important;
+    border-color:#30363d !important;
+  }
+
+  main .text-slate-900,
+  main .text-slate-800,
+  main .text-slate-700 {
+    color:#e5e7eb !important;
+  }
+
+  main .text-slate-600,
+  main .text-slate-500 {
+    color:#aeb4bb !important;
+  }
+
+  #desktopTabNav {
+    background:#21191a !important;
+    border-color:#493033 !important;
+  }
+
+  #desktopTabNav .tab-btn {
+    color:#d7d0d1 !important;
+  }
+
+  #desktopTabNav .tab-btn:hover {
+    background:#2c2224 !important;
+    color:#ff8c90 !important;
+  }
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
