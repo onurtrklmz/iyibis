@@ -472,7 +472,7 @@
 
   <div class="container">
     <div class="form-card" id="formCardYayin">
-      <form id="yayinForm">
+      <form id="yayinForm" autocomplete="off">
         <!-- Başlık ve Dernek Logosu -->
         <div class="form-header">
           <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:contain;display:block;">
@@ -503,17 +503,17 @@
         <div class="grid">
           <div class="form-group full-width">
             <label>Yayın İzni Sahibi</label>
-            <input type="text" value="GAZİANTEP İYİLİK HAREKETİ DERNEĞİ" readonly>
+            <input type="text" value="GAZİANTEP İYİLİK HAREKETİ DERNEĞİ" readonly autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="form-group">
             <label>Yayın İzni Veren Adı Soyadı *</label>
-            <input type="text" id="yayin_ad" name="yayin_ad" required placeholder="Ad Soyad">
+            <input type="text" id="yayin_ad" name="yayin_ad" required placeholder="Ad Soyad" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="form-group">
             <label>Yayın İzni Veren T.C. Kimlik No *</label>
-            <input type="text" id="yayin_tc" name="yayin_tc" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli T.C. Kimlik No">
+            <input type="text" id="yayin_tc" name="yayin_tc" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli T.C. Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="section-note-banner">
@@ -522,12 +522,12 @@
 
           <div class="form-group">
             <label>Yayın İzni Veren Veli/Vasi Adı Soyadı</label>
-            <input type="text" id="veli_ad" name="veli_ad" placeholder="Veli / Vasi Adı Soyadı">
+            <input type="text" id="veli_ad" name="veli_ad" placeholder="Veli / Vasi Adı Soyadı" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="form-group">
             <label>Yayın İzni Veren Veli/Vasi T.C. Kimlik No</label>
-            <input type="text" id="veli_tc" name="veli_tc" maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="Veli / Vasi T.C. Kimlik No">
+            <input type="text" id="veli_tc" name="veli_tc" maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="Veli / Vasi T.C. Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
         </div>
 
@@ -536,12 +536,12 @@
         <div class="grid">
           <div class="form-group full-width">
             <label>İkametgah Adresi *</label>
-            <input type="text" id="yayin_adres" name="yayin_adres" required placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl">
+            <input type="text" id="yayin_adres" name="yayin_adres" required placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="form-group">
             <label>Telefon / GSM No *</label>
-            <input type="tel" id="yayin_gsm" name="yayin_gsm" required placeholder="05XX XXX XX XX">
+            <input type="tel" id="yayin_gsm" name="yayin_gsm" required placeholder="05XX XXX XX XX" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="form-group">

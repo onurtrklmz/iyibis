@@ -432,7 +432,7 @@ function toggleAppMenu() {
     <p>Hane İhtiyaç İnceleme ve Saha Mülakat Kayıt Sistemi</p>
   </header>
 
-  <form id="sahaForm">
+  <form id="sahaForm" autocomplete="off">
     <!-- 1. Ziyaret Tarihi, Konum ve İletişim Bilgileri -->
     <div class="section-title">1. Ziyaret Tarihi, Konum, Adres ve İletişim Bilgileri</div>
     
@@ -483,37 +483,37 @@ function toggleAppMenu() {
 
     <div class="form-group">
       <label>Sokak, Daire, Kapı No (Açık Adres) *</label>
-      <input type="text" name="acik_adres" id="acik_adres" required placeholder="Örn: 10023 Nolu Sok. No: 8 D: 2">
+      <input type="text" name="acik_adres" id="acik_adres" required placeholder="Örn: 10023 Nolu Sok. No: 8 D: 2" autocomplete="new-password" autocapitalize="off" spellcheck="false">
     </div>
 
     <div class="grid">
       <div class="form-group">
         <label>Görüşülen Aile İletişim Kişisi (Ad Soyad) *</label>
-        <input type="text" name="iletisim_kisi" id="iletisim_kisi" required placeholder="Görüşülen hane temsilcisi">
+        <input type="text" name="iletisim_kisi" id="iletisim_kisi" required placeholder="Görüşülen hane temsilcisi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
 
       <div class="form-group">
         <label>Görüşülen Kişinin Yaşı</label>
-        <input type="number" name="iletisim_kisi_yas" id="iletisim_kisi_yas" min="15" max="120" placeholder="Örn: 42">
+        <input type="number" name="iletisim_kisi_yas" id="iletisim_kisi_yas" min="15" max="120" placeholder="Örn: 42" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
     <div class="grid">
       <div class="form-group">
         <label>Görüşülen Kişi T.C. Kimlik No *</label>
-        <input type="text" name="tc_kimlik" id="tc_kimlik" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli T.C. Kimlik No">
+        <input type="text" name="tc_kimlik" id="tc_kimlik" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli T.C. Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
 
       <div class="form-group">
         <label>Telefon Numarası *</label>
-        <input type="tel" name="telefon" id="telefon" required placeholder="05XX XXX XX XX">
+        <input type="tel" name="telefon" id="telefon" required placeholder="05XX XXX XX XX" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
     <div class="grid">
       <div class="form-group">
         <label>Evde Yaşayan Toplam Kişi Sayısı (Hane Halkı)</label>
-        <input type="number" name="kisi_sayisi" id="kisi_sayisi" min="1" placeholder="Örn: 5">
+        <input type="number" name="kisi_sayisi" id="kisi_sayisi" min="1" placeholder="Örn: 5" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
@@ -550,11 +550,11 @@ function toggleAppMenu() {
       </div>
       <div class="checkbox-card">
         <label><input type="checkbox" id="chkBuyukanne" name="birey_buyukanne" value="Var"> Büyükanne</label>
-        <input type="number" id="buyukanne_yas" name="buyukanne_yas" class="age-input" placeholder="Yaş" disabled>
+        <input type="number" id="buyukanne_yas" name="buyukanne_yas" class="age-input" placeholder="Yaş" disabled autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
       <div class="checkbox-card">
         <label><input type="checkbox" id="chkBuyukbaba" name="birey_buyukbaba" value="Var"> Büyükbaba</label>
-        <input type="number" id="buyukbaba_yas" name="buyukbaba_yas" class="age-input" placeholder="Yaş" disabled>
+        <input type="number" id="buyukbaba_yas" name="buyukbaba_yas" class="age-input" placeholder="Yaş" disabled autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
@@ -590,7 +590,7 @@ function toggleAppMenu() {
       </div>
       <div class="form-group" id="kiraBedelDiv" style="display:none;">
         <label>Aylık Kira Bedeli (TL)</label>
-        <input type="number" name="kira_bedeli" id="kira_bedeli" placeholder="Örn: 5000">
+        <input type="number" name="kira_bedeli" id="kira_bedeli" placeholder="Örn: 5000" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
@@ -604,7 +604,7 @@ function toggleAppMenu() {
       </div>
       <div class="form-group" id="faturaDetayDiv" style="display:none;">
         <label>Fatura Türü ve Bedeli</label>
-        <input type="text" name="fatura_detay" id="fatura_detay" placeholder="Örn: Elektrik (1.400 TL), Su (600 TL)">
+        <input type="text" name="fatura_detay" id="fatura_detay" placeholder="Örn: Elektrik (1.400 TL), Su (600 TL)" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
@@ -618,7 +618,7 @@ function toggleAppMenu() {
       </div>
       <div class="form-group" id="destekDetayDiv" style="display:none;">
         <label>Alınan Destekler</label>
-        <input type="text" name="destek_detay" id="destek_detay" placeholder="Örn: Kaymakamlık Şartlı Eğitim">
+        <input type="text" name="destek_detay" id="destek_detay" placeholder="Örn: Kaymakamlık Şartlı Eğitim" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
@@ -626,11 +626,11 @@ function toggleAppMenu() {
     <div class="section-title">5. Saha Notları ve Teslim Edilen Destekler</div>
     <div class="form-group">
       <label>Saha Gözlem Notları</label>
-      <textarea name="notlar" id="notlar" rows="3" placeholder="Ev eşyaları, acil sağlık/gıda ihtiyaçları ve genel gözlemler..."></textarea>
+      <textarea name="notlar" id="notlar" rows="3" placeholder="Ev eşyaları, acil sağlık/gıda ihtiyaçları ve genel gözlemler..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
     </div>
     <div class="form-group">
       <label>Ziyarette Teslim Edilen Destekler</label>
-      <textarea name="ziyarette_verilenler" id="ziyarette_verilenler" rows="2" placeholder="Örn: 1 Adet Gıda Kolisi, Kışlık Mont..."></textarea>
+      <textarea name="ziyarette_verilenler" id="ziyarette_verilenler" rows="2" placeholder="Örn: 1 Adet Gıda Kolisi, Kışlık Mont..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
     </div>
 
     <!-- 6. Saha Fotoğrafları -->
@@ -661,7 +661,7 @@ function toggleAppMenu() {
       <div class="sig-box-card">
         <div class="form-group">
           <label>Aile Adına (İsim Soyisim)</label>
-          <input type="text" name="aile_ad_soyad" id="aile_ad_soyad" placeholder="İmzalayan Aile Bireyi">
+          <input type="text" name="aile_ad_soyad" id="aile_ad_soyad" placeholder="İmzalayan Aile Bireyi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
         </div>
         <label style="margin-top: 4px; display: block;">Aile İmzası</label>
         <div class="sig-container">
@@ -673,7 +673,7 @@ function toggleAppMenu() {
       <div class="sig-box-card">
         <div class="form-group">
           <label>GİH Görevlisi (İsim Soyisim) *</label>
-          <input type="text" name="gih_ad_soyad" id="gih_ad_soyad" required placeholder="GİH Saha Temsilcisi">
+          <input type="text" name="gih_ad_soyad" id="gih_ad_soyad" required placeholder="GİH Saha Temsilcisi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
         </div>
         <label style="margin-top: 4px; display: block;">Görevli İmzası</label>
         <div class="sig-container">

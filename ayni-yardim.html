@@ -167,7 +167,7 @@
 
   <div class="container">
     <div class="form-card" id="formCardAyni">
-      <form id="ayniForm">
+      <form id="ayniForm" autocomplete="off">
         <!-- Başlık ve Logo -->
         <div class="form-header">
           <div class="header-logo-title">
@@ -192,12 +192,12 @@
         <div class="grid">
           <div class="form-group">
             <label>Adı Soyadı *</label>
-            <input type="text" id="faydalanici_ad" name="faydalanici_ad" required placeholder="Faydalanıcı Adı Soyadı">
+            <input type="text" id="faydalanici_ad" name="faydalanici_ad" required placeholder="Faydalanıcı Adı Soyadı" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="form-group">
             <label>T.C. Kimlik / Yabancı Kimlik No *</label>
-            <input type="text" id="faydalanici_tc" name="faydalanici_tc" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli Kimlik No">
+            <input type="text" id="faydalanici_tc" name="faydalanici_tc" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="form-group">
@@ -211,12 +211,12 @@
 
           <div class="form-group">
             <label>Telefon Numarası *</label>
-            <input type="tel" id="faydalanici_tel" name="faydalanici_tel" required placeholder="05XX XXX XX XX">
+            <input type="tel" id="faydalanici_tel" name="faydalanici_tel" required placeholder="05XX XXX XX XX" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
 
           <div class="form-group full-width">
             <label>İkametgah Adresi *</label>
-            <input type="text" id="faydalanici_adres" name="faydalanici_adres" required placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl">
+            <input type="text" id="faydalanici_adres" name="faydalanici_adres" required placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl" autocomplete="new-password" autocapitalize="off" spellcheck="false">
           </div>
         </div>
 
@@ -248,7 +248,7 @@
             <h4>Teslim Eden (GİH Görevlisi)</h4>
             <div class="form-group">
               <label>Görevli İsim Soyisim: *</label>
-              <input type="text" id="gorevli_ad" name="gorevli_ad" required placeholder="GİH Saha Temsilcisi">
+              <input type="text" id="gorevli_ad" name="gorevli_ad" required placeholder="GİH Saha Temsilcisi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
             </div>
             <label style="margin-top: 6px; display: block;">İmza / Paraf:</label>
             <div class="sig-container">
@@ -264,7 +264,7 @@
             <h4>Teslim Alan (Faydalanıcı)</h4>
             <div class="form-group">
               <label>Faydalanıcı İsim Soyisim:</label>
-              <input type="text" id="alan_ad" name="alan_ad" placeholder="Teslim Alan Adı Soyadı">
+              <input type="text" id="alan_ad" name="alan_ad" placeholder="Teslim Alan Adı Soyadı" autocomplete="new-password" autocapitalize="off" spellcheck="false">
             </div>
             <label style="margin-top: 6px; display: block;">İmza / Paraf:</label>
             <div class="sig-container">
