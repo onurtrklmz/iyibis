@@ -1477,6 +1477,48 @@ body {
   }
 }
 </style>
+
+<style id="iyibis-login-home-like-saha-v42">
+/* Aile giriş ekranı: İYİBİS Ana Sayfa bağlantısını Saha ana sayfasıyla eşleştir */
+#accessGate .iyibis-login-home-link {
+  position: absolute !important;
+  top: 18px !important;
+  left: 18px !important;
+  z-index: 40 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: rgba(248,250,252,.92) !important;
+  color: #8b1d24 !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+#accessGate .iyibis-login-home-link:hover {
+  color: #8b1d24 !important;
+  transform: none !important;
+}
+#accessGate .iyibis-login-home-link i {
+  font-size: 1em !important;
+}
+@media (prefers-color-scheme: dark) {
+  #accessGate .iyibis-login-home-link {
+    background: #1b1e21 !important;
+    color: #ff7a7e !important;
+    border: 1px solid #30363d !important;
+  }
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -1792,22 +1834,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <button type="button" onclick="switchTab('tab-mevcut'); closeMobileTabMenu()">
                     <i class="fa-solid fa-users text-emerald-400"></i>
                     <span>Aktif Aileler</span>
-                    <span id="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
+                    <span data-counter="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
                 </button>
 <button type="button" onclick="switchTab('tab-red'); closeMobileTabMenu()">
                     <i class="fa-solid fa-ban text-rose-400"></i>
                     <span>Ret Listesi</span>
-                    <span id="badge-count-red" class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700">0</span>
+                    <span data-counter="badge-count-red" class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700">0</span>
                 </button>
 <button type="button" onclick="switchTab('tab-web'); closeMobileTabMenu()">
                     <i class="fa-solid fa-globe text-sky-400"></i>
                     <span>Web Yeni Başvurular</span>
-                    <span id="badge-count-web" class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50">0</span>
+                    <span data-counter="badge-count-web" class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50">0</span>
                 </button>
 <button type="button" onclick="switchTab('tab-saha'); closeMobileTabMenu()">
                     <i class="fa-solid fa-person-walking-arrow-right text-amber-400"></i>
                     <span>Saha Ziyareti</span>
-                    <span id="badge-count-saha" class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50">0</span>
+                    <span data-counter="badge-count-saha" class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50">0</span>
                 </button>
 <button type="button" onclick="switchTab('tab-stats'); closeMobileTabMenu()">
                     <i class="fa-solid fa-chart-pie text-indigo-400"></i>
@@ -1823,22 +1865,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <button onclick="switchTab('tab-mevcut')" id="nav-tab-mevcut" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-users text-emerald-400"></i>
                     <span>Aktif Aileler</span>
-                    <span id="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
+                    <span data-counter="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
                 </button>
                 <button onclick="switchTab('tab-red')" id="nav-tab-red" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-ban text-rose-400"></i>
                     <span>Ret Listesi</span>
-                    <span id="badge-count-red" class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700">0</span>
+                    <span data-counter="badge-count-red" class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700">0</span>
                 </button>
                 <button onclick="switchTab('tab-web')" id="nav-tab-web" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-globe text-sky-400"></i>
                     <span>Web Yeni Başvurular</span>
-                    <span id="badge-count-web" class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50">0</span>
+                    <span data-counter="badge-count-web" class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50">0</span>
                 </button>
                 <button onclick="switchTab('tab-saha')" id="nav-tab-saha" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-person-walking-arrow-right text-amber-400"></i>
                     <span>Saha Ziyareti</span>
-                    <span id="badge-count-saha" class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50">0</span>
+                    <span data-counter="badge-count-saha" class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50">0</span>
                 </button>
                 <button onclick="switchTab('tab-stats')" id="nav-tab-stats" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-chart-pie text-indigo-400"></i>
@@ -3454,12 +3496,10 @@ function parseWebSheet(rows) {
     return list;
 }
 function updateBadges() {
-    document.getElementById('badge-count-mevcut').innerText = appState.mevcut.length;
-    document.getElementById('badge-count-red').innerText = appState.red.length;
-    document.getElementById('badge-count-web').innerText = appState.web.length;
-    var sahaBadge = document.getElementById('badge-count-saha');
-    if (sahaBadge)
-        sahaBadge.innerText = (appState.saha || []).length;
+    document.querySelectorAll('[data-counter="badge-count-mevcut"]').forEach(el => el.innerText = appState.mevcut.length);
+    document.querySelectorAll('[data-counter="badge-count-red"]').forEach(el => el.innerText = appState.red.length);
+    document.querySelectorAll('[data-counter="badge-count-web"]').forEach(el => el.innerText = appState.web.length);
+    document.querySelectorAll('[data-counter="badge-count-saha"]').forEach(el => el.innerText = (appState.saha || []).length);
     var counts = { ALL: appState.mevcut.length, KRİTİK: 0, TAKİP: 0, STABİL: 0, DELİST: 0 };
     appState.mevcut.forEach(function (item) {
         var s = (item.durumu || '').trim().toUpperCase();

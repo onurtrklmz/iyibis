@@ -672,6 +672,23 @@ body {
   }
 }
 </style>
+
+<style id="iyibis-document-round-logo-v42">
+/* Belge başlığındaki büyük dernek logosu: İYİBİS ana sayfasındaki gibi dairesel kırpma */
+.doc-logo-svg {
+  width: 75px !important;
+  height: 75px !important;
+  min-width: 75px !important;
+  min-height: 75px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  overflow: hidden !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  background: #ffffff !important;
+}
+</style>
 </head>
 <body>
 
@@ -709,7 +726,7 @@ function toggleAppMenu() {
     <!-- Başlık ve Logo: Ayni Yardım formu yapısı -->
     <div class="form-header">
       <div class="header-logo-title">
-        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:contain;display:block;">
+        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
         <div class="header-titles">
           <h1>Gaziantep İyilik Hareketi Derneği</h1>
           <p>Saha Tespit Formu - Hane İhtiyaç İnceleme ve Saha Mülakat Kayıt Sistemi</p>
