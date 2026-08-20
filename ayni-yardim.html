@@ -364,6 +364,36 @@ body {
   }
 }
 </style>
+
+<style id="iyibis-ayni-mobile-date-fullwidth-v42">
+@media (max-width: 768px) {
+  .form-header {
+    align-items: flex-start !important;
+  }
+
+  .header-logo-title {
+    width: 100% !important;
+  }
+
+  .header-date-box {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: 1 1 100% !important;
+  }
+
+  .header-date-box .native-date-box,
+  .header-date-box input[type="date"] {
+    width: 100% !important;
+    max-width: none !important;
+    display: block !important;
+  }
+
+  .header-date-box input[type="date"] {
+    min-height: 54px !important;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -924,6 +954,24 @@ body {
       });
     }, 0);
   });
+})();
+</script>
+
+
+<script id="iyibis-ayni-today-date-safety-v42">
+(function() {
+  function ensureToday_() {
+    var el = document.getElementById('form-date');
+    if (!el || el.value) return;
+    var d = new Date();
+    var local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+    el.value = local.toISOString().slice(0, 10);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureToday_);
+  } else {
+    ensureToday_();
+  }
 })();
 </script>
 
