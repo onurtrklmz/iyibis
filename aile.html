@@ -1028,6 +1028,98 @@
   #logoutBtn .fa-door-open{color:#fff!important}
 }
 </style>
+
+<style id="iyibis-mobile-header-layout-v42">
+@media (max-width: 768px) {
+  /* Tepe barı mobilde üç net satıra ayır:
+     1) Logo + başlık + senkronizasyon
+     2) İYİBİS + Oturumu Kapat
+     3) Menü */
+  header > div.max-w-7xl > div:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .75rem !important;
+  }
+
+  header > div.max-w-7xl > div:first-child > div:first-child {
+    width: 100% !important;
+    flex: none !important;
+    align-items: flex-start !important;
+  }
+
+  header .mobile-header-actions {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: .65rem !important;
+    padding-top: .15rem !important;
+  }
+
+  header .mobile-header-actions .iyibis-top-home-link,
+  header .mobile-header-actions #logoutBtn {
+    flex: 0 1 auto !important;
+    min-height: 2.55rem !important;
+  }
+
+  header .mobile-header-actions .iyibis-top-home-link {
+    padding: .55rem .8rem !important;
+  }
+
+  header .mobile-header-actions #logoutBtn {
+    padding: .55rem .8rem !important;
+  }
+
+  /* Başlık/senkronizasyon satırı rahatça sarsın */
+  header h1 {
+    line-height: 1.25 !important;
+  }
+
+  header #sync-status-pill,
+  header #last-sync-time,
+  header #btn-top-refresh-all {
+    flex: 0 0 auto;
+  }
+
+  header #last-sync-time {
+    white-space: normal !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Başlığın altındaki durum satırının mobilde kontrollü sarılması */
+  header h1 ~ div.flex,
+  header .mobile-header-actions ~ div {
+    min-width: 0;
+  }
+
+  /* Menü daima üçüncü satırda ve ortada */
+  #mobileTabMenuWrap {
+    width: 100% !important;
+    clear: both !important;
+    margin-top: .15rem !important;
+  }
+
+  #mobileTabMenuButton {
+    margin-top: .25rem !important;
+    margin-bottom: .15rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  header .mobile-header-actions {
+    gap: .4rem !important;
+  }
+  header .mobile-header-actions .iyibis-top-home-link,
+  header .mobile-header-actions #logoutBtn {
+    font-size: .72rem !important;
+  }
+  header .mobile-header-actions .iyibis-top-home-link span,
+  header #logoutBtnLabel {
+    display: inline !important;
+  }
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
