@@ -304,6 +304,88 @@
     .iyibis-standard-link:hover {
       color: #8b1d24 !important;
     }
+
+    /* --- SAHA FOTOĞRAFLARI --- */
+    .photo-upload-panel {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .photo-upload-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .photo-upload-title { font-size: .92rem; font-weight: 800; color: #334155; }
+    .photo-upload-note { font-size: .78rem; color: #64748b; margin-top: 2px; line-height: 1.45; }
+    .photo-upload-input {
+      width: 100%;
+      padding: 10px;
+      background: #fff;
+      border: 1px dashed #94a3b8;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: .85rem;
+    }
+    .photo-upload-status {
+      margin-top: 8px;
+      font-size: .78rem;
+      color: #475569;
+      min-height: 1.2em;
+    }
+    .photo-preview-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+    }
+    .photo-preview-item {
+      position: relative;
+      border: 1px solid #e2e8f0;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #fff;
+      min-width: 0;
+    }
+    .photo-preview-item img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      background: #e2e8f0;
+    }
+    .photo-preview-meta {
+      padding: 7px 8px;
+      font-size: .70rem;
+      color: #64748b;
+      line-height: 1.3;
+      word-break: break-word;
+    }
+    .photo-preview-remove {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 28px;
+      height: 28px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(15,23,42,.82);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 640px) {
+      .photo-preview-grid { grid-template-columns: 1fr; }
+      .photo-upload-head { flex-direction: column; }
+    }
+
 </style>
 
 <script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
@@ -551,8 +633,30 @@ function toggleAppMenu() {
       <textarea name="ziyarette_verilenler" id="ziyarette_verilenler" rows="2" placeholder="Örn: 1 Adet Gıda Kolisi, Kışlık Mont..."></textarea>
     </div>
 
-    <!-- 6. İmzalar -->
-    <div class="section-title">6. Tutanak ve İmzalar</div>
+    <!-- 6. Saha Fotoğrafları -->
+    <div class="section-title">6. Saha Fotoğrafları</div>
+    <div class="photo-upload-panel">
+      <div class="photo-upload-head">
+        <div>
+          <div class="photo-upload-title">Ziyarete Ait Fotoğraflar</div>
+          <div class="photo-upload-note">
+            En fazla 3 fotoğraf yüklenebilir. Fotoğraflar cihazınızda otomatik olarak küçültülür ve sıkıştırılır;
+            Drive'a ham yüksek çözünürlüklü dosya gönderilmez.
+          </div>
+        </div>
+        <div id="photoCountBadge" style="font-size:.75rem;font-weight:800;color:#8b1d24;white-space:nowrap;">0 / 3</div>
+      </div>
+
+      <input id="sahaPhotoInput" class="photo-upload-input" type="file" accept="image/*" multiple>
+      <input id="photo_payload_json" name="photo_payload_json" type="hidden" value="">
+      <input id="photo_count" name="photo_count" type="hidden" value="0">
+
+      <div id="photoUploadStatus" class="photo-upload-status">Henüz fotoğraf seçilmedi.</div>
+      <div id="photoPreviewGrid" class="photo-preview-grid"></div>
+    </div>
+
+    <!-- 7. İmzalar -->
+    <div class="section-title">7. Tutanak ve İmzalar</div>
     <div class="signatures-flex-wrap">
       <div class="sig-box-card">
         <div class="form-group">
@@ -632,6 +736,7 @@ function toggleAppMenu() {
       <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">4. Saha Notları ve Teslim Edilen Destekler</th></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Saha Notları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfNotlar"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Verilen Destekler:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfVerilenler"></td></tr>
+      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Saha Fotoğrafları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFotografBilgisi">Fotoğraf eklenmedi.</td></tr>
     </table>
 
     <div style="display: flex; justify-content: space-between; margin-top: 10px;">
@@ -1073,6 +1178,13 @@ function hazirlaPdfSablonu() {
     document.getElementById('pdfDestekler').innerText = (destek === 'Var' && destekDetay) ? "Var (".concat(destekDetay, ")") : destek;
     document.getElementById('pdfNotlar').innerText = notlar;
     document.getElementById('pdfVerilenler').innerText = verilenler;
+    var photoCountForPdf = Number((document.getElementById('photo_count') || {}).value || 0);
+    var photoInfoEl = document.getElementById('pdfFotografBilgisi');
+    if (photoInfoEl) {
+        photoInfoEl.innerText = photoCountForPdf > 0
+            ? photoCountForPdf + ' adet saha fotoğrafı İYİBİS sistemine ayrıca yüklenmiştir.'
+            : 'Fotoğraf eklenmedi.';
+    }
     var pdfCocukTbody = document.getElementById('pdfCocukTbody');
     pdfCocukTbody.innerHTML = "";
     var cocukRows = document.querySelectorAll('#cocukTbody tr');
@@ -1188,7 +1300,10 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                     msg.style.display = "block";
                     msg.style.backgroundColor = "#dcfce7";
                     msg.style.color = "#15803d";
-                    msg.innerHTML = "✓ <strong>Saha tespit formu başarıyla Google E-Tablo'ya işlendi ve PDF Google Drive'a yüklendi.</strong><br><span style='font-size:0.85rem; font-weight:normal;'>İsterseniz 'PDF Tutanak İndir' butonu ile bir kopyasını alabilir veya 'Yeni Kayıt' butonu ile yeni haneye geçebilirsiniz.</span>";
+                    var savedPhotoCount = Number((document.getElementById('photo_count') || {}).value || 0);
+                    msg.innerHTML = "✓ <strong>Saha tespit formu başarıyla Google E-Tablo'ya işlendi, PDF Drive'a yüklendi" +
+                        (savedPhotoCount > 0 ? " ve " + savedPhotoCount + " fotoğraf özel klasöre kaydedildi" : "") +
+                        ".</strong><br><span style='font-size:0.85rem; font-weight:normal;'>İsterseniz 'PDF Tutanak İndir' butonu ile bir kopyasını alabilir veya 'Yeni Kayıt' butonu ile yeni haneye geçebilirsiniz.</span>";
                     return [3 /*break*/, 6];
                 case 4:
                     err_1 = _a.sent();
@@ -1207,6 +1322,238 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
         });
     });
 });
+
+
+  // ===== BETA 4.2 — SAHA FOTOĞRAFI SIKIŞTIRMA / ÖNİZLEME =====
+  var iyibisSahaPhotos = [];
+  var iyibisPhotoProcessing = false;
+  var IYIBIS_MAX_PHOTOS = 3;
+  var IYIBIS_MAX_PHOTO_BYTES = 700 * 1024;
+  var IYIBIS_MAX_PHOTO_EDGE = 1600;
+
+  function iyibisFormatBytes(bytes) {
+    if (!bytes) return '0 KB';
+    return (bytes / 1024).toFixed(bytes >= 1024 * 1024 ? 0 : 0) + ' KB';
+  }
+
+  function iyibisSetPhotoBusy(busy, text) {
+    iyibisPhotoProcessing = !!busy;
+    var btn = document.getElementById('submitBtn');
+    var status = document.getElementById('photoUploadStatus');
+    if (btn) {
+      btn.disabled = !!busy;
+      if (busy) btn.dataset.photoBusy = '1';
+      else delete btn.dataset.photoBusy;
+    }
+    if (status && text) status.textContent = text;
+  }
+
+  function iyibisReadFileAsDataUrl(file) {
+    return new Promise(function(resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function() { resolve(reader.result); };
+      reader.onerror = function() { reject(new Error('Fotoğraf okunamadı.')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function iyibisLoadImage(dataUrl) {
+    return new Promise(function(resolve, reject) {
+      var img = new Image();
+      img.onload = function() { resolve(img); };
+      img.onerror = function() { reject(new Error('Fotoğraf biçimi tarayıcı tarafından açılamadı.')); };
+      img.src = dataUrl;
+    });
+  }
+
+  function iyibisCanvasToBlob(canvas, quality) {
+    return new Promise(function(resolve, reject) {
+      canvas.toBlob(function(blob) {
+        if (blob) resolve(blob);
+        else reject(new Error('Fotoğraf sıkıştırılamadı.'));
+      }, 'image/jpeg', quality);
+    });
+  }
+
+  async function iyibisCompressPhoto(file) {
+    var originalData = await iyibisReadFileAsDataUrl(file);
+    var img = await iyibisLoadImage(originalData);
+
+    var scale = Math.min(1, IYIBIS_MAX_PHOTO_EDGE / Math.max(img.naturalWidth || img.width, img.naturalHeight || img.height));
+    var width = Math.max(1, Math.round((img.naturalWidth || img.width) * scale));
+    var height = Math.max(1, Math.round((img.naturalHeight || img.height) * scale));
+
+    var canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext('2d', { alpha: false });
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
+    ctx.drawImage(img, 0, 0, width, height);
+
+    var quality = 0.78;
+    var blob = await iyibisCanvasToBlob(canvas, quality);
+
+    while (blob.size > IYIBIS_MAX_PHOTO_BYTES && quality > 0.50) {
+      quality -= 0.07;
+      blob = await iyibisCanvasToBlob(canvas, quality);
+    }
+
+    // Çok ayrıntılı fotoğrafta kalite düşürmek yetmezse kenarı bir kez daha küçült.
+    if (blob.size > IYIBIS_MAX_PHOTO_BYTES) {
+      var secondScale = Math.sqrt(IYIBIS_MAX_PHOTO_BYTES / blob.size) * 0.92;
+      var w2 = Math.max(900, Math.round(width * secondScale));
+      var h2 = Math.max(600, Math.round(height * secondScale));
+      var c2 = document.createElement('canvas');
+      c2.width = w2;
+      c2.height = h2;
+      var x2 = c2.getContext('2d', { alpha: false });
+      x2.fillStyle = '#ffffff';
+      x2.fillRect(0, 0, w2, h2);
+      x2.drawImage(canvas, 0, 0, w2, h2);
+      canvas = c2;
+      blob = await iyibisCanvasToBlob(canvas, 0.58);
+    }
+
+    var compressedDataUrl = await iyibisReadFileAsDataUrl(
+      new File([blob], 'photo.jpg', { type: 'image/jpeg' })
+    );
+
+    return {
+      name: String(file.name || 'saha-fotografi').replace(/\.[^.]+$/, '') + '.jpg',
+      mimeType: 'image/jpeg',
+      size: blob.size,
+      width: canvas.width,
+      height: canvas.height,
+      dataUrl: compressedDataUrl,
+      base64: String(compressedDataUrl).split(',')[1] || ''
+    };
+  }
+
+  function iyibisSyncPhotoPayload() {
+    var hidden = document.getElementById('photo_payload_json');
+    var count = document.getElementById('photo_count');
+    var badge = document.getElementById('photoCountBadge');
+    if (hidden) {
+      hidden.value = JSON.stringify(iyibisSahaPhotos.map(function(p) {
+        return {
+          filename: p.name,
+          mimeType: p.mimeType,
+          size: p.size,
+          width: p.width,
+          height: p.height,
+          base64: p.base64
+        };
+      }));
+    }
+    if (count) count.value = String(iyibisSahaPhotos.length);
+    if (badge) badge.textContent = iyibisSahaPhotos.length + ' / ' + IYIBIS_MAX_PHOTOS;
+  }
+
+  function iyibisRenderPhotoPreviews() {
+    var grid = document.getElementById('photoPreviewGrid');
+    var status = document.getElementById('photoUploadStatus');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    iyibisSahaPhotos.forEach(function(photo, index) {
+      var item = document.createElement('div');
+      item.className = 'photo-preview-item';
+
+      var img = document.createElement('img');
+      img.src = photo.dataUrl;
+      img.alt = 'Saha fotoğrafı ' + (index + 1);
+
+      var remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'photo-preview-remove';
+      remove.textContent = '×';
+      remove.title = 'Fotoğrafı kaldır';
+      remove.onclick = function() {
+        iyibisSahaPhotos.splice(index, 1);
+        iyibisSyncPhotoPayload();
+        iyibisRenderPhotoPreviews();
+      };
+
+      var meta = document.createElement('div');
+      meta.className = 'photo-preview-meta';
+      meta.textContent = (index + 1) + '. fotoğraf • ' + iyibisFormatBytes(photo.size) + ' • ' + photo.width + '×' + photo.height;
+
+      item.appendChild(img);
+      item.appendChild(remove);
+      item.appendChild(meta);
+      grid.appendChild(item);
+    });
+
+    if (status && !iyibisPhotoProcessing) {
+      status.textContent = iyibisSahaPhotos.length
+        ? iyibisSahaPhotos.length + ' fotoğraf hazır. Toplam sıkıştırılmış boyut: ' +
+          iyibisFormatBytes(iyibisSahaPhotos.reduce(function(sum, p) { return sum + Number(p.size || 0); }, 0))
+        : 'Henüz fotoğraf seçilmedi.';
+    }
+  }
+
+  async function iyibisHandlePhotoSelection(event) {
+    var input = event && event.target;
+    var files = Array.prototype.slice.call((input && input.files) || []);
+    if (!files.length) return;
+
+    var available = IYIBIS_MAX_PHOTOS - iyibisSahaPhotos.length;
+    if (available <= 0) {
+      alert('En fazla 3 fotoğraf yükleyebilirsiniz.');
+      input.value = '';
+      return;
+    }
+
+    if (files.length > available) {
+      alert('En fazla 3 fotoğraf yükleyebilirsiniz. İlk ' + available + ' fotoğraf işlenecek.');
+      files = files.slice(0, available);
+    }
+
+    iyibisSetPhotoBusy(true, 'Fotoğraflar cihazınızda sıkıştırılıyor...');
+    try {
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        if (!String(file.type || '').startsWith('image/')) {
+          throw new Error('Yalnızca fotoğraf dosyaları yüklenebilir.');
+        }
+        var compressed = await iyibisCompressPhoto(file);
+        if (!compressed.base64) throw new Error('Fotoğraf sıkıştırma sonucu boş.');
+        iyibisSahaPhotos.push(compressed);
+        iyibisRenderPhotoPreviews();
+      }
+      iyibisSyncPhotoPayload();
+      iyibisRenderPhotoPreviews();
+    } catch (err) {
+      alert('Fotoğraf hazırlanamadı: ' + (err && err.message ? err.message : String(err)));
+    } finally {
+      iyibisSetPhotoBusy(false);
+      iyibisRenderPhotoPreviews();
+      if (input) input.value = '';
+    }
+  }
+
+  (function() {
+    var input = document.getElementById('sahaPhotoInput');
+    var form = document.getElementById('sahaForm');
+    if (input) input.addEventListener('change', iyibisHandlePhotoSelection);
+    if (form) {
+      form.addEventListener('reset', function() {
+        iyibisSahaPhotos = [];
+        iyibisSyncPhotoPayload();
+        setTimeout(iyibisRenderPhotoPreviews, 0);
+      });
+      // Fotoğraf işlenirken submit tetiklenirse mevcut submit handler'a geçmesini engelle.
+      form.addEventListener('submit', function(ev) {
+        if (iyibisPhotoProcessing) {
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+          alert('Fotoğraflar hâlâ hazırlanıyor. İşlem tamamlandığında formu yeniden kaydedin.');
+        }
+      }, true);
+    }
+    iyibisSyncPhotoPayload();
+  })();
 
 
   function navigateIyibisApp(appName, event) {

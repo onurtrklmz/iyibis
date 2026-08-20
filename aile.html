@@ -2242,6 +2242,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <div class="font-bold text-amber-900 mb-1">Saha Tespit Formu Özeti</div>
                     <div id="saha-modal-report" class="text-amber-900 whitespace-pre-wrap">--</div>
                     <a id="saha-modal-pdf-link" href="#" target="_blank" rel="noopener" class="hidden mt-3 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-[11px]"><i class="fa-solid fa-file-pdf"></i>Saha Tespit PDF’ini Aç</a>
+                    <div id="saha-modal-photo-area" class="hidden mt-3">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <div class="font-bold text-amber-900 text-[11px]"><i class="fa-solid fa-images mr-1"></i>Saha Fotoğrafları</div>
+                            <div id="saha-modal-photo-count" class="text-[10px] text-amber-700 font-semibold"></div>
+                        </div>
+                        <div id="saha-modal-photo-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+                        <div class="mt-2 text-[10px] text-amber-700">Fotoğraflar Drive’da özel tutulur ve yalnız İYİBİS’in kısa ömürlü güvenli bağlantılarıyla görüntülenir.</div>
+                    </div>
                 </div>
                 <div class="p-3 rounded-lg bg-violet-50 border border-violet-200">
                     <div class="font-bold text-violet-900 mb-1">SYDV Görüşü</div>
@@ -3819,6 +3827,39 @@ function openSahaDecision(id) {
     if (pdfLink) {
         if (item.saha_pdf_url) { pdfLink.href = item.saha_pdf_url; pdfLink.classList.remove('hidden'); }
         else { pdfLink.href = '#'; pdfLink.classList.add('hidden'); }
+    }
+
+    var photoArea = document.getElementById('saha-modal-photo-area');
+    var photoGrid = document.getElementById('saha-modal-photo-grid');
+    var photoCount = document.getElementById('saha-modal-photo-count');
+    var photoUrls = Array.isArray(item.saha_fotograflar) ? item.saha_fotograflar.filter(Boolean) : [];
+    if (photoArea && photoGrid && photoCount) {
+        photoGrid.innerHTML = '';
+        if (photoUrls.length) {
+            photoUrls.forEach(function(url, index) {
+                var a = document.createElement('a');
+                a.href = url;
+                a.target = '_blank';
+                a.rel = 'noopener';
+                a.className = 'block rounded-lg overflow-hidden border border-amber-200 bg-white hover:shadow-md transition';
+                var img = document.createElement('img');
+                img.src = url;
+                img.alt = 'Saha fotoğrafı ' + (index + 1);
+                img.loading = 'lazy';
+                img.className = 'w-full aspect-[4/3] object-cover bg-slate-100';
+                var cap = document.createElement('div');
+                cap.className = 'px-2 py-1.5 text-[10px] font-semibold text-amber-900 text-center';
+                cap.textContent = (index + 1) + '. fotoğrafı aç';
+                a.appendChild(img);
+                a.appendChild(cap);
+                photoGrid.appendChild(a);
+            });
+            photoCount.textContent = photoUrls.length + ' fotoğraf';
+            photoArea.classList.remove('hidden');
+        } else {
+            photoCount.textContent = '';
+            photoArea.classList.add('hidden');
+        }
     }
     setSahaSydvOpinion(item.sydv_gorusu || '');
     var info = document.getElementById('saha-form-optional-info');
