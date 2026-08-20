@@ -961,6 +961,11 @@
   /* Mobil sekme hamburger düğmesi */
   #mobileTabMenuButton {
     display: inline-flex !important;
+    position: relative;
+    margin: .55rem auto .35rem !important;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 75;
   }
 
   #desktopTabNav {
@@ -968,12 +973,13 @@
   }
 
   #mobileTabMenuPanel {
-    position: fixed;
-    top: 4.5rem;
-    left: .75rem;
-    right: .75rem;
-    z-index: 70;
-    max-height: calc(100dvh - 5.5rem);
+    position: absolute;
+    top: calc(100% + .35rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100vw - 1.5rem), 24rem);
+    z-index: 74;
+    max-height: min(70dvh, 34rem);
     overflow-y: auto;
     background: #0f172a;
     border: 1px solid #334155;
@@ -1326,9 +1332,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
             <!-- TABS NAVIGATION -->
             
+<div id="mobileTabMenuWrap" class="relative w-full">
 <button id="mobileTabMenuButton" type="button" onclick="toggleMobileTabMenu()"
-        class="hidden items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold border border-slate-700">
-  <i class="fa-solid fa-bars"></i>
+        aria-expanded="false" aria-controls="mobileTabMenuPanel"
+        class="hidden items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold border border-slate-700 shadow-sm">
+  <i id="mobileTabMenuIcon" class="fa-solid fa-bars"></i>
   <span>Menü</span>
 </button>
 <div id="mobileTabMenuPanel" class="hidden">
@@ -1360,6 +1368,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <i class="fa-solid fa-gear text-cyan-400"></i>
                     <span>Sistem &amp; Ayarlar</span>
                 </button>
+</div>
 </div>
 <div class="flex space-x-1 sm:space-x-4 border-t border-slate-800/80 pt-1 overflow-x-auto custom-scroll" id="desktopTabNav">
                 <button onclick="switchTab('tab-mevcut')" id="nav-tab-mevcut" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
@@ -5926,15 +5935,28 @@ document.addEventListener('click', function(ev) {
 
 
 <script id="iyibis-mobile-nav-logout-v42">
+function setMobileTabMenuOpen_(open) {
+  var panel = document.getElementById('mobileTabMenuPanel');
+  var btn = document.getElementById('mobileTabMenuButton');
+  var icon = document.getElementById('mobileTabMenuIcon');
+  if (!panel || !btn) return;
+
+  panel.classList.toggle('hidden', !open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+  if (icon) {
+    icon.className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  }
+}
+
 function toggleMobileTabMenu() {
   var panel = document.getElementById('mobileTabMenuPanel');
   if (!panel) return;
-  panel.classList.toggle('hidden');
+  setMobileTabMenuOpen_(panel.classList.contains('hidden'));
 }
 
 function closeMobileTabMenu() {
-  var panel = document.getElementById('mobileTabMenuPanel');
-  if (panel) panel.classList.add('hidden');
+  setMobileTabMenuOpen_(false);
 }
 
 document.addEventListener('click', function(ev) {
