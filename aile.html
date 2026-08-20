@@ -1569,15 +1569,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <p class="text-xs text-slate-500 mt-1">Senkronizasyon, yedekleme, dışa aktarma ve Drive / Google E-Tablo bağlantı ayarları.</p>
                 </div>
             </div>
-<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-                    <div>
-                        <h3 class="font-bold text-sm text-slate-900">Veri &amp; Entegrasyon Araçları</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Senkronizasyon, yedekleme ve harici yardım verisi işlemleri</p>
-                    </div>
-                    
-                <div id="drive-storage-card" class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-5">
-                    <div class="flex items-start justify-between gap-4">
+
+            <div id="drive-storage-card" class="w-full max-w-none bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
                         <div class="min-w-0">
                             <div class="flex items-center gap-2">
                                 <div id="drive-storage-icon" class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
@@ -1597,7 +1591,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
 
                     <div class="mt-4">
-                        <div class="flex items-end justify-between gap-3">
+                        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3">
                             <div>
                                 <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Kullanılan / Toplam</div>
                                 <div class="mt-1 text-xl font-extrabold text-slate-900">
@@ -1620,7 +1614,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 </div>
 
-<div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-900">Veri &amp; Entegrasyon Araçları</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Senkronizasyon, yedekleme ve harici yardım verisi işlemleri</p>
+                    </div>
+                <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
                         <button id="btn-refresh-all-sources" onclick="refreshAllGoogleSources(true)" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold rounded-lg shadow-sm transition">
                             <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Tüm Tabloları Drive'dan Çek
                         </button>
