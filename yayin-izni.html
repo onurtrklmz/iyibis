@@ -439,6 +439,28 @@
   <script src="config-beta42.js"></script>
   <script src="api-client-beta42.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
+
+<style id="iyibis-signature-light-surface-v42">
+/* İmza alanı sistem/tarayıcı koyu modundan bağımsız olarak daima kağıt gibi beyaz kalır. */
+.sig-container,
+.sig-container canvas {
+  color-scheme: only light !important;
+  forced-color-adjust: none !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  filter: none !important;
+}
+
+.sig-container {
+  border-color: #94a3b8 !important;
+}
+
+.sig-container canvas {
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -768,5 +790,73 @@
     return false;
   }
 </script>
+
+<script id="iyibis-signature-darkmode-fix-v42">
+(function() {
+  function makeSignatureCanvasLight_(canvas) {
+    if (!canvas || canvas.tagName !== 'CANVAS') return;
+    canvas.style.backgroundColor = '#ffffff';
+    canvas.style.colorScheme = 'only light';
+    canvas.style.filter = 'none';
+
+    /* Yeni/boş canvas'ın gerçek piksel arka planını da beyaz yap.
+       Üzerinde çizim varsa burada tekrar boyamıyoruz. */
+    if (!canvas.dataset.iyibisLightSurfaceReady) {
+      var ctx = canvas.getContext('2d');
+      if (ctx && canvas.width > 0 && canvas.height > 0) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+      }
+      canvas.dataset.iyibisLightSurfaceReady = '1';
+    }
+  }
+
+  function prepareAllSignatureCanvases_() {
+    document.querySelectorAll('.sig-container canvas').forEach(makeSignatureCanvasLight_);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(prepareAllSignatureCanvases_, 50);
+    });
+  } else {
+    setTimeout(prepareAllSignatureCanvases_, 50);
+  }
+
+  window.addEventListener('resize', function() {
+    setTimeout(function() {
+      document.querySelectorAll('.sig-container canvas').forEach(function(canvas) {
+        canvas.style.backgroundColor = '#ffffff';
+        canvas.style.colorScheme = 'only light';
+      });
+    }, 80);
+  });
+
+  /* Temizle düğmesinden sonra canvas yine beyaz yüzeyle başlasın. */
+  document.addEventListener('click', function(ev) {
+    var btn = ev.target && ev.target.closest
+      ? ev.target.closest('.sig-clear, .btn-sig-clear')
+      : null;
+    if (!btn) return;
+
+    setTimeout(function() {
+      document.querySelectorAll('.sig-container canvas').forEach(function(canvas) {
+        var ctx = canvas.getContext('2d');
+        if (!ctx || canvas.width <= 0 || canvas.height <= 0) return;
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+        canvas.style.backgroundColor = '#ffffff';
+      });
+    }, 0);
+  });
+})();
+</script>
+
 </body>
 </html>
