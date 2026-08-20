@@ -1519,6 +1519,96 @@ body {
   }
 }
 </style>
+
+<style id="iyibis-counter-badges-contrast-v42">
+/* ===== BETA 4.2 — Sayaç balonları: açık/koyu mod kontrastı ===== */
+
+/* Ortak */
+[data-counter] {
+  min-width: 2.15rem !important;
+  text-align: center !important;
+  font-weight: 800 !important;
+  border-width: 1px !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* AÇIK MOD */
+@media (prefers-color-scheme: light) {
+  [data-counter="badge-count-mevcut"] {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+    border-color: #6ee7b7 !important;
+  }
+
+  [data-counter="badge-count-red"] {
+    background: #ffe4e6 !important;
+    color: #9f1239 !important;
+    border-color: #fda4af !important;
+  }
+
+  [data-counter="badge-count-web"] {
+    background: #e0f2fe !important;
+    color: #075985 !important;
+    border-color: #7dd3fc !important;
+  }
+
+  [data-counter="badge-count-saha"] {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #fcd34d !important;
+  }
+}
+
+/* Tarayıcı tema bilgisini vermiyorsa açık modu varsay */
+[data-counter="badge-count-mevcut"] {
+  background: #d1fae5 !important;
+  color: #065f46 !important;
+  border-color: #6ee7b7 !important;
+}
+[data-counter="badge-count-red"] {
+  background: #ffe4e6 !important;
+  color: #9f1239 !important;
+  border-color: #fda4af !important;
+}
+[data-counter="badge-count-web"] {
+  background: #e0f2fe !important;
+  color: #075985 !important;
+  border-color: #7dd3fc !important;
+}
+[data-counter="badge-count-saha"] {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fcd34d !important;
+}
+
+/* KOYU MOD */
+@media (prefers-color-scheme: dark) {
+  [data-counter="badge-count-mevcut"] {
+    background: #12372c !important;
+    color: #6ee7b7 !important;
+    border-color: #2f855a !important;
+  }
+
+  [data-counter="badge-count-red"] {
+    background: #4a1724 !important;
+    color: #fda4af !important;
+    border-color: #9f1239 !important;
+  }
+
+  [data-counter="badge-count-web"] {
+    background: #12344a !important;
+    color: #7dd3fc !important;
+    border-color: #0369a1 !important;
+  }
+
+  [data-counter="badge-count-saha"] {
+    background: #493214 !important;
+    color: #fcd34d !important;
+    border-color: #a16207 !important;
+  }
+}
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
