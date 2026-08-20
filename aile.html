@@ -1229,7 +1229,7 @@ body{background:var(--iyibis-bg)!important;color:var(--iyibis-text)}
 
 /* Login: form ekranlarıyla aynı kırmızı-beyaz dil */
 #accessGate{
-  background:linear-gradient(180deg,#ffffff 0%,var(--iyibis-bg) 100%)!important;
+  background:var(--iyibis-bg)!important;
 }
 #accessGate .iyibis-login-card{
   border:1px solid var(--iyibis-border)!important;
@@ -1457,6 +1457,23 @@ header #last-sync-time {
   #desktopTabNav .tab-btn:hover {
     background:#2c2224 !important;
     color:#ff8c90 !important;
+  }
+}
+</style>
+
+<style id="iyibis-page-background-no-gradient-v42">
+html, body {
+  background-image: none !important;
+}
+body {
+  background-color: var(--iyibis-bg, #f6f8fa) !important;
+  background: var(--iyibis-bg, #f6f8fa) !important;
+}
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-image: none !important;
+    background-color: #101214 !important;
+    background: #101214 !important;
   }
 }
 </style>

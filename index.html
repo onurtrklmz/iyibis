@@ -27,7 +27,7 @@ h1{font-size:34px;margin:0}.sub{color:#94a3b8;margin-top:8px}.beta{display:inlin
   --iyibis-muted:#64748b;
 }
 body{
-  background:linear-gradient(180deg,#ffffff 0%,var(--iyibis-bg) 100%)!important;
+  background:var(--iyibis-bg)!important;
   color:var(--iyibis-text)!important;
 }
 .wrap{max-width:900px!important}
@@ -110,6 +110,23 @@ h1{color:var(--iyibis-red)!important;font-weight:850!important;letter-spacing:-.
     background:#5b080c !important;
     color:#ff9b9f !important;
     border-color:#8b1d24 !important;
+  }
+}
+</style>
+
+<style id="iyibis-page-background-no-gradient-v42">
+html, body {
+  background-image: none !important;
+}
+body {
+  background-color: var(--iyibis-bg, #f6f8fa) !important;
+  background: var(--iyibis-bg, #f6f8fa) !important;
+}
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-image: none !important;
+    background-color: #101214 !important;
+    background: #101214 !important;
   }
 }
 </style>

@@ -493,7 +493,7 @@
   --iyibis-text:#1e293b;
   --iyibis-muted:#64748b;
 }
-body{background:linear-gradient(180deg,#ffffff 0%,var(--iyibis-bg) 100%)!important;color:var(--iyibis-text)!important}
+body{background:var(--iyibis-bg)!important;color:var(--iyibis-text)!important}
 .app-navbar{
   background:rgba(255,255,255,.98)!important;
   border-bottom-color:var(--iyibis-red)!important;
@@ -649,6 +649,23 @@ input:focus,select:focus,textarea:focus{
 
   .nav-links {
     background:#181a1c !important;
+  }
+}
+</style>
+
+<style id="iyibis-page-background-no-gradient-v42">
+html, body {
+  background-image: none !important;
+}
+body {
+  background-color: var(--iyibis-bg, #f6f8fa) !important;
+  background: var(--iyibis-bg, #f6f8fa) !important;
+}
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-image: none !important;
+    background-color: #101214 !important;
+    background: #101214 !important;
   }
 }
 </style>
