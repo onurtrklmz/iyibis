@@ -2118,7 +2118,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                             <i class="fa-solid fa-magnifying-glass text-sm"></i>
                         </div>
-                        <input type="text" id="search-mevcut" oninput="renderMevcutTable()" placeholder="İsim, TCKN, telefon veya adres ara..." 
+                        <input type="text" id="search-mevcut" autocomplete="off" autocapitalize="off" spellcheck="false" oninput="renderMevcutTable()" placeholder="İsim, TCKN, telefon veya adres ara..." 
                                class="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs sm:text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition">
                         <button onclick="clearSearch('search-mevcut', renderMevcutTable)" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
                             <i class="fa-solid fa-xmark text-xs"></i>
@@ -3674,6 +3674,34 @@ function switchTab(tabId) {
         renderBirthdayList();
     }
 }
+
+function resetMevcutSearchOnPageLoad_() {
+    var input = document.getElementById('search-mevcut');
+    if (!input) return;
+
+    input.value = '';
+    input.setAttribute('value', '');
+
+    // Bazı tarayıcılar form değerini DOMContentLoaded sonrasında geri yükler.
+    setTimeout(function() {
+        input.value = '';
+        input.setAttribute('value', '');
+        if (typeof renderMevcutTable === 'function' && appState && Array.isArray(appState.mevcut)) {
+            renderMevcutTable();
+        }
+    }, 0);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', resetMevcutSearchOnPageLoad_);
+} else {
+    resetMevcutSearchOnPageLoad_();
+}
+
+window.addEventListener('pageshow', function() {
+    resetMevcutSearchOnPageLoad_();
+});
+
 function setStatusFilter(status) {
     appState.currentStatusFilter = status;
     document.querySelectorAll('.status-filter-btn').forEach(function (btn) {
