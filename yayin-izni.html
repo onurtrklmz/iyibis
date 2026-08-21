@@ -973,45 +973,7 @@ body {
       }
     }
 
-    
-
-    /* İYİBİS — PDF her zaman açık/beyaz tema */
-    function iyibisPdfLightOnClone(clonedDoc) {
-      try {
-        clonedDoc.documentElement.style.colorScheme = 'only light';
-        clonedDoc.documentElement.setAttribute('data-iyibis-pdf-light', '1');
-        clonedDoc.querySelectorAll('style[class*="darkreader"], style[id*="darkreader"], link[class*="darkreader"], [data-darkreader-mode], [data-darkreader-scheme]').forEach(function(el){
-          if (el.tagName === 'STYLE' || el.tagName === 'LINK') el.disabled = true;
-        });
-        var s = clonedDoc.createElement('style');
-        s.id = 'iyibis-pdf-force-light';
-        s.textContent = `
-          html[data-iyibis-pdf-light], html[data-iyibis-pdf-light] body { color-scheme: only light !important; background:#fff !important; filter:none !important; }
-          html[data-iyibis-pdf-light] .form-card,
-          html[data-iyibis-pdf-light] #pdfTemplate { background:#fff !important; color:#0f172a !important; filter:none !important; }
-          html[data-iyibis-pdf-light] input,
-          html[data-iyibis-pdf-light] select,
-          html[data-iyibis-pdf-light] textarea { background:#fff !important; color:#0f172a !important; border-color:#cbd5e1 !important; filter:none !important; }
-          html[data-iyibis-pdf-light] label { color:#334155 !important; }
-          html[data-iyibis-pdf-light] table { background:#fff !important; color:#0f172a !important; }
-          html[data-iyibis-pdf-light] th { background:#f1f5f9 !important; color:#8b1d24 !important; border-color:#cbd5e1 !important; }
-          html[data-iyibis-pdf-light] td { background:#fff !important; color:#0f172a !important; border-color:#d1d5db !important; }
-          html[data-iyibis-pdf-light] .signature-card,
-          html[data-iyibis-pdf-light] .signature-card-single,
-          html[data-iyibis-pdf-light] .sig-box-card,
-          html[data-iyibis-pdf-light] .legal-box { background:#f8fafc !important; color:#334155 !important; border-color:#cbd5e1 !important; }
-          html[data-iyibis-pdf-light] .sig-container,
-          html[data-iyibis-pdf-light] canvas { background:#fff !important; filter:none !important; }
-          html[data-iyibis-pdf-light] .header-titles h1,
-          html[data-iyibis-pdf-light] .section-title { color:#8b1d24 !important; }
-          html[data-iyibis-pdf-light] .header-titles p,
-          html[data-iyibis-pdf-light] .sig-hint { color:#64748b !important; }
-        `;
-        clonedDoc.head.appendChild(s);
-      } catch (_) {}
-    }
-
-async function pdfYayinUret(indir = true) {
+    async function pdfYayinUret(indir = true) {
       const element = document.getElementById('formCardYayin');
       const kisi = document.getElementById('yayin_ad').value || "Muvafakat";
       const cleanName = kisi.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ]/g, '_');
@@ -1020,7 +982,7 @@ async function pdfYayinUret(indir = true) {
         margin: [8, 10, 8, 10],
         filename: `GIH_Yayin_Izni_${cleanName}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0, backgroundColor: '#ffffff', onclone: iyibisPdfLightOnClone, ignoreElements: el => el.classList.contains('no-print') },
+        html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0, ignoreElements: el => el.classList.contains('no-print') },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
@@ -1039,7 +1001,7 @@ async function pdfYayinUret(indir = true) {
       const msg = document.getElementById('status-msg');
 
       btn.disabled = true;
-      btn.innerText = "PDF Hazırlanıyor ve Drive'a Yükleniyor...";
+      btn.innerText = "Yükleniyor...";
       msg.style.display = "none";
 
       const formData = new FormData(this);
@@ -1054,7 +1016,7 @@ async function pdfYayinUret(indir = true) {
           payload.pdf_filename = `GIH_Yayin_Izni_${kisi.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ]/g, '_')}_${Date.now()}.pdf`;
         }
 
-        btn.innerText = "E-Tablo ve Drive Güncelleniyor...";
+        btn.innerText = "Yükleniyor...";
 
         await new Promise((resolve, reject) => {
         google.script.run
@@ -1066,7 +1028,7 @@ async function pdfYayinUret(indir = true) {
         msg.style.display = "block";
         msg.style.backgroundColor = "#dcfce7";
         msg.style.color = "#15803d";
-        msg.innerHTML = "✓ <strong>Yayın izni belgesi başarıyla Google E-Tablo'ya aktarıldı ve PDF Drive'a yüklendi.</strong><br><span style='font-size:0.85rem; font-weight:normal;'>İsterseniz 'PDF Tutanak İndir' butonu ile evrak çıktısını alabilir veya 'Formu Temizle' ile sıfırlayabilirsiniz.</span>";
+        msg.innerHTML = "✓ <strong>Yükleme Başarılı Dosyalar Sisteme Aktarıldı, İşlendi</strong>";
 
       } catch (err) {
         msg.style.display = "block";

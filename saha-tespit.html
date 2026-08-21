@@ -509,8 +509,13 @@ input:focus,select:focus,textarea:focus{
 .form-header .doc-logo-svg {
   width:75px!important;
   height:75px!important;
-  object-fit:contain!important;
+  object-fit:cover!important;
+  object-position:center!important;
   display:block!important;
+  border-radius:50%!important;
+  clip-path:circle(50%)!important;
+  -webkit-clip-path:circle(50%)!important;
+  background:#fff!important;
 }
 @media (max-width: 640px) {
   .form-header {
@@ -563,7 +568,7 @@ function toggleAppMenu() {
     <!-- Başlık ve Logo: Ayni Yardım formu yapısı -->
     <div class="form-header">
       <div class="header-logo-title">
-        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:contain;display:block;">
+        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
         <div class="header-titles">
           <h1>Gaziantep İyilik Hareketi Derneği</h1>
           <p>Saha Tespit Formu - Hane İhtiyaç İnceleme ve Saha Mülakat Kayıt Sistemi</p>
@@ -785,7 +790,7 @@ function toggleAppMenu() {
           <div class="photo-upload-title">Ziyarete Ait Fotoğraflar</div>
           <div class="photo-upload-note">
             En fazla 3 fotoğraf yüklenebilir. Fotoğraflar cihazınızda otomatik olarak küçültülür ve sıkıştırılır;
-            Drive'a ham yüksek çözünürlüklü dosya gönderilmez.
+            sisteme ham yüksek çözünürlüklü dosya gönderilmez.
           </div>
         </div>
         <div id="photoCountBadge" style="font-size:.75rem;font-weight:800;color:#8b1d24;white-space:nowrap;">0 / 3</div>
@@ -829,7 +834,7 @@ function toggleAppMenu() {
 
     <!-- Aksiyon Butonları -->
     <div class="actions-grid">
-      <button type="submit" class="submit-btn" id="submitBtn">Formu Kaydet, Tabloya & Drive'a Yükle</button>
+      <button type="submit" class="submit-btn" id="submitBtn">Formu Gönder</button>
       <button type="button" class="pdf-btn" onclick="pdfTutanakUret(true)">📄 PDF Tutanak İndir</button>
       <button type="button" class="reset-btn" onclick="formuSifirla()">🔄 Yeni Kayıt</button>
     </div>
@@ -882,6 +887,14 @@ function toggleAppMenu() {
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Saha Notları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfNotlar"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Verilen Destekler:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfVerilenler"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Saha Fotoğrafları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFotografBilgisi">Fotoğraf eklenmedi.</td></tr>
+    </table>
+
+    <div id="pdfFotografBolumu" style="display:none; margin: 8px 0 12px; page-break-inside: avoid;">
+      <div style="font-weight:700; color:#8b1d24; margin-bottom:6px;">Saha Fotoğrafları</div>
+      <div id="pdfFotografGrid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;"></div>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
     </table>
 
     <div style="display: flex; justify-content: space-between; margin-top: 10px;">
@@ -1331,10 +1344,52 @@ function hazirlaPdfSablonu() {
     document.getElementById('pdfVerilenler').innerText = verilenler;
     var photoCountForPdf = Number((document.getElementById('photo_count') || {}).value || 0);
     var photoInfoEl = document.getElementById('pdfFotografBilgisi');
+    var photoSectionEl = document.getElementById('pdfFotografBolumu');
+    var photoGridEl = document.getElementById('pdfFotografGrid');
+
     if (photoInfoEl) {
         photoInfoEl.innerText = photoCountForPdf > 0
-            ? photoCountForPdf + ' adet saha fotoğrafı İYİBİS sistemine ayrıca yüklenmiştir.'
+            ? photoCountForPdf + ' adet saha fotoğrafı tutanağa eklenmiştir.'
             : 'Fotoğraf eklenmedi.';
+    }
+
+    if (photoGridEl) {
+        photoGridEl.innerHTML = '';
+        (window.iyibisSahaPhotos || iyibisSahaPhotos || []).forEach(function(photo, index) {
+            if (!photo || !photo.dataUrl) return;
+
+            var wrap = document.createElement('div');
+            wrap.style.border = '1px solid #d1d5db';
+            wrap.style.borderRadius = '6px';
+            wrap.style.padding = '4px';
+            wrap.style.background = '#ffffff';
+            wrap.style.pageBreakInside = 'avoid';
+
+            var img = document.createElement('img');
+            img.src = photo.dataUrl;
+            img.alt = 'Saha fotoğrafı ' + (index + 1);
+            img.style.width = '100%';
+            img.style.height = '135px';
+            img.style.objectFit = 'cover';
+            img.style.objectPosition = 'center';
+            img.style.display = 'block';
+            img.style.borderRadius = '4px';
+
+            var caption = document.createElement('div');
+            caption.textContent = (index + 1) + '. Fotoğraf';
+            caption.style.fontSize = '9px';
+            caption.style.textAlign = 'center';
+            caption.style.marginTop = '3px';
+            caption.style.color = '#475569';
+
+            wrap.appendChild(img);
+            wrap.appendChild(caption);
+            photoGridEl.appendChild(wrap);
+        });
+    }
+
+    if (photoSectionEl) {
+        photoSectionEl.style.display = photoCountForPdf > 0 ? 'block' : 'none';
     }
     var pdfCocukTbody = document.getElementById('pdfCocukTbody');
     pdfCocukTbody.innerHTML = "";
@@ -1450,7 +1505,7 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                     btn = document.getElementById('submitBtn');
                     msg = document.getElementById('status-msg');
                     btn.disabled = true;
-                    btn.innerText = "PDF Hazırlanıyor ve Drive'a Yükleniyor...";
+                    btn.innerText = "Yükleniyor...";
                     msg.style.display = "none";
                     formData = new FormData(this);
                     payload = Object.fromEntries(formData.entries());
@@ -1478,7 +1533,7 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                         kisi = document.getElementById('iletisim_kisi').value || "Bilinmiyor";
                         payload.pdf_filename = "GIH_Saha_Tutanak_".concat(kisi.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ]/g, '_'), "_").concat(Date.now(), ".pdf");
                     }
-                    btn.innerText = "E-Tablo ve Drive Güncelleniyor...";
+                    btn.innerText = "Yükleniyor...";
                     return [4 /*yield*/, iyibisSahaBackendCall('submitSahaTespitForm', [payload])];
                 case 3:
                     _a.sent();
@@ -1486,9 +1541,7 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                     msg.style.backgroundColor = "#dcfce7";
                     msg.style.color = "#15803d";
                     var savedPhotoCount = Number((document.getElementById('photo_count') || {}).value || 0);
-                    msg.innerHTML = "✓ <strong>Saha tespit formu başarıyla Google E-Tablo'ya işlendi, PDF Drive'a yüklendi" +
-                        (savedPhotoCount > 0 ? " ve " + savedPhotoCount + " fotoğraf özel klasöre kaydedildi" : "") +
-                        ".</strong><br><span style='font-size:0.85rem; font-weight:normal;'>İsterseniz 'PDF Tutanak İndir' butonu ile bir kopyasını alabilir veya 'Yeni Kayıt' butonu ile yeni haneye geçebilirsiniz.</span>";
+                    msg.innerHTML = "✓ <strong>Yükleme Başarılı Dosyalar Sisteme Aktarıldı, İşlendi</strong>";
                     return [3 /*break*/, 6];
                 case 4:
                     err_1 = _a.sent();
@@ -1500,7 +1553,7 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                     return [3 /*break*/, 6];
                 case 5:
                     btn.disabled = false;
-                    btn.innerText = "Formu Kaydet, Tabloya & Drive'a Yükle";
+                    btn.innerText = "Formu Gönder";
                     return [7 /*endfinally*/];
                 case 6: return [2 /*return*/];
             }
@@ -1510,7 +1563,7 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
 
 
   // ===== BETA 4.2 — SAHA FOTOĞRAFI SIKIŞTIRMA / ÖNİZLEME =====
-  var iyibisSahaPhotos = [];
+  var iyibisSahaPhotos = window.iyibisSahaPhotos = [];
   var iyibisPhotoProcessing = false;
   var IYIBIS_MAX_PHOTOS = 3;
   var IYIBIS_MAX_PHOTO_BYTES = 700 * 1024;
@@ -1724,7 +1777,7 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
     if (input) input.addEventListener('change', iyibisHandlePhotoSelection);
     if (form) {
       form.addEventListener('reset', function() {
-        iyibisSahaPhotos = [];
+        iyibisSahaPhotos.length = 0;
         iyibisSyncPhotoPayload();
         setTimeout(iyibisRenderPhotoPreviews, 0);
       });
