@@ -2939,6 +2939,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-2">
                     <span class="text-slate-400 block font-medium">Yapılan Yardımlar & Notlar:</span>
                     <div id="m-teslim-edilen-detay" class="p-2.5 bg-emerald-50 text-emerald-900 font-medium rounded border border-emerald-200">--</div>
+                    <div class="mt-2">
+                        <span class="text-slate-400 block font-medium mb-1">Liste Durumu Geçmişi:</span>
+                        <div id="m-list-status-history" class="p-2.5 bg-amber-50 text-amber-950 rounded border border-amber-200 text-[11px]">
+                            Liste durumu değişikliği bulunmuyor.
+                        </div>
+                    </div>
                     <button id="m-open-assistance" type="button" class="mt-2 px-3 py-2 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 rounded-lg font-semibold text-xs"><i class="fa-solid fa-hand-holding-heart mr-1"></i>Yapılan Yardımları Aç</button>
                     <div class="text-[11px] text-slate-600 pt-1">
                         <span class="text-slate-400">Ziyaret Edenler:</span> <span id="m-ziyaretciler" class="font-semibold text-slate-800 ml-1">--</span>
@@ -5029,6 +5035,7 @@ function viewFamilyDetail(id) {
     if (item.teslim_edilen) helpNotes.push(item.teslim_edilen);
     if (fieldVisitSupport) helpNotes.push('Saha ziyaretinde verilen destekler: ' + fieldVisitSupport);
     document.getElementById('m-teslim-edilen-detay').innerText = helpNotes.length ? helpNotes.join(' • ') : 'Kayıtlı destek bulunmuyor.';
+    renderFamilyStatusHistory_(item);
     document.getElementById('m-ziyaretciler').innerText = item.ziyaret_edenler || '-';
     document.getElementById('m-ozel-durum').innerText = item.ozel_durum || '-';
     document.getElementById('m-talep').innerText = item.talep || '-';
@@ -5583,8 +5590,8 @@ function gsActiveToRed(token, tc, name) {
     return serverCall('moveActiveToRedServer', token, tc, name);
 }
 
-function gsSetFamilyStatus(token, tc, name, status) {
-    return serverCall('setFamilyStatusServer', token, tc, name, status);
+function gsSetFamilyStatus(token, tc, name, status, reason) {
+    return serverCall('setFamilyStatusServer', token, tc, name, status, reason);
 }
 
 function gsSaveAssistance(token, tc, name, entries) {
@@ -5882,6 +5889,7 @@ function applyCentralPayload(payload) {
     appState.web = dedupeWebClient_(payload.web || []);
     appState.saha = payload.saha || [];
     appState.fieldSupportHistory = payload.fieldSupportHistory || [];
+    appState.familyStatusHistory = payload.familyStatusHistory || [];
     appState.history = payload.history || [];
     window.appState = appState;
     centralCurrentUser = window.centralCurrentUser = (payload.user || centralCurrentUser);
@@ -6140,25 +6148,91 @@ function moveRedToActive(id) {
         });
     });
 }
+
+function requestRequiredFamilyStatusReason_(title) {
+    while (true) {
+        var value = window.prompt(title + '\n\nGerekçe yazınız:');
+        if (value === null) return null;
+
+        value = String(value || '').trim();
+        if (value) return value;
+
+        alert('Bu işlem için gerekçe yazılması zorunludur.');
+    }
+}
+
+function getFamilyStatusHistoryForFamily_(item) {
+    var tc = normalizeTC(item && item.tc);
+    var name = normalizeName(item && item.ad_soyad);
+
+    return (appState.familyStatusHistory || [])
+        .filter(function (x) {
+            var sameTc = tc && normalizeTC(x.tc) === tc;
+            var sameName = name && normalizeName(x.ad_soyad) === name;
+            return !!(sameTc || sameName);
+        })
+        .slice()
+        .reverse();
+}
+
+function renderFamilyStatusHistory_(item) {
+    var box = document.getElementById('m-list-status-history');
+    if (!box) return;
+
+    var rows = getFamilyStatusHistoryForFamily_(item);
+    if (!rows.length) {
+        box.innerText = 'Liste durumu değişikliği bulunmuyor.';
+        return;
+    }
+
+    box.innerHTML = rows.map(function (x) {
+        var action = escapeHtml(x.islem || 'Durum değişikliği');
+        var date = escapeHtml(x.zaman || '-');
+        var reason = escapeHtml(x.gerekce || '-');
+
+        return '<div class="py-1.5 border-b border-slate-200 last:border-b-0">' +
+            '<span class="font-semibold text-slate-800">' + action + '</span>' +
+            ' <span class="text-slate-500">(' + date + ')</span>' +
+            ' <span class="text-slate-700">(Gerekçe: ' + reason + ')</span>' +
+            '</div>';
+    }).join('');
+}
+
 function delistFamily(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var item, result, err_13;
+        var item, reason, result, err_13;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     item = appState.mevcut.find(function (x) { return x.id === id; });
                     if (!item)
                         return [2 /*return*/];
-                    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " \"Liste D\u0131\u015F\u0131 B\u0131rak\u0131lanlar\" kategorisine aktarmak istedi\u011Finize emin misiniz?")))
+
+                    reason = requestRequiredFamilyStatusReason_(
+                        (item.ad_soyad || 'Bu aile') + ' liste dışı bırakılacak.'
+                    );
+                    if (reason === null)
                         return [2 /*return*/];
+
+                    if (!confirm((item.ad_soyad || 'Bu aileyi') +
+                        ' "Liste Dışı Bırakılanlar" kategorisine aktarmak istediğinize emin misiniz?\n\nGerekçe: ' + reason))
+                        return [2 /*return*/];
+
                     setCentralBusy('Aile Liste Dışına Alınıyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, gsSetFamilyStatus(centralSessionToken, item.tc || '', item.ad_soyad || '', 'DELİST')];
+                    return [4 /*yield*/, gsSetFamilyStatus(
+                        centralSessionToken,
+                        item.tc || '',
+                        item.ad_soyad || '',
+                        'DELİST',
+                        reason
+                    )];
                 case 2:
                     result = _a.sent();
                     applyCentralPayload(result);
+                    clearCentralBusy();
                     return [3 /*break*/, 4];
                 case 3:
                     err_13 = _a.sent();
@@ -6170,25 +6244,42 @@ function delistFamily(id) {
         });
     });
 }
+
 function reactivateDelistedFamily(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var item, result, err_14;
+        var item, reason, result, err_14;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     item = appState.mevcut.find(function (x) { return x.id === id; });
                     if (!item)
                         return [2 /*return*/];
-                    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " yeniden aktif aile listesine almak istedi\u011Finize emin misiniz?")))
+
+                    reason = requestRequiredFamilyStatusReason_(
+                        (item.ad_soyad || 'Bu aile') + ' onaylı aile listesine geri alınacak.'
+                    );
+                    if (reason === null)
                         return [2 /*return*/];
+
+                    if (!confirm((item.ad_soyad || 'Bu aileyi') +
+                        ' yeniden Onaylı Aile listesine almak istediğinize emin misiniz?\n\nGerekçe: ' + reason))
+                        return [2 /*return*/];
+
                     setCentralBusy('Aile Yeniden Aktifleştiriliyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, gsSetFamilyStatus(centralSessionToken, item.tc || '', item.ad_soyad || '', 'TAKİP')];
+                    return [4 /*yield*/, gsSetFamilyStatus(
+                        centralSessionToken,
+                        item.tc || '',
+                        item.ad_soyad || '',
+                        'TAKİP',
+                        reason
+                    )];
                 case 2:
                     result = _a.sent();
                     applyCentralPayload(result);
+                    clearCentralBusy();
                     return [3 /*break*/, 4];
                 case 3:
                     err_14 = _a.sent();
@@ -6200,6 +6291,7 @@ function reactivateDelistedFamily(id) {
         });
     });
 }
+
 function fileToServerObject(file) {
     if (!file)
         return Promise.resolve(null);
