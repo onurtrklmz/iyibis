@@ -2259,7 +2259,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         <div id="tab-web" class="tab-content hidden">
             <div class="bg-sky-50 border border-sky-200 text-sky-900 rounded-xl p-3 mb-4 text-xs">
                 <div class="font-bold mb-1">Başvuru Akışı</div>
-                <div>Web başvurusu için üç karar verilebilir: <b>Doğrudan Onayla</b> ile kişi Aktif Ailelere alınır; <b>Sahaya Al</b> ile Saha Ziyareti kuyruğuna gönderilir; <b>Ret</b> ile Ret Listesine taşınır. Her işlemde hedef kayıt başarıyla oluşturulduktan sonra Web Başvuruları tablosundaki kaynak satır fiziksel olarak silinir.</div>
+                <div>Web başvurusu için üç karar verilebilir: <b>Doğrudan Onayla</b> ile kişi Aktif Ailelere alınır; <b>Sahaya Al</b> ile Saha Ziyareti kuyruğuna gönderilir; <b>Ret</b> ile Ret Listesine taşınır. Her işlemde hedef kayıt başarıyla oluşturulduktan sonra merkezi Web Başvuruları kaydı iş akışından çıkarılır; harici tablo yalnız yedek olarak merkezden eşitlenir.</div>
             </div>
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/80 mb-4">
@@ -2269,13 +2269,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             <i class="fa-solid fa-cloud-arrow-down text-sky-600"></i>
                             Web Başvuru Veri Kaynağı
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Ayrı Google E-Tablo dosyasındaki başvuruları bu panele aktarır.</p>
+                        <p class="text-xs text-slate-500 mt-1">Web sitesinden indirilen CSV dosyasını merkezi veritabanına aktarır. CSV içindeki aynı ailenin birden fazla başvurusu otomatik tekilleştirilir; en güncel başvuru korunur.</p>
                     </div>
-                    <button id="btn-fetch-web-sheet" onclick="fetchWebApplicationsFromExternalSheet(true)"
-                            class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="web-sheet-sync-icon" class="fa-solid fa-table-list mr-1.5"></i>
-                        Web'den Yeni Başvuruları Güncelle
-                    </button>
+                    <div class="flex flex-wrap items-center justify-end gap-2">
+                        <input id="web-csv-file-input" type="file" accept=".csv,text/csv" class="hidden" onchange="handleWebCsvFileSelected(event)">
+                        <button id="btn-upload-web-csv" onclick="document.getElementById('web-csv-file-input').click()"
+                                class="inline-flex items-center justify-center px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
+                            <i class="fa-solid fa-file-csv mr-1.5"></i>
+                            CSV Yükle
+                        </button>
+                        <button id="btn-fetch-web-sheet" onclick="fetchWebApplicationsFromExternalSheet()"
+                                class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
+                            <i id="web-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>
+                            Merkezi Kayıtları Yenile
+                        </button>
+                    </div>
                 </div>
                 <div id="web-sheet-source-status" class="hidden mt-3 text-xs rounded-lg p-3"></div>
             </div>
@@ -2556,7 +2564,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
                         <button id="btn-refresh-all-sources" onclick="refreshAllGoogleSources(true)" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold rounded-lg shadow-sm transition">
-                            <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Tüm Tabloları Güncelle
+                            <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Merkezi Veri + Yedekleri Güncelle
                         </button>
                         
                         <button id="btn-download-all-tables" onclick="downloadAllSourceTables()" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg border border-emerald-800 disabled:opacity-60 disabled:cursor-wait">
@@ -4631,7 +4639,7 @@ function updateAllSourcesLastCheckTime() {
         hour: '2-digit', minute: '2-digit', second: '2-digit',
         hour12: false
     }).format(now);
-    el.innerText = '5 Tablo Son Güncelleme: ' + formatted + ' (GMT+3)';
+    el.innerText = 'Merkezi Veri / Yedekler Son Güncelleme: ' + formatted + ' (GMT+3)';
 }
 function refreshAllGoogleSources() {
     return __awaiter(this, arguments, void 0, function (showToast) {
@@ -4644,7 +4652,7 @@ function refreshAllGoogleSources() {
                     topIcon = document.getElementById('top-refresh-all-icon');
                     if (icon) icon.classList.add('fa-spin');
                     if (topIcon) topIcon.classList.add('fa-spin');
-                    if (showToast) setCentralBusy('Tüm Tablolar Güncelleniyor...');
+                    if (showToast) setCentralBusy('Merkezi Veri ve Yedekler Güncelleniyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, 4, 5]);
@@ -4654,7 +4662,7 @@ function refreshAllGoogleSources() {
                     applyCentralPayload(result);
                     updateAllSourcesLastCheckTime();
                     if (showToast)
-                        showIyibisToast('Tüm Tablolar Güncellendi! ' + iyibisFormatDateTime());
+                        showIyibisToast('Merkezi Veri ve Yedek Tablolar Güncellendi! ' + iyibisFormatDateTime());
                     return [3 /*break*/, 5];
                 case 3:
                     err_5 = _a.sent();
@@ -4672,9 +4680,9 @@ function refreshAllGoogleSources() {
     });
 }
 function scheduleGoogleRefreshCycle() {
-    // Panel açılır açılmaz beş kaynak birden kontrol edilir.
+    // Panel açılır açılmaz merkezi veritabanı okunur ve harici yedekler merkezden eşitlenir.
     if (!isCentralIdleExpired_()) refreshAllGoogleSources(false);
-    // Sonrasında her 10 dakikada bir tüm kaynaklar yeniden kontrol edilir.
+    // Sonrasında her 10 dakikada bir merkezi veri yeniden okunur ve yedek tablolar onarılır.
     if (window.__gihRefreshInterval)
         clearInterval(window.__gihRefreshInterval);
     window.__gihRefreshInterval = setInterval(function () {
@@ -4862,6 +4870,60 @@ function finalizeSahaDecision(destination) {
         });
     });
 }
+
+function readTextFileUtf8(file) {
+    return new Promise(function(resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function() { resolve(String(reader.result || '')); };
+        reader.onerror = function() { reject(new Error('CSV dosyası okunamadı.')); };
+        reader.readAsText(file, 'UTF-8');
+    });
+}
+
+async function handleWebCsvFileSelected(event) {
+    var input = event && event.target ? event.target : document.getElementById('web-csv-file-input');
+    var file = input && input.files && input.files[0];
+    if (!file) return;
+
+    try {
+        if (!/\.csv$/i.test(file.name || '')) throw new Error('Yalnızca .csv dosyası seçebilirsiniz.');
+        if (file.size > 5 * 1024 * 1024) throw new Error('CSV dosyası 5 MB sınırını aşıyor.');
+
+        setCentralBusy('CSV merkezi veritabanına aktarılıyor...');
+        var text = await readTextFileUtf8(file);
+        var result = await gsImportWebCsv(centralSessionToken, text, file.name || 'web-basvurular.csv');
+        applyCentralPayload(result);
+
+        var info = result && result.csvImport ? result.csvImport : {};
+        showIyibisToast(
+            'CSV Aktarımı Tamamlandı! ' +
+            Number(info.added || 0) + ' yeni kayıt eklendi, ' +
+            Number(info.csvFamilyDuplicates || 0) + ' CSV içi mükerrer başvuru tekilleştirildi, ' +
+            Number(info.duplicates || 0) + ' merkezde mevcut kayıt atlandı, ' +
+            Number(info.invalid || 0) + ' geçersiz satır atlandı. ' +
+            iyibisFormatDateTime()
+        );
+
+        var status = document.getElementById('web-sheet-source-status');
+        if (status) {
+            status.className = 'mt-3 text-xs rounded-lg p-3 bg-emerald-50 text-emerald-800 border border-emerald-200';
+            status.classList.remove('hidden');
+            status.innerHTML =
+                '<strong>CSV içe aktarma tamamlandı.</strong> ' +
+                'Yeni: ' + Number(info.added || 0) +
+                ' · CSV mükerrer: ' + Number(info.csvFamilyDuplicates || 0) +
+                ' · Merkezde mevcut: ' + Number(info.duplicates || 0) +
+                ' · Geçersiz: ' + Number(info.invalid || 0);
+        }
+    } catch (err) {
+        clearCentralBusy();
+        showIyibisToast('CSV aktarılamadı: ' + serverFailure(err));
+    } finally {
+        if (input) input.value = '';
+    }
+}
+
+
 function fetchWebApplicationsFromExternalSheet() {
     return __awaiter(this, arguments, void 0, function (showToast) {
         var status, icon, result, err_6;
@@ -5656,6 +5718,10 @@ function gsRefreshAllSources(token) {
 
 function gsFetchExternalWeb(token) {
     return serverCall('getExternalWebApplications', token);
+}
+
+function gsImportWebCsv(token, csvText, fileName) {
+    return serverCall('importWebCsvServer', token, csvText, fileName);
 }
 
 function gsGetConfig(token) {
@@ -6531,7 +6597,7 @@ function importAssistanceFromSheet() {
 
                     if (status) {
                         status.className = 'mt-3 text-xs rounded-lg p-3 bg-sky-50 text-sky-800 border border-sky-200';
-                        status.innerText = 'Merkezi veritabanındaki yardım kayıtları yenileniyor...';
+                        status.innerText = 'Merkezi yardım kayıtları okunuyor ve yedek tablo eşitleniyor...';
                         status.classList.remove('hidden');
                     }
 
