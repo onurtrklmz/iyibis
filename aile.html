@@ -648,9 +648,9 @@
 }
 </style>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4A.4";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4B";</script>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4A.4";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4B";</script>
   <script src="config-beta42.js"></script>
   <script src="api-client-beta42.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
@@ -4439,99 +4439,104 @@ function uploadPdfToDrive(file, family, category, folderValue) {
         });
     });
 }
-function uploadFamilyDocument(type) {
-    return __awaiter(this, void 0, void 0, function () {
-        var family, inputId, file, status, cfg, folder, result, key;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    family = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
-                    if (!family)
-                        return [2 /*return*/];
-                    inputId = type === 'assessment' ? 'family-assessment-pdf' : 'family-media-pdf';
-                    file = document.getElementById(inputId).files[0];
-                    status = document.getElementById('family-doc-upload-status');
-                    if (!file || !isPdfFile(file)) {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
-                        status.innerText = 'Lütfen PDF dosyası seçin.';
-                        status.classList.remove('hidden');
-                        return [2 /*return*/];
-                    }
-                    cfg = getIntegrationConfig();
-                    folder = type === 'assessment' ? cfg.assessmentFolder : cfg.mediaFolder;
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'PDF yükleniyor...';
-                    status.classList.remove('hidden');
-                    return [4 /*yield*/, uploadPdfToDrive(file, family, type, folder)];
-                case 1:
-                    result = _a.sent();
-                    key = familyKey(family);
-                    workflowState.documents[key] = workflowState.documents[key] || [];
-                    if (!result.error) {
-                        workflowState.documents[key].push({
-                            type: type,
-                            name: file.name,
-                            url: result.url || '',
-                            at: new Date().toISOString(),
-                            by: sessionStorage.getItem('gih_current_user') || ''
-                        });
-                        saveWorkflowState();
-                        renderFamilyDocuments(family);
-                        document.getElementById(inputId).value = '';
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200';
-                        status.innerText = 'PDF başarıyla Drive’a yüklendi.';
-                    }
-                    else {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-amber-50 text-amber-900 border border-amber-200';
-                        status.innerText = result.error;
-                    }
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
+// Phase 4B: eski harici uploadEndpoint tabanlı belge yükleme fonksiyonu kaldırıldı.
+
 function renderFamilyDocuments(family) {
-    var container = document.getElementById('family-document-list');
-    if (!container) return;
+    var container=document.getElementById('family-document-list');
+    if(!container) return;
 
-    var keys = [];
-    var tc = normalizeTC(family && family.tc);
-    var name = normalizeName(family && family.ad_soyad);
-    if (tc) keys.push(tc);
-    if (name) keys.push('NAME:' + name);
+    var keys=[];
+    var tc=normalizeTC(family && family.tc);
+    var name=normalizeName(family && family.ad_soyad);
+    if(tc) keys.push(tc);
+    if(name) keys.push('NAME:'+name);
 
-    var docs = [], seen = {};
-    keys.forEach(function(key) {
-        (workflowState.documents[key] || []).forEach(function(d) {
-            var sig = [d.type || '', d.url || '', d.name || ''].join('|');
-            if (seen[sig]) return;
-            seen[sig] = true;
-            docs.push(d);
+    var docs=[], seen={};
+    keys.forEach(function(key){
+        (workflowState.documents[key] || []).forEach(function(d){
+            var type=String(d.type || '').trim().toLowerCase();
+            var sig=[type,d.fileId || '',d.url || '',d.name || ''].join('|');
+            if(seen[sig]) return;
+            seen[sig]=true;
+            docs.push({
+                type:type,
+                name:d.name || '',
+                url:d.url || '',
+                fileId:d.fileId || '',
+                at:d.at || '',
+                by:d.by || ''
+            });
         });
     });
 
-    var hasAssessment = docs.some(function(d){ return d.type === 'assessment' && d.url; });
-    var hasMedia = docs.some(function(d){ return d.type === 'media' && d.url; });
-    var assessmentPanel = document.getElementById('family-assessment-upload-panel');
-    var mediaPanel = document.getElementById('family-media-upload-panel');
-    if (assessmentPanel) assessmentPanel.classList.toggle('hidden', hasAssessment);
-    if (mediaPanel) mediaPanel.classList.toggle('hidden', hasMedia);
-
-    if (!docs.length) {
-        container.innerHTML = '<div class="text-[11px] text-slate-400">Henüz kayıtlı aile tutanağı bulunmuyor.</div>';
-        return;
+    function docsOf(type){
+        return docs.filter(function(d){return d.type===type && d.url;});
     }
 
-    container.innerHTML = docs.map(function(d) {
-        var title = d.type === 'assessment' ? 'Saha Tespit Formu' :
-                    d.type === 'media' ? 'Video / Fotoğraf İzin Belgesi' : 'Belge';
-        return '<div class="flex items-center justify-between gap-3 p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs">' +
-            '<div class="min-w-0"><span class="font-semibold text-slate-800">' + escapeHtml(title) + '</span>' +
-            (d.name ? '<div class="text-slate-500 truncate">' + escapeHtml(d.name) + '</div>' : '') + '</div>' +
-            (d.url ? '<a href="' + escapeAttr(d.url) + '" target="_blank" rel="noopener noreferrer" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold"><i class="fa-solid fa-file-pdf"></i>PDF Aç</a>' : '') +
-            '</div>';
-    }).join('');
+    var assessmentDocs=docsOf('assessment');
+    var mediaDocs=docsOf('media');
+    var hasAssessment=assessmentDocs.length>0;
+    var hasMedia=mediaDocs.length>0;
+
+    var assessmentPanel=document.getElementById('family-assessment-upload-panel');
+    var mediaPanel=document.getElementById('family-media-upload-panel');
+    if(assessmentPanel) assessmentPanel.classList.toggle('hidden',hasAssessment);
+    if(mediaPanel) mediaPanel.classList.toggle('hidden',hasMedia);
+
+    function statusCard_(title,icon,items,missingText){
+        if(!items.length){
+            return '<div class="p-3 rounded-xl border border-slate-200 bg-slate-50">'+
+                '<div class="flex items-center gap-2 font-semibold text-slate-700">'+
+                '<i class="'+icon+' text-slate-400"></i>'+escapeHtml(title)+'</div>'+
+                '<div class="mt-1 text-[11px] text-slate-400">'+escapeHtml(missingText)+'</div>'+
+                '</div>';
+        }
+
+        return items.map(function(d,index){
+            return '<div class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/60">'+
+                '<div class="flex items-center justify-between gap-3">'+
+                  '<div class="min-w-0">'+
+                    '<div class="font-semibold text-slate-800"><i class="'+icon+' mr-1.5 text-emerald-600"></i>'+escapeHtml(title)+(items.length>1?' '+(index+1):'')+'</div>'+
+                    (d.name?'<div class="text-[11px] text-slate-500 truncate mt-1">'+escapeHtml(d.name)+'</div>':'')+
+                  '</div>'+
+                  '<a href="'+escapeAttr(d.url)+'" target="_blank" rel="noopener noreferrer" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold">'+
+                    '<i class="fa-solid fa-file-pdf"></i>PDF Aç'+
+                  '</a>'+
+                '</div>'+
+              '</div>';
+        }).join('');
+    }
+
+    var htmlParts=[];
+    htmlParts.push(statusCard_(
+        'Saha Tespit Formu',
+        'fa-solid fa-clipboard-check',
+        assessmentDocs,
+        'Merkezi BELGELER kaydında saha tespit PDF’i bulunmuyor.'
+    ));
+    htmlParts.push(statusCard_(
+        'Video / Fotoğraf İzin Belgesi',
+        'fa-solid fa-camera',
+        mediaDocs,
+        'Merkezi BELGELER kaydında yayın izin PDF’i bulunmuyor.'
+    ));
+
+    var other=docs.filter(function(d){
+        return d.type!=='assessment' && d.type!=='media' && d.url;
+    });
+    other.forEach(function(d){
+        htmlParts.push(
+          '<div class="p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between gap-3">'+
+            '<div class="min-w-0"><div class="font-semibold text-slate-700">Diğer Belge</div>'+
+            (d.name?'<div class="text-[11px] text-slate-500 truncate">'+escapeHtml(d.name)+'</div>':'')+'</div>'+
+            '<a href="'+escapeAttr(d.url)+'" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold"><i class="fa-solid fa-file-pdf mr-1"></i>PDF Aç</a>'+
+          '</div>'
+        );
+    });
+
+    container.innerHTML=htmlParts.join('');
 }
+
 function escapeHtml(v) {
     return String(v !== null && v !== void 0 ? v : '').replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c]); });
 }
@@ -5946,9 +5951,10 @@ function mapCentralAssistanceToWorkflow(payload) {
     }
     (payload.documents || []).forEach(function (d) {
         var doc = {
-            type: d.belge_turu || '',
+            type: String(d.belge_turu || '').trim().toLowerCase(),
             name: d.dosya_adi || '',
             url: d.drive_url || '',
+            fileId: d.drive_file_id || '',
             at: d.yukleme_zamani || '',
             by: d.kullanici || ''
         };
@@ -6430,49 +6436,67 @@ function saveAssistanceEntries() {
 }
 function uploadFamilyDocument(type) {
     return __awaiter(this, void 0, void 0, function () {
-        var family, inputId, file, status, fileObj, result, err_16;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var family,inputId,file,status,fileObj,result,updatedFamily,err;
+        return __generator(this,function(_a){
+            switch(_a.label){
                 case 0:
-                    family = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
-                    if (!family)
-                        return [2 /*return*/];
-                    inputId = type === 'assessment' ? 'family-assessment-pdf' : 'family-media-pdf';
-                    file = document.getElementById(inputId).files[0];
-                    status = document.getElementById('family-doc-upload-status');
-                    _a.label = 1;
+                    family=appState.mevcut.find(function(x){return x.id===currentFamilyId;});
+                    if(!family) return [2 /*return*/];
+
+                    inputId=type==='assessment'?'family-assessment-pdf':'family-media-pdf';
+                    file=document.getElementById(inputId).files[0];
+                    status=document.getElementById('family-doc-upload-status');
+                    _a.label=1;
                 case 1:
-                    _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, fileToServerObject(file)];
+                    _a.trys.push([1,5,,6]);
+                    if(!file || !isPdfFile(file)) throw new Error('Lütfen PDF dosyası seçin.');
+                    return [4 /*yield*/,fileToServerObject(file)];
                 case 2:
-                    fileObj = _a.sent();
-                    if (!fileObj)
-                        throw new Error('Lütfen PDF dosyası seçin.');
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'PDF Google Drive’a yükleniyor...';
+                    fileObj=_a.sent();
+                    if(!fileObj) throw new Error('PDF dosyası hazırlanamadı.');
+
+                    status.className='mt-3 text-xs p-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-200';
+                    status.innerText='PDF merkezi sisteme yükleniyor...';
                     status.classList.remove('hidden');
-                    setCentralBusy('PDF Google Drive’a Yükleniyor...');
-                    return [4 /*yield*/, gsUploadDocument(centralSessionToken, family.tc || '', family.ad_soyad || '', type, fileObj)];
+                    setCentralBusy('PDF Merkezi Sisteme Yükleniyor...');
+
+                    return [4 /*yield*/,gsUploadDocument(
+                        centralSessionToken,
+                        family.tc || '',
+                        family.ad_soyad || '',
+                        type,
+                        fileObj
+                    )];
                 case 3:
-                    result = _a.sent();
+                    result=_a.sent();
                     applyCentralPayload(result);
-                    document.getElementById(inputId).value = '';
-                    renderFamilyDocuments(family);
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200';
-                    status.innerText = 'PDF merkezi Drive klasörüne yüklendi.';
-                    return [3 /*break*/, 5];
-                case 4:
-                    err_16 = _a.sent();
+                    document.getElementById(inputId).value='';
+
+                    updatedFamily=appState.mevcut.find(function(x){
+                        return normalizeTC(x.tc)===normalizeTC(family.tc) ||
+                               normalizeName(x.ad_soyad)===normalizeName(family.ad_soyad);
+                    }) || family;
+
+                    renderFamilyDocuments(updatedFamily);
+                    status.className='mt-3 text-xs p-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200';
+                    status.innerText='PDF merkezi BELGELER kaydına eklendi.';
                     clearCentralBusy();
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
-                    status.innerText = serverFailure(err_16);
+                    return [3 /*break*/,6];
+                case 4:
+                    return [3 /*break*/,6];
+                case 5:
+                    err=_a.sent();
+                    clearCentralBusy();
+                    status.className='mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
+                    status.innerText=serverFailure(err);
                     status.classList.remove('hidden');
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/,6];
+                case 6:return [2 /*return*/];
             }
         });
     });
 }
+
 function importAssistanceFromSheet() {
     return __awaiter(this, void 0, void 0, function () {
         var status, result, err_17;
