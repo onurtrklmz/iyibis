@@ -350,7 +350,7 @@
 
     </style>
 <style id="iyibis-responsive-modal-v223">
-/*  — işlem menüsü ve modal ölçekleme */
+/* BETA 4.2 — işlem menüsü ve modal ölçekleme */
 #familyActionMenu {
     width: min(16rem, calc(100vw - 1rem)) !important;
     max-height: min(70dvh, 30rem) !important;
@@ -512,7 +512,7 @@
 
 
 <style id="iyibis-active-horizontal-fit-v236">
-/*  — YALNIZ Aktif Aileler tablosunu yatayda sayfaya sığdırır.
+/* BETA 4.2 — YALNIZ Aktif Aileler tablosunu yatayda sayfaya sığdırır.
    Satır yüksekliği, dikey davranış, butonlar ve diğer sekmeler değiştirilmez. */
 #tab-mevcut .overflow-x-auto,
 #tab-mevcut .table-container {
@@ -656,7 +656,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
 
 <style id="iyibis-web-applications-fit-v42">
-/*  — yalnız Web'den Yeni Başvurular tablosunun yatay taşmasını önler. */
+/* BETA 4.2 — yalnız Web'den Yeni Başvurular tablosunun yatay taşmasını önler. */
 #tab-web > .bg-white.rounded-xl {
     width: 100% !important;
     max-width: 100% !important;
@@ -818,7 +818,7 @@
 
 
 <style id="iyibis-aile-login-compact-v42">
-/*  — Login kartını masaüstünde daha kompakt tutar; mobilde esnek kalır. */
+/* BETA 4.2 — Login kartını masaüstünde daha kompakt tutar; mobilde esnek kalır. */
 #accessGate .iyibis-login-card{
   width:min(100%,40rem)!important;
   max-width:40rem!important;
@@ -872,7 +872,7 @@
 </style>
 
 <style id="iyibis-mobile-tables-menu-logout-v42">
-/* =====  — Mobil tablo / sekme / logout iyileştirmeleri ===== */
+/* ===== BETA 4.2 — Mobil tablo / sekme / logout iyileştirmeleri ===== */
 
 @media (max-width: 768px) {
   /* Sayfanın kendisi yatay taşmasın */
@@ -1379,7 +1379,7 @@ header #last-sync-time {
 </style>
 
 <style id="iyibis-flat-dark-mode-v42">
-/*  — Koyu modda beyazdan siyaha gradient yok.
+/* BETA 4.2 — Koyu modda beyazdan siyaha gradient yok.
    Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
 @media (prefers-color-scheme: dark) {
   html {
@@ -1521,7 +1521,7 @@ body {
 </style>
 
 <style id="iyibis-counter-badges-contrast-v42">
-/* =====  — Sayaç balonları: açık/koyu mod kontrastı ===== */
+/* ===== BETA 4.2 — Sayaç balonları: açık/koyu mod kontrastı ===== */
 
 /* Ortak */
 [data-counter] {
@@ -1685,36 +1685,6 @@ body {
   }
 }
 </style>
-
-<style id="iyibis-501-light-mode-guard">
-/* İYİBİS 5.0.1 — Açık mod koruması.
-   Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
-@media (prefers-color-scheme: light) {
-  html {
-    color-scheme: light !important;
-    background: #f6f9fb !important;
-    background-image: none !important;
-  }
-  body {
-    background: #f6f9fb !important;
-    background-color: #f6f9fb !important;
-    background-image: none !important;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  html { color-scheme: dark !important; }
-}
-</style>
-
-
-<style id="iyibis-501-light-surfaces">
-@media (prefers-color-scheme: light) {
-  body.bg-slate-50 { background:#f8fafc !important; color:#0f172a !important; }
-  .bg-white { background-color:#ffffff !important; }
-  input, textarea, select { color-scheme:light !important; }
-}
-</style>
-
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -1732,10 +1702,10 @@ body {
                 <img src="gaziantep-iyilik-hareketi-logo.jpeg" alt="Gaziantep İyilik Hareketi Derneği Logosu" class="iyibis-login-logo">
                 <h2 class="iyibis-login-title">İYİBİS Aile Otomasyonu</h2>
                 <p class="iyibis-login-subtitle">Kullanıcı Girişi</p>
-                
+                <div class="iyibis-login-version-row"><span class="iyibis-login-version">BETA 4.2</span></div>
             </div>
             <form id="accessForm" class="p-6 space-y-4" autocomplete="off" action="javascript:void(0);" novalidate>
-                
+                <div class="text-center text-[9px] text-cyan-600 font-mono -mb-1">Aile Panel Build: BETA 4.2</div>
                 <div class="text-xs text-slate-600 bg-amber-50 border border-amber-200 rounded-lg p-3">
                     Bu panel kişisel veri içerir. Yalnızca tanımlı kullanıcılar erişebilir.
                 </div>
@@ -1803,7 +1773,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 /*
- *  BAĞIMSIZ LOGIN BOOTSTRAP
+ * BETA 4.2 BAĞIMSIZ LOGIN BOOTSTRAP
  * Bu kod, büyük AilePanel JavaScript'inden bağımsızdır.
  */
 (function () {
@@ -1986,7 +1956,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <div>
                         <div class="flex items-center gap-2">
                             <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Gaziantep İyilik Hareketi Aile Takip Otomasyonu</h1>
-                            
+                            <span id="app-version-badge" class="inline-flex shrink-0 items-center px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[9px] sm:text-[10px] font-bold tracking-wider">BETA 4.2</span>
                             <span class="hidden md:inline text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Merkezi Canlı Veritabanı</span>
                         </div>
                         <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -2110,11 +2080,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </button>
                     <button id="btn-fetch-active-sheet" onclick="fetchActiveFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Aktif Aileleri Güncelle
+                        <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Aktif Aileleri Drive'dan Çek
                     </button>
                     <button onclick="importAssistanceFromSheet()"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i class="fa-solid fa-hand-holding-heart mr-1.5"></i>Yapılan Yardımları Güncelle
+                        <i class="fa-solid fa-hand-holding-heart mr-1.5"></i>Yapılan Yardımları Drive'dan Çek
                     </button>
                 </div>
             </div>
@@ -2209,7 +2179,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                     <button id="btn-fetch-red-sheet" onclick="fetchRedFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="red-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Ret Alanları Güncelle
+                        <i id="red-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Ret Alanları Drive'dan Çek
                     </button>
                 </div>
             </div>
@@ -2281,7 +2251,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <button id="btn-fetch-web-sheet" onclick="fetchWebApplicationsFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
                         <i id="web-sheet-sync-icon" class="fa-solid fa-table-list mr-1.5"></i>
-                        Web'den Yeni Başvuruları Güncelle
+                        Web'den Yeni Başvuruları Drive'dan Çek
                     </button>
                 </div>
                 <div id="web-sheet-source-status" class="hidden mt-3 text-xs rounded-lg p-3"></div>
@@ -2358,7 +2328,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                     <button id="btn-fetch-field-sheet" onclick="fetchFieldReportsFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="field-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Saha Tespit Formunu Güncelle
+                        <i id="field-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Saha Tespit Formunu Drive'dan Çek
                     </button>
                 </div>
             </div>
@@ -2563,7 +2533,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
                         <button id="btn-refresh-all-sources" onclick="refreshAllGoogleSources(true)" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold rounded-lg shadow-sm transition">
-                            <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Tüm Tabloları Güncelle
+                            <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Tüm Tabloları Drive'dan Çek
                         </button>
                         
                         <button id="btn-download-all-tables" onclick="downloadAllSourceTables()" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg border border-emerald-800 disabled:opacity-60 disabled:cursor-wait">
@@ -3307,7 +3277,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var DEFAULT_SHEET_ID = ''; // : eski genel aile tablosu kaldırıldı.
+var DEFAULT_SHEET_ID = ''; // BETA 4.2: eski genel aile tablosu kaldırıldı.
 var appState = window.appState = {
     sheetId: DEFAULT_SHEET_ID,
     mevcut: [],
@@ -3375,7 +3345,7 @@ function familyKey(item) {
 }
 function applyWorkflowOverlay(mevcut, red, web) {
     /*
-     * :
+     * BETA 4.2:
      * Aktif / Ret / Web listelerinde tarayıcı workflow overlay'i kullanılmaz.
      * Bu üç listenin tek otoritesi merkezi Google Sheet kaynaklarıdır.
      */
@@ -3666,28 +3636,6 @@ function setStatusFilter(status) {
         activeBtn.classList.add('ring-2', 'ring-slate-900', 'shadow-sm');
     renderMevcutTable();
 }
-
-function normalizeMetricScore(value) {
-    if (value === null || value === undefined || value === '')
-        return null;
-    var raw = String(value).trim().replace(',', '.');
-    if (!raw)
-        return null;
-
-    var hadPercent = raw.includes('%');
-    raw = raw.replace('%', '').trim();
-    var n = Number(raw);
-    if (!Number.isFinite(n))
-        return null;
-
-    // Eski verilerde 0.50 / 0.55 / 0.60 biçimi kullanılmışsa 0-100 puana çevir.
-    // 60% ve 60 gibi değerler ise doğrudan 60 olarak kalır.
-    if (!hadPercent && n >= 0 && n <= 1)
-        n = n * 100;
-
-    return Math.round(n);
-}
-
 function renderMevcutTable() {
     var query = (document.getElementById('search-mevcut').value || '').toLowerCase().trim();
     var district = document.getElementById('filter-district-mevcut').value;
@@ -3712,7 +3660,7 @@ function renderMevcutTable() {
         return true;
     });
     if (sortVal === 'metric-desc') {
-        list.sort(function (a, b) { return (normalizeMetricScore(b.metrik_puani) || 0) - (normalizeMetricScore(a.metrik_puani) || 0); });
+        list.sort(function (a, b) { return parseFloat(b.metrik_puani || 0) - parseFloat(a.metrik_puani || 0); });
     }
     else if (sortVal === 'name-asc') {
         list.sort(function (a, b) { return (a.ad_soyad || '').localeCompare(b.ad_soyad || ''); });
@@ -3731,7 +3679,6 @@ function renderMevcutTable() {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
         var durum = (item.durumu || '').trim().toUpperCase();
-        var metricScore = normalizeMetricScore(item.metrik_puani);
         var statusBadge = "<span class=\"badge-stabil px-2 py-0.5 rounded text-[11px] font-bold\">STAB\u0130L</span>";
         if (durum === 'KRİTİK')
             statusBadge = "<span class=\"badge-kritik px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDD34 KR\u0130T\u0130K</span>";
@@ -3739,7 +3686,7 @@ function renderMevcutTable() {
             statusBadge = "<span class=\"badge-takip px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDFE1 TAK\u0130P</span>";
         else if (durum === 'DELİST')
             statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">\u26AB L\u0130STE DI\u015EI</span>";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(metricScore !== null ? '(' + metricScore + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(item.metrik_puani ? '(' + item.metrik_puani + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
@@ -4390,8 +4337,6 @@ function fetchActiveFamiliesFromExternalSheet() {
                     icon = document.getElementById('active-sheet-sync-icon');
                     if (icon)
                         icon.classList.add('fa-spin');
-                    if (showToast)
-                        setCentralBusy('Saha Tespit Formları Merkezi Veritabanıyla Eşleştiriliyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, 4, 5]);
@@ -4416,8 +4361,6 @@ function fetchActiveFamiliesFromExternalSheet() {
                 case 4:
                     if (icon)
                         icon.classList.remove('fa-spin');
-                    if (showToast)
-                        clearCentralBusy();
                     return [7 /*endfinally*/];
                 case 5: return [2 /*return*/];
             }
@@ -4570,7 +4513,7 @@ function fetchFieldReportsFromExternalSheet() {
                     payload = _a.sent();
                     applyCentralPayload(payload);
                     if (showToast)
-                        alert('Saha Tespit Formları merkezi veritabanıyla eşleştirildi. Saha Ziyareti listesi yenilendi.');
+                        alert('Saha Tespit Formu kontrol edildi; eşleşen kayıtlar Değerlendirmede aşamasına geçirildi.');
                     return [3 /*break*/, 5];
                 case 3:
                     e_1 = _a.sent();
@@ -5158,9 +5101,9 @@ function openModal(id) { document.getElementById(id).classList.remove('hidden');
 function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 function clearSearch(id, cb) { document.getElementById(id).value = ''; cb(); }
 function toggleDropdown(id) { document.getElementById(id).classList.toggle('hidden'); }
-/* : merkezi Apps Script katmanı için UI köprüsü - gerçek UI bloğunun sonunda */
+/* BETA 4.2: merkezi Apps Script katmanı için UI köprüsü - gerçek UI bloğunun sonunda */
 /* ============================================================
-   : MERKEZİ KATMAN AYNI SCRIPT SCOPE'UNDA
+   BETA 4.2: MERKEZİ KATMAN AYNI SCRIPT SCOPE'UNDA
    ============================================================ */
 /* ============================================================
    MERKEZİ APPS SCRIPT KATMANI
@@ -5334,7 +5277,7 @@ function restorePersistentCentralSession_() {
 }
 
 /*
- * :
+ * BETA 4.2:
  * Ana UI state'i önceki script bloğundan window üzerinden alınır.
  * Bu blok çıplak global lexical binding'e güvenmez.
  */
