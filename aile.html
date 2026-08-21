@@ -350,7 +350,7 @@
 
     </style>
 <style id="iyibis-responsive-modal-v223">
-/* BETA 4.2 — işlem menüsü ve modal ölçekleme */
+/*  — işlem menüsü ve modal ölçekleme */
 #familyActionMenu {
     width: min(16rem, calc(100vw - 1rem)) !important;
     max-height: min(70dvh, 30rem) !important;
@@ -512,7 +512,7 @@
 
 
 <style id="iyibis-active-horizontal-fit-v236">
-/* BETA 4.2 — YALNIZ Aktif Aileler tablosunu yatayda sayfaya sığdırır.
+/*  — YALNIZ Aktif Aileler tablosunu yatayda sayfaya sığdırır.
    Satır yüksekliği, dikey davranış, butonlar ve diğer sekmeler değiştirilmez. */
 #tab-mevcut .overflow-x-auto,
 #tab-mevcut .table-container {
@@ -648,12 +648,1073 @@
 }
 </style>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
+<script>window.IYIBIS_WEB_BUILD="5.0 FINAL";</script>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
+<script>window.IYIBIS_WEB_BUILD="5.0 FINAL";</script>
   <script src="config-beta42.js"></script>
   <script src="api-client-beta42.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
+
+<style id="iyibis-web-applications-fit-v42">
+/*  — yalnız Web'den Yeni Başvurular tablosunun yatay taşmasını önler. */
+#tab-web > .bg-white.rounded-xl {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+}
+#tab-web .iyibis-scroll-list {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+#tab-web #web-applications-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+}
+#tab-web #web-applications-table th,
+#tab-web #web-applications-table td {
+    min-width: 0 !important;
+    max-width: none !important;
+    padding-left: .38rem !important;
+    padding-right: .38rem !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    vertical-align: top;
+}
+#tab-web #web-applications-table .whitespace-nowrap {
+    white-space: normal !important;
+}
+#tab-web #web-applications-table .truncate,
+#tab-web #web-applications-table .line-clamp-2 {
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow: hidden !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+}
+#tab-web #web-applications-table th:nth-child(1),
+#tab-web #web-applications-table td:nth-child(1) { width: 8% !important; }
+#tab-web #web-applications-table th:nth-child(2),
+#tab-web #web-applications-table td:nth-child(2) { width: 14% !important; }
+#tab-web #web-applications-table th:nth-child(3),
+#tab-web #web-applications-table td:nth-child(3) { width: 15% !important; }
+#tab-web #web-applications-table th:nth-child(4),
+#tab-web #web-applications-table td:nth-child(4) { width: 10% !important; }
+#tab-web #web-applications-table th:nth-child(5),
+#tab-web #web-applications-table td:nth-child(5) { width: 12% !important; }
+#tab-web #web-applications-table th:nth-child(6),
+#tab-web #web-applications-table td:nth-child(6) { width: 17% !important; }
+#tab-web #web-applications-table th:nth-child(7),
+#tab-web #web-applications-table td:nth-child(7) { width: 9% !important; }
+#tab-web #web-applications-table th:nth-child(8),
+#tab-web #web-applications-table td:nth-child(8) { width: 15% !important; }
+
+#tab-web #web-table-body td:last-child > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: stretch !important;
+}
+#tab-web #web-table-body td:last-child > div > button {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+#tab-web #web-table-body td:last-child > div > div {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: .22rem !important;
+}
+#tab-web #web-table-body td:last-child button {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: .34rem .18rem !important;
+    font-size: .61rem !important;
+    line-height: .9rem !important;
+    white-space: normal !important;
+}
+#tab-web #web-table-body td:last-child button i {
+    margin-right: .15rem !important;
+}
+@media (max-width: 900px) {
+    #tab-web #web-applications-table { font-size: .68rem !important; }
+    #tab-web #web-applications-table th,
+    #tab-web #web-applications-table td {
+        padding-left: .28rem !important;
+        padding-right: .28rem !important;
+    }
+}
+@media (max-width: 640px) {
+    #tab-web #web-applications-table { font-size: .61rem !important; }
+    #tab-web #web-applications-table th,
+    #tab-web #web-applications-table td {
+        padding-left: .2rem !important;
+        padding-right: .2rem !important;
+    }
+    #tab-web #web-table-body td:last-child button {
+        font-size: .56rem !important;
+        padding: .25rem .1rem !important;
+    }
+}
+</style>
+
+
+<style id="iyibis-aile-login-reference-v42">
+#accessGate{
+  background:linear-gradient(135deg,#f8fafc 0%,#fff 52%,#f1f5f9 100%)!important;
+  padding:1.25rem!important;
+}
+#accessGate .iyibis-login-home-link{color:#64748b!important}
+#accessGate .iyibis-login-home-link:hover{color:#8b1d24!important}
+#accessGate .iyibis-login-card{
+  width:min(100%,49rem);max-width:49rem;background:#fff;border:1px solid #eef2f7;
+  border-radius:1rem;box-shadow:0 16px 45px rgba(15,23,42,.10);overflow:hidden;
+}
+#accessGate .iyibis-login-brand{text-align:center;padding:2.2rem 2.2rem .8rem}
+#accessGate .iyibis-login-logo{
+  width:8rem;height:8rem;object-fit:cover;border-radius:50%;display:block;margin:0 auto 1rem;background:#fff;
+}
+#accessGate .iyibis-login-title{
+  margin:0;color:#991b1b;font-size:clamp(1.75rem,3vw,2.35rem);font-weight:800;line-height:1.15;
+}
+#accessGate .iyibis-login-subtitle{
+  margin:.55rem 0 0;color:#374151;font-size:clamp(1.05rem,2vw,1.35rem);font-weight:500;
+}
+#accessGate .iyibis-login-version-row{display:flex;align-items:center;gap:1rem;margin:1.6rem 0 .2rem}
+#accessGate .iyibis-login-version-row:before,#accessGate .iyibis-login-version-row:after{
+  content:"";height:1px;flex:1;background:#fecdd3;
+}
+#accessGate .iyibis-login-version{
+  padding:.45rem .95rem;border-radius:9999px;background:#fff1f2;color:#b91c1c;font-weight:800;font-size:.8rem;
+}
+#accessGate #accessForm{padding:1.25rem 2.2rem 2.2rem!important}
+#accessGate #accessForm>.text-center.text-\[9px\]{display:none!important}
+#accessGate #accessForm>.bg-amber-50{display:none!important}
+#accessGate #accessUsername,#accessGate #accessPassword{
+  min-height:3.55rem;background:#fff!important;border:1px solid #d1d5db!important;border-radius:.6rem!important;font-size:1rem!important;
+}
+#accessGate #accessUsername:focus,#accessGate #accessPassword:focus{
+  border-color:#991b1b!important;--tw-ring-color:rgba(153,27,27,.14)!important;
+}
+#accessGate #accessSubmitBtn{
+  min-height:3.6rem;border-radius:.55rem!important;background:linear-gradient(90deg,#ef2029,#c9090f)!important;
+  color:#fff!important;font-size:1rem!important;box-shadow:none!important;
+}
+#accessGate #accessSubmitBtn:hover{background:linear-gradient(90deg,#dc1720,#ad070c)!important}
+.iyibis-panel-logo-img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:640px){
+  #accessGate{padding:.75rem!important}
+  #accessGate .iyibis-login-brand{padding:1.5rem 1.1rem .5rem}
+  #accessGate .iyibis-login-logo{width:6.5rem;height:6.5rem}
+  #accessGate #accessForm{padding:1rem 1.1rem 1.4rem!important}
+}
+</style>
+
+
+<style id="iyibis-aile-login-compact-v42">
+/*  — Login kartını masaüstünde daha kompakt tutar; mobilde esnek kalır. */
+#accessGate .iyibis-login-card{
+  width:min(100%,40rem)!important;
+  max-width:40rem!important;
+}
+#accessGate .iyibis-login-brand{
+  padding:1.35rem 1.6rem .45rem!important;
+}
+#accessGate .iyibis-login-logo{
+  width:6rem!important;
+  height:6rem!important;
+  margin-bottom:.65rem!important;
+}
+#accessGate .iyibis-login-title{
+  font-size:clamp(1.45rem,2.4vw,1.9rem)!important;
+}
+#accessGate .iyibis-login-subtitle{
+  margin-top:.35rem!important;
+  font-size:clamp(.95rem,1.6vw,1.1rem)!important;
+}
+#accessGate .iyibis-login-version-row{
+  margin:1rem 0 .05rem!important;
+}
+#accessGate #accessForm{
+  padding:.85rem 1.6rem 1.45rem!important;
+}
+#accessGate #accessUsername,#accessGate #accessPassword{
+  min-height:3.05rem!important;
+  font-size:.95rem!important;
+}
+#accessGate #accessSubmitBtn{
+  min-height:3.15rem!important;
+  font-size:.95rem!important;
+}
+@media (max-width:640px){
+  #accessGate{padding:.85rem!important}
+  #accessGate .iyibis-login-card{
+    width:100%!important;
+    max-width:26rem!important;
+  }
+  #accessGate .iyibis-login-brand{
+    padding:1.15rem 1rem .35rem!important;
+  }
+  #accessGate .iyibis-login-logo{
+    width:5.25rem!important;
+    height:5.25rem!important;
+  }
+  #accessGate #accessForm{
+    padding:.75rem 1rem 1.1rem!important;
+  }
+}
+</style>
+
+<style id="iyibis-mobile-tables-menu-logout-v42">
+/* =====  — Mobil tablo / sekme / logout iyileştirmeleri ===== */
+
+@media (max-width: 768px) {
+  /* Sayfanın kendisi yatay taşmasın */
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  /* Aktif Aileler ve Web Başvuruları: tablo kendi içinde yatay kaysın */
+  #tab-mevcut .table-container,
+  #tab-mevcut .overflow-x-auto,
+  #tab-web .iyibis-scroll-list,
+  #tab-web .overflow-x-auto {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  #tab-mevcut table,
+  #tab-web #web-applications-table {
+    width: max-content !important;
+    min-width: 980px !important;
+    max-width: none !important;
+    table-layout: auto !important;
+    font-size: .72rem !important;
+  }
+
+  #tab-mevcut th,
+  #tab-mevcut td,
+  #tab-web #web-applications-table th,
+  #tab-web #web-applications-table td {
+    width: auto !important;
+    min-width: 110px !important;
+    max-width: 240px !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    padding-left: .55rem !important;
+    padding-right: .55rem !important;
+  }
+
+  #tab-mevcut th:first-child,
+  #tab-mevcut td:first-child,
+  #tab-web #web-applications-table th:first-child,
+  #tab-web #web-applications-table td:first-child {
+    min-width: 90px !important;
+  }
+
+  #tab-mevcut th:nth-child(2),
+  #tab-mevcut td:nth-child(2),
+  #tab-web #web-applications-table th:nth-child(2),
+  #tab-web #web-applications-table td:nth-child(2) {
+    min-width: 155px !important;
+  }
+
+  #tab-mevcut th:last-child,
+  #tab-mevcut td:last-child,
+  #tab-web #web-applications-table th:last-child,
+  #tab-web #web-applications-table td:last-child {
+    min-width: 150px !important;
+  }
+
+  /* Web başvurularındaki işlem butonları mobilde sıkışmasın */
+  #tab-web #web-table-body td:last-child > div,
+  #tab-web #web-table-body td:last-child > div > div {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+    max-width: none !important;
+    gap: .3rem !important;
+  }
+
+  #tab-web #web-table-body td:last-child button {
+    width: auto !important;
+    min-width: max-content !important;
+    white-space: nowrap !important;
+    font-size: .66rem !important;
+    padding: .38rem .5rem !important;
+  }
+
+  /* Mobil sekme hamburger düğmesi */
+  #mobileTabMenuButton {
+    display: inline-flex !important;
+    position: relative;
+    margin: .55rem auto .35rem !important;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 75;
+  }
+
+  #desktopTabNav {
+    display: none !important;
+  }
+
+  #mobileTabMenuPanel {
+    position: absolute;
+    top: calc(100% + .35rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100vw - 1.5rem), 24rem);
+    z-index: 74;
+    max-height: min(70dvh, 34rem);
+    overflow-y: auto;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: .85rem;
+    box-shadow: 0 18px 50px rgba(15,23,42,.26);
+    padding: .55rem;
+  }
+
+  #mobileTabMenuPanel.hidden {
+    display: none !important;
+  }
+
+  #mobileTabMenuPanel button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    text-align: left;
+    padding: .78rem .85rem;
+    border-radius: .6rem;
+    color: #e2e8f0;
+    font-size: .84rem;
+    font-weight: 700;
+  }
+
+  #mobileTabMenuPanel button:hover,
+  #mobileTabMenuPanel button.active {
+    background: #1e293b;
+    color: #fff;
+  }
+}
+
+@media (min-width: 769px) {
+  #mobileTabMenuButton,
+  #mobileTabMenuPanel {
+    display: none !important;
+  }
+}
+</style>
+
+
+<style id="iyibis-logout-mobile-visibility-v42">
+@media (max-width:640px){
+  #logoutBtn{color:#fff!important;white-space:nowrap!important;padding:.5rem .65rem!important}
+  #logoutBtnLabel{display:inline!important;color:#fff!important;font-size:.68rem!important}
+  #logoutBtn .fa-door-open{color:#fff!important}
+}
+</style>
+
+<style id="iyibis-mobile-header-layout-v42">
+@media (max-width: 768px) {
+  /* Tepe barı mobilde üç net satıra ayır:
+     1) Logo + başlık + senkronizasyon
+     2) İYİBİS + Oturumu Kapat
+     3) Menü */
+  header > div.max-w-7xl > div:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .75rem !important;
+  }
+
+  header > div.max-w-7xl > div:first-child > div:first-child {
+    width: 100% !important;
+    flex: none !important;
+    align-items: flex-start !important;
+  }
+
+  header .mobile-header-actions {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: .65rem !important;
+    padding-top: .15rem !important;
+  }
+
+  header .mobile-header-actions .iyibis-top-home-link,
+  header .mobile-header-actions #logoutBtn {
+    flex: 0 1 auto !important;
+    min-height: 2.55rem !important;
+  }
+
+  header .mobile-header-actions .iyibis-top-home-link {
+    padding: .55rem .8rem !important;
+  }
+
+  header .mobile-header-actions #logoutBtn {
+    padding: .55rem .8rem !important;
+  }
+
+  /* Başlık/senkronizasyon satırı rahatça sarsın */
+  header h1 {
+    line-height: 1.25 !important;
+  }
+
+  header #sync-status-pill,
+  header #last-sync-time,
+  header #btn-top-refresh-all {
+    flex: 0 0 auto;
+  }
+
+  header #last-sync-time {
+    white-space: normal !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Başlığın altındaki durum satırının mobilde kontrollü sarılması */
+  header h1 ~ div.flex,
+  header .mobile-header-actions ~ div {
+    min-width: 0;
+  }
+
+  /* Menü daima üçüncü satırda ve ortada */
+  #mobileTabMenuWrap {
+    width: 100% !important;
+    clear: both !important;
+    margin-top: .15rem !important;
+  }
+
+  #mobileTabMenuButton {
+    margin-top: .25rem !important;
+    margin-bottom: .15rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  header .mobile-header-actions {
+    gap: .4rem !important;
+  }
+  header .mobile-header-actions .iyibis-top-home-link,
+  header .mobile-header-actions #logoutBtn {
+    font-size: .72rem !important;
+  }
+  header .mobile-header-actions .iyibis-top-home-link span,
+  header #logoutBtnLabel {
+    display: inline !important;
+  }
+}
+</style>
+
+<style id="iyibis-mobile-header-final-v42">
+@media (max-width: 768px) {
+  /* İYİBİS + Oturumu Kapat: daima tek satırda yan yana */
+  header .mobile-header-actions {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    width: 100% !important;
+    gap: .5rem !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+  }
+
+  header .mobile-header-actions .iyibis-top-home-link,
+  header .mobile-header-actions #logoutBtn {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    padding: .55rem .45rem !important;
+    font-size: .72rem !important;
+  }
+
+  header .mobile-header-actions .iyibis-top-home-link span,
+  header #logoutBtnLabel {
+    display: inline !important;
+    min-width: 0 !important;
+  }
+
+  /* Başlık altındaki senkronizasyon alanı ekran içinde kalsın */
+  header > div.max-w-7xl > div:first-child > div:first-child > div:last-child {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  header > div.max-w-7xl > div:first-child > div:first-child > div:last-child > div:last-child {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: .35rem .5rem !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  header #last-sync-time {
+    flex: 1 1 9rem !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  header #btn-top-refresh-all {
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    margin-left: 0 !important;
+    padding: .42rem .58rem !important;
+  }
+
+  header #sync-status-pill {
+    flex: 0 0 auto !important;
+  }
+
+  /* ayraçlar mobilde gereksiz yer kaplamasın */
+  header #sync-status-pill + .text-slate-600,
+  header #btn-top-refresh-all + .text-slate-600 {
+    display: none !important;
+  }
+
+  #current-user-label {
+    display: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  header .mobile-header-actions .iyibis-top-home-link,
+  header .mobile-header-actions #logoutBtn {
+    font-size: .66rem !important;
+    padding: .5rem .3rem !important;
+  }
+
+  header #btn-top-refresh-all {
+    font-size: .62rem !important;
+    padding: .38rem .5rem !important;
+  }
+
+  header #last-sync-time,
+  header #sync-status-pill {
+    font-size: .66rem !important;
+  }
+}
+</style>
+
+<style id="iyibis-brand-theme-v42">
+:root{
+  --iyibis-red:#991b1b;
+  --iyibis-red-2:#b4232d;
+  --iyibis-red-dark:#7f1d1d;
+  --iyibis-bg:#f6f9fb;
+  --iyibis-surface:#ffffff;
+  --iyibis-border:#dce3eb;
+  --iyibis-text:#1e293b;
+  --iyibis-muted:#64748b;
+}
+body{background:var(--iyibis-bg)!important;color:var(--iyibis-text)}
+
+/* Login: form ekranlarıyla aynı kırmızı-beyaz dil */
+#accessGate{
+  background:var(--iyibis-bg)!important;
+}
+#accessGate .iyibis-login-card{
+  border:1px solid var(--iyibis-border)!important;
+  box-shadow:0 18px 50px rgba(15,23,42,.09)!important;
+}
+#accessGate .iyibis-login-title{color:var(--iyibis-red)!important}
+#accessGate .iyibis-login-version{
+  background:#fff1f2!important;
+  color:var(--iyibis-red)!important;
+  border:1px solid #fecdd3!important;
+}
+#accessGate .iyibis-login-version-row:before,
+#accessGate .iyibis-login-version-row:after{background:#fecdd3!important}
+#accessGate #accessSubmitBtn{
+  background:linear-gradient(90deg,var(--iyibis-red-2),var(--iyibis-red-dark))!important;
+  box-shadow:0 8px 20px rgba(153,27,27,.16)!important;
+}
+#accessGate #accessUsername:focus,
+#accessGate #accessPassword:focus{
+  border-color:var(--iyibis-red)!important;
+  --tw-ring-color:rgba(153,27,27,.14)!important;
+}
+
+/* Portal üst bar: lacivert yerine dernek bordosu; bilgi renkleri korunur */
+header.bg-slate-900{
+  background:linear-gradient(135deg,#6f171a 0%,var(--iyibis-red-dark) 48%,var(--iyibis-red) 100%)!important;
+  border-bottom-color:#5f1418!important;
+  box-shadow:0 6px 20px rgba(70,12,18,.18)!important;
+}
+header .iyibis-top-home-link{
+  color:#fff!important;
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+}
+header .iyibis-top-home-link:hover{
+  color:#fff!important;
+  background:rgba(255,255,255,.16)!important;
+}
+header #logoutBtn{
+  background:rgba(15,23,42,.20)!important;
+  border-color:rgba(255,255,255,.22)!important;
+  color:#fff!important;
+}
+header #logoutBtn:hover{background:rgba(15,23,42,.34)!important}
+#mobileTabMenuButton{
+  background:#fff!important;
+  color:var(--iyibis-red-dark)!important;
+  border-color:#fecdd3!important;
+}
+#mobileTabMenuButton:hover{background:#fff1f2!important}
+#mobileTabMenuPanel{
+  background:#fff!important;
+  border-color:var(--iyibis-border)!important;
+  box-shadow:0 18px 50px rgba(15,23,42,.18)!important;
+}
+#mobileTabMenuPanel button{color:var(--iyibis-text)!important}
+#mobileTabMenuPanel button:hover,
+#mobileTabMenuPanel button.active{
+  background:#fff1f2!important;
+  color:var(--iyibis-red)!important;
+}
+
+/* Sistem kartları ve ana yüzey */
+main .bg-white,
+#tab-system .bg-white{
+  border-color:var(--iyibis-border)!important;
+}
+#drive-storage-card{
+  border-color:var(--iyibis-border)!important;
+  box-shadow:0 8px 24px rgba(15,23,42,.05)!important;
+}
+</style>
+
+<style id="iyibis-aile-tabs-logout-contrast-v42">
+/* Masaüstü sekme şeridi: ana bordo başlıktan görsel olarak ayrılır. */
+@media (min-width: 769px) {
+  #desktopTabNav {
+    background: #f7e9ea !important;
+    border-top: 1px solid #e7c5c8 !important;
+    border-bottom: 1px solid #dcaeb2 !important;
+    border-radius: 0 0 10px 10px;
+    padding: .3rem .35rem 0 !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.75);
+  }
+
+  #desktopTabNav .tab-btn {
+    color: #4b3033 !important;
+    opacity: 1 !important;
+    border-radius: .5rem .5rem 0 0;
+    transition: background-color .18s ease, color .18s ease;
+  }
+
+  #desktopTabNav .tab-btn:hover {
+    color: #7f1d1d !important;
+    background: rgba(255,255,255,.58) !important;
+  }
+
+  #desktopTabNav .tab-btn.active,
+  #desktopTabNav .tab-btn[id^="nav-tab-"][class*="text-white"] {
+    color: #67181d !important;
+    background: #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  /* İkonların kategori renkleri aynen kalır; metinler daha koyudur. */
+  #desktopTabNav .tab-btn > span:not([id^="badge-count-"]) {
+    color: inherit !important;
+  }
+}
+
+/* Çıkış butonu: kapı yerine evrensel aç/kapat simgesi ve daha net kontrast. */
+header #logoutBtn {
+  background: #ffffff !important;
+  color: #7f1d1d !important;
+  border: 1px solid #f0c7ca !important;
+  box-shadow: 0 3px 10px rgba(62,10,15,.12) !important;
+}
+header #logoutBtn:hover {
+  background: #fff1f2 !important;
+  color: #681117 !important;
+  border-color: #e6aeb3 !important;
+}
+header #logoutBtn .fa-power-off,
+header #logoutBtnLabel {
+  color: inherit !important;
+}
+header #logoutBtn .fa-power-off {
+  font-size: 1.05em !important;
+}
+
+/* Önceki mobil beyaz-zorlamasını yeni açık buton tasarımına göre düzelt. */
+@media (max-width: 640px) {
+  #logoutBtn {
+    color: #7f1d1d !important;
+  }
+  #logoutBtnLabel,
+  #logoutBtn .fa-power-off {
+    color: #7f1d1d !important;
+  }
+}
+</style>
+
+<style id="iyibis-last-sync-contrast-v42">
+header #last-sync-time {
+  color: #e2e8f0 !important;
+}
+</style>
+
+<style id="iyibis-flat-dark-mode-v42">
+/*  — Koyu modda beyazdan siyaha gradient yok.
+   Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #101214 !important;
+    background-image: none !important;
+    color-scheme: dark;
+  }
+
+  body {
+    background: #101214 !important;
+    background-color: #101214 !important;
+    background-image: none !important;
+  }
+}
+</style>
+
+<style id="iyibis-aile-dark-surfaces-v42">
+@media (prefers-color-scheme: dark) {
+  body, main {
+    background:#101214 !important;
+    background-image:none !important;
+  }
+
+  /* Login ekranında da gradient yerine sabit koyu zemin */
+  #accessGate {
+    background:#101214 !important;
+    background-image:none !important;
+  }
+
+  #accessGate .iyibis-login-card {
+    background:#17191b !important;
+    border-color:#30363d !important;
+    color:#e5e7eb !important;
+  }
+
+  #accessGate .iyibis-login-subtitle,
+  #accessGate label {
+    color:#c9cdd2 !important;
+  }
+
+  #accessGate input {
+    background:#202326 !important;
+    color:#e5e7eb !important;
+    border-color:#374151 !important;
+  }
+
+  /* Portal içerik yüzeyleri */
+  main .bg-white,
+  #tab-system .bg-white,
+  #drive-storage-card {
+    background:#17191b !important;
+    border-color:#30363d !important;
+  }
+
+  main .text-slate-900,
+  main .text-slate-800,
+  main .text-slate-700 {
+    color:#e5e7eb !important;
+  }
+
+  main .text-slate-600,
+  main .text-slate-500 {
+    color:#aeb4bb !important;
+  }
+
+  #desktopTabNav {
+    background:#21191a !important;
+    border-color:#493033 !important;
+  }
+
+  #desktopTabNav .tab-btn {
+    color:#d7d0d1 !important;
+  }
+
+  #desktopTabNav .tab-btn:hover {
+    background:#2c2224 !important;
+    color:#ff8c90 !important;
+  }
+}
+</style>
+
+<style id="iyibis-page-background-no-gradient-v42">
+html, body {
+  background-image: none !important;
+}
+body {
+  background-color: var(--iyibis-bg, #f6f8fa) !important;
+  background: var(--iyibis-bg, #f6f8fa) !important;
+}
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-image: none !important;
+    background-color: #101214 !important;
+    background: #101214 !important;
+  }
+}
+</style>
+
+<style id="iyibis-login-home-like-saha-v42">
+/* Aile giriş ekranı: İYİBİS Ana Sayfa bağlantısını Saha ana sayfasıyla eşleştir */
+#accessGate .iyibis-login-home-link {
+  position: absolute !important;
+  top: 18px !important;
+  left: 18px !important;
+  z-index: 40 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: rgba(248,250,252,.92) !important;
+  color: #8b1d24 !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+#accessGate .iyibis-login-home-link:hover {
+  color: #8b1d24 !important;
+  transform: none !important;
+}
+#accessGate .iyibis-login-home-link i {
+  font-size: 1em !important;
+}
+@media (prefers-color-scheme: dark) {
+  #accessGate .iyibis-login-home-link {
+    background: #1b1e21 !important;
+    color: #ff7a7e !important;
+    border: 1px solid #30363d !important;
+  }
+}
+</style>
+
+<style id="iyibis-counter-badges-contrast-v42">
+/* =====  — Sayaç balonları: açık/koyu mod kontrastı ===== */
+
+/* Ortak */
+[data-counter] {
+  min-width: 2.15rem !important;
+  text-align: center !important;
+  font-weight: 800 !important;
+  border-width: 1px !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* AÇIK MOD */
+@media (prefers-color-scheme: light) {
+  [data-counter="badge-count-mevcut"] {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+    border-color: #6ee7b7 !important;
+  }
+
+  [data-counter="badge-count-red"] {
+    background: #ffe4e6 !important;
+    color: #9f1239 !important;
+    border-color: #fda4af !important;
+  }
+
+  [data-counter="badge-count-web"] {
+    background: #e0f2fe !important;
+    color: #075985 !important;
+    border-color: #7dd3fc !important;
+  }
+
+  [data-counter="badge-count-saha"] {
+    background: #fef3c7 !important;
+    color: #92400e !important;
+    border-color: #fcd34d !important;
+  }
+}
+
+/* Tarayıcı tema bilgisini vermiyorsa açık modu varsay */
+[data-counter="badge-count-mevcut"] {
+  background: #d1fae5 !important;
+  color: #065f46 !important;
+  border-color: #6ee7b7 !important;
+}
+[data-counter="badge-count-red"] {
+  background: #ffe4e6 !important;
+  color: #9f1239 !important;
+  border-color: #fda4af !important;
+}
+[data-counter="badge-count-web"] {
+  background: #e0f2fe !important;
+  color: #075985 !important;
+  border-color: #7dd3fc !important;
+}
+[data-counter="badge-count-saha"] {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fcd34d !important;
+}
+
+/* KOYU MOD */
+@media (prefers-color-scheme: dark) {
+  [data-counter="badge-count-mevcut"] {
+    background: #12372c !important;
+    color: #6ee7b7 !important;
+    border-color: #2f855a !important;
+  }
+
+  [data-counter="badge-count-red"] {
+    background: #4a1724 !important;
+    color: #fda4af !important;
+    border-color: #9f1239 !important;
+  }
+
+  [data-counter="badge-count-web"] {
+    background: #12344a !important;
+    color: #7dd3fc !important;
+    border-color: #0369a1 !important;
+  }
+
+  [data-counter="badge-count-saha"] {
+    background: #493214 !important;
+    color: #fcd34d !important;
+    border-color: #a16207 !important;
+  }
+}
+</style>
+
+<style id="iyibis-login-home-exact-saha-v42">
+#accessGate .iyibis-login-home-link{position:fixed;top:18px;left:18px;z-index:20;display:inline-block;margin:0;color:#8b1d24;font-weight:700;text-decoration:none;background:rgba(248,250,252,.92);padding:8px 10px;border-radius:9px;backdrop-filter:blur(6px)}
+#accessGate .iyibis-login-home-link:hover{border-color:#d7a1a6!important;background:#fff1f2!important}
+#accessGate .iyibis-login-home-link {
+  text-decoration: none !important;
+}
+</style>
+
+<style id="iyibis-login-home-saha-exact-v42">
+#accessGate .iyibis-login-home-link {
+  position: fixed !important;
+  top: 18px !important;
+  left: 18px !important;
+  z-index: 20 !important;
+  display: inline-block !important;
+  margin: 0 !important;
+  color: #8b1d24 !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  background: rgba(248,250,252,.92) !important;
+  padding: 8px 10px !important;
+  border-radius: 9px !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  border: 1px solid #d7dee7 !important;
+  box-shadow: 0 6px 18px rgba(15,23,42,.08) !important;
+  line-height: normal !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  transform: none !important;
+}
+#accessGate .iyibis-login-home-link:hover,
+#accessGate .iyibis-login-home-link:focus-visible {
+  color: #8b1d24 !important;
+  background: #fff1f2 !important;
+  border-color: #e5a3a8 !important;
+  box-shadow: 0 6px 18px rgba(139,29,36,.08) !important;
+  transform: none !important;
+}
+</style>
+
+<style id="iyibis-assistance-history-visibility-v42">
+@media (prefers-color-scheme: dark) {
+  #assistance-history > div {
+    background: #17191b !important;
+    border-color: #30363d !important;
+  }
+  #assistance-history .text-slate-900 {
+    color: #f3f4f6 !important;
+  }
+  #assistance-history .text-slate-500 {
+    color: #aeb4bb !important;
+  }
+  #assistance-history .bg-amber-50 {
+    background: #493214 !important;
+    color: #fcd34d !important;
+    border-color: #a16207 !important;
+  }
+  #assistance-history .bg-emerald-50 {
+    background: #12372c !important;
+    color: #6ee7b7 !important;
+    border-color: #2f855a !important;
+  }
+}
+</style>
+<style id="iyibis-historical-assistance-text-v42">
+@media (prefers-color-scheme: dark) {
+  #historical-assistance-text > div {
+    background:#3b2a12 !important;
+    border-color:#8a5a12 !important;
+    color:#f6d88a !important;
+  }
+}
+</style>
+
+<style id="iyibis-501-light-mode-guard">
+/* İYİBİS 5.0.1 — Açık mod koruması.
+   Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light !important;
+    background: #f6f9fb !important;
+    background-image: none !important;
+  }
+  body {
+    background: #f6f9fb !important;
+    background-color: #f6f9fb !important;
+    background-image: none !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: dark !important; }
+}
+</style>
+
+
+<style id="iyibis-501-light-surfaces">
+@media (prefers-color-scheme: light) {
+  body.bg-slate-50 { background:#f8fafc !important; color:#0f172a !important; }
+  .bg-white { background-color:#ffffff !important; }
+  input, textarea, select { color-scheme:light !important; }
+}
+</style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -666,20 +1727,15 @@
             <span>İYİBİS Ana Sayfa</span>
         </a>
 
-        <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200">
-<div class="bg-slate-900 text-white px-6 py-5">
-                <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                        <i class="fa-solid fa-shield-halved text-xl"></i>
-                    </div>
-                    <div>
-                        <h2 class="font-bold text-base">İYİBİS Aile Otomasyonu</h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Kullanıcı Girişi</p>
-                    </div>
-                </div>
+        <div class="iyibis-login-card">
+            <div class="iyibis-login-brand">
+                <img src="gaziantep-iyilik-hareketi-logo.jpeg" alt="Gaziantep İyilik Hareketi Derneği Logosu" class="iyibis-login-logo">
+                <h2 class="iyibis-login-title">İYİBİS Aile Otomasyonu</h2>
+                <p class="iyibis-login-subtitle">Kullanıcı Girişi</p>
+                
             </div>
             <form id="accessForm" class="p-6 space-y-4" autocomplete="off" action="javascript:void(0);" novalidate>
-                <div class="text-center text-[9px] text-cyan-600 font-mono -mb-1">Aile Panel Build: BETA 4.2</div>
+                
                 <div class="text-xs text-slate-600 bg-amber-50 border border-amber-200 rounded-lg p-3">
                     Bu panel kişisel veri içerir. Yalnızca tanımlı kullanıcılar erişebilir.
                 </div>
@@ -702,7 +1758,7 @@
                 </div>
                 <p id="accessError" class="hidden text-xs font-semibold text-rose-600">Kullanıcı adı veya şifre hatalı.</p>
                 <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-bold transition" id="accessSubmitBtn">
-                    <span id="accessSubmitLabel"><i class="fa-solid fa-lock-open mr-1.5"></i> Panele Gir</span>
+                    <span id="accessSubmitLabel"><i class="fa-solid fa-right-to-bracket mr-1.5"></i> Giriş Yap</span>
                     <span id="accessSubmitSpinner" class="hidden ml-2 inline-flex items-center gap-1.5 text-[11px]">
                         <span class="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
                         <span>Yükleniyor...</span>
@@ -747,7 +1803,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 /*
- * BETA 4.2 BAĞIMSIZ LOGIN BOOTSTRAP
+ *  BAĞIMSIZ LOGIN BOOTSTRAP
  * Bu kod, büyük AilePanel JavaScript'inden bağımsızdır.
  */
 (function () {
@@ -877,6 +1933,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         if (typeof startIdleSessionGuard_ === 'function') {
                             startIdleSessionGuard_();
                         }
+                        if (typeof preloadDriveStorageStatus_ === 'function') {
+                            preloadDriveStorageStatus_();
+                        }
                         return [3 /*break*/, 5];
                     case 4:
                         err_1 = _c.sent();
@@ -922,12 +1981,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <!-- Logo & Brand -->
                 <div class="flex items-center space-x-3">
                     <div class="w-11 h-11 rounded-full bg-white overflow-hidden border border-white/20 shadow-lg shadow-emerald-500/20 shrink-0">
-                        <img src="data:image/jpeg;base64,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" alt="Gaziantep İyilik Hareketi logosu" class="w-full h-full object-cover">
+                        <img src="gaziantep-iyilik-hareketi-logo.jpeg" alt="Gaziantep İyilik Hareketi Derneği Logosu" class="iyibis-panel-logo-img">
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
                             <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Gaziantep İyilik Hareketi Aile Takip Otomasyonu</h1>
-                            <span id="app-version-badge" class="inline-flex shrink-0 items-center px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[9px] sm:text-[10px] font-bold tracking-wider">BETA 4.2</span>
+                            
                             <span class="hidden md:inline text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Merkezi Canlı Veritabanı</span>
                         </div>
                         <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -936,7 +1995,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                 <span id="sync-status-text">Bağlantı Hazır</span>
                             </span>
                             <span class="text-slate-600">•</span>
-                            <span id="last-sync-time" class="text-[11px] text-slate-400">5 Tablo Son Güncelleme: Henüz yapılmadı</span>
+                            <span id="last-sync-time" class="text-[11px] text-slate-400">Son Güncelleme: Henüz yapılmadı</span>
                             <button id="btn-top-refresh-all" type="button" onclick="refreshAllGoogleSources(true)"
                                     class="inline-flex items-center justify-center gap-1.5 px-2 py-1 bg-violet-600 hover:bg-violet-500 text-white text-[10px] font-semibold rounded-md border border-violet-500/60 transition"
                                     title="Tüm Google tablolarını güncelle">
@@ -952,33 +2011,72 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <!-- Session Controls -->
                 <div class="flex items-center gap-2 mobile-header-actions">
                     <a href="#" onclick="return goToIyibisHome(event)" class="iyibis-top-home-link inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-sky-300 hover:text-sky-700 hover:bg-sky-50 transition whitespace-nowrap" title="İYİBİS Ana Sayfası"><i class="fa-solid fa-house"></i><span>İYİBİS</span></a>
-                <button onclick="lockApplication()" class="inline-flex items-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg border border-slate-700 transition">
-                        <i class="fa-solid fa-lock mr-1.5"></i><span class="hidden sm:inline">Oturumu Kapat</span>
+                <button id="logoutBtn" onclick="iyibisLogoutWithLoading(event)" class="inline-flex items-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold rounded-lg border border-slate-700 transition">
+                        <i class="fa-solid fa-power-off mr-1.5" aria-hidden="true"></i><span id="logoutBtnLabel" class="inline">Oturumu Kapat</span>
                     </button>
                 </div>
             </div>
 
             <!-- TABS NAVIGATION -->
-            <div class="flex space-x-1 sm:space-x-4 border-t border-slate-800/80 pt-1 overflow-x-auto custom-scroll">
+            
+<div id="mobileTabMenuWrap" class="relative w-full">
+<button id="mobileTabMenuButton" type="button" onclick="toggleMobileTabMenu()"
+        aria-expanded="false" aria-controls="mobileTabMenuPanel"
+        class="hidden items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold border border-slate-700 shadow-sm">
+  <i id="mobileTabMenuIcon" class="fa-solid fa-bars"></i>
+  <span>Menü</span>
+</button>
+<div id="mobileTabMenuPanel" class="hidden">
+<button type="button" onclick="switchTab('tab-mevcut'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-users text-emerald-400"></i>
+                    <span>Aktif Aileler</span>
+                    <span data-counter="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
+                </button>
+<button type="button" onclick="switchTab('tab-red'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-ban text-rose-400"></i>
+                    <span>Ret Listesi</span>
+                    <span data-counter="badge-count-red" class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700">0</span>
+                </button>
+<button type="button" onclick="switchTab('tab-web'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-globe text-sky-400"></i>
+                    <span>Web Yeni Başvurular</span>
+                    <span data-counter="badge-count-web" class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50">0</span>
+                </button>
+<button type="button" onclick="switchTab('tab-saha'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-person-walking-arrow-right text-amber-400"></i>
+                    <span>Saha Ziyareti</span>
+                    <span data-counter="badge-count-saha" class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50">0</span>
+                </button>
+<button type="button" onclick="switchTab('tab-stats'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-chart-pie text-indigo-400"></i>
+                    <span>İstatistik Veriler</span>
+                </button>
+<button type="button" onclick="switchTab('tab-system'); closeMobileTabMenu()">
+                    <i class="fa-solid fa-gear text-cyan-400"></i>
+                    <span>Sistem &amp; Ayarlar</span>
+                </button>
+</div>
+</div>
+<div class="flex space-x-1 sm:space-x-4 border-t border-slate-800/80 pt-1 overflow-x-auto custom-scroll" id="desktopTabNav">
                 <button onclick="switchTab('tab-mevcut')" id="nav-tab-mevcut" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-users text-emerald-400"></i>
                     <span>Aktif Aileler</span>
-                    <span id="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
+                    <span data-counter="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
                 </button>
                 <button onclick="switchTab('tab-red')" id="nav-tab-red" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-ban text-rose-400"></i>
                     <span>Ret Listesi</span>
-                    <span id="badge-count-red" class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700">0</span>
+                    <span data-counter="badge-count-red" class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700">0</span>
                 </button>
                 <button onclick="switchTab('tab-web')" id="nav-tab-web" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-globe text-sky-400"></i>
                     <span>Web Yeni Başvurular</span>
-                    <span id="badge-count-web" class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50">0</span>
+                    <span data-counter="badge-count-web" class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50">0</span>
                 </button>
                 <button onclick="switchTab('tab-saha')" id="nav-tab-saha" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-person-walking-arrow-right text-amber-400"></i>
                     <span>Saha Ziyareti</span>
-                    <span id="badge-count-saha" class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50">0</span>
+                    <span data-counter="badge-count-saha" class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50">0</span>
                 </button>
                 <button onclick="switchTab('tab-stats')" id="nav-tab-stats" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-chart-pie text-indigo-400"></i>
@@ -1002,9 +2100,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-database text-emerald-600"></i>Aktif Aileler — Merkezi Veritabanı
+                            <i class="fa-solid fa-database text-emerald-600"></i>Aktif Aileler Veri Kaynağı
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Aktif aile listesini merkezi İYİBİS veritabanından yeniden okur.</p>
+                        <p class="text-xs text-slate-500 mt-1">Aktif aile listesini ayrı Google E-Tablo dosyasından yeniler.</p>
                     </div>
                     <button id="btn-new-family" type="button" onclick="openNewFamilyModal()"
                             class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -1105,9 +2203,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-database text-rose-600"></i>Ret Listesi — Merkezi Veritabanı
+                            <i class="fa-solid fa-database text-rose-600"></i>Ret Listesi Veri Kaynağı
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Ret listesini merkezi İYİBİS veritabanından yeniden okur.</p>
+                        <p class="text-xs text-slate-500 mt-1">Ret listesini ayrı Google E-Tablo dosyasından yeniler.</p>
                     </div>
                     <button id="btn-fetch-red-sheet" onclick="fetchRedFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -1176,14 +2274,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
                             <i class="fa-solid fa-cloud-arrow-down text-sky-600"></i>
-                            Web Başvuruları — Merkezi Veritabanı
+                            Web Başvuru Veri Kaynağı
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Web başvurularını merkezi İYİBİS veritabanından yeniden okur.</p>
+                        <p class="text-xs text-slate-500 mt-1">Ayrı Google E-Tablo dosyasındaki başvuruları bu panele aktarır.</p>
                     </div>
                     <button id="btn-fetch-web-sheet" onclick="fetchWebApplicationsFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
                         <i id="web-sheet-sync-icon" class="fa-solid fa-table-list mr-1.5"></i>
-                        Web Başvurularını Güncelle
+                        Web'den Yeni Başvuruları Güncelle
                     </button>
                 </div>
                 <div id="web-sheet-source-status" class="hidden mt-3 text-xs rounded-lg p-3"></div>
@@ -1256,7 +2354,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
                             <i class="fa-solid fa-clipboard-check text-amber-600"></i>Saha Ziyareti Süreci
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Saha kuyruğu merkezi veritabanından gösterilir. Bu düğme yeni Saha Tespit Formlarını merkezi kuyruğa işler.</p>
+                        <p class="text-xs text-slate-500 mt-1">Web onayı alan aileler önce saha ziyaretine alınır. Saha Tespit Formu eşleştiğinde kayıt “Değerlendirmede” aşamasına geçer.</p>
                     </div>
                     <button id="btn-fetch-field-sheet" onclick="fetchFieldReportsFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -1303,8 +2401,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Toplam Aktif Aile</p>
-                        <h3 id="stat-total-active" class="text-2xl font-extrabold text-slate-900 mt-1">0</h3>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            Aktif Aile <span class="text-slate-400 font-medium">/ Liste Dışı</span>
+                        </p>
+                        <h3 class="text-2xl font-extrabold mt-1">
+                            <span id="stat-total-active" class="text-slate-900">0</span>
+                            <span class="text-slate-300 font-bold"> / </span>
+                            <span id="stat-total-delist" class="text-slate-400">0</span>
+                        </h3>
                         <p class="text-[11px] text-emerald-600 font-medium mt-1"><i class="fa-solid fa-circle-check mr-1"></i>Sistemde Kayıtlı</p>
                     </div>
                     <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
@@ -1397,15 +2501,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
         <!-- ================= TAB: SİSTEM & AYARLAR ================= -->
         <div id="tab-system" class="tab-content hidden space-y-6">
-            <div class="bg-cyan-50 rounded-xl border border-cyan-200 shadow-sm p-4">
-                <h3 class="font-bold text-cyan-950 flex items-center gap-2">
-                    <i class="fa-solid fa-diagram-project"></i>BETA 2 Merkezi İşlem Mimarisi
-                </h3>
-                <p class="text-xs text-cyan-900 mt-1">
-                    Aile Takip Paneli merkezi İYİBİS backend üzerinde çalışır. Saha Otomasyonu aynı Google E-Tablo kaynaklarını ve aynı işlem kilidi katmanını kullanır.
-                    Her başvurunun değişmeyen APPLICATION_ID değeri vardır; Aile Paneli ve harici panellerden gelen bütün yazma/taşıma işlemleri merkezi kilit altında yürütülür.
-                </p>
-            </div>
+            
             <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
                 <div class="mb-4">
                     <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
@@ -1414,33 +2510,81 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <p class="text-xs text-slate-500 mt-1">Senkronizasyon, yedekleme, dışa aktarma ve Drive / Google E-Tablo bağlantı ayarları.</p>
                 </div>
             </div>
+
+            <div id="drive-storage-card" class="w-full max-w-none bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <div id="drive-storage-icon" class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                                    <i class="fa-brands fa-google-drive"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-slate-800">Google Drive Depolama</h3>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">İYİBİS hesabının kullanılabilir depolama durumu</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="drive-storage-refresh-btn" type="button" onclick="refreshDriveStorageStatus(true)"
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-emerald-300 bg-emerald-100 hover:bg-emerald-200 text-xs font-bold text-emerald-800 transition shadow-sm">
+                            <i class="fa-solid fa-rotate"></i>
+                            <span id="drive-storage-refresh-label">Yenile</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-3">
+                            <div>
+                                <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Kullanılan / Toplam</div>
+                                <div class="mt-1 text-xl font-extrabold text-slate-900">
+                                    <span id="drive-storage-used">—</span>
+                                    <span class="text-slate-300 font-bold"> / </span>
+                                    <span id="drive-storage-limit" class="text-slate-500">—</span>
+                                </div>
+                            </div>
+                            <div id="drive-storage-percent" class="text-2xl font-extrabold text-emerald-600">—%</div>
+                        </div>
+
+                        <div class="mt-3 w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                            <div id="drive-storage-bar" class="h-full rounded-full bg-emerald-500 transition-all duration-300" style="width:0%"></div>
+                        </div>
+
+                        <div id="drive-storage-message" class="mt-3 text-xs text-slate-500">
+                            Depolama bilgisi yükleniyor...
+                        </div>
+                        <div id="drive-storage-updated" class="mt-1 text-[10px] text-slate-400"></div>
+                    </div>
+                </div>
+
 <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-900">Veri &amp; Entegrasyon Araçları</h3>
                         <p class="text-xs text-slate-500 mt-0.5">Senkronizasyon, yedekleme ve harici yardım verisi işlemleri</p>
                     </div>
-                    <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+                <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
                         <button id="btn-refresh-all-sources" onclick="refreshAllGoogleSources(true)" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold rounded-lg shadow-sm transition">
                             <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Tüm Tabloları Güncelle
                         </button>
                         
-                        <button onclick="exportToExcel()" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700">
-                            <i class="fa-solid fa-file-excel text-emerald-400 mr-1.5"></i>Excel İndir
+                        <button id="btn-download-all-tables" onclick="downloadAllSourceTables()" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg border border-emerald-800 disabled:opacity-60 disabled:cursor-wait">
+                            <span id="download-all-label"><i class="fa-solid fa-file-excel mr-1.5"></i>Tüm Tabloların Güncel Halini İndir</span>
+                            <span id="download-all-loading" class="hidden inline-flex items-center gap-1.5"><span class="inline-block w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>Hazırlanıyor...</span>
                         </button>
-                        <button onclick="exportJSON()" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700">
-                            <i class="fa-solid fa-download mr-1.5"></i>JSON Yedekle
-                        </button>
-                        <label class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 cursor-pointer">
-                            <i class="fa-solid fa-upload mr-1.5"></i>JSON Yükle
-                            <input type="file" accept=".json" onchange="importJSON(event)" class="hidden">
-                        </label>
-                        <button onclick="openSheetConfigModal()" class="inline-flex items-center justify-center px-3 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg border border-indigo-200">
-                            <i class="fa-solid fa-sliders mr-1.5"></i>Entegrasyon Ayarları
+                        <button onclick="downloadSourceTable('active')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-house mr-1.5 text-emerald-400"></i>Aktif Aileler</button>
+                        <button onclick="downloadSourceTable('red')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-ban mr-1.5 text-rose-400"></i>Ret Listesi</button>
+                        <button onclick="downloadSourceTable('web')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-inbox mr-1.5 text-sky-400"></i>Web Başvuruları</button>
+                        <button onclick="downloadSourceTable('field')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-clipboard-check mr-1.5 text-amber-400"></i>Saha Tespit</button>
+                        <button onclick="downloadSourceTable('pendingfield')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-person-walking-arrow-right mr-1.5 text-cyan-400"></i>Sahası Yapılacaklar</button>
+                        <button onclick="downloadSourceTable('assistance')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-box-open mr-1.5 text-violet-400"></i>Yapılan Yardımlar</button>
+                        
+                        <button id="btn-integration-settings" onclick="openSheetConfigModal()" class="inline-flex items-center justify-center px-3 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg border border-indigo-200 disabled:opacity-60 disabled:cursor-wait">
+                            <span id="integration-settings-label"><i class="fa-solid fa-sliders mr-1.5"></i>Entegrasyon Ayarları</span>
+                            <span id="integration-settings-loading" class="hidden inline-flex items-center gap-1.5"><span class="inline-block w-3.5 h-3.5 border-2 border-indigo-300 border-t-indigo-700 rounded-full animate-spin"></span>Yükleniyor...</span>
                         </button>
                     </div>
                 </div>
                 <div id="assistance-import-status" class="hidden mt-3 text-xs rounded-lg p-3"></div>
+                <div class="mt-3 text-[11px] text-slate-500 bg-slate-50 border border-slate-200 rounded-lg p-3"><b>Not:</b> Excel düğmeleri bağlı Google E-Tablo kaynaklarının güncel halini indirir. Panel JSON yedeği yalnız tarayıcıda o anda bulunan panel durumunu saklar; Google Sheets dosyalarının gerçek yedeği değildir.</div>
             </div>
         </div>
 
@@ -1467,8 +2611,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             </div>
             <div id="sheet-config-scroll-area" class="p-5 sm:p-6 space-y-4 text-xs overflow-y-auto custom-scroll flex-1 min-h-0">
                 <div class="p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900">
-                    <div class="font-bold mb-1">Beş bağımsız veri kaynağı</div>
-                    <div>Aktif Aileler, Ret Listesi, Yapılan Yardımlar, Web Başvuruları ve Saha Tespit Formu ayrı Google E-Tablo dosyaları olarak tanımlanır. Ana aile tablosu kullanılmaz.</div>
+                    <div class="font-bold mb-1">Merkezi DB + ham replika mimarisi</div>
+                    <div>İYİBİS Sistem Veritabanı operasyonel ana kaynaktır. Aşağıdaki harici Google E-Tablolar ham kaynak / replika / yedek olarak korunur; panel doğrudan bu tablolardan çalışmaz.</div>
                 </div>
                 <div class="p-3 rounded-lg bg-emerald-50 border border-emerald-200 space-y-3">
                     <div class="font-bold text-emerald-900">Aktif Aileler - Ayrı Google E-Tablo</div>
@@ -1504,7 +2648,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 </div>
                 <div class="p-3 rounded-lg bg-amber-50 border border-amber-200 space-y-3">
-                    <div class="font-bold text-amber-900">Saha Tespit Formu - Beşinci Google E-Tablo</div>
+                    <div class="font-bold text-amber-900">Saha Tespit Formu - Ham/Replika Google E-Tablo</div>
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1">Saha Tespit Formu Spreadsheet ID / URL</label>
                         <input type="text" id="config-field-sheet-id" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs font-mono" placeholder="Daha sonra eklenecek">
@@ -1515,6 +2659,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 </div>
                 <div>
+                    <div class="mt-4 p-3 rounded-lg border border-cyan-200 bg-cyan-50 text-cyan-900">
+                        <div class="font-bold">Sahası Yapılacaklar - Operasyonel Yardımcı Kaynak</div>
+                        <div class="text-[11px] mt-1 break-all">1pFE_IJksN4PepnejBOjJn2uvPxVA1S2xkwZIUghA3ps</div>
+                        <div class="text-[11px] mt-1 text-cyan-700">Web başvurusundan “Sahaya Al” denilen kişiler otomatik eklenir; Saha Tespit Formu TC, telefon veya ad-soyad ile eşleşince otomatik çıkarılır.</div>
+                    </div>
                     <label class="block font-semibold text-slate-700 mb-1">Toplu Yapılan Yardımlar Spreadsheet ID / URL</label>
                     <input type="text" id="config-assistance-sheet-id" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono" placeholder="Daha sonra eklenecek">
                 </div>
@@ -1541,7 +2690,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 </div>
                 <div class="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900">
-                    PDF yükleme için yalnızca Drive klasör bağlantısı yetmez. Apps Script Web App URL'si de gereklidir. Kod entegrasyona hazırdır.
+                    PDF yükleme merkezi Apps Script üzerinden yapılır. Ham Drive bağlantıları frontend’e verilmez; PDF görüntüleme güvenli Worker köprüsü üzerinden yapılır.
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3 border-t border-slate-200">
@@ -1813,13 +2962,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <i class="fa-solid fa-file-shield text-indigo-600"></i> Aile Tutanakları
                     </h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                        <div id="family-assessment-upload-panel" class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <label class="block font-semibold text-slate-700 mb-1.5">Tespit Tutanağı Ekle</label>
                             <input id="family-assessment-pdf" type="file" accept="application/pdf,.pdf"
                                    class="block w-full text-xs file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:bg-indigo-100 file:text-indigo-700 file:font-semibold">
                             <button type="button" onclick="uploadFamilyDocument('assessment')" class="mt-2 w-full px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold">PDF'yi Yükle</button>
                         </div>
-                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                        <div id="family-media-upload-panel" class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                             <label class="block font-semibold text-slate-700 mb-1.5">Video / Fotoğraf İzin Belgesi Ekle</label>
                             <input id="family-media-pdf" type="file" accept="application/pdf,.pdf"
                                    class="block w-full text-xs file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:bg-emerald-100 file:text-emerald-700 file:font-semibold">
@@ -1951,7 +3100,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             <div class="px-5 pb-5">
                 <div class="rounded-xl border border-violet-200 bg-violet-50/70 p-4">
                     <div class="font-bold text-sm text-violet-950 mb-1"><i class="fa-solid fa-building-shield mr-1.5"></i>SYDV Görüşü</div>
-                    <p class="text-[11px] text-violet-800 mb-3">Doğrudan onay, saha veya ret kararı vermeden önce SYDV görüşünü işaretleyin.</p>
+                    <p class="text-[11px] text-violet-800 mb-3">SYDV görüşü isteğe bağlıdır. Görüş mevcutsa seçebilir; görüş almadan da doğrudan onay, saha veya ret kararı verebilirsiniz.</p>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         <label class="cursor-pointer">
                             <input type="radio" name="sydvOpinion" value="ONAY" class="peer sr-only" onchange="updateSydvDecisionButtons()">
@@ -1966,7 +3115,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             <span class="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-amber-200 bg-white text-amber-900 font-semibold text-xs peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition"><i class="fa-solid fa-circle-question"></i>Görüş Alınamadı</span>
                         </label>
                     </div>
-                    <div id="sydv-opinion-warning" class="mt-2 text-[11px] text-violet-700">Karar butonları SYDV görüşü seçildikten sonra etkinleşir.</div>
+                    <div id="sydv-opinion-warning" class="mt-2 text-[11px] text-violet-700">SYDV görüşü seçmek zorunlu değildir.</div>
                 </div>
             </div>
 
@@ -1975,13 +3124,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     Uzun açıklamalar bu kartta kesilmeden gösterilir.
                 </div>
                 <div class="flex flex-wrap items-center justify-end gap-2">
-                    <button type="button" id="web-detail-reject-btn" onclick="processWebApplication(currentWebDetailIndex, 'red')" disabled class="disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold transition">
+                    <button type="button" id="web-detail-reject-btn" onclick="processWebApplication(currentWebDetailIndex, 'red')" class="disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold transition">
                         <i class="fa-solid fa-xmark mr-1"></i>Ret
                     </button>
-                    <button type="button" id="web-detail-approve-btn" onclick="processWebApplication(currentWebDetailIndex, 'active')" disabled class="disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition">
+                    <button type="button" id="web-detail-approve-btn" onclick="processWebApplication(currentWebDetailIndex, 'active')" class="disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition">
                         <i class="fa-solid fa-check mr-1"></i>Doğrudan Onayla
                     </button>
-                    <button type="button" id="web-detail-field-btn" onclick="processWebApplication(currentWebDetailIndex, 'field')" disabled class="disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-semibold transition">
+                    <button type="button" id="web-detail-field-btn" onclick="processWebApplication(currentWebDetailIndex, 'field')" class="disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-semibold transition">
                         <i class="fa-solid fa-person-walking mr-1"></i>Sahaya Al
                     </button>
                     <button onclick="closeModal('webDetailModal')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold transition">Kapat</button>
@@ -2032,6 +3181,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="p-3 rounded-lg bg-amber-50 border border-amber-200">
                     <div class="font-bold text-amber-900 mb-1">Saha Tespit Formu Özeti</div>
                     <div id="saha-modal-report" class="text-amber-900 whitespace-pre-wrap">--</div>
+                    <a id="saha-modal-pdf-link" href="#" target="_blank" rel="noopener" class="hidden mt-3 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-[11px]"><i class="fa-solid fa-file-pdf"></i>Saha Tespit PDF’ini Aç</a>
+                    <div id="saha-modal-photo-area" class="hidden mt-3">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <div class="font-bold text-amber-900 text-[11px]"><i class="fa-solid fa-images mr-1"></i>Saha Fotoğrafları</div>
+                            <div id="saha-modal-photo-count" class="text-[10px] text-amber-700 font-semibold"></div>
+                        </div>
+                        <div id="saha-modal-photo-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+                        <div class="mt-2 text-[10px] text-amber-700">Fotoğraflar Drive’da özel tutulur ve yalnız İYİBİS’in kısa ömürlü güvenli bağlantılarıyla görüntülenir.</div>
+                    </div>
                 </div>
                 <div class="p-3 rounded-lg bg-violet-50 border border-violet-200">
                     <div class="font-bold text-violet-900 mb-1">SYDV Görüşü</div>
@@ -2082,6 +3240,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <button onclick="closeModal('assistanceModal')" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="p-5 space-y-5 max-h-[78vh] overflow-y-auto custom-scroll">
+                <div>
+                    <h4 class="font-bold text-sm text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-clock-rotate-left text-amber-600"></i>Geçmiş Yardımlar</h4>
+                    <div id="historical-assistance-text" class="space-y-2 text-xs"></div>
+                </div>
                 <div>
                     <h4 class="font-bold text-sm text-slate-800 mb-2">Kayıtlı Yardımlar</h4>
                     <div id="assistance-history" class="space-y-2 text-xs"></div>
@@ -2145,7 +3307,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var DEFAULT_SHEET_ID = ''; // BETA 4.2: eski genel aile tablosu kaldırıldı.
+var DEFAULT_SHEET_ID = ''; // : eski genel aile tablosu kaldırıldı.
 var appState = window.appState = {
     sheetId: DEFAULT_SHEET_ID,
     mevcut: [],
@@ -2162,41 +3324,42 @@ var currentWebDetailIndex = window.currentWebDetailIndex = null;
 var currentFamilyId = window.currentFamilyId = null;
 var currentAssistanceFamilyId = window.currentAssistanceFamilyId = null;
 function loadWorkflowState() {
-    try {
-        var saved = JSON.parse(localStorage.getItem(WORKFLOW_KEY) || '{}');
-        return {
-            processedWeb: saved.processedWeb || {},
-            redToActive: saved.redToActive || {},
-            delisted: saved.delisted || {},
-            assistance: saved.assistance || {},
-            documents: saved.documents || {}
-        };
-    }
-    catch (_) {
-        return { processedWeb: {}, redToActive: {}, delisted: {}, assistance: {}, documents: {} };
-    }
+    // Phase 4C: operasyonel veri tarayıcı localStorage'ından yüklenmez.
+    // Bu nesne yalnız merkezi payload'ın istemci içi indeksidir.
+    return {
+        processedWeb: {},
+        redToActive: {},
+        delisted: {},
+        assistance: {},
+        assistanceHistoryText: {},
+        documents: {}
+    };
 }
+
 function saveWorkflowState() {
-    localStorage.setItem(WORKFLOW_KEY, JSON.stringify(workflowState));
+    // Phase 4C: merkezi DB source-of-truth olduğu için workflowState kalıcı olarak
+    // localStorage'a yazılmaz. Fonksiyon eski çağrılarla uyumluluk için no-op'tur.
+    window.workflowState = workflowState;
 }
+
 function getIntegrationConfig() {
-    try {
-        return Object.assign({
-            assistanceSheetId: '',
-            assistanceSheetName: '',
-            uploadEndpoint: '',
-            helpFolder: '',
-            assessmentFolder: '',
-            mediaFolder: ''
-        }, JSON.parse(localStorage.getItem(INTEGRATION_KEY) || '{}'));
-    }
-    catch (_) {
-        return { assistanceSheetId: '', assistanceSheetName: '', uploadEndpoint: '', helpFolder: '', assessmentFolder: '', mediaFolder: '' };
-    }
+    // Phase 4C: entegrasyon ayarlarının gerçek kaynağı Apps Script Script Properties'tir.
+    // Bu uyumluluk nesnesi eski yardımcı fonksiyonların hata vermemesi içindir.
+    return {
+        assistanceSheetId: '',
+        assistanceSheetName: '',
+        uploadEndpoint: '',
+        helpFolder: '',
+        assessmentFolder: '',
+        mediaFolder: ''
+    };
 }
+
 function saveIntegrationConfig(cfg) {
-    localStorage.setItem(INTEGRATION_KEY, JSON.stringify(cfg));
+    // Phase 4C: ayarlar localStorage'a değil gsSaveConfig() üzerinden sunucuya yazılır.
+    return cfg || {};
 }
+
 function normalizeTC(v) {
     return String(v || '').replace(/\D/g, '');
 }
@@ -2212,7 +3375,7 @@ function familyKey(item) {
 }
 function applyWorkflowOverlay(mevcut, red, web) {
     /*
-     * BETA 4.2:
+     * :
      * Aktif / Ret / Web listelerinde tarayıcı workflow overlay'i kullanılmaz.
      * Bu üç listenin tek otoritesi merkezi Google Sheet kaynaklarıdır.
      */
@@ -2326,81 +3489,8 @@ function fetchSheetCSV(sheetName) {
         document.head.appendChild(script);
     });
 }
-function fetchLiveGoogleSheetsData() {
-    return __awaiter(this, arguments, void 0, function (showToast) {
-        var syncIcon, statusText, statusPill, _a, rawMevcut, rawRed, rawWeb, parsedMevcut, parsedRed, parsedWeb, overlaid, now, timeStr, err_1;
-        if (showToast === void 0) { showToast = true; }
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    if (appState.isSyncing)
-                        return [2 /*return*/];
-                    appState.isSyncing = true;
-                    syncIcon = document.getElementById('sync-icon');
-                    statusText = document.getElementById('sync-status-text');
-                    statusPill = document.getElementById('sync-status-pill');
-                    if (syncIcon)
-                        syncIcon.classList.add('fa-spin');
-                    if (statusText)
-                        statusText.innerText = "Google'dan Çekiliyor...";
-                    _b.label = 1;
-                case 1:
-                    _b.trys.push([1, 3, 4, 5]);
-                    return [4 /*yield*/, Promise.all([
-                            fetchSheetCSV('TOPLAM MEVCUT'),
-                            fetchSheetCSV('RED ALANLAR'),
-                            fetchSheetCSV('Web Yeni Başvurular')
-                        ])];
-                case 2:
-                    _a = _b.sent(), rawMevcut = _a[0], rawRed = _a[1], rawWeb = _a[2];
-                    parsedMevcut = parseMevcutSheet(rawMevcut);
-                    parsedRed = parseRedSheet(rawRed);
-                    parsedWeb = parseWebSheet(rawWeb);
-                    overlaid = applyWorkflowOverlay(parsedMevcut, parsedRed, parsedWeb);
-                    parsedMevcut = overlaid.mevcut;
-                    parsedRed = overlaid.red;
-                    parsedWeb = overlaid.web;
-                    if (parsedMevcut.length > 0) {
-                        appState.mevcut = parsedMevcut;
-}
-                    if (parsedRed.length > 0) {
-                        appState.red = parsedRed;
-}
-                    if (parsedWeb.length > 0) {
-                        appState.web = parsedWeb;
-}
-                    now = new Date();
-                    timeStr = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                    document.getElementById('last-sync-time').innerText = 'Son Güncelleme: ' + timeStr;
-                    statusText.innerText = 'Drive Tüm Tablolar Güncel';
-                    statusPill.className = 'inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium';
-                    updateBadges();
-                    renderMevcutTable();
-                    renderRedTable();
-                    renderWebTable();
-                    renderDashboardStats();
-                    renderBirthdayList();
-                    if (showToast)
-                        alert('✅ Google E-Tablo verileri başarıyla senkronize edildi!');
-                    return [3 /*break*/, 5];
-                case 3:
-                    err_1 = _b.sent();
-                    console.warn('Google Sheets Sync Hatası:', err_1);
-                    statusText.innerText = 'Önbellek Verisi Kullanılıyor';
-                    statusPill.className = 'inline-flex items-center gap-1.5 text-[11px] text-amber-400 font-medium';
-                    if (showToast)
-                        alert('Canlı veri alınamadı: ' + err_1.message + '\n\nGoogle E-Tablo dosyasının bağlantıya sahip herkes tarafından görüntülenebilir olduğunu ve sekme adlarının değişmediğini kontrol edin.');
-                    return [3 /*break*/, 5];
-                case 4:
-                    appState.isSyncing = false;
-                    if (syncIcon)
-                        syncIcon.classList.remove('fa-spin');
-                    return [7 /*endfinally*/];
-                case 5: return [2 /*return*/];
-            }
-        });
-    });
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
 function cleanVal(v) {
     if (v === null || v === undefined)
         return "";
@@ -2533,12 +3623,10 @@ function parseWebSheet(rows) {
     return list;
 }
 function updateBadges() {
-    document.getElementById('badge-count-mevcut').innerText = appState.mevcut.length;
-    document.getElementById('badge-count-red').innerText = appState.red.length;
-    document.getElementById('badge-count-web').innerText = appState.web.length;
-    var sahaBadge = document.getElementById('badge-count-saha');
-    if (sahaBadge)
-        sahaBadge.innerText = (appState.saha || []).length;
+    document.querySelectorAll('[data-counter="badge-count-mevcut"]').forEach(el => el.innerText = appState.mevcut.length);
+    document.querySelectorAll('[data-counter="badge-count-red"]').forEach(el => el.innerText = appState.red.length);
+    document.querySelectorAll('[data-counter="badge-count-web"]').forEach(el => el.innerText = appState.web.length);
+    document.querySelectorAll('[data-counter="badge-count-saha"]').forEach(el => el.innerText = (appState.saha || []).length);
     var counts = { ALL: appState.mevcut.length, KRİTİK: 0, TAKİP: 0, STABİL: 0, DELİST: 0 };
     appState.mevcut.forEach(function (item) {
         var s = (item.durumu || '').trim().toUpperCase();
@@ -2578,6 +3666,28 @@ function setStatusFilter(status) {
         activeBtn.classList.add('ring-2', 'ring-slate-900', 'shadow-sm');
     renderMevcutTable();
 }
+
+function normalizeMetricScore(value) {
+    if (value === null || value === undefined || value === '')
+        return null;
+    var raw = String(value).trim().replace(',', '.');
+    if (!raw)
+        return null;
+
+    var hadPercent = raw.includes('%');
+    raw = raw.replace('%', '').trim();
+    var n = Number(raw);
+    if (!Number.isFinite(n))
+        return null;
+
+    // Eski verilerde 0.50 / 0.55 / 0.60 biçimi kullanılmışsa 0-100 puana çevir.
+    // 60% ve 60 gibi değerler ise doğrudan 60 olarak kalır.
+    if (!hadPercent && n >= 0 && n <= 1)
+        n = n * 100;
+
+    return Math.round(n);
+}
+
 function renderMevcutTable() {
     var query = (document.getElementById('search-mevcut').value || '').toLowerCase().trim();
     var district = document.getElementById('filter-district-mevcut').value;
@@ -2602,7 +3712,7 @@ function renderMevcutTable() {
         return true;
     });
     if (sortVal === 'metric-desc') {
-        list.sort(function (a, b) { return parseFloat(b.metrik_puani || 0) - parseFloat(a.metrik_puani || 0); });
+        list.sort(function (a, b) { return (normalizeMetricScore(b.metrik_puani) || 0) - (normalizeMetricScore(a.metrik_puani) || 0); });
     }
     else if (sortVal === 'name-asc') {
         list.sort(function (a, b) { return (a.ad_soyad || '').localeCompare(b.ad_soyad || ''); });
@@ -2621,14 +3731,15 @@ function renderMevcutTable() {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
         var durum = (item.durumu || '').trim().toUpperCase();
+        var metricScore = normalizeMetricScore(item.metrik_puani);
         var statusBadge = "<span class=\"badge-stabil px-2 py-0.5 rounded text-[11px] font-bold\">STAB\u0130L</span>";
         if (durum === 'KRİTİK')
             statusBadge = "<span class=\"badge-kritik px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDD34 KR\u0130T\u0130K</span>";
         else if (durum === 'TAKİP')
             statusBadge = "<span class=\"badge-takip px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDFE1 TAK\u0130P</span>";
         else if (durum === 'DELİST')
-            statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">\u26AB DEL\u0130ST</span>";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(item.metrik_puani ? '(' + item.metrik_puani + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
+            statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">\u26AB L\u0130STE DI\u015EI</span>";
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(metricScore !== null ? '(' + metricScore + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
@@ -2800,10 +3911,12 @@ function updateSydvDecisionButtons() {
     var field = document.getElementById('web-detail-field-btn');
     var reject = document.getElementById('web-detail-reject-btn');
     var warning = document.getElementById('sydv-opinion-warning');
-    if (approve) approve.disabled = !selected;
-    if (field) field.disabled = !selected;
-    if (reject) reject.disabled = !selected;
-    if (warning) warning.innerText = selected ? 'SYDV görüşü kayda alınacak. Şimdi Doğrudan Onayla, Sahaya Al veya Ret kararını verebilirsiniz.' : 'Karar butonları SYDV görüşü seçildikten sonra etkinleşir.';
+    if (approve) approve.disabled = false;
+    if (field) field.disabled = false;
+    if (reject) reject.disabled = false;
+    if (warning) warning.innerText = selected
+        ? 'Seçilen SYDV görüşü işlemle birlikte kaydedilecek.'
+        : 'SYDV görüşü seçilmedi. Görüş olmadan da karar verebilirsiniz.';
 }
 function resetSydvOpinion() {
     var radios = document.querySelectorAll('input[name="sydvOpinion"]');
@@ -2928,49 +4041,9 @@ function makeActiveFromRed(item) {
         kaynak: 'Ret Listesinden Yeniden Değerlendirme'
     };
 }
-function processWebApplication(index, destination) {
-    if (destination !== 'active' && destination !== 'field' && destination !== 'red') {
-        alert('Geçersiz işlem hedefi. Sayfayı yenileyip tekrar deneyin.');
-        return;
-    }
-    var item = appState.web[index];
-    if (!item)
-        return;
-    var actionText = destination === 'active' ? 'doğrudan aktif aile listesine almak' : (destination === 'field' ? 'saha ziyareti sürecine almak' : 'ret listesine almak');
-    if (!confirm("".concat(item.ad_soyad || 'Bu başvuruyu', " ").concat(actionText, " istedi\u011Finize emin misiniz?")))
-        return;
-    var movedItem = destination === 'active' ? makeActiveFromWeb(item) : makeRedFromWeb(item);
-    workflowState.processedWeb[String(item.id)] = { destination: destination, item: movedItem, at: new Date().toISOString(), by: sessionStorage.getItem('gih_current_user') || '' };
-    saveWorkflowState();
-    appState.web.splice(index, 1);
-    if (destination === 'active')
-        appState.mevcut.push(movedItem);
-    else
-        appState.red.push(movedItem);
-closeModal('webDetailModal');
-    updateBadges();
-    renderMevcutTable();
-    renderRedTable();
-    renderWebTable();
-    renderDashboardStats();
-}
-function moveRedToActive(id) {
-    var idx = appState.red.findIndex(function (x) { return x.id === id; });
-    if (idx < 0)
-        return;
-    var source = appState.red[idx];
-    if (!confirm("".concat(source.ad_soyad || 'Bu aileyi', " aktif listeye almak istedi\u011Finize emin misiniz?")))
-        return;
-    var moved = makeActiveFromRed(source);
-    workflowState.redToActive[familyKey(source)] = moved;
-    saveWorkflowState();
-    appState.red.splice(idx, 1);
-    appState.mevcut.push(moved);
-updateBadges();
-    renderMevcutTable();
-    renderRedTable();
-    renderDashboardStats();
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
 
 function moveActiveToRed(id) {
     var item = appState.mevcut.find(function (x) { return x.id === id; });
@@ -2992,42 +4065,116 @@ function moveActiveToRed(id) {
         });
 }
 
-function delistFamily(id) {
-    var item = appState.mevcut.find(function (x) { return x.id === id; });
-    if (!item)
-        return;
-    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " \"Liste D\u0131\u015F\u0131 B\u0131rak\u0131lanlar\" kategorisine aktarmak istedi\u011Finize emin misiniz?")))
-        return;
-    item.durumu = 'DELİST';
-    workflowState.delisted[familyKey(item)] = { at: new Date().toISOString(), by: sessionStorage.getItem('gih_current_user') || '' };
-    saveWorkflowState();
-updateBadges();
-    renderMevcutTable();
-    renderDashboardStats();
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
+function getAssistanceEntriesForFamily_(item) {
+    var keys = [];
+    var tc = normalizeTC(item && item.tc);
+    var name = normalizeName(item && item.ad_soyad);
+
+    if (tc) keys.push(tc);
+    if (name) keys.push('NAME:' + name);
+
+    var merged = [];
+    var seen = {};
+
+    keys.forEach(function(key) {
+        (workflowState.assistance[key] || []).forEach(function(e) {
+            var sig = [
+                e.id || '',
+                e.date || '',
+                e.content || '',
+                e.marketValue || '',
+                e.pdfUrl || '',
+                e.source || ''
+            ].join('|');
+
+            // ID bulunmayan geçmiş kayıtlarda içerik imzasını kullan.
+            if (!e.id) {
+                sig = [
+                    e.date || '',
+                    e.content || '',
+                    e.marketValue || '',
+                    e.pdfUrl || '',
+                    e.source || ''
+                ].join('|');
+            }
+
+            if (seen[sig]) return;
+            seen[sig] = true;
+            merged.push(e);
+        });
+    });
+
+    return merged.sort(function(a, b) {
+        return String(b.date || '').localeCompare(String(a.date || ''));
+    });
 }
-function reactivateDelistedFamily(id) {
-    var item = appState.mevcut.find(function (x) { return x.id === id; });
-    if (!item)
-        return;
-    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " yeniden aktif aile listesine almak istedi\u011Finize emin misiniz?")))
-        return;
-    item.durumu = 'TAKİP';
-    delete workflowState.delisted[familyKey(item)];
-    saveWorkflowState();
-updateBadges();
-    renderMevcutTable();
-    renderDashboardStats();
-}
-function renderAssistanceHistory(item) {
-    var container = document.getElementById('assistance-history');
-    var key = familyKey(item);
-    var entries = (workflowState.assistance[key] || []).slice().sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
-    if (!entries.length) {
-        container.innerHTML = '<div class="text-center py-5 text-slate-400 bg-slate-50 rounded-lg border border-slate-200">Henüz yapılandırılmış yardım kaydı bulunmuyor.</div>';
+
+function renderHistoricalAssistanceText_(item) {
+    var container=document.getElementById('historical-assistance-text');
+    if (!container) return;
+    var keys=[];
+    var tc=normalizeTC(item && item.tc);
+    var name=normalizeName(item && item.ad_soyad);
+    if (tc) keys.push(tc);
+    if (name) keys.push('NAME:'+name);
+    var values=[], seen={};
+    keys.forEach(function(key) {
+        (((workflowState.assistanceHistoryText || {})[key]) || []).forEach(function(v) {
+            if (!v || seen[v]) return;
+            seen[v]=true; values.push(v);
+        });
+    });
+    if (!values.length) {
+        container.innerHTML='<div class="text-center py-4 text-slate-400">Geçmiş yardım kaydı bulunamadı.</div>';
         return;
     }
-    container.innerHTML = entries.map(function (e) { return "\n                <div class=\"p-3 border border-slate-200 rounded-lg bg-white\">\n                    <div class=\"flex flex-col sm:flex-row sm:items-start justify-between gap-2\">\n                        <div>\n                            <div class=\"font-bold text-slate-900\">".concat(escapeHtml(e.content || '-'), "</div>\n                            <div class=\"text-slate-500 mt-1\">").concat(escapeHtml(e.date || '-'), " ").concat(e.marketValue ? '• Rayiç: ' + escapeHtml(e.marketValue) : '', "</div>\n                        </div>\n                        ").concat(e.pdfUrl ? "<a href=\"".concat(escapeAttr(e.pdfUrl), "\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-sky-700 font-semibold\"><i class=\"fa-solid fa-file-pdf mr-1\"></i>Tutanak</a>") : (e.pdfName ? "<span class=\"text-slate-500 pdf-name\"><i class=\"fa-solid fa-file-pdf mr-1\"></i>".concat(escapeHtml(e.pdfName), "</span>") : ''), "\n                    </div>\n                </div>\n            "); }).join('');
+    container.innerHTML=values.map(function(v) {
+        return '<div class="p-3 rounded-lg border border-amber-200 bg-amber-50 text-amber-950 leading-relaxed">'+escapeHtml(v)+'</div>';
+    }).join('');
 }
+
+function renderAssistanceHistory(item) {
+    var container = document.getElementById('assistance-history');
+    var entries = getAssistanceEntriesForFamily_(item).filter(function(e) {
+        return String(e.source || '').toLocaleUpperCase('tr-TR').indexOf('YARDIM GEÇMİŞİ') < 0;
+    });
+
+    if (!entries.length) {
+        container.innerHTML = '<div class="text-center py-5 text-slate-400 bg-slate-50 rounded-lg border border-slate-200">Henüz kayıtlı yardım bulunmuyor.</div>';
+        return;
+    }
+
+    container.innerHTML = entries.map(function(e) {
+        var sourceBadge = '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">Yeni Sistem Kaydı</span>';
+
+        return `
+            <div class="p-3 border border-slate-200 rounded-lg bg-white">
+                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                    <div class="min-w-0">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <div class="font-bold text-slate-900">${escapeHtml(e.content || '-')}</div>
+                            ${sourceBadge}
+                        </div>
+                        <div class="text-slate-500">
+                            ${escapeHtml(e.date || '-')}
+                            ${e.marketValue ? ' • Rayiç: ' + escapeHtml(e.marketValue) : ''}
+                        </div>
+                    </div>
+                    ${e.pdfUrl
+                        ? `<a href="${escapeAttr(e.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="text-sky-700 font-semibold whitespace-nowrap"><i class="fa-solid fa-file-pdf mr-1"></i>Tutanak</a>`
+                        : (e.pdfName
+                            ? `<span class="text-slate-500 pdf-name whitespace-nowrap"><i class="fa-solid fa-file-pdf mr-1"></i>${escapeHtml(e.pdfName)}</span>`
+                            : '')}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
 function openAssistanceModal(id) {
     var item = appState.mevcut.find(function (x) { return x.id === id; });
     if (!item)
@@ -3035,6 +4182,7 @@ function openAssistanceModal(id) {
     currentAssistanceFamilyId = id;
     document.getElementById('assistance-family-label').innerText = "".concat(item.ad_soyad || '-', " \u2022 ").concat(item.tc || 'TCKN yok');
     renderAssistanceHistory(item);
+    renderHistoricalAssistanceText_(item);
     var rows = document.getElementById('assistance-entry-rows');
     rows.innerHTML = '';
     addAssistanceRow();
@@ -3048,90 +4196,8 @@ function addAssistanceRow() {
     row.innerHTML = "\n                <div class=\"assistance-row-grid grid grid-cols-1 md:grid-cols-[150px_minmax(220px,1fr)_170px_minmax(190px,1fr)_36px] gap-2 items-end\">\n                    <div>\n                        <label class=\"block text-[11px] font-semibold text-slate-600 mb-1\">Yard\u0131m Tarihi</label>\n                        <input type=\"date\" class=\"assist-date w-full p-2 bg-white border border-slate-300 rounded-lg text-xs\">\n                    </div>\n                    <div>\n                        <label class=\"block text-[11px] font-semibold text-slate-600 mb-1\">Yard\u0131m \u0130\u00E7eri\u011Fi</label>\n                        <input type=\"text\" class=\"assist-content w-full p-2 bg-white border border-slate-300 rounded-lg text-xs\" placeholder=\"\u00D6rn. g\u0131da kolisi, nakit destek\">\n                    </div>\n                    <div>\n                        <label class=\"block text-[11px] font-semibold text-slate-600 mb-1\">Rayi\u00E7 Bedel (varsa)</label>\n                        <input type=\"text\" class=\"assist-value w-full p-2 bg-white border border-slate-300 rounded-lg text-xs\" placeholder=\"\u00D6rn. 2500 TL\">\n                    </div>\n                    <div>\n                        <label class=\"block text-[11px] font-semibold text-slate-600 mb-1\">Tutanak Ekle (varsa)</label>\n                        <input type=\"file\" accept=\"application/pdf,.pdf\" class=\"assist-pdf block w-full text-[10px] file:mr-2 file:py-1.5 file:px-2 file:rounded-md file:border-0 file:bg-rose-100 file:text-rose-700\">\n                    </div>\n                    <button type=\"button\" onclick=\"this.closest('.assistance-entry-row').remove()\" class=\"h-9 w-9 inline-flex items-center justify-center rounded-lg bg-white border border-slate-300 text-slate-500 hover:text-rose-600\" title=\"Sat\u0131r\u0131 kald\u0131r\"><i class=\"fa-solid fa-trash\"></i></button>\n                </div>";
     container.appendChild(row);
 }
-function saveAssistanceEntries() {
-    return __awaiter(this, void 0, void 0, function () {
-        var family, rows, cfg, key, status, savedCount, _i, rows_1, row, date, content, marketValue, file, upload;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    family = appState.mevcut.find(function (x) { return x.id === currentAssistanceFamilyId; });
-                    if (!family)
-                        return [2 /*return*/];
-                    rows = Array.from(document.querySelectorAll('#assistance-entry-rows .assistance-entry-row'));
-                    cfg = getIntegrationConfig();
-                    key = familyKey(family);
-                    workflowState.assistance[key] = workflowState.assistance[key] || [];
-                    status = document.getElementById('assistance-save-status');
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'Yardımlar kaydediliyor...';
-                    status.classList.remove('hidden');
-                    savedCount = 0;
-                    _i = 0, rows_1 = rows;
-                    _a.label = 1;
-                case 1:
-                    if (!(_i < rows_1.length)) return [3 /*break*/, 5];
-                    row = rows_1[_i];
-                    date = row.querySelector('.assist-date').value;
-                    content = row.querySelector('.assist-content').value.trim();
-                    marketValue = row.querySelector('.assist-value').value.trim();
-                    file = row.querySelector('.assist-pdf').files[0];
-                    if (!date && !content && !marketValue && !file)
-                        return [3 /*break*/, 4];
-                    if (!date || !content) {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
-                        status.innerText = 'Dolu satırlarda yardım tarihi ve yardım içeriği zorunludur.';
-                        return [2 /*return*/];
-                    }
-                    if (file && !isPdfFile(file)) {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
-                        status.innerText = 'Tutanak alanına yalnızca PDF yüklenebilir.';
-                        return [2 /*return*/];
-                    }
-                    upload = null;
-                    if (!file) return [3 /*break*/, 3];
-                    return [4 /*yield*/, uploadPdfToDrive(file, family, 'help', cfg.helpFolder)];
-                case 2:
-                    upload = _a.sent();
-                    if (upload.error) {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-amber-50 text-amber-900 border border-amber-200';
-                        status.innerText = upload.error + ' Yardım kaydı PDF bağlantısı olmadan yerel olarak tutuldu.';
-                    }
-                    _a.label = 3;
-                case 3:
-                    workflowState.assistance[key].push({
-                        id: 'A-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
-                        date: date,
-                        content: content,
-                        marketValue: marketValue,
-                        pdfName: file ? file.name : '',
-                        pdfUrl: upload && upload.url ? upload.url : '',
-                        source: 'Panel',
-                        createdAt: new Date().toISOString(),
-                        by: sessionStorage.getItem('gih_current_user') || ''
-                    });
-                    savedCount++;
-                    _a.label = 4;
-                case 4:
-                    _i++;
-                    return [3 /*break*/, 1];
-                case 5:
-                    saveWorkflowState();
-                    renderAssistanceHistory(family);
-                    if (savedCount) {
-                        document.getElementById('assistance-entry-rows').innerHTML = '';
-                        addAssistanceRow();
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200';
-                        status.innerText = "".concat(savedCount, " yard\u0131m kayd\u0131 kaydedildi.");
-                    }
-                    else {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-amber-50 text-amber-900 border border-amber-200';
-                        status.innerText = 'Kaydedilecek dolu yardım satırı bulunamadı.';
-                    }
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
 function isPdfFile(file) {
     if (!file)
         return false;
@@ -3154,123 +4220,108 @@ function fileToBase64(file) {
         });
     });
 }
-function uploadPdfToDrive(file, family, category, folderValue) {
-    return __awaiter(this, void 0, void 0, function () {
-        var cfg, folderId, payload, response, result, err_2;
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    if (!isPdfFile(file))
-                        return [2 /*return*/, { error: 'Yalnızca PDF dosyaları kabul edilir.' }];
-                    cfg = getIntegrationConfig();
-                    if (!cfg.uploadEndpoint)
-                        return [2 /*return*/, { error: 'Apps Script PDF yükleme adresi henüz ayarlanmadı.' }];
-                    folderId = extractDriveId(folderValue);
-                    if (!folderId)
-                        return [2 /*return*/, { error: 'Bu belge türü için Drive klasörü henüz ayarlanmadı.' }];
-                    _b.label = 1;
-                case 1:
-                    _b.trys.push([1, 5, , 6]);
-                    _a = {
-                        action: 'uploadPdf',
-                        category: category,
-                        folderId: folderId,
-                        fileName: file.name,
-                        mimeType: 'application/pdf'
-                    };
-                    return [4 /*yield*/, fileToBase64(file)];
-                case 2:
-                    payload = (_a.base64 = _b.sent(),
-                        _a.familyName = family.ad_soyad || '',
-                        _a.tc = family.tc || '',
-                        _a.uploadedBy = sessionStorage.getItem('gih_current_user') || '',
-                        _a);
-                    return [4 /*yield*/, fetch(cfg.uploadEndpoint, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                            body: JSON.stringify(payload)
-                        })];
-                case 3:
-                    response = _b.sent();
-                    if (!response.ok)
-                        throw new Error('HTTP ' + response.status);
-                    return [4 /*yield*/, response.json()];
-                case 4:
-                    result = _b.sent();
-                    if (!result.ok)
-                        throw new Error(result.error || 'Drive yükleme hatası');
-                    return [2 /*return*/, { url: result.url || '', id: result.id || '' }];
-                case 5:
-                    err_2 = _b.sent();
-                    return [2 /*return*/, { error: 'PDF Drive’a yüklenemedi: ' + err_2.message }];
-                case 6: return [2 /*return*/];
-            }
-        });
+function uploadPdfToDrive() {
+    return Promise.resolve({
+        error: 'Phase 4C: eski harici uploadEndpoint akışı devre dışı. Merkezi belge yükleme akışını kullanın.'
     });
 }
-function uploadFamilyDocument(type) {
-    return __awaiter(this, void 0, void 0, function () {
-        var family, inputId, file, status, cfg, folder, result, key;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    family = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
-                    if (!family)
-                        return [2 /*return*/];
-                    inputId = type === 'assessment' ? 'family-assessment-pdf' : 'family-media-pdf';
-                    file = document.getElementById(inputId).files[0];
-                    status = document.getElementById('family-doc-upload-status');
-                    if (!file || !isPdfFile(file)) {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
-                        status.innerText = 'Lütfen PDF dosyası seçin.';
-                        status.classList.remove('hidden');
-                        return [2 /*return*/];
-                    }
-                    cfg = getIntegrationConfig();
-                    folder = type === 'assessment' ? cfg.assessmentFolder : cfg.mediaFolder;
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'PDF yükleniyor...';
-                    status.classList.remove('hidden');
-                    return [4 /*yield*/, uploadPdfToDrive(file, family, type, folder)];
-                case 1:
-                    result = _a.sent();
-                    key = familyKey(family);
-                    workflowState.documents[key] = workflowState.documents[key] || [];
-                    if (!result.error) {
-                        workflowState.documents[key].push({
-                            type: type,
-                            name: file.name,
-                            url: result.url || '',
-                            at: new Date().toISOString(),
-                            by: sessionStorage.getItem('gih_current_user') || ''
-                        });
-                        saveWorkflowState();
-                        renderFamilyDocuments(family);
-                        document.getElementById(inputId).value = '';
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200';
-                        status.innerText = 'PDF başarıyla Drive’a yüklendi.';
-                    }
-                    else {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-amber-50 text-amber-900 border border-amber-200';
-                        status.innerText = result.error;
-                    }
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
+
 function renderFamilyDocuments(family) {
-    var container = document.getElementById('family-document-list');
-    if (!container)
-        return;
-    var docs = workflowState.documents[familyKey(family)] || [];
-    if (!docs.length) {
-        container.innerHTML = '<div class="text-[11px] text-slate-400">Henüz panel üzerinden yüklenmiş belge yok.</div>';
-        return;
+    var container=document.getElementById('family-document-list');
+    if(!container) return;
+
+    var keys=[];
+    var tc=normalizeTC(family && family.tc);
+    var name=normalizeName(family && family.ad_soyad);
+    if(tc) keys.push(tc);
+    if(name) keys.push('NAME:'+name);
+
+    var docs=[], seen={};
+    keys.forEach(function(key){
+        (workflowState.documents[key] || []).forEach(function(d){
+            var type=String(d.type || '').trim().toLowerCase();
+            var sig=[type,d.fileId || '',d.url || '',d.name || ''].join('|');
+            if(seen[sig]) return;
+            seen[sig]=true;
+            docs.push({
+                type:type,
+                name:d.name || '',
+                url:d.url || '',
+                fileId:d.fileId || '',
+                at:d.at || '',
+                by:d.by || ''
+            });
+        });
+    });
+
+    function docsOf(type){
+        return docs.filter(function(d){return d.type===type && d.url;});
     }
-    container.innerHTML = docs.map(function (d) { return "\n                <div class=\"flex items-center justify-between gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200 text-xs\">\n                    <div class=\"min-w-0\"><span class=\"font-semibold\">".concat(d.type === 'assessment' ? 'Tespit Tutanağı' : 'Video/Foto İzin Belgesi', "</span><div class=\"text-slate-500 truncate\">").concat(escapeHtml(d.name), "</div></div>\n                    ").concat(d.url ? "<a href=\"".concat(escapeAttr(d.url), "\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"shrink-0 text-sky-700 font-semibold\">A\u00E7</a>") : '', "\n                </div>\n            "); }).join('');
+
+    var assessmentDocs=docsOf('assessment');
+    var mediaDocs=docsOf('media');
+    var hasAssessment=assessmentDocs.length>0;
+    var hasMedia=mediaDocs.length>0;
+
+    var assessmentPanel=document.getElementById('family-assessment-upload-panel');
+    var mediaPanel=document.getElementById('family-media-upload-panel');
+    if(assessmentPanel) assessmentPanel.classList.toggle('hidden',hasAssessment);
+    if(mediaPanel) mediaPanel.classList.toggle('hidden',hasMedia);
+
+    function statusCard_(title,icon,items,missingText){
+        if(!items.length){
+            return '<div class="p-3 rounded-xl border border-slate-200 bg-slate-50">'+
+                '<div class="flex items-center gap-2 font-semibold text-slate-700">'+
+                '<i class="'+icon+' text-slate-400"></i>'+escapeHtml(title)+'</div>'+
+                '<div class="mt-1 text-[11px] text-slate-400">'+escapeHtml(missingText)+'</div>'+
+                '</div>';
+        }
+
+        return items.map(function(d,index){
+            return '<div class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/60">'+
+                '<div class="flex items-center justify-between gap-3">'+
+                  '<div class="min-w-0">'+
+                    '<div class="font-semibold text-slate-800"><i class="'+icon+' mr-1.5 text-emerald-600"></i>'+escapeHtml(title)+(items.length>1?' '+(index+1):'')+'</div>'+
+                    (d.name?'<div class="text-[11px] text-slate-500 truncate mt-1">'+escapeHtml(d.name)+'</div>':'')+
+                  '</div>'+
+                  '<a href="'+escapeAttr(d.url)+'" target="_blank" rel="noopener noreferrer" title="Güvenli PDF köprüsü üzerinden aç" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold">'+
+                    '<i class="fa-solid fa-file-pdf"></i>PDF Aç'+
+                  '</a>'+
+                '</div>'+
+              '</div>';
+        }).join('');
+    }
+
+    var htmlParts=[];
+    htmlParts.push(statusCard_(
+        'Saha Tespit Formu',
+        'fa-solid fa-clipboard-check',
+        assessmentDocs,
+        'Merkezi BELGELER kaydında saha tespit PDF’i bulunmuyor.'
+    ));
+    htmlParts.push(statusCard_(
+        'Video / Fotoğraf İzin Belgesi',
+        'fa-solid fa-camera',
+        mediaDocs,
+        'Merkezi BELGELER kaydında yayın izin PDF’i bulunmuyor.'
+    ));
+
+    var other=docs.filter(function(d){
+        return d.type!=='assessment' && d.type!=='media' && d.url;
+    });
+    other.forEach(function(d){
+        htmlParts.push(
+          '<div class="p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between gap-3">'+
+            '<div class="min-w-0"><div class="font-semibold text-slate-700">Diğer Belge</div>'+
+            (d.name?'<div class="text-[11px] text-slate-500 truncate">'+escapeHtml(d.name)+'</div>':'')+'</div>'+
+            '<a href="'+escapeAttr(d.url)+'" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold"><i class="fa-solid fa-file-pdf mr-1"></i>PDF Aç</a>'+
+          '</div>'
+        );
+    });
+
+    container.innerHTML=htmlParts.join('');
 }
+
 function escapeHtml(v) {
     return String(v !== null && v !== void 0 ? v : '').replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c]); });
 }
@@ -3282,53 +4333,12 @@ function extractSpreadsheetId(value) {
     var m = s.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
     return m ? m[1] : s;
 }
-function fetchSheetFromSpreadsheet(sheetId, sheetName) {
-    if (sheetName === void 0) { sheetName = ''; }
-    return new Promise(function (resolve, reject) {
-        var callbackName = '__gih_ext_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-        var script = document.createElement('script');
-        var done = false;
-        var cleanup = function () {
-            if (done)
-                return;
-            done = true;
-            try {
-                delete window[callbackName];
-            }
-            catch (_) { }
-            script.remove();
-        };
-        var timer = setTimeout(function () { cleanup(); reject(new Error('Harici tablo yanıt vermedi.')); }, 15000);
-        window[callbackName] = function (response) {
-            var _a, _b, _c;
-            clearTimeout(timer);
-            try {
-                if (!response || (response.status && response.status !== 'ok'))
-                    throw new Error('Harici tablo okunamadı.');
-                var cols_1 = ((_b = (_a = response.table) === null || _a === void 0 ? void 0 : _a.cols) === null || _b === void 0 ? void 0 : _b.length) || 0;
-                var rows = (((_c = response.table) === null || _c === void 0 ? void 0 : _c.rows) || []).map(function (r) {
-                    var cells = r.c || [];
-                    var out = new Array(Math.max(cols_1, cells.length)).fill('');
-                    cells.forEach(function (c, i) { return out[i] = gvizCellToValue(c); });
-                    return out;
-                });
-                cleanup();
-                resolve(rows);
-            }
-            catch (e) {
-                cleanup();
-                reject(e);
-            }
-        };
-        script.onerror = function () { clearTimeout(timer); cleanup(); reject(new Error('Harici Google E-Tablo bağlantısı kurulamadı.')); };
-        var tqx = "out:json;responseHandler:".concat(callbackName);
-        var url = "https://docs.google.com/spreadsheets/d/".concat(encodeURIComponent(sheetId), "/gviz/tq?tqx=").concat(encodeURIComponent(tqx), "&headers=0&t=").concat(Date.now());
-        if (sheetName)
-            url += "&sheet=".concat(encodeURIComponent(sheetName));
-        script.src = url;
-        document.head.appendChild(script);
-    });
+function fetchSheetFromSpreadsheet() {
+    return Promise.reject(new Error(
+        'Phase 4C: tarayıcıdan doğrudan harici Google E-Tablo okuma devre dışı. Merkezi sunucu akışını kullanın.'
+    ));
 }
+
 function findHeaderIndex(headers, patterns) {
     return headers.findIndex(function (h) { return patterns.some(function (p) { return normalizeName(h).includes(p); }); });
 }
@@ -3460,7 +4470,7 @@ function updateAllSourcesLastCheckTime() {
         hour: '2-digit', minute: '2-digit', second: '2-digit',
         hour12: false
     }).format(now);
-    el.innerText = '5 Tablo Son Güncelleme: ' + formatted + ' (GMT+3)';
+    el.innerText = 'Son Güncelleme: ' + formatted + ' (GMT+3)';
 }
 function refreshAllGoogleSources() {
     return __awaiter(this, arguments, void 0, function (showToast) {
@@ -3483,7 +4493,7 @@ function refreshAllGoogleSources() {
                     applyCentralPayload(result);
                     updateAllSourcesLastCheckTime();
                     if (showToast)
-                        alert('Beş Google E-Tablo kaynağı başarıyla yenilendi.');
+                        alert('Merkezi veritabanı ve saha kaynakları başarıyla yenilendi.');
                     return [3 /*break*/, 5];
                 case 3:
                     err_5 = _a.sent();
@@ -3518,8 +4528,7 @@ var currentSahaId = window.currentSahaId = null;
 function renderSahaTable() {
     var _a, _b;
     var tbody = document.getElementById('saha-table-body');
-    if (!tbody)
-        return;
+    if (!tbody) return;
     var q = (((_a = document.getElementById('search-saha')) === null || _a === void 0 ? void 0 : _a.value) || '').toLowerCase();
     var stage = ((_b = document.getElementById('filter-saha-stage')) === null || _b === void 0 ? void 0 : _b.value) || 'ALL';
     var list = (appState.saha || []).filter(function (x) { return (stage === 'ALL' || x.asama === stage) && (!q || (x.ad_soyad || '').toLowerCase().includes(q) || String(x.tc || '').includes(q)); });
@@ -3528,13 +4537,19 @@ function renderSahaTable() {
         var hasReport = !!(x.saha_raporu || '').trim();
         var evaluated = x.asama === 'DEĞERLENDİRMEDE';
         var canDecide = x.asama === 'DEĞERLENDİRMEDE' || x.asama === 'SAHA YAPILACAK';
+        var pdfHtml = x.saha_pdf_url ? '<a href="' + escapeHtml(x.saha_pdf_url) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="mt-1.5 inline-flex items-center gap-1 text-rose-700 hover:text-rose-900 font-bold"><i class="fa-solid fa-file-pdf"></i>PDF\'yi Aç</a>' : '';
         var tr = document.createElement('tr');
-        tr.innerHTML = "<td class=\"py-3 px-3\"><div class=\"font-bold\">".concat(escapeHtml(x.ad_soyad || '-'), "</div><div class=\"text-[10px] text-cyan-700 font-mono\">").concat(escapeHtml(x.application_id || x.id || '-'), "</div><div class=\"text-[11px] font-mono text-slate-500\">").concat(escapeHtml(x.tc || '-'), "</div></td>\n        <td class=\"py-3 px-3\"><div>").concat(escapeHtml(x.telefon || '-'), "</div><div class=\"text-[11px] text-emerald-700\">").concat(escapeHtml(x.ilce || '-'), "</div></td>\n        <td class=\"py-3 px-3 max-w-xs text-[11px]\">").concat(escapeHtml(x.talep || '-'), "</td>\n        <td class=\"py-3 px-3\"><span class=\"px-2 py-1 rounded-full text-[10px] font-bold ").concat(evaluated ? 'bg-indigo-100 text-indigo-700' : 'bg-amber-100 text-amber-800', "\">").concat(escapeHtml(x.asama || 'SAHA YAPILACAK'), "</span></td>\n        <td class=\"py-3 px-3 max-w-sm text-[11px] line-clamp-3\">").concat(escapeHtml(hasReport ? x.saha_raporu : 'Saha formu yok — değerlendirme yapılabilir.'), "</td>\n        <td class=\"py-3 px-3 text-right\"><button ").concat(canDecide ? '' : 'disabled', " onclick=\"openSahaDecision('").concat(x.saha_id, "')\" class=\"px-2.5 py-1.5 rounded-md text-xs font-semibold ").concat(canDecide ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-slate-100 text-slate-400', "\">").concat(canDecide ? 'Değerlendir' : 'İşlem Yok', "</button></td>");
+        tr.innerHTML = '<td class="py-3 px-3"><div class="font-bold">' + escapeHtml(x.ad_soyad || '-') + '</div><div class="text-[10px] text-cyan-700 font-mono">' + escapeHtml(x.application_id || x.id || '-') + '</div><div class="text-[11px] font-mono text-slate-500">' + escapeHtml(x.tc || '-') + '</div></td>' +
+            '<td class="py-3 px-3"><div>' + escapeHtml(x.telefon || '-') + '</div><div class="text-[11px] text-emerald-700">' + escapeHtml(x.ilce || '-') + '</div></td>' +
+            '<td class="py-3 px-3 max-w-xs text-[11px]">' + escapeHtml(x.talep || '-') + '</td>' +
+            '<td class="py-3 px-3"><span class="px-2 py-1 rounded-full text-[10px] font-bold ' + (evaluated ? 'bg-indigo-100 text-indigo-700' : 'bg-amber-100 text-amber-800') + '">' + escapeHtml(x.asama || 'SAHA YAPILACAK') + '</span></td>' +
+            '<td class="py-3 px-3 max-w-sm text-[11px]"><div class="line-clamp-3">' + escapeHtml(hasReport ? x.saha_raporu : 'Saha formu yok — değerlendirme yapılabilir.') + '</div>' + pdfHtml + '</td>' +
+            '<td class="py-3 px-3 text-right"><button ' + (canDecide ? '' : 'disabled') + ' onclick="openSahaDecision(\'' + x.saha_id + '\')" class="px-2.5 py-1.5 rounded-md text-xs font-semibold ' + (canDecide ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-slate-100 text-slate-400') + '">' + (canDecide ? 'Değerlendir' : 'İşlem Yok') + '</button></td>';
         tbody.appendChild(tr);
     });
 }
 function fetchFieldReportsFromExternalSheet() {
-    return __awaiter(this, arguments, void 0, function (showToast) {
+    return __awaiter(this, arguments, void 0, function function (showToast) {
         var icon, payload, e_1;
         if (showToast === void 0) { showToast = true; }
         return __generator(this, function (_a) {
@@ -3598,6 +4613,44 @@ function openSahaDecision(id) {
     document.getElementById('saha-modal-report').innerText = hasReport
         ? item.saha_raporu
         : 'Saha Tespit Formu henüz sisteme gelmedi. Form zorunlu değildir; mevcut başvuru ve SYDV bilgileriyle değerlendirme yapılabilir.';
+    var pdfLink = document.getElementById('saha-modal-pdf-link');
+    if (pdfLink) {
+        if (item.saha_pdf_url) { pdfLink.href = item.saha_pdf_url; pdfLink.classList.remove('hidden'); }
+        else { pdfLink.href = '#'; pdfLink.classList.add('hidden'); }
+    }
+
+    var photoArea = document.getElementById('saha-modal-photo-area');
+    var photoGrid = document.getElementById('saha-modal-photo-grid');
+    var photoCount = document.getElementById('saha-modal-photo-count');
+    var photoUrls = Array.isArray(item.saha_fotograflar) ? item.saha_fotograflar.filter(Boolean) : [];
+    if (photoArea && photoGrid && photoCount) {
+        photoGrid.innerHTML = '';
+        if (photoUrls.length) {
+            photoUrls.forEach(function(url, index) {
+                var a = document.createElement('a');
+                a.href = url;
+                a.target = '_blank';
+                a.rel = 'noopener';
+                a.className = 'block rounded-lg overflow-hidden border border-amber-200 bg-white hover:shadow-md transition';
+                var img = document.createElement('img');
+                img.src = url;
+                img.alt = 'Saha fotoğrafı ' + (index + 1);
+                img.loading = 'lazy';
+                img.className = 'w-full aspect-[4/3] object-cover bg-slate-100';
+                var cap = document.createElement('div');
+                cap.className = 'px-2 py-1.5 text-[10px] font-semibold text-amber-900 text-center';
+                cap.textContent = (index + 1) + '. fotoğrafı aç';
+                a.appendChild(img);
+                a.appendChild(cap);
+                photoGrid.appendChild(a);
+            });
+            photoCount.textContent = photoUrls.length + ' fotoğraf';
+            photoArea.classList.remove('hidden');
+        } else {
+            photoCount.textContent = '';
+            photoArea.classList.add('hidden');
+        }
+    }
     setSahaSydvOpinion(item.sydv_gorusu || '');
     var info = document.getElementById('saha-form-optional-info');
     if (info) {
@@ -3669,7 +4722,7 @@ function fetchWebApplicationsFromExternalSheet() {
                     status.className = 'mt-3 text-xs rounded-lg p-3 bg-emerald-50 text-emerald-800 border border-emerald-200';
                     status.innerText = "".concat(appState.web.length, " web ba\u015Fvurusu ayr\u0131 Google E-Tablo dosyas\u0131ndan al\u0131nd\u0131.");
                     if (showToast)
-                        alert('Web başvuruları merkezi veritabanından başarıyla yenilendi.');
+                        alert('Web başvuruları ayrı Google E-Tablo dosyasından başarıyla alındı.');
                     return [3 /*break*/, 5];
                 case 3:
                     err_6 = _a.sent();
@@ -3685,53 +4738,16 @@ function fetchWebApplicationsFromExternalSheet() {
         });
     });
 }
-
-
-function importAssistanceFromSheet() {
-    return __awaiter(this, arguments, void 0, function (showToast) {
-        var status, icon, result, err_17;
-        if (showToast === void 0) { showToast = true; }
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    status = document.getElementById('assistance-import-status');
-                    icon = document.getElementById('assistance-sync-icon');
-                    if (icon) icon.classList.add('fa-spin');
-                    if (showToast) setCentralBusy('Yapılan Yardımlar Güncelleniyor...');
-                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'Merkezi veritabanındaki yardım kayıtları yenileniyor...';
-                    status.classList.remove('hidden');
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, 4, 5]);
-                    return [4 /*yield*/, gsImportAssistance(centralSessionToken)];
-                case 2:
-                    result = _a.sent();
-                    if (!result || result.ok === false)
-                        throw new Error((result && result.error) || 'Yardım kayıtları yenilenemedi.');
-                    applyCentralPayload(result.data || result);
-                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-emerald-50 text-emerald-800 border border-emerald-200';
-                    status.innerText = result.message || 'Yardım kayıtları merkezi veritabanından yenilendi.';
-                    if (showToast) alert(status.innerText);
-                    return [3 /*break*/, 5];
-                case 3:
-                    err_17 = _a.sent();
-                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-rose-50 text-rose-800 border border-rose-200';
-                    status.innerText = serverFailure(err_17);
-                    if (showToast) alert(status.innerText);
-                    return [3 /*break*/, 5];
-                case 4:
-                    if (icon) icon.classList.remove('fa-spin');
-                    if (showToast) clearCentralBusy();
-                    return [7 /*endfinally*/];
-                case 5: return [2 /*return*/];
-            }
-        });
-    });
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
 
 function renderDashboardStats() {
-    document.getElementById('stat-total-active').innerText = appState.mevcut.filter(function (x) { return (x.durumu || '').toUpperCase() !== 'DELİST'; }).length;
+    var totalActive = appState.mevcut.length;
+    var totalDelist = appState.mevcut.filter(function (x) {
+        return (x.durumu || '').trim().toUpperCase() === 'DELİST';
+    }).length;
+    document.getElementById('stat-total-active').innerText = totalActive;
+    var delistStatEl = document.getElementById('stat-total-delist');
+    if (delistStatEl) delistStatEl.innerText = totalDelist;
     document.getElementById('stat-total-critical').innerText = appState.mevcut.filter(function (x) { return (x.durumu || '').toUpperCase() === 'KRİTİK'; }).length;
     document.getElementById('stat-total-red').innerText = appState.red.length;
     document.getElementById('stat-total-web-pending').innerText = appState.web.filter(function (x) { return (x.durum || '').includes('Beklemede') || !x.durum; }).length;
@@ -3790,7 +4806,7 @@ function viewFamilyDetail(id) {
         return;
     document.getElementById('modal-family-name').innerText = item.ad_soyad || 'İsimsiz';
     document.getElementById('modal-family-subtitle').innerText = (item.tc || '-') + ' • ' + (item.iletisim || '-');
-    document.getElementById('m-durum').innerText = item.durumu || 'STABİL';
+    document.getElementById('m-durum').innerText = ((item.durumu || '').trim().toUpperCase() === 'DELİST') ? 'LİSTE DIŞI' : (item.durumu || 'STABİL');
     document.getElementById('m-metrik').innerText = item.metrik_puani || '-';
     document.getElementById('m-bolge').innerText = item.bolge || '-';
     document.getElementById('m-es-durum').innerText = item.es_durumu || '-';
@@ -4085,16 +5101,11 @@ function saveFamilyDetailChanges() {
         });
     });
 }
-function exportToExcel() {
-    var wb = XLSX.utils.book_new();
-    var ws1 = XLSX.utils.json_to_sheet(appState.mevcut);
-    var ws2 = XLSX.utils.json_to_sheet(appState.red);
-    var ws3 = XLSX.utils.json_to_sheet(appState.web);
-    XLSX.utils.book_append_sheet(wb, ws1, 'TOPLAM MEVCUT');
-    XLSX.utils.book_append_sheet(wb, ws2, 'RED ALANLAR');
-    XLSX.utils.book_append_sheet(wb, ws3, 'Web Yeni Başvurular');
-    XLSX.writeFile(wb, 'Gaziantep_Iyilik_Takip_Listesi.xlsx');
-}
+function safeExcelSheetName_(name) { return String(name || 'Tablo').replace(/[\/?*\[\]:]/g, ' ').trim().slice(0, 31) || 'Tablo'; }
+function safeDownloadFileName_(name) { return String(name || 'tablo').toLocaleLowerCase('tr-TR').replace(/[çÇ]/g,'c').replace(/[ğĞ]/g,'g').replace(/[ıİ]/g,'i').replace(/[öÖ]/g,'o').replace(/[şŞ]/g,'s').replace(/[üÜ]/g,'u').replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
+function workbookFromServerTables_(tables) { var wb = XLSX.utils.book_new(); (tables || []).forEach(function(table) { var ws = XLSX.utils.aoa_to_sheet(table.values || []); XLSX.utils.book_append_sheet(wb, ws, safeExcelSheetName_(table.label || table.sheetName)); }); return wb; }
+function downloadSourceTable(key) { return __awaiter(this, void 0, void 0, function () { var payload, table, wb, err; return __generator(this, function (_a) { switch (_a.label) { case 0: setCentralBusy('Güncel tablo hazırlanıyor...'); _a.label = 1; case 1: _a.trys.push([1, 3, , 4]); return [4 /*yield*/, gsExportConfiguredTables(centralSessionToken, [key])]; case 2: payload = _a.sent(); table = payload && payload.tables && payload.tables[0]; if (!table) throw new Error('Tablo verisi alınamadı.'); wb = workbookFromServerTables_([table]); XLSX.writeFile(wb, safeDownloadFileName_(table.label) + '_guncel.xlsx'); clearCentralBusy(); return [3 /*break*/, 4]; case 3: err = _a.sent(); clearCentralBusy(); alert('Tablo indirilemedi: ' + serverFailure(err)); return [3 /*break*/, 4]; case 4: return [2 /*return*/]; } }); }); }
+function downloadAllSourceTables() { return __awaiter(this, void 0, void 0, function () { var btn, label, loading, payload, wb, err; return __generator(this, function (_a) { switch (_a.label) { case 0: btn = document.getElementById('btn-download-all-tables'); label = document.getElementById('download-all-label'); loading = document.getElementById('download-all-loading'); if (btn) btn.disabled = true; if (label) label.classList.add('hidden'); if (loading) loading.classList.remove('hidden'); setCentralBusy('Altı kaynak tablonun güncel hali hazırlanıyor...'); _a.label = 1; case 1: _a.trys.push([1, 3, 4, 5]); return [4 /*yield*/, gsExportConfiguredTables(centralSessionToken, ['active','red','web','field','pendingfield','assistance'])]; case 2: payload = _a.sent(); wb = workbookFromServerTables_((payload && payload.tables) || []); XLSX.writeFile(wb, 'IYIBIS_Tum_Tablolar_Guncel.xlsx'); clearCentralBusy(); return [3 /*break*/, 5]; case 3: err = _a.sent(); clearCentralBusy(); alert('Tablolar indirilemedi: ' + serverFailure(err)); return [3 /*break*/, 5]; case 4: if (btn) btn.disabled = false; if (label) label.classList.remove('hidden'); if (loading) loading.classList.add('hidden'); return [7 /*endfinally*/]; case 5: return [2 /*return*/]; } }); }); }
 function exportJSON() {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
     var a = document.createElement('a');
@@ -4137,26 +5148,15 @@ function resetDataToDefault() {
         location.reload();
     }
 }
-function openSheetConfigModal() {
-    var cfg = getIntegrationConfig();
-    document.getElementById('config-assistance-sheet-id').value = cfg.assistanceSheetId || '';
-    document.getElementById('config-assistance-sheet-name').value = cfg.assistanceSheetName || '';
-    document.getElementById('config-upload-endpoint').value = cfg.uploadEndpoint || '';
-    document.getElementById('config-help-folder').value = cfg.helpFolder || '';
-    document.getElementById('config-assessment-folder').value = cfg.assessmentFolder || '';
-    document.getElementById('config-media-folder').value = cfg.mediaFolder || '';
-    var scrollArea = document.getElementById('sheet-config-scroll-area');
-    if (scrollArea)
-        scrollArea.scrollTop = 0;
-    openModal('sheetConfigModal');
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
 function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 function clearSearch(id, cb) { document.getElementById(id).value = ''; cb(); }
 function toggleDropdown(id) { document.getElementById(id).classList.toggle('hidden'); }
-/* BETA 4.2: merkezi Apps Script katmanı için UI köprüsü - gerçek UI bloğunun sonunda */
+/* : merkezi Apps Script katmanı için UI köprüsü - gerçek UI bloğunun sonunda */
 /* ============================================================
-   BETA 4.2: MERKEZİ KATMAN AYNI SCRIPT SCOPE'UNDA
+   : MERKEZİ KATMAN AYNI SCRIPT SCOPE'UNDA
    ============================================================ */
 /* ============================================================
    MERKEZİ APPS SCRIPT KATMANI
@@ -4330,7 +5330,7 @@ function restorePersistentCentralSession_() {
 }
 
 /*
- * BETA 4.2:
+ * :
  * Ana UI state'i önceki script bloğundan window üzerinden alınır.
  * Bu blok çıplak global lexical binding'e güvenmez.
  */
@@ -4441,6 +5441,12 @@ function gsGetConfig(token) {
         google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).getCentralConfig(token);
     });
 }
+function gsExportConfiguredTables(token, keys) {
+    return new Promise(function (resolve, reject) {
+        google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).exportConfiguredTablesServer(token, keys);
+    });
+}
+
 function gsSaveConfig(token, cfg) {
     return new Promise(function (resolve, reject) {
         google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).saveCentralConfig(token, cfg);
@@ -4506,10 +5512,36 @@ function clearCentralBusy() {
 }
 function mapCentralAssistanceToWorkflow(payload) {
     workflowState.assistance = {};
-    (payload.assistance || []).forEach(function (a) {
-        var key = normalizeTC(a.tc) || ('NAME:' + normalizeName(a.ad_soyad));
+
+    function addAssistanceAlias_(key, entry) {
+        if (!key) return;
         workflowState.assistance[key] = workflowState.assistance[key] || [];
-        workflowState.assistance[key].push({
+
+        var sig = [
+            entry.id || '',
+            entry.date || '',
+            entry.content || '',
+            entry.marketValue || '',
+            entry.pdfUrl || '',
+            entry.source || ''
+        ].join('|');
+
+        var exists = workflowState.assistance[key].some(function(x) {
+            return [
+                x.id || '',
+                x.date || '',
+                x.content || '',
+                x.marketValue || '',
+                x.pdfUrl || '',
+                x.source || ''
+            ].join('|') === sig;
+        });
+
+        if (!exists) workflowState.assistance[key].push(entry);
+    }
+
+    (payload.assistance || []).forEach(function (a) {
+        var entry = {
             id: a.id || '',
             date: a.yardim_tarihi || '',
             content: a.yardim_icerigi || '',
@@ -4519,20 +5551,67 @@ function mapCentralAssistanceToWorkflow(payload) {
             source: a.kaynak || 'Merkezi Sistem',
             createdAt: a.kayit_zamani || '',
             by: a.kullanici || ''
-        });
+        };
+
+        var tcKey = normalizeTC(a.tc);
+        var nameKey = a.ad_soyad ? ('NAME:' + normalizeName(a.ad_soyad)) : '';
+
+        // Geçmiş kayıtları olabildiğince dayanıklı eşleştirmek için
+        // hem TCKN hem ad-soyad anahtarı altında indeksle.
+        addAssistanceAlias_(tcKey, entry);
+        addAssistanceAlias_(nameKey, entry);
     });
+
     window.workflowState = workflowState;
+
+    workflowState.assistanceHistoryText = {};
+    function addHistoryTextAlias_(key, textValue) {
+        if (!key || !textValue) return;
+        workflowState.assistanceHistoryText[key] = workflowState.assistanceHistoryText[key] || [];
+        if (workflowState.assistanceHistoryText[key].indexOf(textValue) < 0) workflowState.assistanceHistoryText[key].push(textValue);
+    }
+    var historyPayload = payload.assistanceHistoryText || [];
+    if (!historyPayload.length) {
+        historyPayload = (payload.assistance || []).filter(function(a) {
+            return String(a.kaynak || '').toLocaleUpperCase('tr-TR').indexOf('YARDIM GEÇMİŞİ') >= 0;
+        }).map(function(a) {
+            var parts = [];
+            if (a.yardim_tarihi) parts.push(a.yardim_tarihi);
+            if (a.yardim_icerigi) parts.push(a.yardim_icerigi);
+            if (a.rayic_bedel) parts.push('Rayiç Bedel: ' + a.rayic_bedel);
+            return { tc:a.tc || '', ad_soyad:a.ad_soyad || '', metin:parts.join(' — ') || 'Geçmiş yardım kaydı' };
+        });
+    }
+    historyPayload.forEach(function(h) {
+        var tcKey = normalizeTC(h.tc || '');
+        var nameKey = h.ad_soyad ? ('NAME:' + normalizeName(h.ad_soyad)) : '';
+        var textValue = h.metin || '';
+        addHistoryTextAlias_(tcKey,textValue);
+        addHistoryTextAlias_(nameKey,textValue);
+    });
+
     workflowState.documents = {};
-    (payload.documents || []).forEach(function (d) {
-        var key = normalizeTC(d.tc) || ('NAME:' + normalizeName(d.ad_soyad));
+    function addDocumentAlias_(key, doc) {
+        if (!key) return;
         workflowState.documents[key] = workflowState.documents[key] || [];
-        workflowState.documents[key].push({
-            type: d.belge_turu || '',
+        var sig = [doc.type || '', doc.url || '', doc.name || ''].join('|');
+        if (!workflowState.documents[key].some(function(x) {
+            return [x.type || '', x.url || '', x.name || ''].join('|') === sig;
+        })) workflowState.documents[key].push(doc);
+    }
+    (payload.documents || []).forEach(function (d) {
+        var doc = {
+            type: String(d.belge_turu || '').trim().toLowerCase(),
             name: d.dosya_adi || '',
             url: d.drive_url || '',
+            fileId: d.drive_file_id || '',
             at: d.yukleme_zamani || '',
             by: d.kullanici || ''
-        });
+        };
+        var tcKey = normalizeTC(d.tc || '');
+        var nameKey = d.ad_soyad ? ('NAME:' + normalizeName(d.ad_soyad)) : '';
+        addDocumentAlias_(tcKey, doc);
+        addDocumentAlias_(nameKey, doc);
     });
     window.workflowState = workflowState;
 }
@@ -4688,7 +5767,7 @@ function initCentralAccessGate() {
     var passwordInput = document.getElementById('accessPassword');
     var error = document.getElementById('accessError');
     // Eski localStorage veritabanı artık kaynak değildir.
-    workflowState = { processedWeb: {}, redToActive: {}, delisted: {}, assistance: {}, documents: {} };
+    workflowState = { processedWeb: {}, redToActive: {}, delisted: {}, assistance: {}, assistanceHistoryText: {}, documents: {} };
     form.addEventListener('submit', function (e) {
         return __awaiter(this, void 0, void 0, function () {
             var result, err_10, msg;
@@ -4814,11 +5893,6 @@ function processWebApplication(index, destination) {
     var item = appState.web[index];
     if (!item) return;
     var sydvOpinion = getSelectedSydvOpinion();
-    if (!sydvOpinion) {
-        viewWebDetail(index);
-        alert('Önce SYDV Görüşü seçilmelidir: Onay, Ret veya Görüş Alınamadı.');
-        return;
-    }
     var text = destination === 'active' ? 'doğrudan aktif aile listesine almak' : (destination === 'field' ? 'saha ziyareti sürecine almak' : 'ret listesine almak');
     var targetLabel = destination === 'active' ? 'DOĞRUDAN ONAY → AKTİF AİLELER' : (destination === 'field' ? 'SAHA → SAHA ZİYARETİ' : 'RET → RET LİSTESİ');
     var message = (item.ad_soyad || 'Bu başvuruyu') + ' ' + text + ' istediğinize emin misiniz?\\n\\nİşlem: ' + targetLabel + '\\nSYDV Görüşü: ' + sydvOpinionLabel(sydvOpinion);
@@ -5012,86 +6086,134 @@ function saveAssistanceEntries() {
 }
 function uploadFamilyDocument(type) {
     return __awaiter(this, void 0, void 0, function () {
-        var family, inputId, file, status, fileObj, result, err_16;
+        var family,inputId,file,status,fileObj,result,updatedFamily,err;
+        return __generator(this,function(_a){
+            switch(_a.label){
+                case 0:
+                    family=appState.mevcut.find(function(x){return x.id===currentFamilyId;});
+                    if(!family) return [2 /*return*/];
+
+                    inputId=type==='assessment'?'family-assessment-pdf':'family-media-pdf';
+                    file=document.getElementById(inputId).files[0];
+                    status=document.getElementById('family-doc-upload-status');
+                    _a.label=1;
+                case 1:
+                    _a.trys.push([1,5,,6]);
+                    if(!file || !isPdfFile(file)) throw new Error('Lütfen PDF dosyası seçin.');
+                    return [4 /*yield*/,fileToServerObject(file)];
+                case 2:
+                    fileObj=_a.sent();
+                    if(!fileObj) throw new Error('PDF dosyası hazırlanamadı.');
+
+                    status.className='mt-3 text-xs p-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-200';
+                    status.innerText='PDF merkezi sisteme yükleniyor...';
+                    status.classList.remove('hidden');
+                    setCentralBusy('PDF Merkezi Sisteme Yükleniyor...');
+
+                    return [4 /*yield*/,gsUploadDocument(
+                        centralSessionToken,
+                        family.tc || '',
+                        family.ad_soyad || '',
+                        type,
+                        fileObj
+                    )];
+                case 3:
+                    result=_a.sent();
+                    applyCentralPayload(result);
+                    document.getElementById(inputId).value='';
+
+                    updatedFamily=appState.mevcut.find(function(x){
+                        return normalizeTC(x.tc)===normalizeTC(family.tc) ||
+                               normalizeName(x.ad_soyad)===normalizeName(family.ad_soyad);
+                    }) || family;
+
+                    renderFamilyDocuments(updatedFamily);
+                    status.className='mt-3 text-xs p-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200';
+                    status.innerText='PDF merkezi BELGELER kaydına eklendi.';
+                    clearCentralBusy();
+                    return [3 /*break*/,6];
+                case 4:
+                    return [3 /*break*/,6];
+                case 5:
+                    err=_a.sent();
+                    clearCentralBusy();
+                    status.className='mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
+                    status.innerText=serverFailure(err);
+                    status.classList.remove('hidden');
+                    return [3 /*break*/,6];
+                case 6:return [2 /*return*/];
+            }
+        });
+    });
+}
+
+function importAssistanceFromSheet() {
+    return __awaiter(this, arguments, void 0, function (showToast) {
+        var status, icon, result, err_17;
+        if (showToast === void 0) { showToast = true; }
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    family = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
-                    if (!family)
-                        return [2 /*return*/];
-                    inputId = type === 'assessment' ? 'family-assessment-pdf' : 'family-media-pdf';
-                    file = document.getElementById(inputId).files[0];
-                    status = document.getElementById('family-doc-upload-status');
+                    status = document.getElementById('assistance-import-status');
+                    icon = document.getElementById('assistance-sync-icon');
+                    if (icon) icon.classList.add('fa-spin');
+                    if (showToast) setCentralBusy('Yapılan Yardımlar Güncelleniyor...');
+                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-sky-50 text-sky-800 border border-sky-200';
+                    status.innerText = 'Merkezi veritabanındaki yardım kayıtları yenileniyor...';
+                    status.classList.remove('hidden');
                     _a.label = 1;
                 case 1:
-                    _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, fileToServerObject(file)];
+                    _a.trys.push([1, 3, 4, 5]);
+                    return [4 /*yield*/, gsImportAssistance(centralSessionToken)];
                 case 2:
-                    fileObj = _a.sent();
-                    if (!fileObj)
-                        throw new Error('Lütfen PDF dosyası seçin.');
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'PDF Google Drive’a yükleniyor...';
-                    status.classList.remove('hidden');
-                    setCentralBusy('PDF Google Drive’a Yükleniyor...');
-                    return [4 /*yield*/, gsUploadDocument(centralSessionToken, family.tc || '', family.ad_soyad || '', type, fileObj)];
-                case 3:
                     result = _a.sent();
-                    applyCentralPayload(result);
-                    document.getElementById(inputId).value = '';
-                    renderFamilyDocuments(family);
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200';
-                    status.innerText = 'PDF merkezi Drive klasörüne yüklendi.';
+                    if (!result || result.ok === false) throw new Error((result && result.error) || 'Yardım kayıtları yenilenemedi.');
+                    applyCentralPayload(result.data || result);
+                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-emerald-50 text-emerald-800 border border-emerald-200';
+                    status.innerText = result.message || 'Yardım kayıtları yenilendi.';
+                    return [3 /*break*/, 5];
+                case 3:
+                    err_17 = _a.sent();
+                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-rose-50 text-rose-800 border border-rose-200';
+                    status.innerText = serverFailure(err_17);
                     return [3 /*break*/, 5];
                 case 4:
-                    err_16 = _a.sent();
-                    clearCentralBusy();
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
-                    status.innerText = serverFailure(err_16);
-                    status.classList.remove('hidden');
-                    return [3 /*break*/, 5];
+                    if (icon) icon.classList.remove('fa-spin');
+                    if (showToast) clearCentralBusy();
+                    return [7 /*endfinally*/];
+                case 5: return [2 /*return*/];
+            }
+        });
+    });
+}
+function openSheetConfigModal() {
+    return __awaiter(this, void 0, void 0, function () {
+        var cfg, err_18, btn, label, loading;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    btn = document.getElementById('btn-integration-settings'); label = document.getElementById('integration-settings-label'); loading = document.getElementById('integration-settings-loading');
+                    if (btn) btn.disabled = true; if (label) label.classList.add('hidden'); if (loading) loading.classList.remove('hidden'); _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, 4, 5]); return [4 /*yield*/, gsGetConfig(centralSessionToken)];
+                case 2:
+                    cfg = _a.sent();
+                    document.getElementById('config-active-sheet-id').value = cfg.activeSpreadsheetId || ''; document.getElementById('config-active-sheet-name').value = cfg.activeSheetName || '';
+                    document.getElementById('config-red-sheet-id').value = cfg.redSpreadsheetId || ''; document.getElementById('config-red-sheet-name').value = cfg.redSheetName || '';
+                    document.getElementById('config-web-sheet-id').value = cfg.webSpreadsheetId || ''; document.getElementById('config-web-sheet-name').value = cfg.webSheetName || '';
+                    document.getElementById('config-field-sheet-id').value = cfg.fieldSpreadsheetId || ''; document.getElementById('config-field-sheet-name').value = cfg.fieldSheetName || '';
+                    document.getElementById('config-assistance-sheet-id').value = cfg.assistanceSpreadsheetId || ''; document.getElementById('config-assistance-sheet-name').value = cfg.assistanceSheetName || '';
+                    document.getElementById('config-upload-endpoint').value = 'Apps Script içinde merkezi'; document.getElementById('config-upload-endpoint').disabled = true;
+                    document.getElementById('config-help-folder').value = cfg.helpFolderId || ''; document.getElementById('config-assessment-folder').value = cfg.assessmentFolderId || ''; document.getElementById('config-media-folder').value = cfg.mediaFolderId || '';
+                    openModal('sheetConfigModal'); return [3 /*break*/, 5];
+                case 3: err_18 = _a.sent(); alert('Ayarlar alınamadı: ' + serverFailure(err_18)); return [3 /*break*/, 5];
+                case 4: if (btn) btn.disabled = false; if (label) label.classList.remove('hidden'); if (loading) loading.classList.add('hidden'); return [7 /*endfinally*/];
                 case 5: return [2 /*return*/];
             }
         });
     });
 }
 
-function openSheetConfigModal() {
-    return __awaiter(this, void 0, void 0, function () {
-        var cfg, err_18;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, gsGetConfig(centralSessionToken)];
-                case 1:
-                    cfg = _a.sent();
-                    document.getElementById('config-active-sheet-id').value = cfg.activeSpreadsheetId || '';
-                    document.getElementById('config-active-sheet-name').value = cfg.activeSheetName || '';
-                    document.getElementById('config-red-sheet-id').value = cfg.redSpreadsheetId || '';
-                    document.getElementById('config-red-sheet-name').value = cfg.redSheetName || '';
-                    document.getElementById('config-web-sheet-id').value = cfg.webSpreadsheetId || '';
-                    document.getElementById('config-web-sheet-name').value = cfg.webSheetName || '';
-                    document.getElementById('config-field-sheet-id').value = cfg.fieldSpreadsheetId || '';
-                    document.getElementById('config-field-sheet-name').value = cfg.fieldSheetName || '';
-                    document.getElementById('config-assistance-sheet-id').value = cfg.assistanceSpreadsheetId || '';
-                    document.getElementById('config-assistance-sheet-name').value = cfg.assistanceSheetName || '';
-                    document.getElementById('config-upload-endpoint').value = 'Apps Script içinde merkezi';
-                    document.getElementById('config-upload-endpoint').disabled = true;
-                    document.getElementById('config-help-folder').value = cfg.helpFolderId || '';
-                    document.getElementById('config-assessment-folder').value = cfg.assessmentFolderId || '';
-                    document.getElementById('config-media-folder').value = cfg.mediaFolderId || '';
-                    openModal('sheetConfigModal');
-                    return [3 /*break*/, 3];
-                case 2:
-                    err_18 = _a.sent();
-                    alert('Ayarlar alınamadı: ' + serverFailure(err_18));
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    });
-}
 function saveSheetConfig() {
     return __awaiter(this, void 0, void 0, function () {
         var cfg, err_19;
@@ -5157,10 +6279,22 @@ window.IYIBIS_SINGLE_SCRIPT_READY = true;
    şifre istemeden merkezi oturumu geri yükle. */
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(restorePersistentCentralSession_, 0);
+        setTimeout(function() {
+            Promise.resolve(restorePersistentCentralSession_()).finally(function() {
+                if (window.centralSessionToken && typeof preloadDriveStorageStatus_ === 'function') {
+                    preloadDriveStorageStatus_();
+                }
+            });
+        }, 0);
     });
 } else {
-    setTimeout(restorePersistentCentralSession_, 0);
+    setTimeout(function() {
+        Promise.resolve(restorePersistentCentralSession_()).finally(function() {
+            if (window.centralSessionToken && typeof preloadDriveStorageStatus_ === 'function') {
+                preloadDriveStorageStatus_();
+            }
+        });
+    }, 0);
 }
 
 
@@ -5183,5 +6317,223 @@ function goToIyibisHome(event) {
     <span class="iyibis-db-spinner"></span>
     <span id="iyibis-db-progress-text">Veritabanı işlemi sürüyor...</span>
 </div>
+
+<script id="iyibis-drive-storage-v42">
+var iyibisDriveStorageCache = null;
+var iyibisDriveStorageLoadingPromise = null;
+
+function formatStorageBytes_(bytes) {
+    var n = Number(bytes || 0);
+    if (!isFinite(n) || n < 0) n = 0;
+    var gb = n / (1024 * 1024 * 1024);
+    if (gb >= 1) return gb.toFixed(gb >= 10 ? 1 : 2).replace('.', ',') + ' GB';
+    var mb = n / (1024 * 1024);
+    return mb.toFixed(mb >= 10 ? 0 : 1).replace('.', ',') + ' MB';
+}
+
+function renderDriveStorageStatus_(result) {
+    if (!result) return;
+
+    var usedEl = document.getElementById('drive-storage-used');
+    var limitEl = document.getElementById('drive-storage-limit');
+    var pctEl = document.getElementById('drive-storage-percent');
+    var bar = document.getElementById('drive-storage-bar');
+    var msg = document.getElementById('drive-storage-message');
+    var updated = document.getElementById('drive-storage-updated');
+    var icon = document.getElementById('drive-storage-icon');
+
+    if (!usedEl || !limitEl || !pctEl || !bar || !msg || !icon) return;
+
+    var percent = Number(result.percent || 0);
+    usedEl.textContent = formatStorageBytes_(result.usedBytes);
+    limitEl.textContent = result.limitBytes > 0 ? formatStorageBytes_(result.limitBytes) : 'Sınırsız';
+    pctEl.textContent = percent.toFixed(1).replace('.0','').replace('.',',') + '%';
+    bar.style.width = Math.max(0, Math.min(100, percent)) + '%';
+
+    pctEl.className = 'text-2xl font-extrabold';
+    bar.className = 'h-full rounded-full transition-all duration-300';
+    icon.className = 'w-9 h-9 rounded-lg flex items-center justify-center shrink-0';
+
+    if (percent >= 85) {
+        pctEl.classList.add('text-red-600');
+        bar.classList.add('bg-red-500');
+        icon.classList.add('bg-red-50','text-red-600');
+        msg.className = 'mt-3 text-xs font-semibold text-red-600';
+        msg.textContent = 'Kritik: Depolama alanı %85’in üzerinde. Ücretli depolama planına geçişi geciktirmeyin.';
+    } else if (percent >= 70) {
+        pctEl.classList.add('text-amber-600');
+        bar.classList.add('bg-amber-500');
+        icon.classList.add('bg-amber-50','text-amber-600');
+        msg.className = 'mt-3 text-xs font-semibold text-amber-600';
+        msg.textContent = 'Uyarı: Depolama alanı %70’in üzerinde. Kapasite artırımı planlanmalı.';
+    } else {
+        pctEl.classList.add('text-emerald-600');
+        bar.classList.add('bg-emerald-500');
+        icon.classList.add('bg-emerald-50','text-emerald-600');
+        msg.className = 'mt-3 text-xs text-emerald-700';
+        msg.textContent = 'Depolama kapasitesi normal seviyede.';
+    }
+
+    if (updated && result.updatedAt) {
+        var dt = new Date(result.updatedAt);
+        updated.textContent = 'Son kontrol: ' + dt.toLocaleString('tr-TR');
+    }
+}
+
+async function requestDriveStorageStatus_() {
+    var result;
+    if (typeof window.iyibisServerCall === 'function') {
+        result = await window.iyibisServerCall('getDriveStorageStatus', centralSessionToken);
+    } else if (typeof serverCall === 'function') {
+        result = await serverCall('getDriveStorageStatus', centralSessionToken);
+    } else if (window.IYIBIS_API && typeof window.IYIBIS_API.call === 'function') {
+        result = await window.IYIBIS_API.call('getDriveStorageStatus', [centralSessionToken]);
+    } else {
+        throw new Error('Backend çağrı katmanı hazır değil.');
+    }
+
+    if (!result || result.ok === false) {
+        throw new Error((result && result.error) || 'Depolama bilgisi alınamadı.');
+    }
+
+    iyibisDriveStorageCache = result;
+    renderDriveStorageStatus_(result);
+    return result;
+}
+
+/* force=true yalnız kullanıcı Yenile butonuna bastığında kullanılır.
+   force=false ise mevcut cache varsa yeni backend çağrısı yapılmaz. */
+async function refreshDriveStorageStatus(force) {
+    var btn = document.getElementById('drive-storage-refresh-btn');
+    var label = document.getElementById('drive-storage-refresh-label');
+    var msg = document.getElementById('drive-storage-message');
+
+    if (!force && iyibisDriveStorageCache) {
+        renderDriveStorageStatus_(iyibisDriveStorageCache);
+        return iyibisDriveStorageCache;
+    }
+
+    if (iyibisDriveStorageLoadingPromise) {
+        return iyibisDriveStorageLoadingPromise;
+    }
+
+    if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-60','cursor-wait');
+    }
+    if (label) label.textContent = 'Yükleniyor...';
+    if (msg && !iyibisDriveStorageCache) {
+        msg.className = 'mt-3 text-xs text-slate-500';
+        msg.textContent = 'Depolama bilgisi hesaplanıyor...';
+    }
+
+    iyibisDriveStorageLoadingPromise = requestDriveStorageStatus_();
+
+    try {
+        return await iyibisDriveStorageLoadingPromise;
+    } catch (err) {
+        if (msg) {
+            msg.className = 'mt-3 text-xs font-semibold text-rose-600';
+            msg.textContent = 'Depolama bilgisi alınamadı: ' + (err && err.message ? err.message : String(err));
+        }
+        return null;
+    } finally {
+        iyibisDriveStorageLoadingPromise = null;
+        if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-60','cursor-wait');
+        }
+        if (label) label.textContent = 'Yenile';
+    }
+}
+
+/* Başarılı girişten hemen sonra arka planda bir kez hesapla.
+   Kart görünür olmak zorunda değildir; sonuç bellekte tutulur. */
+function preloadDriveStorageStatus_() {
+    if (!centralSessionToken || iyibisDriveStorageCache || iyibisDriveStorageLoadingPromise) return;
+    setTimeout(function() {
+        refreshDriveStorageStatus(false);
+    }, 250);
+}
+
+/* Ayarlar sekmesine geçildiğinde yalnız cache'i göster.
+   Giriş sonrası sorgu henüz bitmemişse onu bekler; yeni sorgu başlatmaz. */
+document.addEventListener('click', function(ev) {
+    var tabBtn = ev.target && ev.target.closest
+        ? ev.target.closest('[onclick*="tab-system"], [data-tab="settings"], [onclick*="settings"], [onclick*="ayar"]')
+        : null;
+
+    if (!tabBtn) return;
+
+    setTimeout(function() {
+        if (iyibisDriveStorageCache) {
+            renderDriveStorageStatus_(iyibisDriveStorageCache);
+        } else if (!iyibisDriveStorageLoadingPromise) {
+            refreshDriveStorageStatus(false);
+        }
+    }, 80);
+});
+</script>
+
+
+<script id="iyibis-mobile-nav-logout-v42">
+function setMobileTabMenuOpen_(open) {
+  var panel = document.getElementById('mobileTabMenuPanel');
+  var btn = document.getElementById('mobileTabMenuButton');
+  var icon = document.getElementById('mobileTabMenuIcon');
+  if (!panel || !btn) return;
+
+  panel.classList.toggle('hidden', !open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+  if (icon) {
+    icon.className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  }
+}
+
+function toggleMobileTabMenu() {
+  var panel = document.getElementById('mobileTabMenuPanel');
+  if (!panel) return;
+  setMobileTabMenuOpen_(panel.classList.contains('hidden'));
+}
+
+function closeMobileTabMenu() {
+  setMobileTabMenuOpen_(false);
+}
+
+document.addEventListener('click', function(ev) {
+  var panel = document.getElementById('mobileTabMenuPanel');
+  var btn = document.getElementById('mobileTabMenuButton');
+  if (!panel || panel.classList.contains('hidden')) return;
+  if (panel.contains(ev.target) || (btn && btn.contains(ev.target))) return;
+  panel.classList.add('hidden');
+});
+
+async function iyibisLogoutWithLoading(event) {
+  if (event) event.preventDefault();
+  var btn = document.getElementById('logoutBtn');
+  var label = document.getElementById('logoutBtnLabel');
+  if (!btn) return;
+
+  if (btn.dataset.busy === '1') return;
+  btn.dataset.busy = '1';
+  btn.disabled = true;
+  btn.classList.add('opacity-70','cursor-wait');
+
+  var oldHtml = label ? label.innerHTML : '';
+  if (label) label.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Yükleniyor...';
+
+  try {
+    await (async function() { lockApplication() })();
+  } catch (err) {
+    btn.disabled = false;
+    btn.dataset.busy = '0';
+    btn.classList.remove('opacity-70','cursor-wait');
+    if (label) label.innerHTML = oldHtml || 'Oturumu Kapat';
+    throw err;
+  }
+}
+</script>
+
 </body>
 </html>
