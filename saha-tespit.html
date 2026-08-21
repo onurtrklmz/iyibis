@@ -616,7 +616,7 @@ function toggleAppMenu() {
       </div>
 
       <div class="form-group">
-        <label>Mahalle * (Harf girip öneriye tıklayın veya Enter'a basın)</label>
+        <label>Mahalle * (İlk harfleri yazın; ilk öneri seçili gelir, Enter ile onaylayın)</label>
         <div class="autocomplete-wrapper">
           <input type="text" id="mahalleInput" name="mahalle" placeholder="Önce ilçe seçiniz..." autocomplete="off" readonly required>
           <ul id="suggestionsList" class="suggestions-list"></ul>
@@ -656,7 +656,7 @@ function toggleAppMenu() {
     <div class="grid">
       <div class="form-group">
         <label>Evde Yaşayan Toplam Kişi Sayısı (Hane Halkı)</label>
-        <input type="number" name="kisi_sayisi" id="kisi_sayisi" min="1" placeholder="Örn: 5" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+        <input type="text" name="kisi_sayisi" id="kisi_sayisi" inputmode="numeric" pattern="[0-9]*" placeholder="Örn: 5" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
@@ -1063,10 +1063,18 @@ function ilceMahalleBaglantisiniKur() {
             ilceDegisti();
     });
 }
+
+var kisiSayisiInput = document.getElementById('kisi_sayisi');
+if (kisiSayisiInput) {
+    kisiSayisiInput.addEventListener('input', function() {
+        this.value = String(this.value || '').replace(/\D/g, '');
+    });
+}
+
 var mahalleInput = document.getElementById('mahalleInput');
 var suggestionsList = document.getElementById('suggestionsList');
 mahalleInput.addEventListener('input', function () {
-    var val = this.value.toLocaleLowerCase('tr').trim();
+    var val = this.value.replace(/\s+Mah\.?$/i, '').toLocaleLowerCase('tr').trim();
     suggestionsList.innerHTML = "";
     seciliOneriIndex = -1;
     if (!val || aktifMahalleler.length === 0) {
@@ -1085,6 +1093,8 @@ mahalleInput.addEventListener('input', function () {
             suggestionsList.appendChild(li);
         });
         suggestionsList.style.display = "block";
+        seciliOneriIndex = 0;
+        vurgulaOneri(suggestionsList.querySelectorAll('li'));
     }
     else {
         suggestionsList.style.display = "none";
@@ -1129,9 +1139,11 @@ function vurgulaOneri(items) {
     });
 }
 function mahalleSec(mahalleAdi) {
-    mahalleInput.value = mahalleAdi;
+    var temizAd = String(mahalleAdi || '').replace(/\s+Mah\.?$/i, '').trim();
+    mahalleInput.value = temizAd ? temizAd + " Mah." : "";
     suggestionsList.innerHTML = "";
     suggestionsList.style.display = "none";
+    seciliOneriIndex = -1;
 }
 function konumAl() {
     var status = document.getElementById('gpsStatus');
@@ -1328,7 +1340,8 @@ function hazirlaPdfSablonu() {
     var notlar = document.getElementById('notlar').value || "-";
     var verilenler = document.getElementById('ziyarette_verilenler').value || "-";
     document.getElementById('pdfTarih').innerText = "Ziyaret / Tanzim Tarihi: " + formattedDate;
-    document.getElementById('pdfIlceMahalle').innerText = "".concat(ilce, " / ").concat(mahalle, " Mah.");
+    var pdfMahalle = String(mahalle || "-").replace(/\s+Mah\.?$/i, '').trim();
+    document.getElementById('pdfIlceMahalle').innerText = "".concat(ilce, " / ").concat(pdfMahalle, " Mah.");
     document.getElementById('pdfAdres').innerText = adres;
     document.getElementById('pdfKisiTel').innerText = yas ? "".concat(kisi, " (").concat(yas, " Ya\u015F)") : kisi;
     document.getElementById('pdfTcKimlik').innerText = "".concat(tc, " / Tel: ").concat(tel);
