@@ -512,7 +512,7 @@
 
 
 <style id="iyibis-active-horizontal-fit-v236">
-/* BETA — YALNIZ Aktif Aileler tablosunu yatayda sayfaya sığdırır.
+/* BETA — YALNIZ Onaylı Aileler tablosunu yatayda sayfaya sığdırır.
    Satır yüksekliği, dikey davranış, butonlar ve diğer sekmeler değiştirilmez. */
 #tab-mevcut .overflow-x-auto,
 #tab-mevcut .table-container {
@@ -879,7 +879,7 @@
     overflow-x: hidden !important;
   }
 
-  /* Aktif Aileler ve Web Başvuruları: tablo kendi içinde yatay kaysın */
+  /* Onaylı Aileler ve Web Başvuruları: tablo kendi içinde yatay kaysın */
   #tab-mevcut .table-container,
   #tab-mevcut .overflow-x-auto,
   #tab-web .iyibis-scroll-list,
@@ -2022,7 +2022,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <div id="mobileTabMenuPanel" class="hidden">
 <button type="button" onclick="switchTab('tab-mevcut'); closeMobileTabMenu()">
                     <i class="fa-solid fa-users text-emerald-400"></i>
-                    <span>Aktif Aileler</span>
+                    <span>Onaylı Aileler</span>
                     <span data-counter="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
                 </button>
 <button type="button" onclick="switchTab('tab-red'); closeMobileTabMenu()">
@@ -2053,7 +2053,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <div class="flex space-x-1 sm:space-x-4 border-t border-slate-800/80 pt-1 overflow-x-auto custom-scroll" id="desktopTabNav">
                 <button onclick="switchTab('tab-mevcut')" id="nav-tab-mevcut" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-users text-emerald-400"></i>
-                    <span>Aktif Aileler</span>
+                    <span>Onaylı Aileler</span>
                     <span data-counter="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
                 </button>
                 <button onclick="switchTab('tab-red')" id="nav-tab-red" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
@@ -2086,14 +2086,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     <!-- MAIN CONTENT CONTAINER -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <!-- ================= TAB 1: AKTİF AİLELER ================= -->
+        <!-- ================= TAB 1: ONAYLI AİLELER ================= -->
         <div id="tab-mevcut" class="tab-content">
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/80 mb-4">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-database text-emerald-600"></i>Aktif Aileler Veri Kaynağı
+                            <i class="fa-solid fa-database text-emerald-600"></i>Onaylı Aileler Veri Kaynağı
                         </h3>
                         <p class="text-xs text-slate-500 mt-1">Aktif aile listesini ayrı Google E-Tablo dosyasından yeniler.</p>
                     </div>
@@ -2103,7 +2103,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </button>
                     <button id="btn-fetch-active-sheet" onclick="fetchActiveFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Aktif Aileleri Güncelle
+                        <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Onaylı Aileleri Güncelle
                     </button>
                     <button id="btn-refresh-assistance" onclick="importAssistanceFromSheet()"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -2259,7 +2259,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         <div id="tab-web" class="tab-content hidden">
             <div class="bg-sky-50 border border-sky-200 text-sky-900 rounded-xl p-3 mb-4 text-xs">
                 <div class="font-bold mb-1">Başvuru Akışı</div>
-                <div>Web başvurusu için üç karar verilebilir: <b>Doğrudan Onayla</b> ile kişi Aktif Ailelere alınır; <b>Sahaya Al</b> ile Saha Ziyareti kuyruğuna gönderilir; <b>Ret</b> ile Ret Listesine taşınır. Her işlemde hedef kayıt başarıyla oluşturulduktan sonra Web Başvuruları tablosundaki kaynak satır fiziksel olarak silinir.</div>
+                <div>Web başvurusu için üç karar verilebilir: <b>Doğrudan Onayla</b> ile kişi Onaylı Ailelere alınır; <b>Sahaya Al</b> ile Saha Ziyareti kuyruğuna gönderilir; <b>Ret</b> ile Ret Listesine taşınır. Her işlemde hedef kayıt başarıyla oluşturulduktan sonra Web Başvuruları tablosundaki kaynak satır fiziksel olarak silinir.</div>
             </div>
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/80 mb-4">
@@ -2395,7 +2395,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                     <div>
                         <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                            Aktif Aile <span class="text-slate-400 font-medium">/ Liste Dışı</span>
+                            Onaylı Aile <span class="text-slate-400 font-medium">/ Liste Dışı</span>
                         </p>
                         <h3 class="text-2xl font-extrabold mt-1">
                             <span id="stat-total-active" class="text-slate-900">0</span>
@@ -2563,7 +2563,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             <span id="download-all-label"><i class="fa-solid fa-file-excel mr-1.5"></i>Tüm Tabloların Güncel Halini İndir</span>
                             <span id="download-all-loading" class="hidden inline-flex items-center gap-1.5"><span class="inline-block w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>Hazırlanıyor...</span>
                         </button>
-                        <button onclick="downloadSourceTable('active')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-house mr-1.5 text-emerald-400"></i>Aktif Aileler</button>
+                        <button onclick="downloadSourceTable('active')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-house mr-1.5 text-emerald-400"></i>Onaylı Aileler</button>
                         <button onclick="downloadSourceTable('red')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-ban mr-1.5 text-rose-400"></i>Ret Listesi</button>
                         <button onclick="downloadSourceTable('web')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-inbox mr-1.5 text-sky-400"></i>Web Başvuruları</button>
                         <button onclick="downloadSourceTable('field')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-clipboard-check mr-1.5 text-amber-400"></i>Saha Tespit</button>
@@ -2608,13 +2608,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <div>İYİBİS Sistem Veritabanı operasyonel ana kaynaktır. Aşağıdaki harici Google E-Tablolar ham kaynak / replika / yedek olarak korunur; panel doğrudan bu tablolardan çalışmaz.</div>
                 </div>
                 <div class="p-3 rounded-lg bg-emerald-50 border border-emerald-200 space-y-3">
-                    <div class="font-bold text-emerald-900">Aktif Aileler - Ayrı Google E-Tablo</div>
+                    <div class="font-bold text-emerald-900">Onaylı Aileler - Ayrı Google E-Tablo</div>
                     <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Aktif Aileler Spreadsheet ID / URL</label>
+                        <label class="block font-semibold text-slate-700 mb-1">Onaylı Aileler Spreadsheet ID / URL</label>
                         <input type="text" id="config-active-sheet-id" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs font-mono">
                     </div>
                     <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Aktif Aileler Sekme Adı</label>
+                        <label class="block font-semibold text-slate-700 mb-1">Onaylı Aileler Sekme Adı</label>
                         <input type="text" id="config-active-sheet-name" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs">
                     </div>
                 </div>
@@ -2705,7 +2705,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                     <div>
                         <h3 class="text-base font-bold">Yeni Aile Ekle</h3>
-                        <p class="text-xs text-slate-400">Kayıt doğrudan Aktif Aileler Google E-Tablosuna yazılır.</p>
+                        <p class="text-xs text-slate-400">Kayıt doğrudan Onaylı Aileler Google E-Tablosuna yazılır.</p>
                     </div>
                 </div>
                 <button type="button" onclick="closeModal('newFamilyModal')" class="text-slate-400 hover:text-white p-2 text-lg">
@@ -2716,7 +2716,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             <div class="p-6 overflow-y-auto custom-scroll text-xs space-y-5 min-h-0">
                 <div class="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900">
                     <i class="fa-solid fa-circle-info mr-1"></i>
-                    Ad Soyad ve TC Kimlik No yeni kaydın kimliğini oluşturur. Aynı TC aktif listede varsa ikinci kayıt oluşturulmaz.
+                    Ad Soyad ve TC Kimlik No yeni kaydın kimliğini oluşturur. Aynı TC onaylı listede varsa ikinci kayıt oluşturulmaz.
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
@@ -2808,7 +2808,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 </button>
                 <button id="new-family-save-btn" type="button" onclick="saveNewFamily()"
                         class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs shadow-sm">
-                    <i class="fa-solid fa-floppy-disk mr-1.5"></i>Aileyi Aktif Listeye Kaydet
+                    <i class="fa-solid fa-floppy-disk mr-1.5"></i>Aileyi Onaylı Listeye Kaydet
                 </button>
             </div>
         </div>
@@ -3140,7 +3140,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-    <!-- AKTİF AİLE İŞLEMLER AÇILIR MENÜSÜ -->
+    <!-- ONAYLI AİLE İŞLEMLER AÇILIR MENÜSÜ -->
     <div id="familyActionMenu"
          class="hidden fixed z-[120] w-56 bg-white rounded-xl shadow-2xl border border-slate-200 py-1.5 text-xs overflow-hidden">
         <button id="fam-action-info" type="button"
@@ -3223,7 +3223,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             </div>
             <div class="bg-slate-50 p-4 border-t border-slate-200 flex justify-end gap-2">
                 <button type="button" onclick="finalizeSahaDecision('red')" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-bold text-xs"><i class="fa-solid fa-xmark mr-1"></i>Ret</button>
-                <button type="button" onclick="finalizeSahaDecision('active')" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs"><i class="fa-solid fa-check mr-1"></i>Onayla ve Aktif Aileye Al</button>
+                <button type="button" onclick="finalizeSahaDecision('active')" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs"><i class="fa-solid fa-check mr-1"></i>Onayla ve Onaylı Aileye Al</button>
             </div>
         </div>
     </div>
@@ -3812,7 +3812,7 @@ function openFamilyActionMenu(event, id) {
         };
     }
     if (isDelisted) {
-        statusText.innerText = 'Aktif Listeye Al';
+        statusText.innerText = 'Onaylı Listeye Al';
         statusBtn.className = 'w-full flex items-center text-left px-3.5 py-2.5 hover:bg-emerald-50 text-emerald-700 font-semibold border-t border-slate-100';
         statusIcon.className = 'fa-solid fa-user-check w-6 text-emerald-600';
         statusBtn.onclick = function () {
@@ -3892,7 +3892,7 @@ function renderRedTable() {
     list.forEach(function (item) {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">".concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-slate-500 truncate max-w-xs\">").concat(item.adres || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><span class=\"font-semibold text-slate-700\">").concat(item.bolge || '-', "</span></td>\n                    <td class=\"py-3 px-3\"><div>").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\">Gelir: ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-semibold text-slate-800\">").concat(item.cocuk_sayisi || '-', "</div><div class=\"text-[10px] text-slate-500\">").concat(item.cocuk_detay || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs text-[11px] text-slate-700\">").concat(item.teslim_edilen || getFieldVisitSupportText_(item) || item.talep || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <div class=\"flex flex-col items-end gap-1.5\">\n                            <span class=\"badge-red px-2 py-0.5 rounded text-[11px] font-bold\">RET ALDI</span>\n                            <button onclick=\"moveRedToActive('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-arrow-rotate-left mr-1\"></i>Aktif Listeye Al\n                            </button>\n                        </div>\n                    </td>\n                ");
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">".concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-slate-500 truncate max-w-xs\">").concat(item.adres || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><span class=\"font-semibold text-slate-700\">").concat(item.bolge || '-', "</span></td>\n                    <td class=\"py-3 px-3\"><div>").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\">Gelir: ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-semibold text-slate-800\">").concat(item.cocuk_sayisi || '-', "</div><div class=\"text-[10px] text-slate-500\">").concat(item.cocuk_detay || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs text-[11px] text-slate-700\">").concat(item.teslim_edilen || getFieldVisitSupportText_(item) || item.talep || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <div class=\"flex flex-col items-end gap-1.5\">\n                            <span class=\"badge-red px-2 py-0.5 rounded text-[11px] font-bold\">RET ALDI</span>\n                            <button onclick=\"moveRedToActive('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-arrow-rotate-left mr-1\"></i>Onaylı Listeye Al\n                            </button>\n                        </div>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
@@ -4083,7 +4083,7 @@ function moveActiveToRed(id) {
     if (!item)
         return;
 
-    if (!confirm((item.ad_soyad || 'Bu aileyi') + ' Aktif Aileler listesinden çıkarıp Ret Listesine taşımak istediğinize emin misiniz?'))
+    if (!confirm((item.ad_soyad || 'Bu aileyi') + ' Onaylı Aileler listesinden çıkarıp Ret Listesine taşımak istediğinize emin misiniz?'))
         return;
 
     setCentralBusy('Aile Ret Listesine Taşınıyor...');
@@ -4565,7 +4565,7 @@ function fetchActiveFamiliesFromExternalSheet() {
                     renderDashboardStats();
                     renderBirthdayList();
                     if (showToast)
-                        alert("".concat(appState.mevcut.length, " aktif aile kayd\u0131 yenilendi."));
+                        alert("".concat(appState.mevcut.length, " onaylı aile kayd\u0131 yenilendi."));
                     return [3 /*break*/, 5];
                 case 3:
                     err_3 = _a.sent();
@@ -4842,7 +4842,7 @@ function finalizeSahaDecision(destination) {
                         return [2 /*return*/];
                     status = document.getElementById('saha-final-status').value;
                     sydvOpinion = getSelectedSahaSydvOpinion();
-                    setCentralBusy(destination === 'active' ? 'Aile Aktif Listeye Taşınıyor...' : 'Aile Ret Listesine Taşınıyor...');
+                    setCentralBusy(destination === 'active' ? 'Aile Onaylı Listeye Taşınıyor...' : 'Aile Ret Listesine Taşınıyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -5067,7 +5067,7 @@ function viewFamilyDetail(id) {
         detailDelistBtn.classList.toggle('bg-emerald-600', isDelisted_1);
         detailDelistBtn.classList.toggle('hover:bg-emerald-700', isDelisted_1);
         detailDelistBtn.innerHTML = isDelisted_1
-            ? '<i class="fa-solid fa-user-check mr-1.5"></i>Aktif Listeye Al'
+            ? '<i class="fa-solid fa-user-check mr-1.5"></i>Onaylı Listeye Al'
             : '<i class="fa-solid fa-user-slash mr-1.5"></i>Liste Dışı Bırak';
         detailDelistBtn.onclick = function () {
             closeModal('detailModal');
@@ -5147,9 +5147,9 @@ function saveNewFamily() {
                         return [2 /*return*/, alert('Metrik puanı 0 veya daha büyük bir sayı olmalıdır.')];
 
                     if (appState.mevcut.some(function(x) { return normalizeTC(x.tc) === normalizeTC(data.tc); }))
-                        return [2 /*return*/, alert('Bu TC Kimlik No ile Aktif Aileler listesinde zaten bir kayıt bulunuyor.')];
+                        return [2 /*return*/, alert('Bu TC Kimlik No ile Onaylı Aileler listesinde zaten bir kayıt bulunuyor.')];
 
-                    if (!confirm(data.name + ' adlı aileyi Aktif Aileler listesine eklemek istediğinize emin misiniz?'))
+                    if (!confirm(data.name + ' adlı aileyi Onaylı Aileler listesine eklemek istediğinize emin misiniz?'))
                         return [2 /*return*/];
 
                     btn = document.getElementById('new-family-save-btn');
@@ -5157,7 +5157,7 @@ function saveNewFamily() {
                         btn.disabled = true;
                         btn.classList.add('opacity-60');
                     }
-                    setCentralBusy('Yeni Aile Aktif Listeye Kaydediliyor...');
+                    setCentralBusy('Yeni Aile Onaylı Listeye Kaydediliyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, 4, 5]);
@@ -5166,7 +5166,7 @@ function saveNewFamily() {
                     payload = _a.sent();
                     applyCentralPayload(payload);
                     closeModal('newFamilyModal');
-                    alert('Yeni aile Aktif Aileler listesine ve Google E-Tabloya kaydedildi.');
+                    alert('Yeni aile Onaylı Aileler listesine ve Google E-Tabloya kaydedildi.');
                     return [3 /*break*/, 5];
                 case 3:
                     err = _a.sent();
@@ -6102,8 +6102,8 @@ function processWebApplication(index, destination) {
     var item = appState.web[index];
     if (!item) return;
     var sydvOpinion = getSelectedSydvOpinion();
-    var text = destination === 'active' ? 'doğrudan aktif aile listesine almak' : (destination === 'field' ? 'saha ziyareti sürecine almak' : 'ret listesine almak');
-    var targetLabel = destination === 'active' ? 'DOĞRUDAN ONAY → AKTİF AİLELER' : (destination === 'field' ? 'SAHA → SAHA ZİYARETİ' : 'RET → RET LİSTESİ');
+    var text = destination === 'active' ? 'doğrudan onaylı aile listesine almak' : (destination === 'field' ? 'saha ziyareti sürecine almak' : 'ret listesine almak');
+    var targetLabel = destination === 'active' ? 'DOĞRUDAN ONAY → ONAYLI AİLELER' : (destination === 'field' ? 'SAHA → SAHA ZİYARETİ' : 'RET → RET LİSTESİ');
     var message = (item.ad_soyad || 'Bu başvuruyu') + ' ' + text + ' istediğinize emin misiniz?\\n\\nİşlem: ' + targetLabel + '\\nSYDV Görüşü: ' + sydvOpinionLabel(sydvOpinion);
     if (!confirm(message)) return;
     setCentralBusy('Başvuru İşleniyor...');
@@ -6127,9 +6127,9 @@ function moveRedToActive(id) {
                     item = appState.red.find(function (x) { return x.id === id; });
                     if (!item)
                         return [2 /*return*/];
-                    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " aktif listeye almak istedi\u011Finize emin misiniz?")))
+                    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " onaylı listeye almak istedi\u011Finize emin misiniz?")))
                         return [2 /*return*/];
-                    setCentralBusy('Aile Aktif Listeye Alınıyor...');
+                    setCentralBusy('Aile Onaylı Listeye Alınıyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
