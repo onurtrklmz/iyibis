@@ -5524,7 +5524,7 @@ function expireCentralSessionForIdle_() {
 
     var error = document.getElementById('accessError');
     if (error) {
-        error.innerText = '15 dakika işlem yapılmadığı için oturum kapatıldı. Yeniden giriş yapın.';
+        error.innerText = 'Bu sekmede 15 dakika boyunca aktivite olmadığı için otomatik çıkış yapıldı. Devam etmek için yeniden giriş yapın.';
         error.className = 'text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3';
         error.classList.remove('hidden');
     }
