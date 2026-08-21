@@ -78,6 +78,21 @@
       border-color: #0284c7;
       box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
     }
+    .native-date-box input[type="text"] {
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      width: 100%;
+      outline: none;
+      background: #ffffff;
+      color: #0f172a;
+      box-sizing: border-box;
+    }
+    .native-date-box input[type="text"]:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
 
 
     /* Malzeme Tablosu */
@@ -455,6 +470,77 @@ body {
 }
 </style>
 
+<style id="iyibis-segmented-birthdate">
+
+    .segmented-date-input {
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0f172a;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+      cursor: text;
+    }
+    .segmented-date-input:focus-within {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+    .date-segment {
+      border: 0 !important;
+      outline: 0 !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #0f172a;
+      min-width: 0;
+      width: auto !important;
+      caret-color: transparent;
+    }
+    .date-segment::placeholder {
+      color: #64748b;
+      opacity: 1;
+    }
+    .date-day, .date-month { flex: 0 0 2.6ch; }
+    .date-year { flex: 0 0 4.8ch; }
+    .date-separator {
+      color: #64748b;
+      font-weight: 700;
+      padding: 0 2px;
+      user-select: none;
+    }
+    .date-segment.segment-active {
+      background: #dbeafe !important;
+      color: #1d4ed8 !important;
+      border-radius: 4px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .segmented-date-input {
+        background:#17191b !important;
+        border-color:#374151 !important;
+        color:#e5e7eb !important;
+      }
+      .date-segment {
+        color:#e5e7eb !important;
+      }
+      .date-segment::placeholder {
+        color:#9ca3af !important;
+      }
+      .date-separator { color:#9ca3af !important; }
+      .date-segment.segment-active {
+        background:#1e3a5f !important;
+        color:#bfdbfe !important;
+      }
+    }
+
+</style>
 </head>
 <body>
 
@@ -524,9 +610,20 @@ body {
           <div class="form-group">
             <label>Doğum Tarihi</label>
             <div class="native-date-box">
-              <input type="date" id="faydalanici_dogum" name="faydalanici_dogum"
-                     onclick="this.showPicker && this.showPicker()"
-                     aria-label="Doğum Tarihi">
+              <div class="segmented-date-input" id="faydalanici_dogum_ui" role="group" aria-label="Doğum Tarihi">
+                <input type="text" id="faydalanici_dogum_gun" class="date-segment date-day"
+                       inputmode="numeric" maxlength="2" placeholder="GG"
+                       aria-label="Doğum günü" autocomplete="off">
+                <span class="date-separator">.</span>
+                <input type="text" id="faydalanici_dogum_ay" class="date-segment date-month"
+                       inputmode="numeric" maxlength="2" placeholder="AA"
+                       aria-label="Doğum ayı" autocomplete="off">
+                <span class="date-separator">.</span>
+                <input type="text" id="faydalanici_dogum_yil" class="date-segment date-year"
+                       inputmode="numeric" maxlength="4" placeholder="YYYY"
+                       aria-label="Doğum yılı" autocomplete="off">
+              </div>
+              <input type="hidden" id="faydalanici_dogum" name="faydalanici_dogum">
             </div>
           </div>
 
@@ -636,6 +733,75 @@ body {
         }
       }
       input.value = formatted;
+    }
+
+
+    function syncBirthDateHidden_() {
+      const dd = (document.getElementById('faydalanici_dogum_gun')?.value || '').padStart(2, '0');
+      const mm = (document.getElementById('faydalanici_dogum_ay')?.value || '').padStart(2, '0');
+      const yyyy = (document.getElementById('faydalanici_dogum_yil')?.value || '');
+      const hidden = document.getElementById('faydalanici_dogum');
+      if (!hidden) return;
+
+      const d = Number(dd), m = Number(mm), y = Number(yyyy);
+      const complete = dd.length === 2 && mm.length === 2 && yyyy.length === 4 &&
+        d >= 1 && d <= 31 && m >= 1 && m <= 12 && y >= 1900 && y <= 2100;
+
+      hidden.value = complete ? `${dd}.${mm}.${yyyy}` : '';
+    }
+
+    function setupSegmentedBirthDate_() {
+      const ids = ['faydalanici_dogum_gun','faydalanici_dogum_ay','faydalanici_dogum_yil'];
+      const max = [2,2,4];
+      const parts = ids.map(id => document.getElementById(id));
+
+      parts.forEach((el, index) => {
+        if (!el) return;
+
+        function activate() {
+          parts.forEach(x => x && x.classList.remove('segment-active'));
+          el.classList.add('segment-active');
+          requestAnimationFrame(() => el.select());
+        }
+
+        el.addEventListener('focus', activate);
+        el.addEventListener('click', function(ev) {
+          ev.preventDefault();
+          activate();
+        });
+
+        el.addEventListener('input', function() {
+          el.value = el.value.replace(/\D/g, '').slice(0, max[index]);
+          syncBirthDateHidden_();
+          if (el.value.length === max[index] && index < parts.length - 1) {
+            parts[index + 1].focus();
+          }
+        });
+
+        el.addEventListener('keydown', function(ev) {
+          if (ev.key === 'ArrowRight' && index < parts.length - 1) {
+            ev.preventDefault();
+            parts[index + 1].focus();
+          } else if (ev.key === 'ArrowLeft' && index > 0) {
+            ev.preventDefault();
+            parts[index - 1].focus();
+          } else if (ev.key === 'Backspace' && el.value === '' && index > 0) {
+            ev.preventDefault();
+            parts[index - 1].focus();
+          } else if (ev.key === '.' || ev.key === '/' || ev.key === '-') {
+            ev.preventDefault();
+            if (index < parts.length - 1) parts[index + 1].focus();
+          }
+        });
+
+        el.addEventListener('blur', function() {
+          setTimeout(() => {
+            if (!parts.some(x => x === document.activeElement)) {
+              parts.forEach(x => x && x.classList.remove('segment-active'));
+            }
+          }, 0);
+        });
+      });
     }
 
     function openDatePicker(textInputId, pickerInputId) {
@@ -916,6 +1082,7 @@ body {
     window.addEventListener('DOMContentLoaded', () => {
       initSingleRow();
       initTodayDate();
+      setupSegmentedBirthDate_();
       canvases.forEach(id => setupCanvas(id));
     });
 

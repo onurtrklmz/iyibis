@@ -4159,8 +4159,8 @@ function renderAssistanceHistory(item) {
                             ${e.marketValue ? ' • Rayiç: ' + escapeHtml(e.marketValue) : ''}
                         </div>
                     </div>
-                    ${e.pdfUrl
-                        ? `<a href="${escapeAttr(e.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="text-sky-700 font-semibold whitespace-nowrap"><i class="fa-solid fa-file-pdf mr-1"></i>Tutanak</a>`
+                    ${e.pdfFileId
+                        ? `<button type="button" data-secure-pdf-id="${escapeAttr(e.pdfFileId)}" class="text-sky-700 font-semibold whitespace-nowrap"><i class="fa-solid fa-file-pdf mr-1"></i>Tutanak</button>`
                         : (e.pdfName
                             ? `<span class="text-slate-500 pdf-name whitespace-nowrap"><i class="fa-solid fa-file-pdf mr-1"></i>${escapeHtml(e.pdfName)}</span>`
                             : '')}
@@ -4221,6 +4221,76 @@ function uploadPdfToDrive() {
     });
 }
 
+function openSecurePdfByFileId(fileId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    if (!fileId) {
+        alert('PDF dosya kimliği bulunamadı.');
+        return false;
+    }
+
+    var pdfWindow = window.open('', '_blank');
+
+    if (pdfWindow) {
+        try {
+            pdfWindow.document.title = 'PDF hazırlanıyor...';
+            pdfWindow.document.body.innerHTML =
+                '<div style="font-family:Arial,sans-serif;padding:24px">PDF güvenli bağlantısı hazırlanıyor...</div>';
+        } catch (_) {}
+    }
+
+    setCentralBusy('PDF Güvenli Bağlantısı Hazırlanıyor...');
+
+    gsGetFreshSecurePdfUrl(centralSessionToken, fileId)
+        .then(function(result) {
+            clearCentralBusy();
+
+            if (!result || result.ok === false || !result.url) {
+                throw new Error((result && result.error) || 'PDF bağlantısı oluşturulamadı.');
+            }
+
+            if (pdfWindow) {
+                pdfWindow.location.replace(result.url);
+            } else {
+                window.open(result.url, '_blank', 'noopener');
+            }
+        })
+        .catch(function(err) {
+            clearCentralBusy();
+            if (pdfWindow) {
+                try { pdfWindow.close(); } catch (_) {}
+            }
+            alert('PDF açılamadı: ' + serverFailure(err));
+        });
+
+    return false;
+}
+
+function setupSecurePdfClickHandler_() {
+    if (window.__iyibisSecurePdfClickReady) return;
+    window.__iyibisSecurePdfClickReady = true;
+
+    document.addEventListener('click', function(event) {
+        var target = event.target && event.target.closest
+            ? event.target.closest('[data-secure-pdf-id]')
+            : null;
+
+        if (!target) return;
+
+        var fileId = target.getAttribute('data-secure-pdf-id') || '';
+        openSecurePdfByFileId(fileId, event);
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupSecurePdfClickHandler_);
+} else {
+    setupSecurePdfClickHandler_();
+}
+
 function renderFamilyDocuments(family) {
     var container=document.getElementById('family-document-list');
     if(!container) return;
@@ -4235,13 +4305,12 @@ function renderFamilyDocuments(family) {
     keys.forEach(function(key){
         (workflowState.documents[key] || []).forEach(function(d){
             var type=String(d.type || '').trim().toLowerCase();
-            var sig=[type,d.fileId || '',d.url || '',d.name || ''].join('|');
+            var sig=[type,d.fileId || '',d.name || ''].join('|');
             if(seen[sig]) return;
             seen[sig]=true;
             docs.push({
                 type:type,
                 name:d.name || '',
-                url:d.url || '',
                 fileId:d.fileId || '',
                 at:d.at || '',
                 by:d.by || ''
@@ -4250,7 +4319,7 @@ function renderFamilyDocuments(family) {
     });
 
     function docsOf(type){
-        return docs.filter(function(d){return d.type===type && d.url;});
+        return docs.filter(function(d){return d.type===type && d.fileId;});
     }
 
     var assessmentDocs=docsOf('assessment');
@@ -4279,9 +4348,9 @@ function renderFamilyDocuments(family) {
                     '<div class="font-semibold text-slate-800"><i class="'+icon+' mr-1.5 text-emerald-600"></i>'+escapeHtml(title)+(items.length>1?' '+(index+1):'')+'</div>'+
                     (d.name?'<div class="text-[11px] text-slate-500 truncate mt-1">'+escapeHtml(d.name)+'</div>':'')+
                   '</div>'+
-                  '<a href="'+escapeAttr(d.url)+'" target="_blank" rel="noopener noreferrer" title="Güvenli PDF köprüsü üzerinden aç" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold">'+
+                  '<button type="button" data-secure-pdf-id="'+escapeAttr(d.fileId)+'" title="PDF için yeni güvenli bağlantı oluştur" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold">'+
                     '<i class="fa-solid fa-file-pdf"></i>PDF Aç'+
-                  '</a>'+
+                  '</button>'+
                 '</div>'+
               '</div>';
         }).join('');
@@ -4302,14 +4371,15 @@ function renderFamilyDocuments(family) {
     ));
 
     var other=docs.filter(function(d){
-        return d.type!=='assessment' && d.type!=='media' && d.url;
+        return d.type!=='assessment' && d.type!=='media' && d.fileId;
     });
+
     other.forEach(function(d){
         htmlParts.push(
           '<div class="p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between gap-3">'+
             '<div class="min-w-0"><div class="font-semibold text-slate-700">Diğer Belge</div>'+
             (d.name?'<div class="text-[11px] text-slate-500 truncate">'+escapeHtml(d.name)+'</div>':'')+'</div>'+
-            '<a href="'+escapeAttr(d.url)+'" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold"><i class="fa-solid fa-file-pdf mr-1"></i>PDF Aç</a>'+
+            '<button type="button" data-secure-pdf-id="'+escapeAttr(d.fileId)+'" class="shrink-0 px-3 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-semibold"><i class="fa-solid fa-file-pdf mr-1"></i>PDF Aç</button>'+
           '</div>'
         );
     });
@@ -4532,7 +4602,7 @@ function renderSahaTable() {
         var hasReport = !!(x.saha_raporu || '').trim();
         var evaluated = x.asama === 'DEĞERLENDİRMEDE';
         var canDecide = x.asama === 'DEĞERLENDİRMEDE' || x.asama === 'SAHA YAPILACAK';
-        var pdfHtml = x.saha_pdf_url ? '<a href="' + escapeHtml(x.saha_pdf_url) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="mt-1.5 inline-flex items-center gap-1 text-rose-700 hover:text-rose-900 font-bold"><i class="fa-solid fa-file-pdf"></i>PDF\'yi Aç</a>' : '';
+        var pdfHtml = x.saha_pdf_file_id ? '<button type="button" data-secure-pdf-id="' + escapeAttr(x.saha_pdf_file_id) + '" class="mt-1.5 inline-flex items-center gap-1 text-rose-700 hover:text-rose-900 font-bold"><i class="fa-solid fa-file-pdf"></i>PDF\'yi Aç</button>' : '';
         var tr = document.createElement('tr');
         tr.innerHTML = '<td class="py-3 px-3"><div class="font-bold">' + escapeHtml(x.ad_soyad || '-') + '</div><div class="text-[10px] text-cyan-700 font-mono">' + escapeHtml(x.application_id || x.id || '-') + '</div><div class="text-[11px] font-mono text-slate-500">' + escapeHtml(x.tc || '-') + '</div></td>' +
             '<td class="py-3 px-3"><div>' + escapeHtml(x.telefon || '-') + '</div><div class="text-[11px] text-emerald-700">' + escapeHtml(x.ilce || '-') + '</div></td>' +
@@ -4610,8 +4680,16 @@ function openSahaDecision(id) {
         : 'Saha Tespit Formu henüz sisteme gelmedi. Form zorunlu değildir; mevcut başvuru ve SYDV bilgileriyle değerlendirme yapılabilir.';
     var pdfLink = document.getElementById('saha-modal-pdf-link');
     if (pdfLink) {
-        if (item.saha_pdf_url) { pdfLink.href = item.saha_pdf_url; pdfLink.classList.remove('hidden'); }
-        else { pdfLink.href = '#'; pdfLink.classList.add('hidden'); }
+        if (item.saha_pdf_file_id) {
+            pdfLink.href = '#';
+            pdfLink.setAttribute('data-secure-pdf-id', item.saha_pdf_file_id);
+            pdfLink.classList.remove('hidden');
+        }
+        else {
+            pdfLink.href = '#';
+            pdfLink.removeAttribute('data-secure-pdf-id');
+            pdfLink.classList.add('hidden');
+        }
     }
 
     var photoArea = document.getElementById('saha-modal-photo-area');
@@ -5423,6 +5501,10 @@ function gsUploadDocument(token, tc, name, type, fileObj) {
     return serverCall('uploadFamilyDocumentServer', token, tc, name, type, fileObj);
 }
 
+function gsGetFreshSecurePdfUrl(token, fileId) {
+    return serverCall('getFreshSecurePdfUrlServer', token, fileId);
+}
+
 function gsImportAssistance(token) {
     return serverCall('importAssistanceServer', token);
 }
@@ -5566,7 +5648,8 @@ function mapCentralAssistanceToWorkflow(payload) {
             date: a.yardim_tarihi || '',
             content: a.yardim_icerigi || '',
             marketValue: a.rayic_bedel || '',
-            pdfUrl: a.tutanak_url || '',
+            pdfUrl: '',
+            pdfFileId: a.tutanak_file_id || '',
             pdfName: a.tutanak_adi || '',
             source: a.kaynak || 'Merkezi Sistem',
             createdAt: a.kayit_zamani || '',
@@ -5623,7 +5706,7 @@ function mapCentralAssistanceToWorkflow(payload) {
         var doc = {
             type: String(d.belge_turu || '').trim().toLowerCase(),
             name: d.dosya_adi || '',
-            url: d.drive_url || '',
+            url: '',
             fileId: d.drive_file_id || '',
             at: d.yukleme_zamani || '',
             by: d.kullanici || ''
