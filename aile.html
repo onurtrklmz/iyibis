@@ -648,9 +648,9 @@
 }
 </style>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4B.1";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4C";</script>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4B.1";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4C";</script>
   <script src="config-beta42.js"></script>
   <script src="api-client-beta42.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
@@ -2546,8 +2546,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <button onclick="downloadSourceTable('field')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-clipboard-check mr-1.5 text-amber-400"></i>Saha Tespit</button>
                         <button onclick="downloadSourceTable('pendingfield')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-person-walking-arrow-right mr-1.5 text-cyan-400"></i>Sahası Yapılacaklar</button>
                         <button onclick="downloadSourceTable('assistance')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-box-open mr-1.5 text-violet-400"></i>Yapılan Yardımlar</button>
-                        <button onclick="exportJSON()" title="Yalnız panelin bellekte tuttuğu verileri JSON olarak indirir; Google Sheets yedeği değildir." class="inline-flex items-center justify-center px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-medium rounded-lg border border-slate-600"><i class="fa-solid fa-code mr-1.5"></i>Panel JSON Yedeği</button>
-                        <label title="JSON içeriğini yalnız tarayıcıdaki panel durumuna yükler; Google Sheets'e yazmaz." class="inline-flex items-center justify-center px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-medium rounded-lg border border-slate-600 cursor-pointer"><i class="fa-solid fa-upload mr-1.5"></i>Panel JSON Yükle<input type="file" accept=".json" onchange="importJSON(event)" class="hidden"></label>
+                        
                         <button id="btn-integration-settings" onclick="openSheetConfigModal()" class="inline-flex items-center justify-center px-3 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg border border-indigo-200 disabled:opacity-60 disabled:cursor-wait">
                             <span id="integration-settings-label"><i class="fa-solid fa-sliders mr-1.5"></i>Entegrasyon Ayarları</span>
                             <span id="integration-settings-loading" class="hidden inline-flex items-center gap-1.5"><span class="inline-block w-3.5 h-3.5 border-2 border-indigo-300 border-t-indigo-700 rounded-full animate-spin"></span>Yükleniyor...</span>
@@ -2582,8 +2581,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             </div>
             <div id="sheet-config-scroll-area" class="p-5 sm:p-6 space-y-4 text-xs overflow-y-auto custom-scroll flex-1 min-h-0">
                 <div class="p-3 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-900">
-                    <div class="font-bold mb-1">Beş bağımsız veri kaynağı</div>
-                    <div>Aktif Aileler, Ret Listesi, Yapılan Yardımlar, Web Başvuruları, Saha Tespit Formu ve Sahası Yapılacaklar listesi ayrı Google E-Tablo kaynakları olarak kullanılır.</div>
+                    <div class="font-bold mb-1">Merkezi DB + ham replika mimarisi</div>
+                    <div>İYİBİS Sistem Veritabanı operasyonel ana kaynaktır. Aşağıdaki harici Google E-Tablolar ham kaynak / replika / yedek olarak korunur; panel doğrudan bu tablolardan çalışmaz.</div>
                 </div>
                 <div class="p-3 rounded-lg bg-emerald-50 border border-emerald-200 space-y-3">
                     <div class="font-bold text-emerald-900">Aktif Aileler - Ayrı Google E-Tablo</div>
@@ -2619,7 +2618,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 </div>
                 <div class="p-3 rounded-lg bg-amber-50 border border-amber-200 space-y-3">
-                    <div class="font-bold text-amber-900">Saha Tespit Formu - Beşinci Google E-Tablo</div>
+                    <div class="font-bold text-amber-900">Saha Tespit Formu - Ham/Replika Google E-Tablo</div>
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1">Saha Tespit Formu Spreadsheet ID / URL</label>
                         <input type="text" id="config-field-sheet-id" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs font-mono" placeholder="Daha sonra eklenecek">
@@ -2631,7 +2630,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 </div>
                 <div>
                     <div class="mt-4 p-3 rounded-lg border border-cyan-200 bg-cyan-50 text-cyan-900">
-                        <div class="font-bold">Sahası Yapılacaklar - Altıncı Google E-Tablo</div>
+                        <div class="font-bold">Sahası Yapılacaklar - Operasyonel Yardımcı Kaynak</div>
                         <div class="text-[11px] mt-1 break-all">1pFE_IJksN4PepnejBOjJn2uvPxVA1S2xkwZIUghA3ps</div>
                         <div class="text-[11px] mt-1 text-cyan-700">Web başvurusundan “Sahaya Al” denilen kişiler otomatik eklenir; Saha Tespit Formu TC, telefon veya ad-soyad ile eşleşince otomatik çıkarılır.</div>
                     </div>
@@ -2661,7 +2660,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 </div>
                 <div class="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900">
-                    PDF yükleme için yalnızca Drive klasör bağlantısı yetmez. Apps Script Web App URL'si de gereklidir. Kod entegrasyona hazırdır.
+                    PDF yükleme merkezi Apps Script üzerinden yapılır. Ham Drive bağlantıları frontend’e verilmez; PDF görüntüleme güvenli Worker köprüsü üzerinden yapılır.
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3 border-t border-slate-200">
@@ -3295,41 +3294,42 @@ var currentWebDetailIndex = window.currentWebDetailIndex = null;
 var currentFamilyId = window.currentFamilyId = null;
 var currentAssistanceFamilyId = window.currentAssistanceFamilyId = null;
 function loadWorkflowState() {
-    try {
-        var saved = JSON.parse(localStorage.getItem(WORKFLOW_KEY) || '{}');
-        return {
-            processedWeb: saved.processedWeb || {},
-            redToActive: saved.redToActive || {},
-            delisted: saved.delisted || {},
-            assistance: saved.assistance || {},
-            documents: saved.documents || {}
-        };
-    }
-    catch (_) {
-        return { processedWeb: {}, redToActive: {}, delisted: {}, assistance: {}, documents: {} };
-    }
+    // Phase 4C: operasyonel veri tarayıcı localStorage'ından yüklenmez.
+    // Bu nesne yalnız merkezi payload'ın istemci içi indeksidir.
+    return {
+        processedWeb: {},
+        redToActive: {},
+        delisted: {},
+        assistance: {},
+        assistanceHistoryText: {},
+        documents: {}
+    };
 }
+
 function saveWorkflowState() {
-    localStorage.setItem(WORKFLOW_KEY, JSON.stringify(workflowState));
+    // Phase 4C: merkezi DB source-of-truth olduğu için workflowState kalıcı olarak
+    // localStorage'a yazılmaz. Fonksiyon eski çağrılarla uyumluluk için no-op'tur.
+    window.workflowState = workflowState;
 }
+
 function getIntegrationConfig() {
-    try {
-        return Object.assign({
-            assistanceSheetId: '',
-            assistanceSheetName: '',
-            uploadEndpoint: '',
-            helpFolder: '',
-            assessmentFolder: '',
-            mediaFolder: ''
-        }, JSON.parse(localStorage.getItem(INTEGRATION_KEY) || '{}'));
-    }
-    catch (_) {
-        return { assistanceSheetId: '', assistanceSheetName: '', uploadEndpoint: '', helpFolder: '', assessmentFolder: '', mediaFolder: '' };
-    }
+    // Phase 4C: entegrasyon ayarlarının gerçek kaynağı Apps Script Script Properties'tir.
+    // Bu uyumluluk nesnesi eski yardımcı fonksiyonların hata vermemesi içindir.
+    return {
+        assistanceSheetId: '',
+        assistanceSheetName: '',
+        uploadEndpoint: '',
+        helpFolder: '',
+        assessmentFolder: '',
+        mediaFolder: ''
+    };
 }
+
 function saveIntegrationConfig(cfg) {
-    localStorage.setItem(INTEGRATION_KEY, JSON.stringify(cfg));
+    // Phase 4C: ayarlar localStorage'a değil gsSaveConfig() üzerinden sunucuya yazılır.
+    return cfg || {};
 }
+
 function normalizeTC(v) {
     return String(v || '').replace(/\D/g, '');
 }
@@ -3459,81 +3459,8 @@ function fetchSheetCSV(sheetName) {
         document.head.appendChild(script);
     });
 }
-function fetchLiveGoogleSheetsData() {
-    return __awaiter(this, arguments, void 0, function (showToast) {
-        var syncIcon, statusText, statusPill, _a, rawMevcut, rawRed, rawWeb, parsedMevcut, parsedRed, parsedWeb, overlaid, now, timeStr, err_1;
-        if (showToast === void 0) { showToast = true; }
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    if (appState.isSyncing)
-                        return [2 /*return*/];
-                    appState.isSyncing = true;
-                    syncIcon = document.getElementById('sync-icon');
-                    statusText = document.getElementById('sync-status-text');
-                    statusPill = document.getElementById('sync-status-pill');
-                    if (syncIcon)
-                        syncIcon.classList.add('fa-spin');
-                    if (statusText)
-                        statusText.innerText = "Google'dan Çekiliyor...";
-                    _b.label = 1;
-                case 1:
-                    _b.trys.push([1, 3, 4, 5]);
-                    return [4 /*yield*/, Promise.all([
-                            fetchSheetCSV('TOPLAM MEVCUT'),
-                            fetchSheetCSV('RED ALANLAR'),
-                            fetchSheetCSV('Web Yeni Başvurular')
-                        ])];
-                case 2:
-                    _a = _b.sent(), rawMevcut = _a[0], rawRed = _a[1], rawWeb = _a[2];
-                    parsedMevcut = parseMevcutSheet(rawMevcut);
-                    parsedRed = parseRedSheet(rawRed);
-                    parsedWeb = parseWebSheet(rawWeb);
-                    overlaid = applyWorkflowOverlay(parsedMevcut, parsedRed, parsedWeb);
-                    parsedMevcut = overlaid.mevcut;
-                    parsedRed = overlaid.red;
-                    parsedWeb = overlaid.web;
-                    if (parsedMevcut.length > 0) {
-                        appState.mevcut = parsedMevcut;
-}
-                    if (parsedRed.length > 0) {
-                        appState.red = parsedRed;
-}
-                    if (parsedWeb.length > 0) {
-                        appState.web = parsedWeb;
-}
-                    now = new Date();
-                    timeStr = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                    document.getElementById('last-sync-time').innerText = 'Son Güncelleme: ' + timeStr;
-                    statusText.innerText = 'Drive Tüm Tablolar Güncel';
-                    statusPill.className = 'inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium';
-                    updateBadges();
-                    renderMevcutTable();
-                    renderRedTable();
-                    renderWebTable();
-                    renderDashboardStats();
-                    renderBirthdayList();
-                    if (showToast)
-                        alert('✅ Google E-Tablo verileri başarıyla senkronize edildi!');
-                    return [3 /*break*/, 5];
-                case 3:
-                    err_1 = _b.sent();
-                    console.warn('Google Sheets Sync Hatası:', err_1);
-                    statusText.innerText = 'Önbellek Verisi Kullanılıyor';
-                    statusPill.className = 'inline-flex items-center gap-1.5 text-[11px] text-amber-400 font-medium';
-                    if (showToast)
-                        alert('Canlı veri alınamadı: ' + err_1.message + '\n\nGoogle E-Tablo dosyasının bağlantıya sahip herkes tarafından görüntülenebilir olduğunu ve sekme adlarının değişmediğini kontrol edin.');
-                    return [3 /*break*/, 5];
-                case 4:
-                    appState.isSyncing = false;
-                    if (syncIcon)
-                        syncIcon.classList.remove('fa-spin');
-                    return [7 /*endfinally*/];
-                case 5: return [2 /*return*/];
-            }
-        });
-    });
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
 function cleanVal(v) {
     if (v === null || v === undefined)
         return "";
@@ -4061,49 +3988,9 @@ function makeActiveFromRed(item) {
         kaynak: 'Ret Listesinden Yeniden Değerlendirme'
     };
 }
-function processWebApplication(index, destination) {
-    if (destination !== 'active' && destination !== 'field' && destination !== 'red') {
-        alert('Geçersiz işlem hedefi. Sayfayı yenileyip tekrar deneyin.');
-        return;
-    }
-    var item = appState.web[index];
-    if (!item)
-        return;
-    var actionText = destination === 'active' ? 'doğrudan aktif aile listesine almak' : (destination === 'field' ? 'saha ziyareti sürecine almak' : 'ret listesine almak');
-    if (!confirm("".concat(item.ad_soyad || 'Bu başvuruyu', " ").concat(actionText, " istedi\u011Finize emin misiniz?")))
-        return;
-    var movedItem = destination === 'active' ? makeActiveFromWeb(item) : makeRedFromWeb(item);
-    workflowState.processedWeb[String(item.id)] = { destination: destination, item: movedItem, at: new Date().toISOString(), by: sessionStorage.getItem('gih_current_user') || '' };
-    saveWorkflowState();
-    appState.web.splice(index, 1);
-    if (destination === 'active')
-        appState.mevcut.push(movedItem);
-    else
-        appState.red.push(movedItem);
-closeModal('webDetailModal');
-    updateBadges();
-    renderMevcutTable();
-    renderRedTable();
-    renderWebTable();
-    renderDashboardStats();
-}
-function moveRedToActive(id) {
-    var idx = appState.red.findIndex(function (x) { return x.id === id; });
-    if (idx < 0)
-        return;
-    var source = appState.red[idx];
-    if (!confirm("".concat(source.ad_soyad || 'Bu aileyi', " aktif listeye almak istedi\u011Finize emin misiniz?")))
-        return;
-    var moved = makeActiveFromRed(source);
-    workflowState.redToActive[familyKey(source)] = moved;
-    saveWorkflowState();
-    appState.red.splice(idx, 1);
-    appState.mevcut.push(moved);
-updateBadges();
-    renderMevcutTable();
-    renderRedTable();
-    renderDashboardStats();
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
 
 function moveActiveToRed(id) {
     var item = appState.mevcut.find(function (x) { return x.id === id; });
@@ -4125,32 +4012,10 @@ function moveActiveToRed(id) {
         });
 }
 
-function delistFamily(id) {
-    var item = appState.mevcut.find(function (x) { return x.id === id; });
-    if (!item)
-        return;
-    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " \"Liste D\u0131\u015F\u0131 B\u0131rak\u0131lanlar\" kategorisine aktarmak istedi\u011Finize emin misiniz?")))
-        return;
-    item.durumu = 'DELİST';
-    workflowState.delisted[familyKey(item)] = { at: new Date().toISOString(), by: sessionStorage.getItem('gih_current_user') || '' };
-    saveWorkflowState();
-updateBadges();
-    renderMevcutTable();
-    renderDashboardStats();
-}
-function reactivateDelistedFamily(id) {
-    var item = appState.mevcut.find(function (x) { return x.id === id; });
-    if (!item)
-        return;
-    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " yeniden aktif aile listesine almak istedi\u011Finize emin misiniz?")))
-        return;
-    item.durumu = 'TAKİP';
-    delete workflowState.delisted[familyKey(item)];
-    saveWorkflowState();
-updateBadges();
-    renderMevcutTable();
-    renderDashboardStats();
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
 function getAssistanceEntriesForFamily_(item) {
     var keys = [];
     var tc = normalizeTC(item && item.tc);
@@ -4278,90 +4143,8 @@ function addAssistanceRow() {
     row.innerHTML = "\n                <div class=\"assistance-row-grid grid grid-cols-1 md:grid-cols-[150px_minmax(220px,1fr)_170px_minmax(190px,1fr)_36px] gap-2 items-end\">\n                    <div>\n                        <label class=\"block text-[11px] font-semibold text-slate-600 mb-1\">Yard\u0131m Tarihi</label>\n                        <input type=\"date\" class=\"assist-date w-full p-2 bg-white border border-slate-300 rounded-lg text-xs\">\n                    </div>\n                    <div>\n                        <label class=\"block text-[11px] font-semibold text-slate-600 mb-1\">Yard\u0131m \u0130\u00E7eri\u011Fi</label>\n                        <input type=\"text\" class=\"assist-content w-full p-2 bg-white border border-slate-300 rounded-lg text-xs\" placeholder=\"\u00D6rn. g\u0131da kolisi, nakit destek\">\n                    </div>\n                    <div>\n                        <label class=\"block text-[11px] font-semibold text-slate-600 mb-1\">Rayi\u00E7 Bedel (varsa)</label>\n                        <input type=\"text\" class=\"assist-value w-full p-2 bg-white border border-slate-300 rounded-lg text-xs\" placeholder=\"\u00D6rn. 2500 TL\">\n                    </div>\n                    <div>\n                        <label class=\"block text-[11px] font-semibold text-slate-600 mb-1\">Tutanak Ekle (varsa)</label>\n                        <input type=\"file\" accept=\"application/pdf,.pdf\" class=\"assist-pdf block w-full text-[10px] file:mr-2 file:py-1.5 file:px-2 file:rounded-md file:border-0 file:bg-rose-100 file:text-rose-700\">\n                    </div>\n                    <button type=\"button\" onclick=\"this.closest('.assistance-entry-row').remove()\" class=\"h-9 w-9 inline-flex items-center justify-center rounded-lg bg-white border border-slate-300 text-slate-500 hover:text-rose-600\" title=\"Sat\u0131r\u0131 kald\u0131r\"><i class=\"fa-solid fa-trash\"></i></button>\n                </div>";
     container.appendChild(row);
 }
-function saveAssistanceEntries() {
-    return __awaiter(this, void 0, void 0, function () {
-        var family, rows, cfg, key, status, savedCount, _i, rows_1, row, date, content, marketValue, file, upload;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    family = appState.mevcut.find(function (x) { return x.id === currentAssistanceFamilyId; });
-                    if (!family)
-                        return [2 /*return*/];
-                    rows = Array.from(document.querySelectorAll('#assistance-entry-rows .assistance-entry-row'));
-                    cfg = getIntegrationConfig();
-                    key = familyKey(family);
-                    workflowState.assistance[key] = workflowState.assistance[key] || [];
-                    status = document.getElementById('assistance-save-status');
-                    status.className = 'mt-3 text-xs p-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'Yardımlar kaydediliyor...';
-                    status.classList.remove('hidden');
-                    savedCount = 0;
-                    _i = 0, rows_1 = rows;
-                    _a.label = 1;
-                case 1:
-                    if (!(_i < rows_1.length)) return [3 /*break*/, 5];
-                    row = rows_1[_i];
-                    date = row.querySelector('.assist-date').value;
-                    content = row.querySelector('.assist-content').value.trim();
-                    marketValue = row.querySelector('.assist-value').value.trim();
-                    file = row.querySelector('.assist-pdf').files[0];
-                    if (!date && !content && !marketValue && !file)
-                        return [3 /*break*/, 4];
-                    if (!date || !content) {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
-                        status.innerText = 'Dolu satırlarda yardım tarihi ve yardım içeriği zorunludur.';
-                        return [2 /*return*/];
-                    }
-                    if (file && !isPdfFile(file)) {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-rose-50 text-rose-800 border border-rose-200';
-                        status.innerText = 'Tutanak alanına yalnızca PDF yüklenebilir.';
-                        return [2 /*return*/];
-                    }
-                    upload = null;
-                    if (!file) return [3 /*break*/, 3];
-                    return [4 /*yield*/, uploadPdfToDrive(file, family, 'help', cfg.helpFolder)];
-                case 2:
-                    upload = _a.sent();
-                    if (upload.error) {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-amber-50 text-amber-900 border border-amber-200';
-                        status.innerText = upload.error + ' Yardım kaydı PDF bağlantısı olmadan yerel olarak tutuldu.';
-                    }
-                    _a.label = 3;
-                case 3:
-                    workflowState.assistance[key].push({
-                        id: 'A-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
-                        date: date,
-                        content: content,
-                        marketValue: marketValue,
-                        pdfName: file ? file.name : '',
-                        pdfUrl: upload && upload.url ? upload.url : '',
-                        source: 'Panel',
-                        createdAt: new Date().toISOString(),
-                        by: sessionStorage.getItem('gih_current_user') || ''
-                    });
-                    savedCount++;
-                    _a.label = 4;
-                case 4:
-                    _i++;
-                    return [3 /*break*/, 1];
-                case 5:
-                    saveWorkflowState();
-                    renderAssistanceHistory(family);
-                    if (savedCount) {
-                        document.getElementById('assistance-entry-rows').innerHTML = '';
-                        addAssistanceRow();
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200';
-                        status.innerText = "".concat(savedCount, " yard\u0131m kayd\u0131 kaydedildi.");
-                    }
-                    else {
-                        status.className = 'mt-3 text-xs p-3 rounded-lg bg-amber-50 text-amber-900 border border-amber-200';
-                        status.innerText = 'Kaydedilecek dolu yardım satırı bulunamadı.';
-                    }
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
 function isPdfFile(file) {
     if (!file)
         return false;
@@ -4384,62 +4167,11 @@ function fileToBase64(file) {
         });
     });
 }
-function uploadPdfToDrive(file, family, category, folderValue) {
-    return __awaiter(this, void 0, void 0, function () {
-        var cfg, folderId, payload, response, result, err_2;
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    if (!isPdfFile(file))
-                        return [2 /*return*/, { error: 'Yalnızca PDF dosyaları kabul edilir.' }];
-                    cfg = getIntegrationConfig();
-                    if (!cfg.uploadEndpoint)
-                        return [2 /*return*/, { error: 'Apps Script PDF yükleme adresi henüz ayarlanmadı.' }];
-                    folderId = extractDriveId(folderValue);
-                    if (!folderId)
-                        return [2 /*return*/, { error: 'Bu belge türü için Drive klasörü henüz ayarlanmadı.' }];
-                    _b.label = 1;
-                case 1:
-                    _b.trys.push([1, 5, , 6]);
-                    _a = {
-                        action: 'uploadPdf',
-                        category: category,
-                        folderId: folderId,
-                        fileName: file.name,
-                        mimeType: 'application/pdf'
-                    };
-                    return [4 /*yield*/, fileToBase64(file)];
-                case 2:
-                    payload = (_a.base64 = _b.sent(),
-                        _a.familyName = family.ad_soyad || '',
-                        _a.tc = family.tc || '',
-                        _a.uploadedBy = sessionStorage.getItem('gih_current_user') || '',
-                        _a);
-                    return [4 /*yield*/, fetch(cfg.uploadEndpoint, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                            body: JSON.stringify(payload)
-                        })];
-                case 3:
-                    response = _b.sent();
-                    if (!response.ok)
-                        throw new Error('HTTP ' + response.status);
-                    return [4 /*yield*/, response.json()];
-                case 4:
-                    result = _b.sent();
-                    if (!result.ok)
-                        throw new Error(result.error || 'Drive yükleme hatası');
-                    return [2 /*return*/, { url: result.url || '', id: result.id || '' }];
-                case 5:
-                    err_2 = _b.sent();
-                    return [2 /*return*/, { error: 'PDF Drive’a yüklenemedi: ' + err_2.message }];
-                case 6: return [2 /*return*/];
-            }
-        });
+function uploadPdfToDrive() {
+    return Promise.resolve({
+        error: 'Phase 4C: eski harici uploadEndpoint akışı devre dışı. Merkezi belge yükleme akışını kullanın.'
     });
 }
-// Phase 4B: eski harici uploadEndpoint tabanlı belge yükleme fonksiyonu kaldırıldı.
 
 function renderFamilyDocuments(family) {
     var container=document.getElementById('family-document-list');
@@ -4548,53 +4280,12 @@ function extractSpreadsheetId(value) {
     var m = s.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
     return m ? m[1] : s;
 }
-function fetchSheetFromSpreadsheet(sheetId, sheetName) {
-    if (sheetName === void 0) { sheetName = ''; }
-    return new Promise(function (resolve, reject) {
-        var callbackName = '__gih_ext_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-        var script = document.createElement('script');
-        var done = false;
-        var cleanup = function () {
-            if (done)
-                return;
-            done = true;
-            try {
-                delete window[callbackName];
-            }
-            catch (_) { }
-            script.remove();
-        };
-        var timer = setTimeout(function () { cleanup(); reject(new Error('Harici tablo yanıt vermedi.')); }, 15000);
-        window[callbackName] = function (response) {
-            var _a, _b, _c;
-            clearTimeout(timer);
-            try {
-                if (!response || (response.status && response.status !== 'ok'))
-                    throw new Error('Harici tablo okunamadı.');
-                var cols_1 = ((_b = (_a = response.table) === null || _a === void 0 ? void 0 : _a.cols) === null || _b === void 0 ? void 0 : _b.length) || 0;
-                var rows = (((_c = response.table) === null || _c === void 0 ? void 0 : _c.rows) || []).map(function (r) {
-                    var cells = r.c || [];
-                    var out = new Array(Math.max(cols_1, cells.length)).fill('');
-                    cells.forEach(function (c, i) { return out[i] = gvizCellToValue(c); });
-                    return out;
-                });
-                cleanup();
-                resolve(rows);
-            }
-            catch (e) {
-                cleanup();
-                reject(e);
-            }
-        };
-        script.onerror = function () { clearTimeout(timer); cleanup(); reject(new Error('Harici Google E-Tablo bağlantısı kurulamadı.')); };
-        var tqx = "out:json;responseHandler:".concat(callbackName);
-        var url = "https://docs.google.com/spreadsheets/d/".concat(encodeURIComponent(sheetId), "/gviz/tq?tqx=").concat(encodeURIComponent(tqx), "&headers=0&t=").concat(Date.now());
-        if (sheetName)
-            url += "&sheet=".concat(encodeURIComponent(sheetName));
-        script.src = url;
-        document.head.appendChild(script);
-    });
+function fetchSheetFromSpreadsheet() {
+    return Promise.reject(new Error(
+        'Phase 4C: tarayıcıdan doğrudan harici Google E-Tablo okuma devre dışı. Merkezi sunucu akışını kullanın.'
+    ));
 }
+
 function findHeaderIndex(headers, patterns) {
     return headers.findIndex(function (h) { return patterns.some(function (p) { return normalizeName(h).includes(p); }); });
 }
@@ -4994,76 +4685,8 @@ function fetchWebApplicationsFromExternalSheet() {
         });
     });
 }
-function importAssistanceFromSheet() {
-    return __awaiter(this, void 0, void 0, function () {
-        var cfg, status, sheetId, rows, entries, matched, unmatched, added, _loop_1, _i, entries_1, e, err_7;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    cfg = getIntegrationConfig();
-                    status = document.getElementById('assistance-import-status');
-                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'Yapılan yardımlar tablosu okunuyor...';
-                    status.classList.remove('hidden');
-                    sheetId = extractSpreadsheetId(cfg.assistanceSheetId);
-                    if (!sheetId) {
-                        status.className = 'mt-3 text-xs rounded-lg p-3 bg-amber-50 text-amber-900 border border-amber-200';
-                        status.innerText = 'Önce Entegrasyon Ayarları bölümünden toplu yapılan yardımlar Google E-Tablo bağlantısını girin.';
-                        return [2 /*return*/];
-                    }
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, fetchSheetFromSpreadsheet(sheetId, cfg.assistanceSheetName || '')];
-                case 2:
-                    rows = _a.sent();
-                    entries = parseAssistanceSheet(rows);
-                    matched = 0, unmatched = 0, added = 0;
-                    _loop_1 = function (e) {
-                        var family = appState.mevcut.find(function (f) { return normalizeTC(f.tc) && normalizeTC(f.tc) === normalizeTC(e.tc); });
-                        if (!family && e.name)
-                            family = appState.mevcut.find(function (f) { return normalizeName(f.ad_soyad) === normalizeName(e.name); });
-                        if (!family) {
-                            unmatched++;
-                            return "continue";
-                        }
-                        matched++;
-                        var key = familyKey(family);
-                        workflowState.assistance[key] = workflowState.assistance[key] || [];
-                        var signature = [e.date, e.content, e.marketValue, e.pdfUrl].join('|');
-                        var exists = workflowState.assistance[key].some(function (x) { return [x.date, x.content, x.marketValue, x.pdfUrl].join('|') === signature; });
-                        if (!exists) {
-                            workflowState.assistance[key].push({
-                                id: 'IMP-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
-                                date: e.date,
-                                content: e.content || 'Yardım',
-                                marketValue: e.marketValue,
-                                pdfUrl: e.pdfUrl,
-                                pdfName: '',
-                                source: 'Toplu Yardımlar Google E-Tablosu',
-                                createdAt: new Date().toISOString()
-                            });
-                            added++;
-                        }
-                    };
-                    for (_i = 0, entries_1 = entries; _i < entries_1.length; _i++) {
-                        e = entries_1[_i];
-                        _loop_1(e);
-                    }
-                    saveWorkflowState();
-                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-emerald-50 text-emerald-800 border border-emerald-200';
-                    status.innerText = "".concat(entries.length, " yard\u0131m sat\u0131r\u0131 okundu; ").concat(matched, " sat\u0131r ailelerle e\u015Fle\u015Fti, ").concat(added, " yeni kay\u0131t eklendi, ").concat(unmatched, " sat\u0131r e\u015Fle\u015Fmedi.");
-                    return [3 /*break*/, 4];
-                case 3:
-                    err_7 = _a.sent();
-                    status.className = 'mt-3 text-xs rounded-lg p-3 bg-rose-50 text-rose-800 border border-rose-200';
-                    status.innerText = 'Yapılan yardımlar alınamadı: ' + err_7.message;
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
+
 function renderDashboardStats() {
     var totalActive = appState.mevcut.length;
     var totalDelist = appState.mevcut.filter(function (x) {
@@ -5472,33 +5095,7 @@ function resetDataToDefault() {
         location.reload();
     }
 }
-function openSheetConfigModal() {
-    return __awaiter(this, void 0, void 0, function () {
-        var cfg, err_18, btn, label, loading;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    btn = document.getElementById('btn-integration-settings'); label = document.getElementById('integration-settings-label'); loading = document.getElementById('integration-settings-loading');
-                    if (btn) btn.disabled = true; if (label) label.classList.add('hidden'); if (loading) loading.classList.remove('hidden'); _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, 4, 5]); return [4 /*yield*/, gsGetConfig(centralSessionToken)];
-                case 2:
-                    cfg = _a.sent();
-                    document.getElementById('config-active-sheet-id').value = cfg.activeSpreadsheetId || ''; document.getElementById('config-active-sheet-name').value = cfg.activeSheetName || '';
-                    document.getElementById('config-red-sheet-id').value = cfg.redSpreadsheetId || ''; document.getElementById('config-red-sheet-name').value = cfg.redSheetName || '';
-                    document.getElementById('config-web-sheet-id').value = cfg.webSpreadsheetId || ''; document.getElementById('config-web-sheet-name').value = cfg.webSheetName || '';
-                    document.getElementById('config-field-sheet-id').value = cfg.fieldSpreadsheetId || ''; document.getElementById('config-field-sheet-name').value = cfg.fieldSheetName || '';
-                    document.getElementById('config-assistance-sheet-id').value = cfg.assistanceSpreadsheetId || ''; document.getElementById('config-assistance-sheet-name').value = cfg.assistanceSheetName || '';
-                    document.getElementById('config-upload-endpoint').value = 'Apps Script içinde merkezi'; document.getElementById('config-upload-endpoint').disabled = true;
-                    document.getElementById('config-help-folder').value = cfg.helpFolderId || ''; document.getElementById('config-assessment-folder').value = cfg.assessmentFolderId || ''; document.getElementById('config-media-folder').value = cfg.mediaFolderId || '';
-                    openModal('sheetConfigModal'); return [3 /*break*/, 5];
-                case 3: err_18 = _a.sent(); alert('Ayarlar alınamadı: ' + serverFailure(err_18)); return [3 /*break*/, 5];
-                case 4: if (btn) btn.disabled = false; if (label) label.classList.remove('hidden'); if (loading) loading.classList.add('hidden'); return [7 /*endfinally*/];
-                case 5: return [2 /*return*/];
-            }
-        });
-    });
-}
+// Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
 
 function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
