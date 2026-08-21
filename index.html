@@ -8,9 +8,9 @@ h1{font-size:34px;margin:0}.sub{color:#94a3b8;margin-top:8px}.beta{display:inlin
 .card h2{font-size:22px;margin:12px 0 8px}.card p{font-size:14px;color:#94a3b8;line-height:1.55}.go{margin-top:18px;font-weight:800}.family .go{color:#34d399}.field .go{color:#fbbf24}
 @media(max-width:680px){.grid{grid-template-columns:1fr}h1{font-size:27px}}</style>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.0.1";</script>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.0.1";</script>
   <script src="config-beta42.js"></script>
   <script src="api-client-beta42.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
@@ -130,8 +130,60 @@ body {
   }
 }
 </style>
+
+<style id="iyibis-501-light-mode-guard">
+/* İYİBİS 5.0.1 — Açık mod koruması.
+   Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light !important;
+    background: #f6f9fb !important;
+    background-image: none !important;
+  }
+  body {
+    background: #f6f9fb !important;
+    background-color: #f6f9fb !important;
+    background-image: none !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: dark !important; }
+}
+</style>
+
+
+<style id="iyibis-501-light-surfaces">
+@media (prefers-color-scheme: light) {
+  body { color:#1e293b !important; }
+  h1, .card h2, .family .go, .field .go { color:#991b1b !important; }
+  .sub, .card p { color:#64748b !important; }
+  .card {
+    color:#1e293b !important;
+    background:#ffffff !important;
+    border-color:#dce3eb !important;
+    box-shadow:0 10px 28px rgba(15,23,42,.06) !important;
+  }
+  .card:hover { background:#ffffff !important; border-color:#d7a1a6 !important; }
+}
+</style>
+
+
+<style id="iyibis-501-version-badge">
+.beta {
+  background:#dcfce7 !important;
+  border:1px solid #86efac !important;
+  color:#166534 !important;
+}
+@media (prefers-color-scheme: dark) {
+  .beta {
+    background:#14532d !important;
+    border-color:#22c55e !important;
+    color:#bbf7d0 !important;
+  }
+}
+</style>
 </head>
-<body><main class="wrap"><div class="brand"><div class="logo"><img src="gaziantep-iyilik-hareketi-logo.jpeg" alt="Gaziantep İyilik Hareketi Derneği Logosu"></div><h1>İYİBİS</h1><div class="sub">İyilik Bilgi Yönetim Sistemi, Gaziantep İyilik Hareketi Derneği</div><span class="beta">BETA 4.2</span></div>
+<body><main class="wrap"><div class="brand"><div class="logo"><img src="gaziantep-iyilik-hareketi-logo.jpeg" alt="Gaziantep İyilik Hareketi Derneği Logosu"></div><h1>İYİBİS</h1><div class="sub">İyilik Bilgi Yönetim Sistemi, Gaziantep İyilik Hareketi Derneği</div><span class="beta">Beta 5.0.1</span></div>
 <div class="grid"><a class="card family" href="aile.html"><div style="font-size:30px">👨‍👩‍👧‍👦</div><h2>Aile Otomasyonu</h2><p>Başvurular, saha değerlendirmesi, aktif aileler, ret listesi ve yardım kayıtlarının merkezi yönetimi.</p><div class="go">Aile Otomasyonunu Aç →</div></a>
 <a class="card field" href="saha.html"><div style="font-size:30px">📋</div><h2>Saha Otomasyonu</h2><p>Saha tespit formu, ayni yardım teslimi ve video/fotoğraf izin belgelerinin yönetimi.</p><div class="go">Saha Otomasyonunu Aç →</div></a></div>
 </main></body></html>
