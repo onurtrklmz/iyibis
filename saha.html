@@ -1,24 +1,161 @@
 <!doctype html>
-<html lang="tr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Saha Otomasyonu - İYİBİS</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<meta http-equiv="refresh" content="0;url=https://script.google.com/macros/s/AKfycbxN5Og_5cG7vr1C5mC2APZ2H7DB_rQULb68lf8c/exec?app=saha">
-<style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f8fafc;color:#334155;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-.box{text-align:center;padding:32px;max-width:520px} .spinner{width:34px;height:34px;border:4px solid #e2e8f0;border-top-color:#8b1d24;border-radius:50%;margin:0 auto 18px;animation:s .8s linear infinite} @keyframes s{to{transform:rotate(360deg)}}
-a{color:#8b1d24;font-weight:700}
+<html lang="tr"><head><base target="_top"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saha Otomasyonu - İYİBİS</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#f8fafc;color:#0f172a}
+.wrap{max-width:960px;margin:0 auto;padding:32px 18px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}.head{text-align:center;margin-bottom:28px}
+.back{position:fixed;top:18px;left:18px;z-index:20;display:inline-block;margin:0;color:#8b1d24;font-weight:700;text-decoration:none;background:rgba(248,250,252,.92);padding:8px 10px;border-radius:9px;backdrop-filter:blur(6px)}
+@media(max-width:640px){.wrap{padding:76px 16px 28px;min-height:100svh;justify-content:center}.back{top:10px;left:10px;font-size:13px;padding:7px 9px}}.saha-home-logo{width:75px;height:75px;object-fit:cover;display:block;margin:0 auto 10px;border-radius:50%;overflow:hidden;background:#fff;border:2px solid #8b1d24;box-shadow:0 8px 22px rgba(139,29,36,.16)}.head h1{color:#8b1d24;margin:0;font-size:28px}.head p{color:#64748b}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.card{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px;box-shadow:0 4px 18px rgba(0,0,0,.05)}
+.card:hover{border-color:#8b1d24}.ico{font-size:30px}.card h2{font-size:18px;margin:14px 0 8px}.card p{font-size:13px;color:#64748b;line-height:1.5}.beta{display:inline-block;margin-top:8px;padding:3px 8px;border-radius:999px;background:#fef3c7;color:#92400e;font-size:11px;font-weight:800}</style>
+
+<script src="config-beta42.js"></script>
+  <script src="api-client-beta42.js"></script>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+<style id="iyibis-brand-theme-v42">
+:root{
+  --iyibis-red:#991b1b;
+  --iyibis-red-dark:#7f1d1d;
+  --iyibis-bg:#f6f9fb;
+  --iyibis-surface:#ffffff;
+  --iyibis-border:#dce3eb;
+  --iyibis-text:#1e293b;
+  --iyibis-muted:#64748b;
+}
+body{
+  background:var(--iyibis-bg)!important;
+  color:var(--iyibis-text)!important;
+}
+.saha-home-logo{
+  border-color:var(--iyibis-red)!important;
+  box-shadow:0 8px 24px rgba(153,27,27,.14)!important;
+}
+.head h1{color:var(--iyibis-red)!important;font-weight:850!important}
+.head p{color:var(--iyibis-muted)!important}
+.beta{
+  background:#fff1f2!important;
+  color:var(--iyibis-red)!important;
+  border:1px solid #fecdd3!important;
+}
+.card{
+  background:#fff!important;
+  border-color:var(--iyibis-border)!important;
+  box-shadow:0 9px 26px rgba(15,23,42,.06)!important;
+}
+.card:hover{
+  border-color:#d7a1a6!important;
+  box-shadow:0 12px 30px rgba(153,27,27,.09)!important;
+  transform:translateY(-1px);
+}
+.card h2{color:var(--iyibis-red)!important}
+.card p{color:var(--iyibis-muted)!important}
+.back{
+  color:var(--iyibis-red)!important;
+  background:rgba(255,255,255,.94)!important;
+  border:1px solid var(--iyibis-border)!important;
+  box-shadow:0 4px 14px rgba(15,23,42,.05);
+}
+.back:hover{border-color:#d7a1a6!important;background:#fff1f2!important}
 </style>
-<script>
-(function(){
-  var target='https://script.google.com/macros/s/AKfycbxN5Og_5cG7vr1C5mC2APZ2H7DB_rQULb68lf8c/exec?app=saha';
-  if (window.location.replace) window.location.replace(target);
-  else window.location.href=target;
-})();
-</script>
+
+<style id="iyibis-flat-dark-mode-v42">
+/*  — Koyu modda beyazdan siyaha gradient yok.
+   Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #101214 !important;
+    background-image: none !important;
+    color-scheme: dark;
+  }
+
+  body {
+    background: #101214 !important;
+    background-color: #101214 !important;
+    background-image: none !important;
+  }
+}
+</style>
+
+<style id="iyibis-saha-dark-surfaces-v42">
+@media (prefers-color-scheme: dark) {
+  body { color:#e5e7eb !important; }
+  .head h1, .card h2 { color:#f36b6f !important; }
+  .head p, .card p { color:#b7ada3 !important; }
+  .card {
+    background:#17191b !important;
+    border-color:#30363d !important;
+    box-shadow:0 10px 28px rgba(0,0,0,.22) !important;
+  }
+  .card:hover {
+    background:#1b1e21 !important;
+    border-color:#7f3037 !important;
+  }
+  .beta {
+    background:#5b080c !important;
+    color:#ff9b9f !important;
+    border-color:#8b1d24 !important;
+  }
+  .back {
+    background:#1b1e21 !important;
+    color:#ff7a7e !important;
+    border-color:#30363d !important;
+  }
+}
+</style>
+
+<style id="iyibis-page-background-no-gradient-v42">
+html, body {
+  background-image: none !important;
+}
+body {
+  background-color: var(--iyibis-bg, #f6f8fa) !important;
+  background: var(--iyibis-bg, #f6f8fa) !important;
+}
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-image: none !important;
+    background-color: #101214 !important;
+    background: #101214 !important;
+  }
+}
+</style>
+
+<style id="iyibis-501-light-mode-guard">
+/* İYİBİS 5.0.1 — Açık mod koruması.
+   Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light !important;
+    background: #f6f9fb !important;
+    background-image: none !important;
+  }
+  body {
+    background: #f6f9fb !important;
+    background-color: #f6f9fb !important;
+    background-image: none !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: dark !important; }
+}
+</style>
+
+
+<style id="iyibis-501-light-surfaces">
+@media (prefers-color-scheme: light) {
+  body { color:#1e293b !important; }
+  .head h1, .card h2 { color:#991b1b !important; }
+  .head p, .card p { color:#64748b !important; }
+  .card { background:#ffffff !important; border-color:#dce3eb !important; }
+  .back { background:rgba(255,255,255,.94) !important; color:#991b1b !important; border-color:#dce3eb !important; }
+}
+</style>
+
 </head>
-<body><div class="box"><div class="spinner"></div><strong>Saha Otomasyonu açılıyor…</strong><p>Otomatik yönlendirme olmazsa <a href="https://script.google.com/macros/s/AKfycbxN5Og_5cG7vr1C5mC2APZ2H7DB_rQULb68lf8c/exec?app=saha">buraya tıklayın</a>.</p></div></body>
-</html>
+<body><div class="wrap"><a class="back" href="index.html">← İYİBİS Ana Sayfa</a>
+<div class="head"><img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="saha-home-logo" alt="Gaziantep İyilik Hareketi Derneği Logosu"><h1>İYİBİS Saha Otomasyonu</h1><p>Gaziantep İyilik Hareketi saha ve belge modülleri</p></div>
+<div class="grid">
+<a class="card" href="saha-tespit.html"><div class="ico">📋</div><h2>Saha Tespit Formu</h2><p>Saha bilgilerini kaydet, form listesini güncelle ve PDF tutanağı Drive'a yükle.</p></a>
+<a class="card" href="ayni-yardim.html"><div class="ico">📦</div><h2>Ayni Yardım Teslimi</h2><p>Yardım teslim kayıtlarını Yapılan Yardımlar veritabanına işle.</p></a>
+<a class="card" href="yayin-izni.html"><div class="ico">📸</div><h2>Video / Fotoğraf İzni</h2><p>Yayın izin belgesini oluştur ve kurumsal Drive klasörüne kaydet.</p></a>
+</div></div></body></html>

@@ -1,24 +1,1245 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Ayni Yardım Teslimi - İYİBİS</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<meta http-equiv="refresh" content="0;url=https://script.google.com/macros/s/AKfycbxN5Og_5cG7vr1C5mC2APZ2H7DB_rQULb68lf8c/exec?app=ayni-yardim">
-<style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f8fafc;color:#334155;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-.box{text-align:center;padding:32px;max-width:520px} .spinner{width:34px;height:34px;border:4px solid #e2e8f0;border-top-color:#8b1d24;border-radius:50%;margin:0 auto 18px;animation:s .8s linear infinite} @keyframes s{to{transform:rotate(360deg)}}
-a{color:#8b1d24;font-weight:700}
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayni Yardım Teslim Belgesi - Gaziantep İyilik Hareketi Derneği</title>
+  <!-- PDF Oluşturma Kütüphanesi -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root {
+      --gih-red: #8b1d24;
+      --gih-red-dark: #681117;
+      --gih-accent: #0284c7;
+      --gih-dark: #0f172a;
+      --gih-gray-bg: #f8fafc;
+      --gih-border: #cbd5e1;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    body { background-color: #f8fafc; color: #0f172a; padding-bottom: 40px; line-height: 1.5; }
+    .container { max-width: 860px; margin: 20px auto; padding: 0 14px; }
+
+    /* Navigasyon */
+    .app-navbar { background: #ffffff; border-bottom: 2px solid var(--gih-red); box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; width: 100%; }
+    .nav-inner { max-width: 960px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--gih-dark); }
+    .nav-brand-text { display: flex; flex-direction: column; }
+    .brand-title { font-size: 15px; font-weight: 800; color: var(--gih-red); letter-spacing: 0.3px; line-height: 1.2; }
+    .brand-sub { font-size: 11px; font-weight: 600; color: #64748b; letter-spacing: 0.5px; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #334155; text-decoration: none; transition: all 0.2s ease; }
+    .nav-link:hover { background: #f1f5f9; color: var(--gih-red); }
+    .nav-link.active { background: var(--gih-red); color: #ffffff !important; box-shadow: 0 2px 6px rgba(139, 29, 36, 0.25); }
+    .nav-toggle { display: none; background: none; border: 1px solid #cbd5e1; border-radius: 8px; padding: 6px 10px; font-size: 20px; cursor: pointer; color: var(--gih-dark); }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 100%; left: 0; background: #ffffff; padding: 12px 16px; border-bottom: 2px solid var(--gih-red); box-shadow: 0 10px 15px rgba(0,0,0,0.1); gap: 6px; }
+      .nav-links.show { display: flex; }
+      .nav-link { width: 100%; padding: 12px 14px; font-size: 14px; }
+    }
+
+    /* Form Kartı */
+    .form-card { background: #ffffff; padding: 28px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; width: 100%; }
+    .form-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 18px; margin-bottom: 20px; flex-wrap: wrap; }
+    .header-logo-title { display: flex; align-items: center; gap: 14px; }
+    .header-titles h1 { font-size: 1.35rem; color: #8b1d24; font-weight: 800; line-height: 1.2; }
+    .header-titles p { font-size: 0.88rem; color: #64748b; margin-top: 3px; }
+    .header-date-box { display: flex; flex-direction: column; gap: 4px; min-width: 170px; }
+    .header-date-box label { font-size: 0.82rem; font-weight: 700; color: #8b1d24; }
+
+    .section-title { font-size: 1.05rem; font-weight: 700; color: #8b1d24; margin: 22px 0 12px; padding-bottom: 6px; border-bottom: 1.5px solid #fecdd3; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 8px; min-width: 0; }
+    .form-group.full-width { grid-column: 1 / -1; }
+    label { font-size: 0.86rem; font-weight: 600; color: #334155; }
+    input[type="text"], input[type="tel"], select, textarea { padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; width: 100%; outline: none; transition: all 0.2s ease; background: #ffffff; color: #0f172a; }
+    input[type="text"]:focus, input[type="tel"]:focus, select:focus, textarea:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
+
+
+    /* BETA 4.2 — Saha Tespit formuyla aynı çalışan yerel takvim alanı */
+    .native-date-box { width: 100%; }
+    .native-date-box input[type="date"] {
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      width: 100%;
+      outline: none;
+      background: #ffffff;
+      color: #0f172a;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+    .native-date-box input[type="date"]:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+    .native-date-box input[type="text"] {
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      width: 100%;
+      outline: none;
+      background: #ffffff;
+      color: #0f172a;
+      box-sizing: border-box;
+    }
+    .native-date-box input[type="text"]:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+
+    /* Malzeme Tablosu */
+    .table-responsive { overflow-x: auto; margin-top: 6px; border-radius: 8px; border: 1px solid #cbd5e1; width: 100%; }
+    table.modern-table { width: 100%; border-collapse: collapse; background: #ffffff; min-width: 480px; }
+    table.modern-table th { background: #f1f5f9; color: #8b1d24; font-weight: 700; font-size: 0.85rem; padding: 10px 8px; text-align: left; border-bottom: 1px solid #cbd5e1; }
+    table.modern-table td { padding: 8px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
+    table.modern-table tr:last-child td { border-bottom: none; }
+    table.modern-table td input { padding: 8px 10px; font-size: 0.9rem; border: 1px solid #cbd5e1; border-radius: 6px; }
+    .btn-row-del { background: #fee2e2; border: 1px solid #fca5a5; color: #b91c1c; font-weight: 700; font-size: 13px; cursor: pointer; padding: 6px 10px; border-radius: 6px; }
+    .btn-add-row { margin-top: 10px; padding: 9px 16px; background: #eff6ff; border: 1.5px dashed #3b82f6; border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: #1d4ed8; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+
+    /* İmza Blokları */
+    .signatures-flex-wrap { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 10px; width: 100%; }
+    .signature-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px; flex: 1 1 320px; min-width: 270px; box-sizing: border-box; }
+    .signature-card h4 { font-size: 0.95rem; font-weight: 700; color: #8b1d24; margin-bottom: 10px; padding-bottom: 4px; border-bottom: 1px solid #e2e8f0; text-transform: uppercase; }
+    .sig-container { border: 1px dashed #94a3b8; border-radius: 8px; background: #ffffff; position: relative; margin-top: 8px; touch-action: none; width: 100%; overflow: hidden; }
+    canvas { width: 100%; height: 120px; display: block; cursor: crosshair; touch-action: none; }
+    .sig-tools { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; flex-wrap: wrap; gap: 4px; }
+    .sig-hint { font-size: 0.8rem; color: #64748b; }
+    .btn-sig-clear { background: #e2e8f0; border: none; font-size: 0.78rem; font-weight: 600; color: #334155; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
+
+    /* Butonlar */
+    .actions-grid { display: grid; grid-template-columns: 2fr 1.2fr 1fr; gap: 12px; margin-top: 26px; }
+    @media (max-width: 640px) { .actions-grid { grid-template-columns: 1fr; } }
+    .action-btn { padding: 14px 20px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: none; }
+    .submit-btn { background: #8b1d24; color: white; }
+    .submit-btn:hover { background: #681117; }
+    .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+    .btn-pdf { background: #047857; color: #ffffff; }
+    .btn-pdf:hover { background: #065f46; }
+    .btn-reset { background: #64748b; color: #ffffff; }
+    .btn-reset:hover { background: #475569; }
+    #status-msg { margin-top: 16px; text-align: center; font-weight: 600; padding: 12px; border-radius: var(--radius); display: none; }.nav-brand .brand-subtitle {
+        display: none;
+      }
+      .nav-brand {
+        min-width: 0;
+      }
+    }
+
+
+    .iyibis-standard-link {
+      color: #111827 !important;
+    }
+    .iyibis-standard-link:hover {
+      color: #8b1d24 !important;
+    }
 </style>
-<script>
-(function(){
-  var target='https://script.google.com/macros/s/AKfycbxN5Og_5cG7vr1C5mC2APZ2H7DB_rQULb68lf8c/exec?app=ayni-yardim';
-  if (window.location.replace) window.location.replace(target);
-  else window.location.href=target;
+
+<script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
+
+<script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
+  <script src="config-beta42.js"></script>
+  <script src="api-client-beta42.js"></script>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+<style id="iyibis-signature-light-surface-v42">
+/* İmza alanı sistem/tarayıcı koyu modundan bağımsız olarak daima kağıt gibi beyaz kalır. */
+.sig-container,
+.sig-container canvas {
+  color-scheme: only light !important;
+  forced-color-adjust: none !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  filter: none !important;
+}
+
+.sig-container {
+  border-color: #94a3b8 !important;
+}
+
+.sig-container canvas {
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+</style>
+
+
+<style id="iyibis-form-navbar-round-logo-v42">
+/* Tepe bardaki dernek logosu tüm temalarda yuvarlak görünür. */
+.app-navbar .nav-logo-svg {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+}
+</style>
+
+<style id="iyibis-brand-theme-v42">
+:root{
+  --gih-red:#991b1b!important;
+  --gih-red-dark:#7f1d1d!important;
+  --gih-gray-bg:#f6f9fb!important;
+  --gih-border:#dce3eb!important;
+  --gih-dark:#1e293b!important;
+  --iyibis-red:#991b1b;
+  --iyibis-red-dark:#7f1d1d;
+  --iyibis-bg:#f6f9fb;
+  --iyibis-border:#dce3eb;
+  --iyibis-text:#1e293b;
+  --iyibis-muted:#64748b;
+}
+body{background:var(--iyibis-bg)!important;color:var(--iyibis-text)!important}
+.app-navbar{
+  background:rgba(255,255,255,.98)!important;
+  border-bottom-color:var(--iyibis-red)!important;
+  box-shadow:0 4px 14px rgba(15,23,42,.06)!important;
+}
+.brand-title{color:var(--iyibis-red)!important}
+.brand-sub{color:var(--iyibis-muted)!important}
+.nav-link{color:#334155!important}
+.nav-link:hover{background:#fff1f2!important;color:var(--iyibis-red)!important}
+.nav-link.active{
+  background:linear-gradient(135deg,var(--iyibis-red),var(--iyibis-red-dark))!important;
+  box-shadow:0 5px 14px rgba(153,27,27,.18)!important;
+}
+.form-card{
+  background:#fff!important;
+  border-color:var(--iyibis-border)!important;
+  box-shadow:0 10px 30px rgba(15,23,42,.06)!important;
+}
+.section-title,
+.header-titles h1{color:var(--iyibis-red)!important}
+input,select,textarea{
+  border-color:#cfd8e3!important;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--iyibis-red)!important;
+  box-shadow:0 0 0 3px rgba(153,27,27,.08)!important;
+}
+@media(max-width:768px){
+  .nav-links{background:#fff!important;border-bottom-color:var(--iyibis-red)!important}
+}
+</style>
+
+<style id="iyibis-flat-dark-mode-v42">
+/* BETA 4.2 — Koyu modda beyazdan siyaha gradient yok.
+   Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #101214 !important;
+    background-image: none !important;
+    color-scheme: dark;
+  }
+
+  body {
+    background: #101214 !important;
+    background-color: #101214 !important;
+    background-image: none !important;
+  }
+}
+</style>
+
+<style id="iyibis-form-dark-surfaces-v42">
+@media (prefers-color-scheme: dark) {
+  body {
+    color:#e5e7eb !important;
+  }
+
+  .app-navbar {
+    background:#181a1c !important;
+    border-bottom-color:#991b1b !important;
+    box-shadow:0 4px 14px rgba(0,0,0,.25) !important;
+  }
+
+  .nav-link { color:#d1d5db !important; }
+  .nav-link:hover {
+    background:#27292c !important;
+    color:#ff7a7e !important;
+  }
+  .nav-link.active {
+    background:#991b1b !important;
+    color:#ffffff !important;
+  }
+
+  .form-card,
+  .container > form,
+  .container > .form-card {
+    background:#17191b !important;
+    border-color:#30363d !important;
+    color:#e5e7eb !important;
+    box-shadow:0 10px 28px rgba(0,0,0,.22) !important;
+  }
+
+  .form-header {
+    border-bottom-color:#374151 !important;
+  }
+
+  .header-titles h1,
+  .section-title {
+    color:#f36b6f !important;
+  }
+
+  .header-titles p,
+  .sig-hint,
+  .photo-upload-note {
+    color:#b7ada3 !important;
+  }
+
+  label {
+    color:#d7dbe0 !important;
+  }
+
+  input:not([type="hidden"]),
+  select,
+  textarea {
+    background:#17191b !important;
+    color:#e5e7eb !important;
+    border-color:#374151 !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color:#77736f !important;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color:#b4232d !important;
+    box-shadow:0 0 0 3px rgba(180,35,45,.16) !important;
+  }
+
+  table.modern-table,
+  table {
+    background:#17191b !important;
+    color:#e5e7eb !important;
+  }
+
+  table.modern-table th,
+  th {
+    background:#202326 !important;
+    color:#f36b6f !important;
+    border-color:#374151 !important;
+  }
+
+  table.modern-table td,
+  td {
+    border-color:#30363d !important;
+  }
+
+  .signature-card,
+  .signature-card-single,
+  .sig-box-card,
+  .photo-upload-panel {
+    background:#1b1e21 !important;
+    border-color:#30363d !important;
+  }
+
+  /* İmza canvas'ı mevcut kurala göre mutlaka beyaz kalır. */
+  .sig-container,
+  .sig-container canvas {
+    background:#ffffff !important;
+    background-color:#ffffff !important;
+  }
+
+  .nav-links {
+    background:#181a1c !important;
+  }
+}
+</style>
+
+<style id="iyibis-page-background-no-gradient-v42">
+html, body {
+  background-image: none !important;
+}
+body {
+  background-color: var(--iyibis-bg, #f6f8fa) !important;
+  background: var(--iyibis-bg, #f6f8fa) !important;
+}
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-image: none !important;
+    background-color: #101214 !important;
+    background: #101214 !important;
+  }
+}
+</style>
+
+<style id="iyibis-ayni-mobile-date-fullwidth-v42">
+@media (max-width: 768px) {
+  .form-header {
+    align-items: flex-start !important;
+  }
+
+  .header-logo-title {
+    width: 100% !important;
+  }
+
+  .header-date-box {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: 1 1 100% !important;
+  }
+
+  .header-date-box .native-date-box,
+  .header-date-box input[type="date"] {
+    width: 100% !important;
+    max-width: none !important;
+    display: block !important;
+  }
+
+  .header-date-box input[type="date"] {
+    min-height: 54px !important;
+  }
+}
+</style>
+
+<style id="iyibis-document-round-logo-v42">
+/* Belge başlığındaki büyük dernek logosu: İYİBİS ana sayfasındaki gibi dairesel kırpma */
+.doc-logo-svg {
+  width: 75px !important;
+  height: 75px !important;
+  min-width: 75px !important;
+  min-height: 75px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  overflow: hidden !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  background: #ffffff !important;
+}
+</style>
+
+<style id="iyibis-501-light-mode-guard">
+/* İYİBİS 5.0.1 — Açık mod koruması.
+   Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light !important;
+    background: #f6f9fb !important;
+    background-image: none !important;
+  }
+  body {
+    background: #f6f9fb !important;
+    background-color: #f6f9fb !important;
+    background-image: none !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: dark !important; }
+}
+</style>
+
+
+<style id="iyibis-501-light-surfaces">
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f8fafc !important;
+    --card-bg:#ffffff !important;
+    --border:#cbd5e1 !important;
+    --text:#0f172a !important;
+    --text-muted:#64748b !important;
+    --gih-dark:#0f172a !important;
+    --gih-gray-bg:#f8fafc !important;
+    --gih-border:#cbd5e1 !important;
+  }
+  .app-navbar, .nav-links, .form-card, .container,
+  .signature-card, .signature-card-single, .sig-container,
+  .table-responsive, table.modern-table, .legal-box {
+    color-scheme: light !important;
+  }
+  .app-navbar, .nav-links, .form-card { background:#ffffff !important; }
+  input, select, textarea { background:#ffffff !important; color:#0f172a !important; }
+}
+</style>
+
+<style id="iyibis-segmented-birthdate">
+
+    .segmented-date-input {
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0f172a;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+      cursor: text;
+    }
+    .segmented-date-input:focus-within {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+    .date-segment {
+      border: 0 !important;
+      outline: 0 !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #0f172a;
+      min-width: 0;
+      width: auto !important;
+      caret-color: transparent;
+    }
+    .date-segment::placeholder {
+      color: #64748b;
+      opacity: 1;
+    }
+    .date-day, .date-month { flex: 0 0 2.6ch; }
+    .date-year { flex: 0 0 4.8ch; }
+    .date-separator {
+      color: #64748b;
+      font-weight: 700;
+      padding: 0 2px;
+      user-select: none;
+    }
+    .date-segment.segment-active {
+      background: #dbeafe !important;
+      color: #1d4ed8 !important;
+      border-radius: 4px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .segmented-date-input {
+        background:#17191b !important;
+        border-color:#374151 !important;
+        color:#e5e7eb !important;
+      }
+      .date-segment {
+        color:#e5e7eb !important;
+      }
+      .date-segment::placeholder {
+        color:#9ca3af !important;
+      }
+      .date-separator { color:#9ca3af !important; }
+      .date-segment.segment-active {
+        background:#1e3a5f !important;
+        color:#bfdbfe !important;
+      }
+    }
+
+</style>
+</head>
+<body>
+
+  <header class="app-navbar no-print">
+    <div class="nav-inner">
+      <a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-brand">
+        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="40" height="40" class="nav-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:40px;height:40px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
+        <div class="nav-brand-text">
+          <span class="brand-title">Gaziantep İyilik Hareketi</span>
+          <span class="brand-sub">Saha Otomasyonu</span>
+        </div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menüyü Aç/Kapat" onclick="toggleAppMenu()">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-link">🏠 Ana Panel</a></li>
+        <li><a href="#" onclick="return navigateIyibisApp('saha-tespit', event)" class="nav-link">📋 Saha Tespit</a></li>
+        <li><a href="#" onclick="return navigateIyibisApp('ayni-yardim', event)" class="nav-link active">📦 Ayni Yardım</a></li>
+        <li><a href="#" onclick="return navigateIyibisApp('yayin-izni', event)" class="nav-link">📸 Yayın İzni</a></li>
+      
+        <li><a href="#" onclick="return navigateIyibisApp('portal', event)" class="nav-link iyibis-standard-link">➜ İYİBİS</a></li></ul>
+    </div>
+  </header>
+  <script>
+    function toggleAppMenu() {
+      const navLinks = document.getElementById('navLinks');
+      const navToggle = document.getElementById('navToggle');
+      navLinks.classList.toggle('show');
+      navToggle.innerText = navLinks.classList.contains('show') ? '✕' : '☰';
+    }
+  </script>
+
+  <div class="container">
+    <div class="form-card" id="formCardAyni">
+      <form id="ayniForm" autocomplete="off">
+        <!-- Başlık ve Logo -->
+        <div class="form-header">
+          <div class="header-logo-title">
+            <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
+            <div class="header-titles">
+              <h1>Gaziantep İyilik Hareketi Derneği</h1>
+              <p>Ayni Yardım Teslim ve Tesellüm Tutanağı</p>
+            </div>
+          </div>
+          <div class="header-date-box">
+            <label>Tanzim Tarihi:</label>
+            <div class="native-date-box">
+              <input type="date" id="form-date" name="tarih" required
+                     onclick="this.showPicker && this.showPicker()"
+                     aria-label="Tanzim Tarihi">
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. Faydalanıcı Bilgileri -->
+        <div class="section-title">1. Teslim Alan (Faydalanıcı / Aile Temsilcisi)</div>
+        <div class="grid">
+          <div class="form-group">
+            <label>Adı Soyadı *</label>
+            <input type="text" id="faydalanici_ad" name="faydalanici_ad" required placeholder="Faydalanıcı Adı Soyadı" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+          </div>
+
+          <div class="form-group">
+            <label>T.C. Kimlik / Yabancı Kimlik No *</label>
+            <input type="text" id="faydalanici_tc" name="faydalanici_tc" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+          </div>
+
+          <div class="form-group">
+            <label>Doğum Tarihi</label>
+            <div class="native-date-box">
+              <div class="segmented-date-input" id="faydalanici_dogum_ui" role="group" aria-label="Doğum Tarihi">
+                <input type="text" id="faydalanici_dogum_gun" class="date-segment date-day"
+                       inputmode="numeric" maxlength="2" placeholder="GG"
+                       aria-label="Doğum günü" autocomplete="off">
+                <span class="date-separator">.</span>
+                <input type="text" id="faydalanici_dogum_ay" class="date-segment date-month"
+                       inputmode="numeric" maxlength="2" placeholder="AA"
+                       aria-label="Doğum ayı" autocomplete="off">
+                <span class="date-separator">.</span>
+                <input type="text" id="faydalanici_dogum_yil" class="date-segment date-year"
+                       inputmode="numeric" maxlength="4" placeholder="YYYY"
+                       aria-label="Doğum yılı" autocomplete="off">
+              </div>
+              <input type="hidden" id="faydalanici_dogum" name="faydalanici_dogum">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Telefon Numarası *</label>
+            <input type="tel" id="faydalanici_tel" name="faydalanici_tel" required placeholder="05XX XXX XX XX" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+          </div>
+
+          <div class="form-group full-width">
+            <label>İkametgah Adresi *</label>
+            <input type="text" id="faydalanici_adres" name="faydalanici_adres" required placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+          </div>
+        </div>
+
+        <!-- 2. Teslim Edilen Yardım İçeriği -->
+        <div class="section-title">2. Teslim Edilen Yardım ve Malzeme İçeriği</div>
+        <div class="table-responsive">
+          <table class="modern-table" id="items-table">
+            <thead>
+              <tr>
+                <th style="width: 8%; text-align: center;">SIRA</th>
+                <th style="width: 48%;">MALZEME / YARDIM CİNSİ</th>
+                <th style="width: 20%;">MİKTAR / ADET</th>
+                <th style="width: 18%;">RAYİÇ BEDEL (TL)</th>
+                <th style="width: 6%; text-align: center;" class="no-print">SİL</th>
+              </tr>
+            </thead>
+            <tbody id="items-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="no-print">
+          <button type="button" class="btn-add-row" onclick="addRow()">➕ Yeni Malzeme Satırı Ekle</button>
+        </div>
+
+        <!-- 3. Tutanak ve İmzalar -->
+        <div class="section-title">3. Teslim ve Tesellüm İmzaları</div>
+        <div class="signatures-flex-wrap">
+          <div class="signature-card">
+            <h4>Teslim Eden (GİH Görevlisi)</h4>
+            <div class="form-group">
+              <label>Görevli İsim Soyisim: *</label>
+              <input type="text" id="gorevli_ad" name="gorevli_ad" required placeholder="GİH Saha Temsilcisi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+            </div>
+            <label style="margin-top: 6px; display: block;">İmza / Paraf:</label>
+            <div class="sig-container">
+              <canvas id="sig-eden"></canvas>
+            </div>
+            <div class="sig-tools no-print">
+              <span class="sig-hint">Parmak veya kalemle imzalayınız</span>
+              <button type="button" class="btn-sig-clear" onclick="clearSig('sig-eden')">Temizle</button>
+            </div>
+          </div>
+
+          <div class="signature-card">
+            <h4>Teslim Alan (Faydalanıcı)</h4>
+            <div class="form-group">
+              <label>Faydalanıcı İsim Soyisim:</label>
+              <input type="text" id="alan_ad" name="alan_ad" placeholder="Teslim Alan Adı Soyadı" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+            </div>
+            <label style="margin-top: 6px; display: block;">İmza / Paraf:</label>
+            <div class="sig-container">
+              <canvas id="sig-alan"></canvas>
+            </div>
+            <div class="sig-tools no-print">
+              <span class="sig-hint">Parmak veya kalemle imzalayınız</span>
+              <button type="button" class="btn-sig-clear" onclick="clearSig('sig-alan')">Temizle</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alt Aksiyon Butonları -->
+        <div class="actions-grid no-print">
+          <button type="submit" class="action-btn submit-btn" id="submitBtn">
+            Formu Gönder
+          </button>
+          <button type="button" class="action-btn btn-pdf" onclick="pdfAyniUret(true)">
+            📄 PDF Tutanak İndir
+          </button>
+          <button type="button" class="action-btn btn-reset" onclick="resetForm()">
+            🔄 Yeni Kayıt
+          </button>
+        </div>
+
+        <div id="status-msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = ""; // İYİBİS BETA 4.2: google.script.run kullanılıyor.
+
+    let sigEdenData = null;
+    let sigAlanData = null;
+
+    function maskDateInput(input) {
+      let val = input.value.replace(/\D/g, '');
+      if (val.length > 8) val = val.substring(0, 8);
+      let formatted = '';
+      if (val.length > 0) {
+        formatted = val.substring(0, 2);
+        if (val.length > 2) {
+          formatted += '.' + val.substring(2, 4);
+          if (val.length > 4) {
+            formatted += '.' + val.substring(4, 8);
+          }
+        }
+      }
+      input.value = formatted;
+    }
+
+
+    function syncBirthDateHidden_() {
+      const dd = (document.getElementById('faydalanici_dogum_gun')?.value || '').padStart(2, '0');
+      const mm = (document.getElementById('faydalanici_dogum_ay')?.value || '').padStart(2, '0');
+      const yyyy = (document.getElementById('faydalanici_dogum_yil')?.value || '');
+      const hidden = document.getElementById('faydalanici_dogum');
+      if (!hidden) return;
+
+      const d = Number(dd), m = Number(mm), y = Number(yyyy);
+      const complete = dd.length === 2 && mm.length === 2 && yyyy.length === 4 &&
+        d >= 1 && d <= 31 && m >= 1 && m <= 12 && y >= 1900 && y <= 2100;
+
+      hidden.value = complete ? `${dd}.${mm}.${yyyy}` : '';
+    }
+
+    function setupSegmentedBirthDate_() {
+      const ids = ['faydalanici_dogum_gun','faydalanici_dogum_ay','faydalanici_dogum_yil'];
+      const max = [2,2,4];
+      const parts = ids.map(id => document.getElementById(id));
+
+      parts.forEach((el, index) => {
+        if (!el) return;
+
+        function activate() {
+          parts.forEach(x => x && x.classList.remove('segment-active'));
+          el.classList.add('segment-active');
+          requestAnimationFrame(() => el.select());
+        }
+
+        el.addEventListener('focus', activate);
+        el.addEventListener('click', function(ev) {
+          ev.preventDefault();
+          activate();
+        });
+
+        el.addEventListener('input', function() {
+          el.value = el.value.replace(/\D/g, '').slice(0, max[index]);
+          syncBirthDateHidden_();
+          if (el.value.length === max[index] && index < parts.length - 1) {
+            parts[index + 1].focus();
+          }
+        });
+
+        el.addEventListener('keydown', function(ev) {
+          if (ev.key === 'ArrowRight' && index < parts.length - 1) {
+            ev.preventDefault();
+            parts[index + 1].focus();
+          } else if (ev.key === 'ArrowLeft' && index > 0) {
+            ev.preventDefault();
+            parts[index - 1].focus();
+          } else if (ev.key === 'Backspace' && el.value === '' && index > 0) {
+            ev.preventDefault();
+            parts[index - 1].focus();
+          } else if (ev.key === '.' || ev.key === '/' || ev.key === '-') {
+            ev.preventDefault();
+            if (index < parts.length - 1) parts[index + 1].focus();
+          }
+        });
+
+        el.addEventListener('blur', function() {
+          setTimeout(() => {
+            if (!parts.some(x => x === document.activeElement)) {
+              parts.forEach(x => x && x.classList.remove('segment-active'));
+            }
+          }, 0);
+        });
+      });
+    }
+
+    function openDatePicker(textInputId, pickerInputId) {
+      const textInput = document.getElementById(textInputId);
+      const picker = document.getElementById(pickerInputId);
+      if (textInput && textInput.value) {
+        const parts = textInput.value.split('.');
+        if (parts.length === 3 && parts[2].length === 4) {
+          picker.value = `${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;
+        }
+      }
+      if (picker.showPicker) {
+        picker.showPicker();
+      } else {
+        picker.focus();
+        picker.click();
+      }
+    }
+
+    function syncPickerToField(textInputId, isoDate) {
+      if (!isoDate) return;
+      const parts = isoDate.split('-');
+      if (parts.length === 3) {
+        document.getElementById(textInputId).value = `${parts[2]}.${parts[1]}.${parts[0]}`;
+      }
+    }
+
+    function initTodayDate() {
+      const today = new Date();
+      const dd = String(today.getDate()).padStart(2, '0');
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const yyyy = today.getFullYear();
+      const formattedToday = `${dd}.${mm}.${yyyy}`;
+      const formDate = document.getElementById('form-date');
+      if (formDate && !formDate.value) {
+        formDate.value = formattedToday;
+      }
+    }
+
+    const tbody = document.getElementById('items-tbody');
+
+    function createRow(index) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="font-weight: 700; text-align: center; color: #475569;">${index}</td>
+        <td><input type="text" class="item-name" placeholder="Örn: Gıda Kolisi, Buzdolabı, Çekyat"></td>
+        <td><input type="text" class="item-qty" style="text-align: center;" placeholder="1 Adet / Koli"></td>
+        <td><input type="text" class="item-price" style="text-align: right;" placeholder="0,00 TL"></td>
+        <td class="no-print" style="text-align: center;">
+          <button type="button" class="btn-row-del" onclick="deleteRow(this)" title="Satırı Sil">✕</button>
+        </td>
+      `;
+      return tr;
+    }
+
+    function initSingleRow() {
+      tbody.innerHTML = '';
+      tbody.appendChild(createRow(1));
+    }
+
+    function addRow() {
+      const currentCount = tbody.children.length;
+      tbody.appendChild(createRow(currentCount + 1));
+    }
+
+    function deleteRow(btn) {
+      if (tbody.children.length <= 1) {
+        const tr = btn.closest('tr');
+        tr.querySelectorAll('input').forEach(i => i.value = '');
+        return;
+      }
+      btn.closest('tr').remove();
+      Array.from(tbody.children).forEach((tr, idx) => {
+        tr.children[0].innerText = idx + 1;
+      });
+    }
+
+    const canvases = ['sig-eden', 'sig-alan'];
+    const ctxs = {};
+
+    function resizeCanvas(id) {
+      const canvas = document.getElementById(id);
+      if (!canvas) return;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      if (rect.width > 0 && canvas.width !== Math.floor(rect.width)) {
+        const temp = document.createElement('canvas');
+        temp.width = canvas.width;
+        temp.height = canvas.height;
+        if (canvas.width > 0 && canvas.height > 0) {
+          temp.getContext('2d').drawImage(canvas, 0, 0);
+        }
+        canvas.width = Math.floor(rect.width);
+        canvas.height = 120;
+        const ctx = canvas.getContext('2d');
+        if (temp.width > 0 && temp.height > 0) {
+          ctx.drawImage(temp, 0, 0, canvas.width, canvas.height);
+        }
+      }
+    }
+
+    function setupCanvas(id) {
+      const canvas = document.getElementById(id);
+      const ctx = canvas.getContext('2d');
+      ctxs[id] = ctx;
+      resizeCanvas(id);
+
+      let drawing = false;
+
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return {
+          x: (clientX - rect.left) * (canvas.width / rect.width),
+          y: (clientY - rect.top) * (canvas.height / rect.height)
+        };
+      }
+
+      function start(e) {
+        e.preventDefault();
+        drawing = true;
+        const p = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+      }
+
+      function move(e) {
+        if (!drawing) return;
+        e.preventDefault();
+        const p = getPos(e);
+        ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+      }
+
+      function end() {
+        if (drawing) {
+          drawing = false;
+          if (id === 'sig-eden') sigEdenData = canvas.toDataURL('image/png');
+          if (id === 'sig-alan') sigAlanData = canvas.toDataURL('image/png');
+        }
+      }
+
+      canvas.addEventListener('mousedown', start);
+      canvas.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', end);
+
+      canvas.addEventListener('touchstart', start, { passive: false });
+      canvas.addEventListener('touchmove', move, { passive: false });
+      window.addEventListener('touchend', end);
+    }
+
+    function clearSig(id) {
+      const canvas = document.getElementById(id);
+      const ctx = ctxs[id];
+      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (id === 'sig-eden') sigEdenData = null;
+      if (id === 'sig-alan') sigAlanData = null;
+    }
+
+    function resetForm() {
+      if (confirm('Formdaki tüm bilgileri ve imzaları temizlemek istediğinize emin misiniz?')) {
+        document.getElementById('ayniForm').reset();
+        initSingleRow();
+        canvases.forEach(id => clearSig(id));
+        initTodayDate();
+        document.getElementById('status-msg').style.display = 'none';
+      }
+    }
+
+    
+
+    /* İYİBİS — PDF her zaman açık/beyaz tema */
+    function iyibisPdfLightOnClone(clonedDoc) {
+      try {
+        clonedDoc.documentElement.style.colorScheme = 'only light';
+        clonedDoc.documentElement.setAttribute('data-iyibis-pdf-light', '1');
+        clonedDoc.querySelectorAll('style[class*="darkreader"], style[id*="darkreader"], link[class*="darkreader"], [data-darkreader-mode], [data-darkreader-scheme]').forEach(function(el){
+          if (el.tagName === 'STYLE' || el.tagName === 'LINK') el.disabled = true;
+        });
+        var s = clonedDoc.createElement('style');
+        s.id = 'iyibis-pdf-force-light';
+        s.textContent = `
+          html[data-iyibis-pdf-light], html[data-iyibis-pdf-light] body { color-scheme: only light !important; background:#fff !important; filter:none !important; }
+          html[data-iyibis-pdf-light] .form-card,
+          html[data-iyibis-pdf-light] #pdfTemplate { background:#fff !important; color:#0f172a !important; filter:none !important; }
+          html[data-iyibis-pdf-light] input,
+          html[data-iyibis-pdf-light] select,
+          html[data-iyibis-pdf-light] textarea { background:#fff !important; color:#0f172a !important; border-color:#cbd5e1 !important; filter:none !important; }
+          html[data-iyibis-pdf-light] label { color:#334155 !important; }
+          html[data-iyibis-pdf-light] table { background:#fff !important; color:#0f172a !important; }
+          html[data-iyibis-pdf-light] th { background:#f1f5f9 !important; color:#8b1d24 !important; border-color:#cbd5e1 !important; }
+          html[data-iyibis-pdf-light] td { background:#fff !important; color:#0f172a !important; border-color:#d1d5db !important; }
+          html[data-iyibis-pdf-light] .signature-card,
+          html[data-iyibis-pdf-light] .signature-card-single,
+          html[data-iyibis-pdf-light] .sig-box-card,
+          html[data-iyibis-pdf-light] .legal-box { background:#f8fafc !important; color:#334155 !important; border-color:#cbd5e1 !important; }
+          html[data-iyibis-pdf-light] .sig-container,
+          html[data-iyibis-pdf-light] canvas { background:#fff !important; filter:none !important; }
+          html[data-iyibis-pdf-light] .header-titles h1,
+          html[data-iyibis-pdf-light] .section-title { color:#8b1d24 !important; }
+          html[data-iyibis-pdf-light] .header-titles p,
+          html[data-iyibis-pdf-light] .sig-hint { color:#64748b !important; }
+        `;
+        clonedDoc.head.appendChild(s);
+      } catch (_) {}
+    }
+
+async function pdfAyniUret(indir = true) {
+      const element = document.getElementById('formCardAyni');
+      const kisi = document.getElementById('faydalanici_ad').value || "Faydalanici";
+      const cleanName = kisi.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ]/g, '_');
+      
+      const opt = {
+        margin: [10, 12, 10, 12],
+        filename: `GIH_Ayni_Yardim_${cleanName}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0, backgroundColor: '#ffffff', onclone: iyibisPdfLightOnClone, ignoreElements: el => el.classList.contains('no-print') },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      if (indir) {
+        setTimeout(() => {
+          html2pdf().set(opt).from(element).save();
+        }, 100);
+      } else {
+        return await html2pdf().set(opt).from(element).outputPdf('datauristring');
+      }
+    }
+
+    document.getElementById('ayniForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('status-msg');
+
+      btn.disabled = true;
+      btn.innerText = "Kayıt hazırlanıyor...";
+      msg.style.display = "none";
+
+      const formData = new FormData(this);
+      const payload = Object.fromEntries(formData.entries());
+      payload.form_tipi = "ayni_yardim";
+
+      const malzemeler = [];
+      document.querySelectorAll('#items-tbody tr').forEach((tr, index) => {
+        const cinsi = tr.querySelector('.item-name')?.value.trim();
+        const miktar = tr.querySelector('.item-qty')?.value.trim();
+        const bedel = tr.querySelector('.item-price')?.value.trim();
+        if (cinsi) {
+          var satirMetni = (index + 1) + ". " + cinsi;
+          if (miktar) satirMetni += " (" + miktar + ")";
+          if (bedel) satirMetni += " - " + bedel;
+          malzemeler.push(satirMetni);
+        }
+      });
+      payload.malzeme_listesi = malzemeler.join(" | ");
+
+      const bedeller = [];
+      document.querySelectorAll('#items-tbody tr').forEach((tr) => {
+        const bedel = tr.querySelector('.item-price')?.value.trim();
+        if (bedel) bedeller.push(bedel);
+      });
+      payload.rayic_bedel = bedeller.join(" + ");
+
+      try {
+        const pdfDataUri = await pdfAyniUret(false);
+        if (pdfDataUri && pdfDataUri.includes(',')) {
+          payload.pdf_base64 = pdfDataUri.split(',')[1];
+          const kisi = document.getElementById('faydalanici_ad').value || "Faydalanici";
+          payload.pdf_filename = `GIH_Ayni_Yardim_${kisi.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ]/g, '_')}_${Date.now()}.pdf`;
+        }
+
+        btn.innerText = "Yapılan Yardımlar E-Tablosu güncelleniyor...";
+
+        const result = await new Promise((resolve, reject) => {
+          google.script.run
+            .withSuccessHandler(resolve)
+            .withFailureHandler(reject)
+            .submitAyniYardimForm(payload);
+        });
+
+        msg.style.display = "block";
+        msg.style.backgroundColor = "#dcfce7";
+        msg.style.color = "#15803d";
+
+        const sheetInfo = result && result.sheetName
+          ? "Kayıt sekmesi: <strong>" + result.sheetName + "</strong> (satır " + result.sheetRow + ")."
+          : "Yardım kaydı E-Tabloya aktarıldı.";
+
+        const pdfInfo = result && result.pdfUrl
+          ? "<br>PDF tutanak Drive klasörüne yüklendi."
+          : "<br>PDF tutanak oluşturulamadı.";
+
+        msg.innerHTML = "✓ <strong>Ayni yardım teslim kaydı başarıyla kaydedildi.</strong><br>" +
+          "<span style='font-size:0.85rem; font-weight:normal;'>" +
+          sheetInfo + pdfInfo +
+          "<br>Not: Sistem kayıtları <strong>YARDIM KAYITLARI</strong> sekmesinde tutulur." +
+          "</span>";
+
+      } catch (err) {
+        msg.style.display = "block";
+        msg.style.backgroundColor = "#fee2e2";
+        msg.style.color = "#b91c1c";
+        const errorText = err && err.message ? err.message : String(err || "Bilinmeyen hata");
+        msg.innerText = "Hata: " + errorText;
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Formu Gönder";
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initSingleRow();
+      initTodayDate();
+      setupSegmentedBirthDate_();
+      canvases.forEach(id => setupCanvas(id));
+    });
+
+    window.addEventListener('resize', () => {
+      canvases.forEach(id => resizeCanvas(id));
+    });
+  
+    function displayDateTR(value) {
+      if (!value) return "";
+      if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        const p = value.split("-");
+        return p[2] + "." + p[1] + "." + p[0];
+      }
+      return value;
+    }
+
+
+  function navigateIyibisApp(appName, event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    var routes = {
+      portal: 'index.html',
+      aile: 'aile.html',
+      saha: 'saha.html',
+      'saha-tespit': 'saha-tespit.html',
+      'ayni-yardim': 'ayni-yardim.html',
+      'yayin-izni': 'yayin-izni.html'
+    };
+    window.top.location.href = routes[appName] || 'index.html';
+    return false;
+  }
+</script>
+
+<script id="iyibis-signature-darkmode-fix-v42">
+(function() {
+  function makeSignatureCanvasLight_(canvas) {
+    if (!canvas || canvas.tagName !== 'CANVAS') return;
+    canvas.style.backgroundColor = '#ffffff';
+    canvas.style.colorScheme = 'only light';
+    canvas.style.filter = 'none';
+
+    /* Yeni/boş canvas'ın gerçek piksel arka planını da beyaz yap.
+       Üzerinde çizim varsa burada tekrar boyamıyoruz. */
+    if (!canvas.dataset.iyibisLightSurfaceReady) {
+      var ctx = canvas.getContext('2d');
+      if (ctx && canvas.width > 0 && canvas.height > 0) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+      }
+      canvas.dataset.iyibisLightSurfaceReady = '1';
+    }
+  }
+
+  function prepareAllSignatureCanvases_() {
+    document.querySelectorAll('.sig-container canvas').forEach(makeSignatureCanvasLight_);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(prepareAllSignatureCanvases_, 50);
+    });
+  } else {
+    setTimeout(prepareAllSignatureCanvases_, 50);
+  }
+
+  window.addEventListener('resize', function() {
+    setTimeout(function() {
+      document.querySelectorAll('.sig-container canvas').forEach(function(canvas) {
+        canvas.style.backgroundColor = '#ffffff';
+        canvas.style.colorScheme = 'only light';
+      });
+    }, 80);
+  });
+
+  /* Temizle düğmesinden sonra canvas yine beyaz yüzeyle başlasın. */
+  document.addEventListener('click', function(ev) {
+    var btn = ev.target && ev.target.closest
+      ? ev.target.closest('.sig-clear, .btn-sig-clear')
+      : null;
+    if (!btn) return;
+
+    setTimeout(function() {
+      document.querySelectorAll('.sig-container canvas').forEach(function(canvas) {
+        var ctx = canvas.getContext('2d');
+        if (!ctx || canvas.width <= 0 || canvas.height <= 0) return;
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+        canvas.style.backgroundColor = '#ffffff';
+      });
+    }, 0);
+  });
 })();
 </script>
-</head>
-<body><div class="box"><div class="spinner"></div><strong>Ayni Yardım Teslimi açılıyor…</strong><p>Otomatik yönlendirme olmazsa <a href="https://script.google.com/macros/s/AKfycbxN5Og_5cG7vr1C5mC2APZ2H7DB_rQULb68lf8c/exec?app=ayni-yardim">buraya tıklayın</a>.</p></div></body>
+
+
+<script id="iyibis-ayni-today-date-safety-v42">
+(function() {
+  function ensureToday_() {
+    var el = document.getElementById('form-date');
+    if (!el || el.value) return;
+    var d = new Date();
+    var local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+    el.value = local.toISOString().slice(0, 10);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureToday_);
+  } else {
+    ensureToday_();
+  }
+})();
+</script>
+
+</body>
 </html>
