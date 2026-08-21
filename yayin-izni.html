@@ -973,6 +973,177 @@ body {
       }
     }
 
+
+// ============================================================================
+// İYİBİS 5.0.36 — PDF LIGHT MODE GUARD
+// PDF üretimi sırasında dark mode / Dark Reader etkisini yalnız gerektiğinde
+// devre dışı bırakır. Gündüz modunda mevcut görünüm aynen korunur.
+// ============================================================================
+
+function iyibisRgbIsDark_(rgb) {
+  var m = String(rgb || '').match(/rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/i);
+  if (!m) return false;
+  var r = Number(m[1]), g = Number(m[2]), b = Number(m[3]);
+  var luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  return luminance < 0.48;
+}
+
+function iyibisPdfNeedsLightGuard_(element) {
+  try {
+    var root = document.documentElement;
+    var darkReader =
+      !!root.getAttribute('data-darkreader-scheme') ||
+      !!root.getAttribute('data-darkreader-mode') ||
+      !!document.querySelector('style.darkreader, link.darkreader, [data-darkreader-inline-bgcolor], [data-darkreader-inline-color]');
+
+    var osDark = !!(
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    );
+
+    var elementBg = element ? getComputedStyle(element).backgroundColor : '';
+    var bodyBg = document.body ? getComputedStyle(document.body).backgroundColor : '';
+    var renderedDark = iyibisRgbIsDark_(elementBg) || iyibisRgbIsDark_(bodyBg);
+
+    return darkReader || osDark || renderedDark;
+  } catch (_) {
+    return false;
+  }
+}
+
+function iyibisSetImportant_(el, prop, value) {
+  if (!el || !el.style) return;
+  el.style.setProperty(prop, value, 'important');
+}
+
+function iyibisPrepareCanvasWhiteForPdf_(root) {
+  if (!root) return;
+  root.querySelectorAll('canvas').forEach(function(canvas) {
+    try {
+      var ctx = canvas.getContext('2d');
+      if (!ctx || canvas.width < 1 || canvas.height < 1) return;
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-over';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.restore();
+      iyibisSetImportant_(canvas, 'background', '#ffffff');
+      iyibisSetImportant_(canvas, 'background-color', '#ffffff');
+      iyibisSetImportant_(canvas, 'filter', 'none');
+    } catch (_) {}
+  });
+}
+
+function iyibisLightenPdfClone_(cloneDoc, sourceElementId) {
+  if (!cloneDoc) return;
+
+  // Dark Reader'ın klona taşıdığı dinamik stil katmanlarını kaldır.
+  cloneDoc.querySelectorAll(
+    'style.darkreader, link.darkreader, style[data-darkreader], link[data-darkreader]'
+  ).forEach(function(node) {
+    try { node.remove(); } catch (_) {}
+  });
+
+  var html = cloneDoc.documentElement;
+  var body = cloneDoc.body;
+  if (html) {
+    iyibisSetImportant_(html, 'color-scheme', 'only light');
+    iyibisSetImportant_(html, 'background', '#ffffff');
+    iyibisSetImportant_(html, 'background-color', '#ffffff');
+    iyibisSetImportant_(html, 'filter', 'none');
+  }
+  if (body) {
+    iyibisSetImportant_(body, 'color-scheme', 'only light');
+    iyibisSetImportant_(body, 'background', '#ffffff');
+    iyibisSetImportant_(body, 'background-color', '#ffffff');
+    iyibisSetImportant_(body, 'color', '#111827');
+    iyibisSetImportant_(body, 'filter', 'none');
+  }
+
+  var root = sourceElementId
+    ? cloneDoc.getElementById(sourceElementId)
+    : null;
+  if (!root) return;
+
+  iyibisSetImportant_(root, 'background', '#ffffff');
+  iyibisSetImportant_(root, 'background-color', '#ffffff');
+  iyibisSetImportant_(root, 'color', '#111827');
+  iyibisSetImportant_(root, 'color-scheme', 'only light');
+  iyibisSetImportant_(root, 'filter', 'none');
+  iyibisSetImportant_(root, 'box-shadow', 'none');
+
+  // Belgenin tüm yüzeyleri beyaz, normal metinler siyah.
+  root.querySelectorAll('*').forEach(function(el) {
+    if (!el || !el.style) return;
+
+    iyibisSetImportant_(el, 'background-color', '#ffffff');
+    iyibisSetImportant_(el, 'background-image', 'none');
+    iyibisSetImportant_(el, 'color', '#111827');
+    iyibisSetImportant_(el, '-webkit-text-fill-color', '#111827');
+    iyibisSetImportant_(el, 'text-shadow', 'none');
+    iyibisSetImportant_(el, 'filter', 'none');
+    iyibisSetImportant_(el, 'mix-blend-mode', 'normal');
+
+    if (/^(INPUT|TEXTAREA|SELECT|OPTION)$/.test(el.tagName || '')) {
+      iyibisSetImportant_(el, 'background', '#ffffff');
+      iyibisSetImportant_(el, 'background-color', '#ffffff');
+      iyibisSetImportant_(el, 'color', '#111827');
+      iyibisSetImportant_(el, '-webkit-text-fill-color', '#111827');
+      iyibisSetImportant_(el, 'border-color', '#cbd5e1');
+      iyibisSetImportant_(el, 'opacity', '1');
+    }
+
+    if (/^(TABLE|THEAD|TBODY|TFOOT|TR|TD)$/.test(el.tagName || '')) {
+      iyibisSetImportant_(el, 'background', '#ffffff');
+      iyibisSetImportant_(el, 'background-color', '#ffffff');
+      iyibisSetImportant_(el, 'color', '#111827');
+      iyibisSetImportant_(el, 'border-color', '#d1d5db');
+    }
+
+    if ((el.tagName || '') === 'IMG') {
+      iyibisSetImportant_(el, 'filter', 'none');
+      iyibisSetImportant_(el, 'opacity', '1');
+    }
+  });
+
+  // Başlıklar ve tablo başlıkları özgün İYİBİS bordo renginde.
+  root.querySelectorAll(
+    'h1, h2, h3, h4, .section-title, .header-titles h1, ' +
+    '.header-date-box label, .signature-card h4, th, ' +
+    '[data-iyibis-pdf-heading]'
+  ).forEach(function(el) {
+    iyibisSetImportant_(el, 'color', '#8b1d24');
+    iyibisSetImportant_(el, '-webkit-text-fill-color', '#8b1d24');
+  });
+
+  // PDF şablonlarında section header satırları açık/beyaz yüzeyde kalır.
+  root.querySelectorAll('th').forEach(function(el) {
+    iyibisSetImportant_(el, 'background', '#ffffff');
+    iyibisSetImportant_(el, 'background-color', '#ffffff');
+    iyibisSetImportant_(el, 'border-color', '#d1d5db');
+  });
+
+  // İmza alanları: gerçek piksel zemini de beyaza sabitlenir.
+  iyibisPrepareCanvasWhiteForPdf_(root);
+}
+
+function iyibisPdfCanvasOptions_(element, sourceElementId, normalOptions) {
+  var opts = Object.assign({}, normalOptions || {});
+  if (!iyibisPdfNeedsLightGuard_(element)) {
+    return opts; // Gündüz modunda mevcut PDF davranışına dokunma.
+  }
+
+  // Koyu modda gerçek canvas imza yüzeylerini PDF yakalanmadan önce beyazlaştır.
+  iyibisPrepareCanvasWhiteForPdf_(element);
+
+  opts.backgroundColor = '#ffffff';
+  opts.onclone = function(cloneDoc) {
+    iyibisLightenPdfClone_(cloneDoc, sourceElementId);
+  };
+  return opts;
+}
+
+
     async function pdfYayinUret(indir = true) {
       const element = document.getElementById('formCardYayin');
       const kisi = document.getElementById('yayin_ad').value || "Muvafakat";
@@ -982,7 +1153,7 @@ body {
         margin: [8, 10, 8, 10],
         filename: `GIH_Yayin_Izni_${cleanName}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0, ignoreElements: el => el.classList.contains('no-print') },
+        html2canvas: iyibisPdfCanvasOptions_(element, 'formCardYayin', { scale: 2, useCORS: true, scrollX: 0, scrollY: 0, ignoreElements: el => el.classList.contains('no-print') }),
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
