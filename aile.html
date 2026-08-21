@@ -5324,6 +5324,59 @@ function restorePersistentCentralSession_() {
     });
 }
 
+
+/*
+ * 5.0 FINAL — GLOBAL BACKEND BRIDGE
+ * Login bootstrap kendi IIFE scope'unda bir serverCall tanımlar.
+ * Panelin geri kalanı ise global gs* wrapper'larından çağrı yapar.
+ * Bu global köprü iki scope'u kalıcı olarak birbirine bağlar.
+ */
+function serverCall(method) {
+    var args = Array.prototype.slice.call(arguments, 1);
+
+    // Login bootstrap tarafından hazırlanmış köprü varsa onu kullan.
+    if (typeof window.iyibisServerCall === 'function') {
+        return window.iyibisServerCall.apply(window, [method].concat(args));
+    }
+
+    // Emniyet fallback'i: Apps Script HTML Service.
+    var hasAppsScript = !!(
+        window.google &&
+        google.script &&
+        google.script.run &&
+        typeof google.script.run.withSuccessHandler === 'function'
+    );
+
+    // Emniyet fallback'i: statik frontend / Worker API.
+    var hasWebApi = !!(
+        window.IYIBIS_API &&
+        typeof window.IYIBIS_API.call === 'function'
+    );
+
+    return new Promise(function(resolve, reject) {
+        try {
+            if (hasAppsScript) {
+                var runner = google.script.run
+                    .withSuccessHandler(resolve)
+                    .withFailureHandler(reject);
+                runner[method].apply(runner, args);
+                return;
+            }
+
+            if (hasWebApi) {
+                Promise.resolve(window.IYIBIS_API.call(method, args))
+                    .then(resolve)
+                    .catch(reject);
+                return;
+            }
+
+            reject(new Error('İYİBİS backend bağlantısı hazır değil.'));
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
 /*
  * BETA:
  * Ana UI state'i önceki script bloğundan window üzerinden alınır.
