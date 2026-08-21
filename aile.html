@@ -512,7 +512,7 @@
 
 
 <style id="iyibis-active-horizontal-fit-v236">
-/* BETA — YALNIZ Onaylı Aileler tablosunu yatayda sayfaya sığdırır.
+/* BETA — YALNIZ Aktif Aileler tablosunu yatayda sayfaya sığdırır.
    Satır yüksekliği, dikey davranış, butonlar ve diğer sekmeler değiştirilmez. */
 #tab-mevcut .overflow-x-auto,
 #tab-mevcut .table-container {
@@ -879,7 +879,7 @@
     overflow-x: hidden !important;
   }
 
-  /* Onaylı Aileler ve Web Başvuruları: tablo kendi içinde yatay kaysın */
+  /* Aktif Aileler ve Web Başvuruları: tablo kendi içinde yatay kaysın */
   #tab-mevcut .table-container,
   #tab-mevcut .overflow-x-auto,
   #tab-web .iyibis-scroll-list,
@@ -2022,7 +2022,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <div id="mobileTabMenuPanel" class="hidden">
 <button type="button" onclick="switchTab('tab-mevcut'); closeMobileTabMenu()">
                     <i class="fa-solid fa-users text-emerald-400"></i>
-                    <span>Onaylı Aileler</span>
+                    <span>Aktif Aileler</span>
                     <span data-counter="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
                 </button>
 <button type="button" onclick="switchTab('tab-red'); closeMobileTabMenu()">
@@ -2053,7 +2053,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <div class="flex space-x-1 sm:space-x-4 border-t border-slate-800/80 pt-1 overflow-x-auto custom-scroll" id="desktopTabNav">
                 <button onclick="switchTab('tab-mevcut')" id="nav-tab-mevcut" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-users text-emerald-400"></i>
-                    <span>Onaylı Aileler</span>
+                    <span>Aktif Aileler</span>
                     <span data-counter="badge-count-mevcut" class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50">0</span>
                 </button>
                 <button onclick="switchTab('tab-red')" id="nav-tab-red" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
@@ -2086,16 +2086,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     <!-- MAIN CONTENT CONTAINER -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <!-- ================= TAB 1: ONAYLI AİLELER ================= -->
+        <!-- ================= TAB 1: AKTİF AİLELER ================= -->
         <div id="tab-mevcut" class="tab-content">
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/80 mb-4">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-users text-emerald-600"></i>Onaylı Aile Süreci
+                            <i class="fa-solid fa-database text-emerald-600"></i>Aktif Aileler Veri Kaynağı
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Onaylanan aileler burada izlenir; durum, öncelik, yapılan yardımlar ve aile bilgileri bu liste üzerinden yönetilir.</p>
+                        <p class="text-xs text-slate-500 mt-1">Aktif aile listesini ayrı Google E-Tablo dosyasından yeniler.</p>
                     </div>
                     <button id="btn-new-family" type="button" onclick="openNewFamilyModal()"
                             class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -2103,7 +2103,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </button>
                     <button id="btn-fetch-active-sheet" onclick="fetchActiveFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Onaylı Aileleri Güncelle
+                        <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Aktif Aileleri Güncelle
                     </button>
                     <button id="btn-refresh-assistance" onclick="importAssistanceFromSheet()"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -2146,16 +2146,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             </select>
                         </div>
                         <div class="flex items-center gap-1">
-                            <span class="text-slate-500 font-medium">Durum:</span>
-                            <select id="filter-status-mevcut-select" onchange="setStatusFilter(this.value)" class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none">
-                                <option value="ALL">Tüm Durumlar</option>
-                                <option value="KRİTİK">Kritik</option>
-                                <option value="TAKİP">Takip</option>
-                                <option value="STABİL">Stabil</option>
-                                <option value="DELİST">Liste Dışı</option>
-                            </select>
-                        </div>
-                        <div class="flex items-center gap-1">
                             <span class="text-slate-500 font-medium">Sıralama:</span>
                             <select id="sort-mevcut" onchange="renderMevcutTable()" class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none">
                                 <option value="default">Varsayılan Sıra</option>
@@ -2164,23 +2154,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                 <option value="kids-desc">Çocuk Sayısı (Çoktan Aza)</option>
                             </select>
                         </div>
-                        <div class="ml-auto flex items-center gap-2">
-                            <button type="button" onclick="resetApprovedFamilyFilters()"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
-                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
-                        </button>
-                            <button type="button" onclick="exportFilteredApprovedFamiliesToExcel()"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-sm">
-                            <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi İndir
-                        </button>
-                        </div>
                         <label class="flex items-center gap-1.5 cursor-pointer text-slate-600 bg-slate-50 px-2 py-1 rounded border border-slate-200">
                             <input type="checkbox" id="filter-special-mevcut" onchange="renderMevcutTable()" class="rounded text-emerald-600 focus:ring-0">
                             <span>Sadece Özel Durumu Olanlar</span>
                         </label>
                     </div>
                     <div class="text-slate-500">
-                        <span id="showing-count-mevcut" class="inline-flex min-w-[54px] items-center justify-center rounded-full border-2 border-emerald-500 bg-emerald-50 px-3 py-1 text-base font-bold text-rose-500 shadow-sm">0</span>
+                        Gösterilen: <span id="showing-count-mevcut" class="font-bold text-slate-800">0</span> aile
                     </div>
                 </div>
             </div>
@@ -2216,9 +2196,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-ban text-rose-600"></i>Ret Süreci
+                            <i class="fa-solid fa-database text-rose-600"></i>Ret Listesi Veri Kaynağı
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Başvurusu reddedilen aileler burada tutulur; kayıtlar gerektiğinde yeniden Onaylı Aile listesine alınabilir.</p>
+                        <p class="text-xs text-slate-500 mt-1">Ret listesini ayrı Google E-Tablo dosyasından yeniler.</p>
                     </div>
                     <button id="btn-fetch-red-sheet" onclick="fetchRedFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -2249,10 +2229,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <div class="text-slate-500 ml-2">
                             Kayıtlı Ret Sayısı: <span id="showing-count-red" class="font-bold text-slate-800">0</span>
                         </div>
-                        <button type="button" onclick="resetRedFilters()"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
-                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
-                        </button>
                     </div>
                 </div>
             </div>
@@ -2283,17 +2259,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         <div id="tab-web" class="tab-content hidden">
             <div class="bg-sky-50 border border-sky-200 text-sky-900 rounded-xl p-3 mb-4 text-xs">
                 <div class="font-bold mb-1">Başvuru Akışı</div>
-                <div>Web başvurusu için üç karar verilebilir: <b>Doğrudan Onayla</b> ile kişi Onaylı Ailelere alınır; <b>Sahaya Al</b> ile Saha Ziyareti kuyruğuna gönderilir; <b>Ret</b> ile Ret Listesine taşınır. Her işlemde hedef kayıt başarıyla oluşturulduktan sonra Web Başvuruları tablosundaki kaynak satır fiziksel olarak silinir.</div>
+                <div>Web başvurusu için üç karar verilebilir: <b>Doğrudan Onayla</b> ile kişi Aktif Ailelere alınır; <b>Sahaya Al</b> ile Saha Ziyareti kuyruğuna gönderilir; <b>Ret</b> ile Ret Listesine taşınır. Her işlemde hedef kayıt başarıyla oluşturulduktan sonra Web Başvuruları tablosundaki kaynak satır fiziksel olarak silinir.</div>
             </div>
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/80 mb-4">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-globe text-sky-600"></i>
-                            Web Başvuru Süreci
+                            <i class="fa-solid fa-cloud-arrow-down text-sky-600"></i>
+                            Web Başvuru Veri Kaynağı
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Yeni web başvuruları burada değerlendirilir; doğrudan onay, saha ziyareti veya ret kararıyla ilgili sürece aktarılır.</p>
+                        <p class="text-xs text-slate-500 mt-1">Ayrı Google E-Tablo dosyasındaki başvuruları bu panele aktarır.</p>
                     </div>
                     <button id="btn-fetch-web-sheet" onclick="fetchWebApplicationsFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -2319,6 +2295,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
                     <div class="flex flex-wrap items-center gap-1.5 text-xs">
                         <span class="font-semibold text-slate-500 mr-1">Durum:</span>
+                        <select id="filter-web-status" onchange="renderWebTable()" class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none">
+                            <option value="ALL">Tüm Başvurular</option>
+                            <option value="Beklemede">⏳ Beklemede</option>
+                            <option value="ONAY">✅ Onaylandı</option>
+                            <option value="ŞÜPHELİ">⚠️ Şüpheli</option>
+                            <option value="RET">❌ Ret Edildi</option>
+                        </select>
                         <select id="filter-web-district" onchange="renderWebTable()" class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none ml-2">
                             <option value="ALL">Tüm İlçeler</option>
                             <option value="Şahinbey">Şahinbey</option>
@@ -2327,10 +2310,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <div class="text-slate-500 ml-3">
                             Gösterilen: <span id="showing-count-web" class="font-bold text-slate-800">0</span>
                         </div>
-                        <button type="button" onclick="resetWebFilters()"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
-                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
-                        </button>
                     </div>
                 </div>
             </div>
@@ -2383,29 +2362,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <h3 class="font-bold text-slate-900">Saha Bekleyen / Değerlendirilen Aileler</h3>
                         <p class="text-xs text-slate-500 mt-0.5">Başvuru → Saha → Değerlendirme → Onay / Ret</p>
                     </div>
-                    <div class="flex flex-wrap gap-2 items-center">
-                        <input id="search-saha" oninput="renderSahaTable()" type="text" placeholder="İsim / TC ara"
-                               class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs min-w-0">
-                        <select id="filter-saha-district" onchange="renderSahaTable()" class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs">
-                            <option value="ALL">Tüm İlçeler</option>
-                            <option value="ŞAHİNBEY">Şahinbey</option>
-                            <option value="ŞEHİTKAMİL">Şehitkamil</option>
-                        </select>
+                    <div class="flex gap-2">
                         <select id="filter-saha-stage" onchange="renderSahaTable()" class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs">
                             <option value="ALL">Tüm Aşamalar</option>
                             <option value="SAHA YAPILACAK">Saha Yapılacak</option>
                             <option value="DEĞERLENDİRMEDE">Değerlendirmede</option>
                         </select>
-                        <button type="button" onclick="exportFilteredFieldVisitsToExcel()"
-                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm">
-                            <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi İndir
-                        </button>
-                        <button type="button" onclick="resetFieldVisitFilters()"
-                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-semibold">
-                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
-                        </button>
-                        <span id="showing-count-saha"
-                              class="inline-flex min-w-[54px] items-center justify-center rounded-full border-2 border-emerald-500 bg-emerald-50 px-3 py-1 text-base font-bold text-rose-500 shadow-sm">0</span>
+                        <input id="search-saha" oninput="renderSahaTable()" type="text" placeholder="İsim / TC ara"
+                               class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs min-w-0">
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -2430,21 +2394,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Aile Liste Durumu</p>
-                        <div class="mt-2 space-y-1 text-xs">
-                            <div class="flex items-center justify-between gap-4">
-                                <span class="text-slate-500">Toplam Listelenmiş Aile:</span>
-                                <span id="stat-total-listed" class="font-extrabold text-slate-900">0</span>
-                            </div>
-                            <div class="flex items-center justify-between gap-4">
-                                <span class="text-emerald-700 font-semibold">Onaylı:</span>
-                                <span id="stat-total-active" class="font-extrabold text-emerald-700">0</span>
-                            </div>
-                            <div class="flex items-center justify-between gap-4">
-                                <span class="text-slate-500">Liste Dışı:</span>
-                                <span id="stat-total-delist" class="font-extrabold text-slate-600">0</span>
-                            </div>
-                        </div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            Aktif Aile <span class="text-slate-400 font-medium">/ Liste Dışı</span>
+                        </p>
+                        <h3 class="text-2xl font-extrabold mt-1">
+                            <span id="stat-total-active" class="text-slate-900">0</span>
+                            <span class="text-slate-300 font-bold"> / </span>
+                            <span id="stat-total-delist" class="text-slate-400">0</span>
+                        </h3>
+                        <p class="text-[11px] text-emerald-600 font-medium mt-1"><i class="fa-solid fa-circle-check mr-1"></i>Sistemde Kayıtlı</p>
                     </div>
                     <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-house-chimney"></i>
@@ -2554,8 +2512,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                     <i class="fa-brands fa-google-drive"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-sm font-bold text-slate-800">Kullanılabilir Depolama Alanı</h3>
-                                    <p class="text-[11px] text-slate-500 mt-0.5">İYİBİS hesabının kullanılabilir depolama durumu sisteme gönderilen form PDF'leri ve saha fotoğraflarının bulutta kapladığı yeri gösterir</p>
+                                    <h3 class="text-sm font-bold text-slate-800">Google Drive Depolama</h3>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">İYİBİS hesabının kullanılabilir depolama durumu</p>
                                 </div>
                             </div>
                         </div>
@@ -2605,7 +2563,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             <span id="download-all-label"><i class="fa-solid fa-file-excel mr-1.5"></i>Tüm Tabloların Güncel Halini İndir</span>
                             <span id="download-all-loading" class="hidden inline-flex items-center gap-1.5"><span class="inline-block w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>Hazırlanıyor...</span>
                         </button>
-                        <button onclick="downloadSourceTable('active')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-house mr-1.5 text-emerald-400"></i>Onaylı Aileler</button>
+                        <button onclick="downloadSourceTable('active')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-house mr-1.5 text-emerald-400"></i>Aktif Aileler</button>
                         <button onclick="downloadSourceTable('red')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-ban mr-1.5 text-rose-400"></i>Ret Listesi</button>
                         <button onclick="downloadSourceTable('web')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-inbox mr-1.5 text-sky-400"></i>Web Başvuruları</button>
                         <button onclick="downloadSourceTable('field')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-clipboard-check mr-1.5 text-amber-400"></i>Saha Tespit</button>
@@ -2650,13 +2608,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <div>İYİBİS Sistem Veritabanı operasyonel ana kaynaktır. Aşağıdaki harici Google E-Tablolar ham kaynak / replika / yedek olarak korunur; panel doğrudan bu tablolardan çalışmaz.</div>
                 </div>
                 <div class="p-3 rounded-lg bg-emerald-50 border border-emerald-200 space-y-3">
-                    <div class="font-bold text-emerald-900">Onaylı Aileler - Ayrı Google E-Tablo</div>
+                    <div class="font-bold text-emerald-900">Aktif Aileler - Ayrı Google E-Tablo</div>
                     <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Onaylı Aileler Spreadsheet ID / URL</label>
+                        <label class="block font-semibold text-slate-700 mb-1">Aktif Aileler Spreadsheet ID / URL</label>
                         <input type="text" id="config-active-sheet-id" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs font-mono">
                     </div>
                     <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Onaylı Aileler Sekme Adı</label>
+                        <label class="block font-semibold text-slate-700 mb-1">Aktif Aileler Sekme Adı</label>
                         <input type="text" id="config-active-sheet-name" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs">
                     </div>
                 </div>
@@ -2747,7 +2705,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                     <div>
                         <h3 class="text-base font-bold">Yeni Aile Ekle</h3>
-                        <p class="text-xs text-slate-400">Kayıt doğrudan Onaylı Aileler Google E-Tablosuna yazılır.</p>
+                        <p class="text-xs text-slate-400">Kayıt doğrudan Aktif Aileler Google E-Tablosuna yazılır.</p>
                     </div>
                 </div>
                 <button type="button" onclick="closeModal('newFamilyModal')" class="text-slate-400 hover:text-white p-2 text-lg">
@@ -2758,7 +2716,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             <div class="p-6 overflow-y-auto custom-scroll text-xs space-y-5 min-h-0">
                 <div class="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900">
                     <i class="fa-solid fa-circle-info mr-1"></i>
-                    Ad Soyad ve TC Kimlik No yeni kaydın kimliğini oluşturur. Aynı TC onaylı listede varsa ikinci kayıt oluşturulmaz.
+                    Ad Soyad ve TC Kimlik No yeni kaydın kimliğini oluşturur. Aynı TC aktif listede varsa ikinci kayıt oluşturulmaz.
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
@@ -2822,10 +2780,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Aylık Gelir</label>
+                        <label class="block font-semibold text-slate-700 mb-1">Hane Geliri (Aylık)</label>
                         <input id="new-family-income" type="text" inputmode="decimal"
                                class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none"
-                               placeholder="Aylık gelir">
+                               placeholder="Hane geliri (aylık)">
                     </div>
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1">Gider / Kira</label>
@@ -2850,7 +2808,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 </button>
                 <button id="new-family-save-btn" type="button" onclick="saveNewFamily()"
                         class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs shadow-sm">
-                    <i class="fa-solid fa-floppy-disk mr-1.5"></i>Aileyi Onaylı Listeye Kaydet
+                    <i class="fa-solid fa-floppy-disk mr-1.5"></i>Aileyi Aktif Listeye Kaydet
                 </button>
             </div>
         </div>
@@ -2955,9 +2913,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <input id="m-ev-edit" type="text" class="hidden mt-1 w-full p-2 bg-white border border-slate-300 rounded-lg font-semibold text-sm text-slate-800 focus:ring-2 focus:ring-emerald-500" placeholder="Konut / ev bilgisi">
                     </div>
                     <div>
-                        <span class="text-slate-400 font-medium">Aylık Gelir:</span>
+                        <span class="text-slate-400 font-medium">Hane Geliri (Aylık):</span>
                         <p id="m-gelir" class="font-semibold text-emerald-700 mt-0.5">--</p>
-                        <input id="m-gelir-edit" type="text" inputmode="decimal" class="hidden mt-1 w-full p-2 bg-white border border-slate-300 rounded-lg font-semibold text-sm text-slate-800 focus:ring-2 focus:ring-emerald-500" placeholder="Aylık gelir">
+                        <input id="m-gelir-edit" type="text" inputmode="decimal" class="hidden mt-1 w-full p-2 bg-white border border-slate-300 rounded-lg font-semibold text-sm text-slate-800 focus:ring-2 focus:ring-emerald-500" placeholder="Hane geliri (aylık)">
                     </div>
                     <div>
                         <span class="text-slate-400 font-medium">Gider / Kira:</span>
@@ -2981,12 +2939,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="bg-white p-3.5 rounded-lg border border-slate-200 space-y-2">
                     <span class="text-slate-400 block font-medium">Yapılan Yardımlar & Notlar:</span>
                     <div id="m-teslim-edilen-detay" class="p-2.5 bg-emerald-50 text-emerald-900 font-medium rounded border border-emerald-200">--</div>
-                    <div class="mt-2">
-                        <span class="text-slate-400 block font-medium mb-1">Liste Durumu Geçmişi:</span>
-                        <div id="m-list-status-history" class="p-2.5 bg-amber-50 text-amber-950 rounded border border-amber-200 text-[11px]">
-                            Liste durumu değişikliği bulunmuyor.
-                        </div>
-                    </div>
                     <button id="m-open-assistance" type="button" class="mt-2 px-3 py-2 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 rounded-lg font-semibold text-xs"><i class="fa-solid fa-hand-holding-heart mr-1"></i>Yapılan Yardımları Aç</button>
                     <div class="text-[11px] text-slate-600 pt-1">
                         <span class="text-slate-400">Ziyaret Edenler:</span> <span id="m-ziyaretciler" class="font-semibold text-slate-800 ml-1">--</span>
@@ -3031,7 +2983,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             class="inline-flex items-center justify-center px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold transition">
                         <i class="fa-solid fa-user-slash mr-1.5"></i>Liste Dışı Bırak
                     </button>
-                    <button id="family-detail-approve-btn" type="button" class="hidden inline-flex items-center justify-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition"><i class="fa-solid fa-user-check mr-1.5"></i>Onay'a Al</button>
                     <button id="family-detail-ret-btn" type="button"
                             class="inline-flex items-center justify-center px-4 py-2.5 bg-red-800 hover:bg-red-900 text-white rounded-lg text-xs font-semibold transition">
                         <i class="fa-solid fa-ban mr-1.5"></i>Ret Listesine Taşı
@@ -3183,7 +3134,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-    <!-- ONAYLI AİLE İŞLEMLER AÇILIR MENÜSÜ -->
+    <!-- AKTİF AİLE İŞLEMLER AÇILIR MENÜSÜ -->
     <div id="familyActionMenu"
          class="hidden fixed z-[120] w-56 bg-white rounded-xl shadow-2xl border border-slate-200 py-1.5 text-xs overflow-hidden">
         <button id="fam-action-info" type="button"
@@ -3266,7 +3217,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             </div>
             <div class="bg-slate-50 p-4 border-t border-slate-200 flex justify-end gap-2">
                 <button type="button" onclick="finalizeSahaDecision('red')" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-bold text-xs"><i class="fa-solid fa-xmark mr-1"></i>Ret</button>
-                <button type="button" onclick="finalizeSahaDecision('active')" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs"><i class="fa-solid fa-check mr-1"></i>Onayla ve Onaylı Aileye Al</button>
+                <button type="button" onclick="finalizeSahaDecision('active')" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-xs"><i class="fa-solid fa-check mr-1"></i>Onayla ve Aktif Aileye Al</button>
             </div>
         </div>
     </div>
@@ -3289,10 +3240,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div>
                     <h4 class="font-bold text-sm text-slate-800 mb-2">Kayıtlı Yardımlar</h4>
                     <div id="assistance-history" class="space-y-2 text-xs"></div>
-                </div>
-                <div id="field-visit-support-panel">
-                    <h4 class="font-bold text-sm text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-person-walking text-emerald-600"></i>Saha Ziyaretinde Verilen Destekler</h4>
-                    <div id="field-visit-support-text" class="p-3 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-900 text-xs">Kayıtlı saha desteği bulunmuyor.</div>
                 </div>
                 <div class="border-t border-slate-200 pt-4">
                     <div class="flex items-center justify-between gap-3 mb-3">
@@ -3757,85 +3704,27 @@ window.addEventListener('pageshow', function() {
 
 function setStatusFilter(status) {
     appState.currentStatusFilter = status;
-
     document.querySelectorAll('.status-filter-btn').forEach(function (btn) {
         btn.classList.remove('ring-2', 'ring-slate-900', 'shadow-sm');
     });
-
     var activeBtn = document.getElementById('filter-status-' + status);
     if (activeBtn)
         activeBtn.classList.add('ring-2', 'ring-slate-900', 'shadow-sm');
-
-    var select = document.getElementById('filter-status-mevcut-select');
-    if (select && select.value !== status)
-        select.value = status;
-
     renderMevcutTable();
 }
-
-
-function resetApprovedFamilyFilters() {
-    var search = document.getElementById('search-mevcut');
-    var district = document.getElementById('filter-district-mevcut');
-    var status = document.getElementById('filter-status-mevcut-select');
-    var special = document.getElementById('filter-special-mevcut');
-    var sort = document.getElementById('sort-mevcut');
-    if (search) search.value = '';
-    if (district) district.value = 'ALL';
-    if (special) special.checked = false;
-    if (sort) sort.value = 'default';
-    if (status) status.value = 'ALL';
-    appState.currentStatusFilter = 'ALL';
-    document.querySelectorAll('.status-filter-btn').forEach(function (btn) {
-        btn.classList.remove('ring-2', 'ring-slate-900', 'shadow-sm');
-    });
-    var allBtn = document.getElementById('filter-status-ALL');
-    if (allBtn) allBtn.classList.add('ring-2', 'ring-slate-900', 'shadow-sm');
-    renderMevcutTable();
-}
-
-function resetFieldVisitFilters() {
-    var search = document.getElementById('search-saha');
-    var district = document.getElementById('filter-saha-district');
-    var stage = document.getElementById('filter-saha-stage');
-    if (search) search.value = '';
-    if (district) district.value = 'ALL';
-    if (stage) stage.value = 'ALL';
-    renderSahaTable();
-}
-
-function resetRedFilters() {
-    var search = document.getElementById('search-red');
-    var district = document.getElementById('filter-district-red');
-    if (search) search.value = '';
-    if (district) district.value = 'ALL';
-    renderRedTable();
-}
-
-function resetWebFilters() {
-    var search = document.getElementById('search-web');
-    var district = document.getElementById('filter-web-district');
-    if (search) search.value = '';
-    if (district) district.value = 'ALL';
-    renderWebTable();
-}
-
-function getFilteredApprovedFamilies_() {
+function renderMevcutTable() {
     var query = (document.getElementById('search-mevcut').value || '').toLowerCase().trim();
     var district = document.getElementById('filter-district-mevcut').value;
     var sortVal = document.getElementById('sort-mevcut').value;
     var specialOnly = document.getElementById('filter-special-mevcut').checked;
-
     var list = appState.mevcut.filter(function (item) {
-        var status = (item.durumu || '').trim().toUpperCase();
-
-        if (appState.currentStatusFilter !== 'ALL' && status !== appState.currentStatusFilter)
+        var s = (item.durumu || '').trim().toUpperCase();
+        if (appState.currentStatusFilter !== 'ALL' && s !== appState.currentStatusFilter)
             return false;
         if (district !== 'ALL' && !(item.bolge || '').toUpperCase().includes(district))
             return false;
         if (specialOnly && (!item.ozel_durum || item.ozel_durum.trim() === ''))
             return false;
-
         if (query) {
             var match = (item.ad_soyad || '').toLowerCase().includes(query) ||
                 (item.tc || '').toString().includes(query) ||
@@ -3846,177 +3735,38 @@ function getFilteredApprovedFamilies_() {
         }
         return true;
     });
-
     if (sortVal === 'metric-desc') {
-        list.sort(function (a, b) {
-            return (normalizeMetricScore(b.metrik_puani) || 0) -
-                (normalizeMetricScore(a.metrik_puani) || 0);
-        });
-    } else if (sortVal === 'name-asc') {
-        list.sort(function (a, b) {
-            return (a.ad_soyad || '').localeCompare(b.ad_soyad || '', 'tr');
-        });
-    } else if (sortVal === 'kids-desc') {
-        list.sort(function (a, b) {
-            return parseInt(b.cocuk_sayisi || 0) - parseInt(a.cocuk_sayisi || 0);
-        });
+        list.sort(function (a, b) { return (normalizeMetricScore(b.metrik_puani) || 0) - (normalizeMetricScore(a.metrik_puani) || 0); });
     }
-
-    return list;
-}
-
-function getFilteredFieldVisits_() {
-    var searchEl = document.getElementById('search-saha');
-    var stageEl = document.getElementById('filter-saha-stage');
-    var districtEl = document.getElementById('filter-saha-district');
-
-    var q = ((searchEl && searchEl.value) || '').toLowerCase().trim();
-    var stage = (stageEl && stageEl.value) || 'ALL';
-    var district = ((districtEl && districtEl.value) || 'ALL').toLocaleUpperCase('tr-TR');
-
-    return (appState.saha || []).filter(function (x) {
-        var xStage = (x.asama || '').trim().toLocaleUpperCase('tr-TR');
-        var xDistrict = (x.ilce || x.bolge || '').trim().toLocaleUpperCase('tr-TR');
-
-        if (stage !== 'ALL' && xStage !== stage)
-            return false;
-        if (district !== 'ALL' && !xDistrict.includes(district))
-            return false;
-
-        if (q) {
-            var matches = (x.ad_soyad || '').toLowerCase().includes(q) ||
-                String(x.tc || '').includes(q) ||
-                String(x.telefon || '').toLowerCase().includes(q);
-            if (!matches)
-                return false;
-        }
-        return true;
-    });
-}
-
-function iyibisExcelDateStamp_() {
-    var d = new Date();
-    var pad = function (n) { return String(n).padStart(2, '0'); };
-    return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) +
-        '_' + pad(d.getHours()) + pad(d.getMinutes());
-}
-
-function setExcelColumnWidths_(ws, widths) {
-    ws['!cols'] = (widths || []).map(function (w) {
-        return { wch: w };
-    });
-}
-
-function exportFilteredApprovedFamiliesToExcel() {
-    if (typeof XLSX === 'undefined') {
-        alert('Excel dışa aktarma kütüphanesi yüklenemedi.');
-        return;
+    else if (sortVal === 'name-asc') {
+        list.sort(function (a, b) { return (a.ad_soyad || '').localeCompare(b.ad_soyad || ''); });
     }
-
-    var list = getFilteredApprovedFamilies_();
-    if (!list.length) {
-        alert('Seçili filtrelere uygun indirilecek aile bulunamadı.');
-        return;
+    else if (sortVal === 'kids-desc') {
+        list.sort(function (a, b) { return parseInt(b.cocuk_sayisi || 0) - parseInt(a.cocuk_sayisi || 0); });
     }
-
-    var rows = list.map(function (item) {
-        return {
-            'Ad Soyad': item.ad_soyad || '',
-            'TC Kimlik No': String(item.tc || ''),
-            'Durum': ((item.durumu || '').trim().toUpperCase() === 'DELİST') ? 'LİSTE DIŞI' : (item.durumu || ''),
-            'Değerlendirme Puanı': normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '',
-            'Telefon': item.iletisim || '',
-            'İlçe / Bölge': item.bolge || '',
-            'Adres': item.adres || '',
-            'Konut Durumu': item.ev || '',
-            'Gelir': item.gelir || '',
-            'Gider': item.gider || '',
-            'Eş Durumu': item.es_durumu || '',
-            'Çocuk Sayısı': item.cocuk_sayisi || '',
-            'Kız Çocuk': item.cocuk_kiz || '',
-            'Erkek Çocuk': item.cocuk_erkek || '',
-            'Özel Durum': item.ozel_durum || '',
-            'Talep': item.talep || '',
-            'Ziyaret Edenler': item.ziyaret_edenler || '',
-            'Yapılan Destekler': item.teslim_edilen || getFieldVisitSupportText_(item) || ''
-        };
-    });
-
-    var ws = XLSX.utils.json_to_sheet(rows);
-    setExcelColumnWidths_(ws, [28, 15, 16, 18, 16, 18, 42, 18, 16, 16, 18, 13, 12, 12, 34, 34, 24, 40]);
-
-    var wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Onaylı Aileler');
-    XLSX.writeFile(wb, 'IYIBIS_Onayli_Aileler_Filtreli_' + iyibisExcelDateStamp_() + '.xlsx');
-}
-
-function exportFilteredFieldVisitsToExcel() {
-    if (typeof XLSX === 'undefined') {
-        alert('Excel dışa aktarma kütüphanesi yüklenemedi.');
-        return;
-    }
-
-    var list = getFilteredFieldVisits_();
-    if (!list.length) {
-        alert('Seçili filtrelere uygun indirilecek saha kaydı bulunamadı.');
-        return;
-    }
-
-    var rows = list.map(function (x) {
-        return {
-            'Ad Soyad': x.ad_soyad || '',
-            'TC Kimlik No': String(x.tc || ''),
-            'Başvuru / Application ID': x.application_id || x.id || '',
-            'Telefon': x.telefon || '',
-            'İlçe': x.ilce || x.bolge || '',
-            'Aşama': x.asama || 'SAHA YAPILACAK',
-            'Başvuru Talebi': x.talep || '',
-            'Saha Raporu': x.saha_raporu || '',
-            'Saha Form Tarihi': x.saha_form_tarihi || x.tarih || '',
-            'SYDV Görüşü': x.sydv_gorusu || '',
-            'Ziyarette Verilen Destekler': x.ziyarette_verilenler || x.saha_verilen_destekler || ''
-        };
-    });
-
-    var ws = XLSX.utils.json_to_sheet(rows);
-    setExcelColumnWidths_(ws, [28, 15, 24, 16, 16, 18, 36, 60, 18, 20, 42]);
-
-    var wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Saha Ziyareti');
-    XLSX.writeFile(wb, 'IYIBIS_Saha_Ziyareti_Filtreli_' + iyibisExcelDateStamp_() + '.xlsx');
-}
-
-
-function renderMevcutTable() {
-    var list = getFilteredApprovedFamilies_();
-
     document.getElementById('showing-count-mevcut').innerText = list.length;
     var tbody = document.getElementById('mevcut-table-body');
     tbody.innerHTML = '';
-
     if (list.length === 0) {
-        tbody.innerHTML = "<tr><td colspan=\"9\" class=\"text-center py-8 text-slate-400\">Arama kriterlerine uygun aile bulunamadı.</td></tr>";
+        tbody.innerHTML = "<tr><td colspan=\"9\" class=\"text-center py-8 text-slate-400\">Arama kriterlerine uygun aile bulunamad\u0131.</td></tr>";
         return;
     }
-
     list.forEach(function (item) {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
         var durum = (item.durumu || '').trim().toUpperCase();
-        var statusBadge = "<span class=\"badge-stabil px-2 py-0.5 rounded text-[11px] font-bold\">STABİL</span>";
-
+        var statusBadge = "<span class=\"badge-stabil px-2 py-0.5 rounded text-[11px] font-bold\">STAB\u0130L</span>";
         if (durum === 'KRİTİK')
-            statusBadge = "<span class=\"badge-kritik px-2 py-0.5 rounded text-[11px] font-bold\">🔴 KRİTİK</span>";
+            statusBadge = "<span class=\"badge-kritik px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDD34 KR\u0130T\u0130K</span>";
         else if (durum === 'TAKİP')
-            statusBadge = "<span class=\"badge-takip px-2 py-0.5 rounded text-[11px] font-bold\">🟡 TAKİP</span>";
+            statusBadge = "<span class=\"badge-takip px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDFE1 TAK\u0130P</span>";
         else if (durum === 'DELİST')
-            statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">⚫ LİSTE DIŞI</span>";
-
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(normalizeMetricScore(item.metrik_puani) !== null ? '(' + normalizeMetricScore(item.metrik_puani) + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || getFieldVisitSupportText_(item) || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            İşlemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
+            statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">\u26AB L\u0130STE DI\u015EI</span>";
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(normalizeMetricScore(item.metrik_puani) !== null ? '(' + normalizeMetricScore(item.metrik_puani) + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
-
+var currentFamilyActionMenuId = null;
 function closeFamilyActionMenu() {
     var menu = document.getElementById('familyActionMenu');
     if (menu)
@@ -4052,7 +3802,7 @@ function openFamilyActionMenu(event, id) {
         };
     }
     if (isDelisted) {
-        statusText.innerText = 'Onaylı Listeye Al';
+        statusText.innerText = 'Aktif Listeye Al';
         statusBtn.className = 'w-full flex items-center text-left px-3.5 py-2.5 hover:bg-emerald-50 text-emerald-700 font-semibold border-t border-slate-100';
         statusIcon.className = 'fa-solid fa-user-check w-6 text-emerald-600';
         statusBtn.onclick = function () {
@@ -4112,35 +3862,37 @@ document.addEventListener('click', function (e) {
 window.addEventListener('resize', closeFamilyActionMenu);
 window.addEventListener('scroll', closeFamilyActionMenu, true);
 function renderRedTable() {
-    var query=(document.getElementById('search-red').value||'').toLowerCase().trim();
-    var district=document.getElementById('filter-district-red').value;
-    var list=appState.red.filter(function(item){
-        if(district!=='ALL' && !(item.bolge||'').toUpperCase().includes(district)) return false;
-        if(query && !((item.ad_soyad||'').toLowerCase().includes(query)||(item.tc||'').toString().includes(query)||(item.adres||'').toLowerCase().includes(query))) return false;
+    var query = (document.getElementById('search-red').value || '').toLowerCase().trim();
+    var district = document.getElementById('filter-district-red').value;
+    var list = appState.red.filter(function (item) {
+        if (district !== 'ALL' && !(item.bolge || '').toUpperCase().includes(district))
+            return false;
+        if (query) {
+            var match = (item.ad_soyad || '').toLowerCase().includes(query) ||
+                (item.tc || '').toString().includes(query) ||
+                (item.adres || '').toLowerCase().includes(query);
+            if (!match)
+                return false;
+        }
         return true;
     });
-    document.getElementById('showing-count-red').innerText=list.length;
-    var tbody=document.getElementById('red-table-body'); tbody.innerHTML='';
-    list.forEach(function(item){
-        var tr=document.createElement('tr'); tr.className='hover:bg-slate-50/80 transition border-b border-slate-100';
-        tr.innerHTML='<td class="py-3 px-3"><button type="button" data-action="detail" class="text-left group"><div class="font-bold text-slate-900 group-hover:text-sky-700 group-hover:underline">'+(item.ad_soyad||'-')+'</div><div class="text-[11px] text-slate-400 font-mono">'+(item.tc||'-')+'</div></button></td>'+
-        '<td class="py-3 px-3"><div class="font-medium text-slate-700">'+(item.iletisim||'-')+'</div><div class="text-[11px] text-slate-500 truncate max-w-xs">'+(item.adres||'-')+'</div></td>'+
-        '<td class="py-3 px-3 whitespace-nowrap"><span class="font-semibold text-slate-700">'+(item.bolge||'-')+'</span></td>'+
-        '<td class="py-3 px-3"><div>'+(item.ev||'-')+'</div><div class="text-[11px] text-slate-500">Gelir: '+(item.gelir||'-')+'</div></td>'+
-        '<td class="py-3 px-3"><div class="font-semibold text-slate-800">'+(item.cocuk_sayisi||'-')+'</div><div class="text-[10px] text-slate-500">'+(item.cocuk_detay||'')+'</div></td>'+
-        '<td class="py-3 px-3 text-[11px] text-slate-600">'+(item.ziyaret_edenler||'-')+'</td>'+
-        '<td class="py-3 px-3 max-w-xs text-[11px] text-slate-700">'+(item.teslim_edilen||getFieldVisitSupportText_(item)||item.talep||'-')+'</td>'+
-        '<td class="py-3 px-3 text-right whitespace-nowrap"><div class="flex flex-col items-end gap-1.5"><span class="badge-red px-2 py-0.5 rounded text-[11px] font-bold">RET ALDI</span><button type="button" data-action="detail" class="px-2.5 py-1.5 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 rounded-md font-semibold text-[11px]"><i class="fa-solid fa-address-card mr-1"></i>Aile Bilgi Kartı</button><button type="button" data-action="approve" class="px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]"><i class="fa-solid fa-arrow-rotate-left mr-1"></i>Onaylı Listeye Al</button></div></td>';
-        tr.querySelectorAll('[data-action="detail"]').forEach(function(btn){ btn.addEventListener('click',function(){ viewFamilyDetail(item.id,'red'); }); });
-        var approve=tr.querySelector('[data-action="approve"]'); if(approve) approve.addEventListener('click',function(){ moveRedToActive(item.id); });
+    document.getElementById('showing-count-red').innerText = list.length;
+    var tbody = document.getElementById('red-table-body');
+    tbody.innerHTML = '';
+    list.forEach(function (item) {
+        var tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">".concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-slate-500 truncate max-w-xs\">").concat(item.adres || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><span class=\"font-semibold text-slate-700\">").concat(item.bolge || '-', "</span></td>\n                    <td class=\"py-3 px-3\"><div>").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\">Gelir: ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-semibold text-slate-800\">").concat(item.cocuk_sayisi || '-', "</div><div class=\"text-[10px] text-slate-500\">").concat(item.cocuk_detay || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs text-[11px] text-slate-700\">").concat(item.teslim_edilen || item.talep || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <div class=\"flex flex-col items-end gap-1.5\">\n                            <span class=\"badge-red px-2 py-0.5 rounded text-[11px] font-bold\">RET ALDI</span>\n                            <button onclick=\"moveRedToActive('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-arrow-rotate-left mr-1\"></i>Aktif Listeye Al\n                            </button>\n                        </div>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
-
 function renderWebTable() {
     var query = (document.getElementById('search-web').value || '').toLowerCase().trim();
+    var statusFilter = document.getElementById('filter-web-status').value;
     var district = document.getElementById('filter-web-district').value;
     var list = dedupeWebClient_(appState.web).filter(function (item) {
+        if (statusFilter !== 'ALL' && !(item.durum || '').toUpperCase().includes(statusFilter.toUpperCase()))
+            return false;
         if (district !== 'ALL' && !(item.ilce || '').toLowerCase().includes(district.toLowerCase()))
             return false;
         if (query) {
@@ -4321,7 +4073,7 @@ function moveActiveToRed(id) {
     if (!item)
         return;
 
-    if (!confirm((item.ad_soyad || 'Bu aileyi') + ' Onaylı Aileler listesinden çıkarıp Ret Listesine taşımak istediğinize emin misiniz?'))
+    if (!confirm((item.ad_soyad || 'Bu aileyi') + ' Aktif Aileler listesinden çıkarıp Ret Listesine taşımak istediğinize emin misiniz?'))
         return;
 
     setCentralBusy('Aile Ret Listesine Taşınıyor...');
@@ -4339,63 +4091,6 @@ function moveActiveToRed(id) {
 // Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
 
 // Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
-
-function getFieldVisitSupportsForFamily_(item) {
-    if (!item) return [];
-    var tc = normalizeTC(item.tc);
-    var name = normalizeName(item.ad_soyad);
-    var candidates = [];
-
-    function addValue_(value) {
-        var text = String(value || '').trim();
-        if (!text || text === '-' || /^yok$/i.test(text)) return;
-        if (candidates.indexOf(text) < 0) candidates.push(text);
-    }
-
-    // Backend yeni alanı doğrudan Aktif/Ret kaydına taşıyorsa öncelikle onu kullan.
-    addValue_(item.ziyarette_verilenler);
-    addValue_(item.saha_verilen_destekler);
-    addValue_(item.saha_ziyareti_destekleri);
-
-    // Geçmiş saha formları: aile SAHA ZİYARETİ kuyruğundan çıkmış olsa bile
-    // ham saha formu tablosundaki "Teslim Edilen Destekler" bilgisi korunur.
-    (appState.fieldSupportHistory || []).forEach(function (x) {
-        var sameTc = tc && normalizeTC(x.tc) === tc;
-        var sameName = name && normalizeName(x.ad_soyad) === name;
-        if (!sameTc && !sameName) return;
-        addValue_(x.verilen_destekler);
-    });
-
-    // Merkezi saha kayıtlarında aynı aileyi TC; TC yoksa ad-soyad üzerinden eşleştir.
-    (appState.saha || []).forEach(function (x) {
-        var sameTc = tc && normalizeTC(x.tc) === tc;
-        var sameName = !tc && name && normalizeName(x.ad_soyad) === name;
-        if (!sameTc && !sameName) return;
-
-        addValue_(x.ziyarette_verilenler);
-        addValue_(x.saha_verilen_destekler);
-        addValue_(x.saha_ziyareti_destekleri);
-        addValue_(x.verilen_destekler);
-
-        // Eski merkezi payload yalnız saha_raporu döndürüyorsa metinden güvenli fallback.
-        var report = String(x.saha_raporu || '');
-        var m = report.match(/(?:Ziyarette\s+Teslim\s+Edilen\s+Destekler|Verilen\s+Destekler|Teslim\s+Edilen\s+Destekler)\s*[:：-]\s*([^\n|]+)/i);
-        if (m && m[1]) addValue_(m[1]);
-    });
-    return candidates;
-}
-
-function getFieldVisitSupportText_(item) {
-    var values = getFieldVisitSupportsForFamily_(item);
-    return values.length ? values.join(' • ') : '';
-}
-
-function renderFieldVisitSupport_(item) {
-    var el = document.getElementById('field-visit-support-text');
-    if (!el) return;
-    var text = getFieldVisitSupportText_(item);
-    el.innerText = text || 'Kayıtlı saha desteği bulunmuyor.';
-}
 
 function getAssistanceEntriesForFamily_(item) {
     var keys = [];
@@ -4504,14 +4199,13 @@ function renderAssistanceHistory(item) {
 }
 
 function openAssistanceModal(id) {
-    var item = appState.mevcut.find(function (x) { return x.id === id; }) || appState.red.find(function (x) { return x.id === id; });
+    var item = appState.mevcut.find(function (x) { return x.id === id; });
     if (!item)
         return;
     currentAssistanceFamilyId = id;
     document.getElementById('assistance-family-label').innerText = "".concat(item.ad_soyad || '-', " \u2022 ").concat(item.tc || 'TCKN yok');
     renderAssistanceHistory(item);
     renderHistoricalAssistanceText_(item);
-    renderFieldVisitSupport_(item);
     var rows = document.getElementById('assistance-entry-rows');
     rows.innerHTML = '';
     addAssistanceRow();
@@ -4803,7 +4497,7 @@ function fetchActiveFamiliesFromExternalSheet() {
                     renderDashboardStats();
                     renderBirthdayList();
                     if (showToast)
-                        alert("".concat(appState.mevcut.length, " onaylı aile kayd\u0131 yenilendi."));
+                        alert("".concat(appState.mevcut.length, " aktif aile kayd\u0131 yenilendi."));
                     return [3 /*break*/, 5];
                 case 3:
                     err_3 = _a.sent();
@@ -4925,43 +4619,28 @@ function scheduleGoogleRefreshCycle() {
 }
 var currentSahaId = window.currentSahaId = null;
 function renderSahaTable() {
+    var _a, _b;
     var tbody = document.getElementById('saha-table-body');
     if (!tbody) return;
-
-    var list = getFilteredFieldVisits_();
-
-    var countEl = document.getElementById('showing-count-saha');
-    if (countEl) countEl.innerText = list.length;
-
+    var q = (((_a = document.getElementById('search-saha')) === null || _a === void 0 ? void 0 : _a.value) || '').toLowerCase();
+    var stage = ((_b = document.getElementById('filter-saha-stage')) === null || _b === void 0 ? void 0 : _b.value) || 'ALL';
+    var list = (appState.saha || []).filter(function (x) { return (stage === 'ALL' || x.asama === stage) && (!q || (x.ad_soyad || '').toLowerCase().includes(q) || String(x.tc || '').includes(q)); });
     tbody.innerHTML = '';
-
-    if (!list.length) {
-        tbody.innerHTML = '<tr><td colspan="6" class="py-8 px-3 text-center text-slate-400 text-xs">Filtrelere uygun saha kaydı bulunamadı.</td></tr>';
-        return;
-    }
-
     list.forEach(function (x) {
         var hasReport = !!(x.saha_raporu || '').trim();
         var evaluated = x.asama === 'DEĞERLENDİRMEDE';
         var canDecide = x.asama === 'DEĞERLENDİRMEDE' || x.asama === 'SAHA YAPILACAK';
-
-        var pdfHtml = x.saha_pdf_file_id
-            ? "<button type=\"button\" data-secure-pdf-id=\"" + escapeAttr(x.saha_pdf_file_id) + "\" class=\"mt-1.5 inline-flex items-center gap-1 text-rose-700 hover:text-rose-900 font-bold\"><i class=\"fa-solid fa-file-pdf\"></i>PDF'yi Aç</button>"
-            : '';
-
+        var pdfHtml = x.saha_pdf_file_id ? '<button type="button" data-secure-pdf-id="' + escapeAttr(x.saha_pdf_file_id) + '" class="mt-1.5 inline-flex items-center gap-1 text-rose-700 hover:text-rose-900 font-bold"><i class="fa-solid fa-file-pdf"></i>PDF\'yi Aç</button>' : '';
         var tr = document.createElement('tr');
-        tr.innerHTML =
-            '<td class="py-3 px-3"><div class="font-bold">' + escapeHtml(x.ad_soyad || '-') + '</div><div class="text-[10px] text-cyan-700 font-mono">' + escapeHtml(x.application_id || x.id || '-') + '</div><div class="text-[11px] font-mono text-slate-500">' + escapeHtml(x.tc || '-') + '</div></td>' +
-            '<td class="py-3 px-3"><div>' + escapeHtml(x.telefon || '-') + '</div><div class="text-[11px] text-emerald-700">' + escapeHtml(x.ilce || x.bolge || '-') + '</div></td>' +
+        tr.innerHTML = '<td class="py-3 px-3"><div class="font-bold">' + escapeHtml(x.ad_soyad || '-') + '</div><div class="text-[10px] text-cyan-700 font-mono">' + escapeHtml(x.application_id || x.id || '-') + '</div><div class="text-[11px] font-mono text-slate-500">' + escapeHtml(x.tc || '-') + '</div></td>' +
+            '<td class="py-3 px-3"><div>' + escapeHtml(x.telefon || '-') + '</div><div class="text-[11px] text-emerald-700">' + escapeHtml(x.ilce || '-') + '</div></td>' +
             '<td class="py-3 px-3 max-w-xs text-[11px]">' + escapeHtml(x.talep || '-') + '</td>' +
             '<td class="py-3 px-3"><span class="px-2 py-1 rounded-full text-[10px] font-bold ' + (evaluated ? 'bg-indigo-100 text-indigo-700' : 'bg-amber-100 text-amber-800') + '">' + escapeHtml(x.asama || 'SAHA YAPILACAK') + '</span></td>' +
             '<td class="py-3 px-3 max-w-sm text-[11px]"><div class="line-clamp-3">' + escapeHtml(hasReport ? x.saha_raporu : 'Saha formu yok — değerlendirme yapılabilir.') + '</div>' + pdfHtml + '</td>' +
             '<td class="py-3 px-3 text-right"><button ' + (canDecide ? '' : 'disabled') + ' onclick="openSahaDecision(\'' + x.saha_id + '\')" class="px-2.5 py-1.5 rounded-md text-xs font-semibold ' + (canDecide ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-slate-100 text-slate-400') + '">' + (canDecide ? 'Değerlendir' : 'İşlem Yok') + '</button></td>';
-
         tbody.appendChild(tr);
     });
 }
-
 function fetchFieldReportsFromExternalSheet() {
     return __awaiter(this, arguments, void 0, function (showToast) {
         var icon, payload, e_1;
@@ -5095,7 +4774,7 @@ function finalizeSahaDecision(destination) {
                         return [2 /*return*/];
                     status = document.getElementById('saha-final-status').value;
                     sydvOpinion = getSelectedSahaSydvOpinion();
-                    setCentralBusy(destination === 'active' ? 'Aile Onaylı Listeye Taşınıyor...' : 'Aile Ret Listesine Taşınıyor...');
+                    setCentralBusy(destination === 'active' ? 'Aile Aktif Listeye Taşınıyor...' : 'Aile Ret Listesine Taşınıyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -5163,14 +4842,10 @@ function fetchWebApplicationsFromExternalSheet() {
 // Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
 
 function renderDashboardStats() {
-    var totalListed = appState.mevcut.length;
+    var totalActive = appState.mevcut.length;
     var totalDelist = appState.mevcut.filter(function (x) {
         return (x.durumu || '').trim().toUpperCase() === 'DELİST';
     }).length;
-    var totalActive = Math.max(0, totalListed - totalDelist);
-
-    var listedStatEl = document.getElementById('stat-total-listed');
-    if (listedStatEl) listedStatEl.innerText = totalListed;
     document.getElementById('stat-total-active').innerText = totalActive;
     var delistStatEl = document.getElementById('stat-total-delist');
     if (delistStatEl) delistStatEl.innerText = totalDelist;
@@ -5225,14 +4900,14 @@ function renderBirthdayList() {
         container.appendChild(card);
     });
 }
-function viewFamilyDetail(id, source) {
-    currentFamilyId=id; window.currentFamilyDetailSource=source==='red'?'red':'active';
-    var item=window.currentFamilyDetailSource==='red'?appState.red.find(function(x){return x.id===id;}):appState.mevcut.find(function(x){return x.id===id;});
-    if(!item) return;
-    var isRedFamily=window.currentFamilyDetailSource==='red';
+function viewFamilyDetail(id) {
+    currentFamilyId = id;
+    var item = appState.mevcut.find(function (x) { return x.id === id; });
+    if (!item)
+        return;
     document.getElementById('modal-family-name').innerText = item.ad_soyad || 'İsimsiz';
     document.getElementById('modal-family-subtitle').innerText = (item.tc || '-') + ' • ' + (item.iletisim || '-');
-    document.getElementById('m-durum').innerText=isRedFamily?'RET':(((item.durumu||'').trim().toUpperCase()==='DELİST')?'LİSTE DIŞI':(item.durumu||'STABİL'));
+    document.getElementById('m-durum').innerText = ((item.durumu || '').trim().toUpperCase() === 'DELİST') ? 'LİSTE DIŞI' : (item.durumu || 'STABİL');
     document.getElementById('m-metrik').innerText = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '-';
     document.getElementById('m-bolge').innerText = item.bolge || '-';
     document.getElementById('m-es-durum').innerText = item.es_durumu || '-';
@@ -5241,9 +4916,11 @@ function viewFamilyDetail(id, source) {
     document.getElementById('m-adres').innerText = item.adres || 'Adres girilmemiş.';
     var statusEdit = document.getElementById('m-durum-edit');
     var normalizedStatus = (item.durumu || 'STABİL').trim().toUpperCase();
-    if(statusEdit){statusEdit.value=['KRİTİK','TAKİP','STABİL'].includes(normalizedStatus)?normalizedStatus:'STABİL';statusEdit.disabled=isRedFamily;}
+    if (statusEdit)
+        statusEdit.value = ['KRİTİK', 'TAKİP', 'STABİL'].includes(normalizedStatus) ? normalizedStatus : 'STABİL';
     var metricEdit = document.getElementById('m-metrik-edit');
-    if(metricEdit){metricEdit.value=normalizeMetricScore(item.metrik_puani)!==null?normalizeMetricScore(item.metrik_puani):'';metricEdit.disabled=isRedFamily;}
+    if (metricEdit)
+        metricEdit.value = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '';
     var addressEdit = document.getElementById('m-adres-edit');
     if (addressEdit)
         addressEdit.value = item.adres || '';
@@ -5285,12 +4962,7 @@ function viewFamilyDetail(id, source) {
         var hasVal = val && val !== 'nan';
         grid.innerHTML += "<div class=\"p-1 rounded text-center border ".concat(hasVal ? 'bg-amber-100 border-amber-300 font-bold' : 'bg-slate-50 border-slate-200 text-slate-400', "\"><div>").concat(m.l, "</div><div>").concat(hasVal ? val : '-', "</div></div>");
     });
-    var fieldVisitSupport = getFieldVisitSupportText_(item);
-    var helpNotes = [];
-    if (item.teslim_edilen) helpNotes.push(item.teslim_edilen);
-    if (fieldVisitSupport) helpNotes.push('Saha ziyaretinde verilen destekler: ' + fieldVisitSupport);
-    document.getElementById('m-teslim-edilen-detay').innerText = helpNotes.length ? helpNotes.join(' • ') : 'Kayıtlı destek bulunmuyor.';
-    renderFamilyStatusHistory_(item);
+    document.getElementById('m-teslim-edilen-detay').innerText = item.teslim_edilen || 'Kayıtlı destek bulunmuyor.';
     document.getElementById('m-ziyaretciler').innerText = item.ziyaret_edenler || '-';
     document.getElementById('m-ozel-durum').innerText = item.ozel_durum || '-';
     document.getElementById('m-talep').innerText = item.talep || '-';
@@ -5298,21 +4970,22 @@ function viewFamilyDetail(id, source) {
     if (assistanceBtn)
         assistanceBtn.onclick = function () { return openAssistanceModal(id); };
     var detailAssistanceBtn = document.getElementById('family-detail-assistance-btn');
-    if(detailAssistanceBtn){detailAssistanceBtn.classList.toggle('hidden',isRedFamily);detailAssistanceBtn.onclick=function(){closeModal('detailModal');openAssistanceModal(id);};}
-    var detailDelistBtn=document.getElementById('family-detail-delist-btn');
-    var detailRetBtn=document.getElementById('family-detail-ret-btn');
-    var detailApproveBtn=document.getElementById('family-detail-approve-btn');
-    if(detailApproveBtn){detailApproveBtn.classList.toggle('hidden',!isRedFamily);detailApproveBtn.onclick=function(){closeModal('detailModal');moveRedToActive(id);};}
+    if (detailAssistanceBtn)
+        detailAssistanceBtn.onclick = function () {
+            closeModal('detailModal');
+            openAssistanceModal(id);
+        };
+    var detailDelistBtn = document.getElementById('family-detail-delist-btn');
+    var detailRetBtn = document.getElementById('family-detail-ret-btn');
     if (detailRetBtn) {
         var isDelistedForRet = (item.durumu || '').trim().toUpperCase() === 'DELİST';
-        detailRetBtn.classList.toggle('hidden', isRedFamily || isDelistedForRet);
+        detailRetBtn.classList.toggle('hidden', isDelistedForRet);
         detailRetBtn.onclick = function () {
             closeModal('detailModal');
             moveActiveToRed(id);
         };
     }
     if (detailDelistBtn) {
-        detailDelistBtn.classList.toggle('hidden',isRedFamily);
         var isDelisted_1 = (item.durumu || '').trim().toUpperCase() === 'DELİST';
         detailDelistBtn.disabled = false;
         detailDelistBtn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -5321,7 +4994,7 @@ function viewFamilyDetail(id, source) {
         detailDelistBtn.classList.toggle('bg-emerald-600', isDelisted_1);
         detailDelistBtn.classList.toggle('hover:bg-emerald-700', isDelisted_1);
         detailDelistBtn.innerHTML = isDelisted_1
-            ? '<i class="fa-solid fa-user-check mr-1.5"></i>Onaylı Listeye Al'
+            ? '<i class="fa-solid fa-user-check mr-1.5"></i>Aktif Listeye Al'
             : '<i class="fa-solid fa-user-slash mr-1.5"></i>Liste Dışı Bırak';
         detailDelistBtn.onclick = function () {
             closeModal('detailModal');
@@ -5401,9 +5074,9 @@ function saveNewFamily() {
                         return [2 /*return*/, alert('Metrik puanı 0 veya daha büyük bir sayı olmalıdır.')];
 
                     if (appState.mevcut.some(function(x) { return normalizeTC(x.tc) === normalizeTC(data.tc); }))
-                        return [2 /*return*/, alert('Bu TC Kimlik No ile Onaylı Aileler listesinde zaten bir kayıt bulunuyor.')];
+                        return [2 /*return*/, alert('Bu TC Kimlik No ile Aktif Aileler listesinde zaten bir kayıt bulunuyor.')];
 
-                    if (!confirm(data.name + ' adlı aileyi Onaylı Aileler listesine eklemek istediğinize emin misiniz?'))
+                    if (!confirm(data.name + ' adlı aileyi Aktif Aileler listesine eklemek istediğinize emin misiniz?'))
                         return [2 /*return*/];
 
                     btn = document.getElementById('new-family-save-btn');
@@ -5411,7 +5084,7 @@ function saveNewFamily() {
                         btn.disabled = true;
                         btn.classList.add('opacity-60');
                     }
-                    setCentralBusy('Yeni Aile Onaylı Listeye Kaydediliyor...');
+                    setCentralBusy('Yeni Aile Aktif Listeye Kaydediliyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, 4, 5]);
@@ -5420,7 +5093,7 @@ function saveNewFamily() {
                     payload = _a.sent();
                     applyCentralPayload(payload);
                     closeModal('newFamilyModal');
-                    alert('Yeni aile Onaylı Aileler listesine ve Google E-Tabloya kaydedildi.');
+                    alert('Yeni aile Aktif Aileler listesine ve Google E-Tabloya kaydedildi.');
                     return [3 /*break*/, 5];
                 case 3:
                     err = _a.sent();
@@ -5442,9 +5115,9 @@ function saveNewFamily() {
 
 function enableFamilyDetailEdit() {
     var _a;
-    var item = window.currentFamilyDetailSource === 'red' ? appState.red.find(function (x) { return x.id === currentFamilyId; }) : appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
-    if (!item) return;
-    var isRedFamily=window.currentFamilyDetailSource==='red';
+    var item = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
+    if (!item)
+        return;
     document.getElementById('m-durum-edit').value = ['KRİTİK', 'TAKİP', 'STABİL'].includes((item.durumu || '').trim().toUpperCase()) ? (item.durumu || '').trim().toUpperCase() : 'STABİL';
     document.getElementById('m-metrik-edit').value = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '';
     document.getElementById('m-adres-edit').value = item.adres || '';
@@ -5453,14 +5126,12 @@ function enableFamilyDetailEdit() {
     document.getElementById('m-gelir-edit').value = item.gelir || '';
     document.getElementById('m-gider-edit').value = item.gider || '';
     document.getElementById('m-bolge-edit').value = item.bolge || '';
-    document.getElementById('m-es-durum-edit').value=item.es_durumu||'';
-    document.getElementById('m-durum-edit').disabled=isRedFamily;
-    document.getElementById('m-metrik-edit').disabled=isRedFamily;
+    document.getElementById('m-es-durum-edit').value = item.es_durumu || '';
     setFamilyDetailEditMode(true);
 }
 function cancelFamilyDetailEdit() {
     var _a;
-    var item = window.currentFamilyDetailSource === 'red' ? appState.red.find(function (x) { return x.id === currentFamilyId; }) : appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
+    var item = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
     if (item) {
         document.getElementById('m-durum-edit').value = ['KRİTİK', 'TAKİP', 'STABİL'].includes((item.durumu || '').trim().toUpperCase()) ? (item.durumu || '').trim().toUpperCase() : 'STABİL';
         document.getElementById('m-metrik-edit').value = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '';
@@ -5490,8 +5161,8 @@ function saveFamilyDetailChanges() {
                     expense = (document.getElementById('m-gider-edit').value || '').trim();
                     region = (document.getElementById('m-bolge-edit').value || '').trim();
                     spouseStatus = (document.getElementById('m-es-durum-edit').value || '').trim();
-                    status=window.currentFamilyDetailSource==='red'?'TAKİP':document.getElementById('m-durum-edit').value;
-                    metricRaw=window.currentFamilyDetailSource==='red'?'':(document.getElementById('m-metrik-edit').value||'').trim();
+                    status = document.getElementById('m-durum-edit').value;
+                    metricRaw = (document.getElementById('m-metrik-edit').value || '').trim();
                     metricNumber = metricRaw === '' ? null : Number(metricRaw.replace(',', '.'));
                     if (!['KRİTİK', 'TAKİP', 'STABİL'].includes(status))
                         return [2 /*return*/, alert('Geçersiz ihtiyaç durumu.')];
@@ -5846,8 +5517,8 @@ function gsActiveToRed(token, tc, name) {
     return serverCall('moveActiveToRedServer', token, tc, name);
 }
 
-function gsSetFamilyStatus(token, tc, name, status, reason) {
-    return serverCall('setFamilyStatusServer', token, tc, name, status, reason);
+function gsSetFamilyStatus(token, tc, name, status) {
+    return serverCall('setFamilyStatusServer', token, tc, name, status);
 }
 
 function gsSaveAssistance(token, tc, name, entries) {
@@ -6144,8 +5815,6 @@ function applyCentralPayload(payload) {
 
     appState.web = dedupeWebClient_(payload.web || []);
     appState.saha = payload.saha || [];
-    appState.fieldSupportHistory = payload.fieldSupportHistory || [];
-    appState.familyStatusHistory = payload.familyStatusHistory || [];
     appState.history = payload.history || [];
     window.appState = appState;
     centralCurrentUser = window.centralCurrentUser = (payload.user || centralCurrentUser);
@@ -6358,8 +6027,8 @@ function processWebApplication(index, destination) {
     var item = appState.web[index];
     if (!item) return;
     var sydvOpinion = getSelectedSydvOpinion();
-    var text = destination === 'active' ? 'doğrudan onaylı aile listesine almak' : (destination === 'field' ? 'saha ziyareti sürecine almak' : 'ret listesine almak');
-    var targetLabel = destination === 'active' ? 'DOĞRUDAN ONAY → ONAYLI AİLELER' : (destination === 'field' ? 'SAHA → SAHA ZİYARETİ' : 'RET → RET LİSTESİ');
+    var text = destination === 'active' ? 'doğrudan aktif aile listesine almak' : (destination === 'field' ? 'saha ziyareti sürecine almak' : 'ret listesine almak');
+    var targetLabel = destination === 'active' ? 'DOĞRUDAN ONAY → AKTİF AİLELER' : (destination === 'field' ? 'SAHA → SAHA ZİYARETİ' : 'RET → RET LİSTESİ');
     var message = (item.ad_soyad || 'Bu başvuruyu') + ' ' + text + ' istediğinize emin misiniz?\\n\\nİşlem: ' + targetLabel + '\\nSYDV Görüşü: ' + sydvOpinionLabel(sydvOpinion);
     if (!confirm(message)) return;
     setCentralBusy('Başvuru İşleniyor...');
@@ -6383,9 +6052,9 @@ function moveRedToActive(id) {
                     item = appState.red.find(function (x) { return x.id === id; });
                     if (!item)
                         return [2 /*return*/];
-                    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " onaylı listeye almak istedi\u011Finize emin misiniz?")))
+                    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " aktif listeye almak istedi\u011Finize emin misiniz?")))
                         return [2 /*return*/];
-                    setCentralBusy('Aile Onaylı Listeye Alınıyor...');
+                    setCentralBusy('Aile Aktif Listeye Alınıyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -6404,91 +6073,25 @@ function moveRedToActive(id) {
         });
     });
 }
-
-function requestRequiredFamilyStatusReason_(title) {
-    while (true) {
-        var value = window.prompt(title + '\n\nGerekçe yazınız:');
-        if (value === null) return null;
-
-        value = String(value || '').trim();
-        if (value) return value;
-
-        alert('Bu işlem için gerekçe yazılması zorunludur.');
-    }
-}
-
-function getFamilyStatusHistoryForFamily_(item) {
-    var tc = normalizeTC(item && item.tc);
-    var name = normalizeName(item && item.ad_soyad);
-
-    return (appState.familyStatusHistory || [])
-        .filter(function (x) {
-            var sameTc = tc && normalizeTC(x.tc) === tc;
-            var sameName = name && normalizeName(x.ad_soyad) === name;
-            return !!(sameTc || sameName);
-        })
-        .slice()
-        .reverse();
-}
-
-function renderFamilyStatusHistory_(item) {
-    var box = document.getElementById('m-list-status-history');
-    if (!box) return;
-
-    var rows = getFamilyStatusHistoryForFamily_(item);
-    if (!rows.length) {
-        box.innerText = 'Liste durumu değişikliği bulunmuyor.';
-        return;
-    }
-
-    box.innerHTML = rows.map(function (x) {
-        var action = escapeHtml(x.islem || 'Durum değişikliği');
-        var date = escapeHtml(x.zaman || '-');
-        var reason = escapeHtml(x.gerekce || '-');
-
-        return '<div class="py-1.5 border-b border-slate-200 last:border-b-0">' +
-            '<span class="font-semibold text-slate-800">' + action + '</span>' +
-            ' <span class="text-slate-500">(' + date + ')</span>' +
-            ' <span class="text-slate-700">(Gerekçe: ' + reason + ')</span>' +
-            '</div>';
-    }).join('');
-}
-
 function delistFamily(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var item, reason, result, err_13;
+        var item, result, err_13;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     item = appState.mevcut.find(function (x) { return x.id === id; });
                     if (!item)
                         return [2 /*return*/];
-
-                    reason = requestRequiredFamilyStatusReason_(
-                        (item.ad_soyad || 'Bu aile') + ' liste dışı bırakılacak.'
-                    );
-                    if (reason === null)
+                    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " \"Liste D\u0131\u015F\u0131 B\u0131rak\u0131lanlar\" kategorisine aktarmak istedi\u011Finize emin misiniz?")))
                         return [2 /*return*/];
-
-                    if (!confirm((item.ad_soyad || 'Bu aileyi') +
-                        ' "Liste Dışı Bırakılanlar" kategorisine aktarmak istediğinize emin misiniz?\n\nGerekçe: ' + reason))
-                        return [2 /*return*/];
-
                     setCentralBusy('Aile Liste Dışına Alınıyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, gsSetFamilyStatus(
-                        centralSessionToken,
-                        item.tc || '',
-                        item.ad_soyad || '',
-                        'DELİST',
-                        reason
-                    )];
+                    return [4 /*yield*/, gsSetFamilyStatus(centralSessionToken, item.tc || '', item.ad_soyad || '', 'DELİST')];
                 case 2:
                     result = _a.sent();
                     applyCentralPayload(result);
-                    clearCentralBusy();
                     return [3 /*break*/, 4];
                 case 3:
                     err_13 = _a.sent();
@@ -6500,42 +6103,25 @@ function delistFamily(id) {
         });
     });
 }
-
 function reactivateDelistedFamily(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var item, reason, result, err_14;
+        var item, result, err_14;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     item = appState.mevcut.find(function (x) { return x.id === id; });
                     if (!item)
                         return [2 /*return*/];
-
-                    reason = requestRequiredFamilyStatusReason_(
-                        (item.ad_soyad || 'Bu aile') + ' onaylı aile listesine geri alınacak.'
-                    );
-                    if (reason === null)
+                    if (!confirm("".concat(item.ad_soyad || 'Bu aileyi', " yeniden aktif aile listesine almak istedi\u011Finize emin misiniz?")))
                         return [2 /*return*/];
-
-                    if (!confirm((item.ad_soyad || 'Bu aileyi') +
-                        ' yeniden Onaylı Aile listesine almak istediğinize emin misiniz?\n\nGerekçe: ' + reason))
-                        return [2 /*return*/];
-
                     setCentralBusy('Aile Yeniden Aktifleştiriliyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, gsSetFamilyStatus(
-                        centralSessionToken,
-                        item.tc || '',
-                        item.ad_soyad || '',
-                        'TAKİP',
-                        reason
-                    )];
+                    return [4 /*yield*/, gsSetFamilyStatus(centralSessionToken, item.tc || '', item.ad_soyad || '', 'TAKİP')];
                 case 2:
                     result = _a.sent();
                     applyCentralPayload(result);
-                    clearCentralBusy();
                     return [3 /*break*/, 4];
                 case 3:
                     err_14 = _a.sent();
@@ -6547,7 +6133,6 @@ function reactivateDelistedFamily(id) {
         });
     });
 }
-
 function fileToServerObject(file) {
     if (!file)
         return Promise.resolve(null);

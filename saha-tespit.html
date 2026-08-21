@@ -719,6 +719,12 @@ function toggleAppMenu() {
     <div class="section-title">4. Sosyo-Ekonomik ve Mülkiyet Durumu</div>
     <div class="grid">
       <div class="form-group">
+        <label>Hane Geliri (Aylık)</label>
+        <input type="number" name="hane_geliri" id="hane_geliri" min="0" step="1" placeholder="Örn: 25000" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+      </div>
+    </div>
+    <div class="grid">
+      <div class="form-group">
         <label>Ev Mülkiyet Durumu</label>
         <select name="mulkiyet" id="mulkiyetSelect">
           <option value="Kendi Mülkü">Kendi Mülkü</option>
@@ -734,17 +740,15 @@ function toggleAppMenu() {
 
     <div class="grid">
       <div class="form-group">
-        <label>Ödenmemiş Fatura &amp; Borç var mı?</label>
+        <label>Ödenmemiş Fatura Var mı?</label>
         <select name="fatura_durumu" id="faturaSelect">
           <option value="Yok">Yok</option>
           <option value="Var">Var</option>
         </select>
       </div>
       <div class="form-group" id="faturaDetayDiv" style="display:none;">
-        <label>Fatura &amp; Borçlar</label>
-        <div id="faturaDetayList"></div>
-        <button type="button" class="btn-add" onclick="faturaBorcEkle()">+ Fatura &amp; Borç Ekle</button>
-        <input type="hidden" name="fatura_detay" id="fatura_detay">
+        <label>Fatura Türü ve Bedeli</label>
+        <input type="text" name="fatura_detay" id="fatura_detay" placeholder="Örn: Elektrik (1.400 TL), Su (600 TL)" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
@@ -758,9 +762,7 @@ function toggleAppMenu() {
       </div>
       <div class="form-group" id="destekDetayDiv" style="display:none;">
         <label>Alınan Destekler</label>
-        <div id="destekDetayList"></div>
-        <button type="button" class="btn-add" onclick="kurumDestegiEkle()">+ Destek Ekle</button>
-        <input type="hidden" name="destek_detay" id="destek_detay">
+        <input type="text" name="destek_detay" id="destek_detay" placeholder="Örn: Kaymakamlık Şartlı Eğitim" autocomplete="new-password" autocapitalize="off" spellcheck="false">
       </div>
     </div>
 
@@ -827,7 +829,7 @@ function toggleAppMenu() {
 
     <!-- Aksiyon Butonları -->
     <div class="actions-grid">
-      <button type="submit" class="submit-btn" id="submitBtn">Formu Gönder</button>
+      <button type="submit" class="submit-btn" id="submitBtn">Formu Kaydet, Tabloya & Drive'a Yükle</button>
       <button type="button" class="pdf-btn" onclick="pdfTutanakUret(true)">📄 PDF Tutanak İndir</button>
       <button type="button" class="reset-btn" onclick="formuSifirla()">🔄 Yeni Kayıt</button>
     </div>
@@ -858,8 +860,9 @@ function toggleAppMenu() {
       <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">2. Hane Yapısı ve Sosyo-Ekonomik Durum</th></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Anne / Baba Durumu:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfEbeveyn"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Evde Yaşayanlar:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfBireyler"></td></tr>
+      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Hane Geliri (Aylık):</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfHaneGeliri"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Mülkiyet / Kira:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfMulkiyet"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Ödenmemiş Fatura &amp; Borç:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFatura"></td></tr>
+      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Gecikmiş Fatura:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFatura"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Diğer Destekler:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfDestekler"></td></tr>
     </table>
 
@@ -1150,51 +1153,11 @@ document.getElementById('chkBuyukbaba').addEventListener('change', function () {
 document.getElementById('mulkiyetSelect').addEventListener('change', function () {
     document.getElementById('kiraBedelDiv').style.display = (this.value === 'Kira') ? 'block' : 'none';
 });
-var faturaBorcSayac = 0;
-function faturaBorcEkle() {
-    faturaBorcSayac++;
-    var list = document.getElementById('faturaDetayList');
-    var row = document.createElement('div');
-    row.className = 'iyibis-repeat-row';
-    row.style.cssText = 'display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:8px;';
-    row.innerHTML = '<input type="text" class="fatura-borc-item" placeholder="Örn: Elektrik faturası - 1.400 TL" autocomplete="off">' +
-      '<button type="button" class="btn-del" aria-label="Sil">Sil</button>';
-    row.querySelector('.btn-del').onclick = function(){ row.remove(); syncFaturaBorcDetay_(); };
-    row.querySelector('input').addEventListener('input', syncFaturaBorcDetay_);
-    list.appendChild(row);
-}
-function syncFaturaBorcDetay_() {
-    document.getElementById('fatura_detay').value = Array.from(document.querySelectorAll('.fatura-borc-item'))
-      .map(function(x){ return x.value.trim(); }).filter(Boolean).join(' | ');
-}
-var kurumDestekSayac = 0;
-function kurumDestegiEkle() {
-    kurumDestekSayac++;
-    var list = document.getElementById('destekDetayList');
-    var row = document.createElement('div');
-    row.className = 'iyibis-repeat-row';
-    row.style.cssText = 'display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:8px;';
-    row.innerHTML = '<input type="text" class="kurum-destek-item" placeholder="Örn: Kaymakamlık - Şartlı Eğitim Desteği" autocomplete="off">' +
-      '<button type="button" class="btn-del" aria-label="Sil">Sil</button>';
-    row.querySelector('.btn-del').onclick = function(){ row.remove(); syncKurumDestekDetay_(); };
-    row.querySelector('input').addEventListener('input', syncKurumDestekDetay_);
-    list.appendChild(row);
-}
-function syncKurumDestekDetay_() {
-    document.getElementById('destek_detay').value = Array.from(document.querySelectorAll('.kurum-destek-item'))
-      .map(function(x){ return x.value.trim(); }).filter(Boolean).join(' | ');
-}
 document.getElementById('faturaSelect').addEventListener('change', function () {
-    var panel=document.getElementById('faturaDetayDiv');
-    panel.style.display = (this.value === 'Var') ? 'block' : 'none';
-    if(this.value === 'Var' && !document.querySelector('.fatura-borc-item')) faturaBorcEkle();
-    if(this.value !== 'Var'){ document.getElementById('faturaDetayList').innerHTML=''; syncFaturaBorcDetay_(); }
+    document.getElementById('faturaDetayDiv').style.display = (this.value === 'Var') ? 'block' : 'none';
 });
 document.getElementById('destekSelect').addEventListener('change', function () {
-    var panel=document.getElementById('destekDetayDiv');
-    panel.style.display = (this.value === 'Var') ? 'block' : 'none';
-    if(this.value === 'Var' && !document.querySelector('.kurum-destek-item')) kurumDestegiEkle();
-    if(this.value !== 'Var'){ document.getElementById('destekDetayList').innerHTML=''; syncKurumDestekDetay_(); }
+    document.getElementById('destekDetayDiv').style.display = (this.value === 'Var') ? 'block' : 'none';
 });
 var cocukSayac = 0;
 function cocukSatirEkle() {
@@ -1305,10 +1268,6 @@ function formuSifirla() {
     if (confirm("Yeni bir kayıt başlatmak için formu sıfırlamak istiyor musunuz?")) {
         document.getElementById('sahaForm').reset();
         document.getElementById('cocukTbody').innerHTML = "";
-        document.getElementById('faturaDetayList').innerHTML = "";
-        document.getElementById('destekDetayList').innerHTML = "";
-        document.getElementById('faturaDetayDiv').style.display = 'none';
-        document.getElementById('destekDetayDiv').style.display = 'none';
         clearSig('sigAile');
         clearSig('sigGih');
         document.getElementById('gpsStatus').innerText = "Henüz konum alınmadı.";
@@ -1323,8 +1282,6 @@ function formuSifirla() {
     }
 }
 function hazirlaPdfSablonu() {
-    syncFaturaBorcDetay_();
-    syncKurumDestekDetay_();
     var _a, _b;
     var zTarihVal = document.getElementById('ziyaret_tarihi').value;
     var formattedDate = zTarihVal ? new Date(zTarihVal).toLocaleDateString('tr-TR') : new Date().toLocaleDateString('tr-TR');
@@ -1348,6 +1305,7 @@ function hazirlaPdfSablonu() {
         bireyler.push("B\u00FCy\u00FCkanne (".concat(document.getElementById('buyukanne_yas').value || '-', " Ya\u015F)"));
     if (document.getElementById('chkBuyukbaba').checked)
         bireyler.push("B\u00FCy\u00FCkbaba (".concat(document.getElementById('buyukbaba_yas').value || '-', " Ya\u015F)"));
+    var haneGeliri = document.getElementById('hane_geliri').value;
     var mulkiyet = document.getElementById('mulkiyetSelect').value;
     var kiraBedel = document.getElementById('kira_bedeli').value;
     var fatura = document.getElementById('faturaSelect').value;
@@ -1365,6 +1323,7 @@ function hazirlaPdfSablonu() {
     document.getElementById('pdfGps').innerText = gpsLink;
     document.getElementById('pdfEbeveyn').innerText = "Anne: ".concat(anne, " | Baba: ").concat(baba);
     document.getElementById('pdfBireyler').innerText = bireyler.length > 0 ? bireyler.join(", ") : "Belirtilmedi";
+    document.getElementById('pdfHaneGeliri').innerText = haneGeliri ? haneGeliri + " TL" : "Belirtilmedi";
     document.getElementById('pdfMulkiyet').innerText = (mulkiyet === 'Kira' && kiraBedel) ? "Kira (".concat(kiraBedel, " TL)") : mulkiyet;
     document.getElementById('pdfFatura').innerText = (fatura === 'Var' && faturaDetay) ? "Var (".concat(faturaDetay, ")") : fatura;
     document.getElementById('pdfDestekler').innerText = (destek === 'Var' && destekDetay) ? "Var (".concat(destekDetay, ")") : destek;
@@ -1412,44 +1371,6 @@ function hazirlaPdfSablonu() {
         pdfSigGihImg.style.display = "none";
     }
 }
-
-
-    /* İYİBİS — PDF her zaman açık/beyaz tema */
-    function iyibisPdfLightOnClone(clonedDoc) {
-      try {
-        clonedDoc.documentElement.style.colorScheme = 'only light';
-        clonedDoc.documentElement.setAttribute('data-iyibis-pdf-light', '1');
-        clonedDoc.querySelectorAll('style[class*="darkreader"], style[id*="darkreader"], link[class*="darkreader"], [data-darkreader-mode], [data-darkreader-scheme]').forEach(function(el){
-          if (el.tagName === 'STYLE' || el.tagName === 'LINK') el.disabled = true;
-        });
-        var s = clonedDoc.createElement('style');
-        s.id = 'iyibis-pdf-force-light';
-        s.textContent = `
-          html[data-iyibis-pdf-light], html[data-iyibis-pdf-light] body { color-scheme: only light !important; background:#fff !important; filter:none !important; }
-          html[data-iyibis-pdf-light] .form-card,
-          html[data-iyibis-pdf-light] #pdfTemplate { background:#fff !important; color:#0f172a !important; filter:none !important; }
-          html[data-iyibis-pdf-light] input,
-          html[data-iyibis-pdf-light] select,
-          html[data-iyibis-pdf-light] textarea { background:#fff !important; color:#0f172a !important; border-color:#cbd5e1 !important; filter:none !important; }
-          html[data-iyibis-pdf-light] label { color:#334155 !important; }
-          html[data-iyibis-pdf-light] table { background:#fff !important; color:#0f172a !important; }
-          html[data-iyibis-pdf-light] th { background:#f1f5f9 !important; color:#8b1d24 !important; border-color:#cbd5e1 !important; }
-          html[data-iyibis-pdf-light] td { background:#fff !important; color:#0f172a !important; border-color:#d1d5db !important; }
-          html[data-iyibis-pdf-light] .signature-card,
-          html[data-iyibis-pdf-light] .signature-card-single,
-          html[data-iyibis-pdf-light] .sig-box-card,
-          html[data-iyibis-pdf-light] .legal-box { background:#f8fafc !important; color:#334155 !important; border-color:#cbd5e1 !important; }
-          html[data-iyibis-pdf-light] .sig-container,
-          html[data-iyibis-pdf-light] canvas { background:#fff !important; filter:none !important; }
-          html[data-iyibis-pdf-light] .header-titles h1,
-          html[data-iyibis-pdf-light] .section-title { color:#8b1d24 !important; }
-          html[data-iyibis-pdf-light] .header-titles p,
-          html[data-iyibis-pdf-light] .sig-hint { color:#64748b !important; }
-        `;
-        clonedDoc.head.appendChild(s);
-      } catch (_) {}
-    }
-
 function pdfTutanakUret() {
     return __awaiter(this, arguments, void 0, function (indir) {
         var kisi, cleanName, element, opt;
@@ -1465,7 +1386,7 @@ function pdfTutanakUret() {
                         margin: 8,
                         filename: "GIH_Saha_Tutanak_".concat(cleanName, ".pdf"),
                         image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0, backgroundColor: '#ffffff', onclone: iyibisPdfLightOnClone },
+                        html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0 },
                         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
                     };
                     if (!indir) return [3 /*break*/, 1];
@@ -1531,17 +1452,8 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                     btn.disabled = true;
                     btn.innerText = "PDF Hazırlanıyor ve Drive'a Yükleniyor...";
                     msg.style.display = "none";
-                    syncFaturaBorcDetay_();
-                    syncKurumDestekDetay_();
                     formData = new FormData(this);
                     payload = Object.fromEntries(formData.entries());
-
-                    // İYİBİS 5.0.16:
-                    // Saha ziyaretinde verilen destek metnini FormData yorumuna bırakma;
-                    // DOM'dan açıkça merkezi payload'a taşı.
-                    payload.ziyarette_verilenler =
-                        (document.getElementById('ziyarette_verilenler').value || '').trim();
-
                     payload.form_tipi = "saha_tespit";
                     cocuklar = [];
                     document.querySelectorAll('#cocukTbody tr').forEach(function (tr) {
@@ -1588,7 +1500,7 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                     return [3 /*break*/, 6];
                 case 5:
                     btn.disabled = false;
-                    btn.innerText = "Formu Gönder";
+                    btn.innerText = "Formu Kaydet, Tabloya & Drive'a Yükle";
                     return [7 /*endfinally*/];
                 case 6: return [2 /*return*/];
             }
