@@ -689,50 +689,6 @@ body {
   background: #ffffff !important;
 }
 </style>
-
-<style id="iyibis-501-light-mode-guard">
-/* İYİBİS 5.0.1 — Açık mod koruması.
-   Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
-@media (prefers-color-scheme: light) {
-  html {
-    color-scheme: light !important;
-    background: #f6f9fb !important;
-    background-image: none !important;
-  }
-  body {
-    background: #f6f9fb !important;
-    background-color: #f6f9fb !important;
-    background-image: none !important;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  html { color-scheme: dark !important; }
-}
-</style>
-
-
-<style id="iyibis-501-light-surfaces">
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg:#f8fafc !important;
-    --card-bg:#ffffff !important;
-    --border:#cbd5e1 !important;
-    --text:#0f172a !important;
-    --text-muted:#64748b !important;
-    --gih-dark:#0f172a !important;
-    --gih-gray-bg:#f8fafc !important;
-    --gih-border:#cbd5e1 !important;
-  }
-  .app-navbar, .nav-links, .form-card, .container,
-  .signature-card, .signature-card-single, .sig-container,
-  .table-responsive, table.modern-table, .legal-box {
-    color-scheme: light !important;
-  }
-  .app-navbar, .nav-links, .form-card { background:#ffffff !important; }
-  input, select, textarea { background:#ffffff !important; color:#0f172a !important; }
-}
-</style>
-
 </head>
 <body>
 
@@ -968,10 +924,14 @@ function toggleAppMenu() {
     </div>
 
     <!-- 5. Saha Notları -->
-    <div class="section-title">5. Saha Notları</div>
+    <div class="section-title">5. Saha Notları ve Teslim Edilen Destekler</div>
     <div class="form-group">
       <label>Saha Gözlem Notları</label>
       <textarea name="notlar" id="notlar" rows="3" placeholder="Ev eşyaları, acil sağlık/gıda ihtiyaçları ve genel gözlemler..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Ziyarette Teslim Edilen Destekler</label>
+      <textarea name="ziyarette_verilenler" id="ziyarette_verilenler" rows="2" placeholder="Örn: 1 Adet Gıda Kolisi, Kışlık Mont..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
     </div>
 
     <!-- 6. Saha Fotoğrafları -->
@@ -1074,8 +1034,9 @@ function toggleAppMenu() {
     </table>
 
     <table style="width: 100%; border-collapse: collapse; margin-bottom: 14px;">
-      <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">4. Saha Notları</th></tr>
+      <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">4. Saha Notları ve Teslim Edilen Destekler</th></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Saha Notları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfNotlar"></td></tr>
+      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Verilen Destekler:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfVerilenler"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Saha Fotoğrafları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFotografBilgisi">Fotoğraf eklenmedi.</td></tr>
     </table>
 
@@ -1507,7 +1468,7 @@ function hazirlaPdfSablonu() {
     var destek = document.getElementById('destekSelect').value;
     var destekDetay = document.getElementById('destek_detay').value;
     var notlar = document.getElementById('notlar').value || "-";
-
+    var verilenler = document.getElementById('ziyarette_verilenler').value || "-";
     document.getElementById('pdfTarih').innerText = "Ziyaret / Tanzim Tarihi: " + formattedDate;
     document.getElementById('pdfIlceMahalle').innerText = "".concat(ilce, " / ").concat(mahalle, " Mah.");
     document.getElementById('pdfAdres').innerText = adres;
@@ -1521,7 +1482,7 @@ function hazirlaPdfSablonu() {
     document.getElementById('pdfFatura').innerText = (fatura === 'Var' && faturaDetay) ? "Var (".concat(faturaDetay, ")") : fatura;
     document.getElementById('pdfDestekler').innerText = (destek === 'Var' && destekDetay) ? "Var (".concat(destekDetay, ")") : destek;
     document.getElementById('pdfNotlar').innerText = notlar;
-
+    document.getElementById('pdfVerilenler').innerText = verilenler;
     var photoCountForPdf = Number((document.getElementById('photo_count') || {}).value || 0);
     var photoInfoEl = document.getElementById('pdfFotografBilgisi');
     if (photoInfoEl) {
@@ -1640,7 +1601,9 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                                 .submitSahaTespitForm(payload);
                         })];
                 case 3:
-                    _a.sent();
+                    submitResult = _a.sent();
+                    if (!submitResult || submitResult.centralVerified !== true)
+                        throw new Error('Merkezi SAHA ZİYARETİ kaydı doğrulanamadı.');
                     msg.style.display = "block";
                     msg.style.backgroundColor = "#dcfce7";
                     msg.style.color = "#15803d";

@@ -1995,7 +1995,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                 <span id="sync-status-text">Bağlantı Hazır</span>
                             </span>
                             <span class="text-slate-600">•</span>
-                            <span id="last-sync-time" class="text-[11px] text-slate-400">Son Güncelleme: Henüz yapılmadı</span>
+                            <span id="last-sync-time" class="text-[11px] text-slate-400">5 Tablo Son Güncelleme: Henüz yapılmadı</span>
                             <button id="btn-top-refresh-all" type="button" onclick="refreshAllGoogleSources(true)"
                                     class="inline-flex items-center justify-center gap-1.5 px-2 py-1 bg-violet-600 hover:bg-violet-500 text-white text-[10px] font-semibold rounded-md border border-violet-500/60 transition"
                                     title="Tüm Google tablolarını güncelle">
@@ -2112,9 +2112,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             class="inline-flex items-center justify-center px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
                         <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Aktif Aileleri Güncelle
                     </button>
-                    <button id="btn-refresh-assistance" onclick="importAssistanceFromSheet(true)"
+                    <button onclick="importAssistanceFromSheet()"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="assistance-sync-icon" class="fa-solid fa-hand-holding-heart mr-1.5"></i>Yapılan Yardımları Güncelle
+                        <i class="fa-solid fa-hand-holding-heart mr-1.5"></i>Yapılan Yardımları Güncelle
                     </button>
                 </div>
             </div>
@@ -4390,6 +4390,8 @@ function fetchActiveFamiliesFromExternalSheet() {
                     icon = document.getElementById('active-sheet-sync-icon');
                     if (icon)
                         icon.classList.add('fa-spin');
+                    if (showToast)
+                        setCentralBusy('Saha Tespit Formları Merkezi Veritabanıyla Eşleştiriliyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, 4, 5]);
@@ -4397,7 +4399,7 @@ function fetchActiveFamiliesFromExternalSheet() {
                 case 2:
                     result = _a.sent();
                     if (!result || result.ok === false)
-                        throw new Error((result && result.error) || 'Aktif aileler merkezi veritabanından alınamadı.');
+                        throw new Error((result && result.error) || 'Aktif aileler alınamadı.');
                     appState.mevcut = dedupePeopleClient_(result.mevcut || []);
                     updateBadges();
                     renderMevcutTable();
@@ -4414,6 +4416,8 @@ function fetchActiveFamiliesFromExternalSheet() {
                 case 4:
                     if (icon)
                         icon.classList.remove('fa-spin');
+                    if (showToast)
+                        clearCentralBusy();
                     return [7 /*endfinally*/];
                 case 5: return [2 /*return*/];
             }
@@ -4470,7 +4474,7 @@ function updateAllSourcesLastCheckTime() {
         hour: '2-digit', minute: '2-digit', second: '2-digit',
         hour12: false
     }).format(now);
-    el.innerText = 'Son Güncelleme: ' + formatted + ' (GMT+3)';
+    el.innerText = '5 Tablo Son Güncelleme: ' + formatted + ' (GMT+3)';
 }
 function refreshAllGoogleSources() {
     return __awaiter(this, arguments, void 0, function (showToast) {
@@ -4493,7 +4497,7 @@ function refreshAllGoogleSources() {
                     applyCentralPayload(result);
                     updateAllSourcesLastCheckTime();
                     if (showToast)
-                        alert('Merkezi veritabanı ve saha kaynakları başarıyla yenilendi.');
+                        alert('Beş Google E-Tablo kaynağı başarıyla yenilendi.');
                     return [3 /*break*/, 5];
                 case 3:
                     err_5 = _a.sent();
@@ -4566,7 +4570,7 @@ function fetchFieldReportsFromExternalSheet() {
                     payload = _a.sent();
                     applyCentralPayload(payload);
                     if (showToast)
-                        alert('Saha Tespit Formu kontrol edildi; eşleşen kayıtlar Değerlendirmede aşamasına geçirildi.');
+                        alert('Saha Tespit Formları merkezi veritabanıyla eşleştirildi. Saha Ziyareti listesi yenilendi.');
                     return [3 /*break*/, 5];
                 case 3:
                     e_1 = _a.sent();
@@ -6148,40 +6152,31 @@ function uploadFamilyDocument(type) {
 }
 
 function importAssistanceFromSheet() {
-    return __awaiter(this, arguments, void 0, function (showToast) {
-        var status, icon, result, err_17;
-        if (showToast === void 0) { showToast = true; }
+    return __awaiter(this, void 0, void 0, function () {
+        var status, result, err_17;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     status = document.getElementById('assistance-import-status');
-                    icon = document.getElementById('assistance-sync-icon');
-                    if (icon) icon.classList.add('fa-spin');
-                    if (showToast) setCentralBusy('Yapılan Yardımlar Güncelleniyor...');
                     status.className = 'mt-3 text-xs rounded-lg p-3 bg-sky-50 text-sky-800 border border-sky-200';
-                    status.innerText = 'Merkezi veritabanındaki yardım kayıtları yenileniyor...';
+                    status.innerText = 'Toplu yardım tablosu merkezi sunucuda işleniyor...';
                     status.classList.remove('hidden');
                     _a.label = 1;
                 case 1:
-                    _a.trys.push([1, 3, 4, 5]);
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, gsImportAssistance(centralSessionToken)];
                 case 2:
                     result = _a.sent();
-                    if (!result || result.ok === false) throw new Error((result && result.error) || 'Yardım kayıtları yenilenemedi.');
-                    applyCentralPayload(result.data || result);
+                    applyCentralPayload(result.data);
                     status.className = 'mt-3 text-xs rounded-lg p-3 bg-emerald-50 text-emerald-800 border border-emerald-200';
-                    status.innerText = result.message || 'Yardım kayıtları yenilendi.';
-                    return [3 /*break*/, 5];
+                    status.innerText = result.message || 'Yardımlar başarıyla aktarıldı.';
+                    return [3 /*break*/, 4];
                 case 3:
                     err_17 = _a.sent();
                     status.className = 'mt-3 text-xs rounded-lg p-3 bg-rose-50 text-rose-800 border border-rose-200';
                     status.innerText = serverFailure(err_17);
-                    return [3 /*break*/, 5];
-                case 4:
-                    if (icon) icon.classList.remove('fa-spin');
-                    if (showToast) clearCentralBusy();
-                    return [7 /*endfinally*/];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
         });
     });
