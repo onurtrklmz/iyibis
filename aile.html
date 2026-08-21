@@ -2093,9 +2093,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-database text-emerald-600"></i>Onaylı Aileler Veri Kaynağı
+                            <i class="fa-solid fa-users text-emerald-600"></i>Onaylı Aile Süreci
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Aktif aile listesini ayrı Google E-Tablo dosyasından yeniler.</p>
+                        <p class="text-xs text-slate-500 mt-1">Onaylanan aileler burada izlenir; durum, öncelik, yapılan yardımlar ve aile bilgileri bu liste üzerinden yönetilir.</p>
                     </div>
                     <button id="btn-new-family" type="button" onclick="openNewFamilyModal()"
                             class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -2196,9 +2196,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-database text-rose-600"></i>Ret Listesi Veri Kaynağı
+                            <i class="fa-solid fa-ban text-rose-600"></i>Ret Süreci
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Ret listesini ayrı Google E-Tablo dosyasından yeniler.</p>
+                        <p class="text-xs text-slate-500 mt-1">Başvurusu reddedilen aileler burada tutulur; kayıtlar gerektiğinde yeniden Onaylı Aile listesine alınabilir.</p>
                     </div>
                     <button id="btn-fetch-red-sheet" onclick="fetchRedFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -2266,10 +2266,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-cloud-arrow-down text-sky-600"></i>
-                            Web Başvuru Veri Kaynağı
+                            <i class="fa-solid fa-globe text-sky-600"></i>
+                            Web Başvuru Süreci
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Ayrı Google E-Tablo dosyasındaki başvuruları bu panele aktarır.</p>
+                        <p class="text-xs text-slate-500 mt-1">Yeni web başvuruları burada değerlendirilir; doğrudan onay, saha ziyareti veya ret kararıyla ilgili sürece aktarılır.</p>
                     </div>
                     <button id="btn-fetch-web-sheet" onclick="fetchWebApplicationsFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
@@ -2394,15 +2394,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                            Onaylı Aile <span class="text-slate-400 font-medium">/ Liste Dışı</span>
-                        </p>
-                        <h3 class="text-2xl font-extrabold mt-1">
-                            <span id="stat-total-active" class="text-slate-900">0</span>
-                            <span class="text-slate-300 font-bold"> / </span>
-                            <span id="stat-total-delist" class="text-slate-400">0</span>
-                        </h3>
-                        <p class="text-[11px] text-emerald-600 font-medium mt-1"><i class="fa-solid fa-circle-check mr-1"></i>Sistemde Kayıtlı</p>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Aile Liste Durumu</p>
+                        <div class="mt-2 space-y-1 text-xs">
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="text-slate-500">Toplam Listelenmiş Aile:</span>
+                                <span id="stat-total-listed" class="font-extrabold text-slate-900">0</span>
+                            </div>
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="text-emerald-700 font-semibold">Onaylı:</span>
+                                <span id="stat-total-active" class="font-extrabold text-emerald-700">0</span>
+                            </div>
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="text-slate-500">Liste Dışı:</span>
+                                <span id="stat-total-delist" class="font-extrabold text-slate-600">0</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-house-chimney"></i>
@@ -2512,8 +2518,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                     <i class="fa-brands fa-google-drive"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-sm font-bold text-slate-800">Google Drive Depolama</h3>
-                                    <p class="text-[11px] text-slate-500 mt-0.5">İYİBİS hesabının kullanılabilir depolama durumu</p>
+                                    <h3 class="text-sm font-bold text-slate-800">Kullanılabilir Depolama Alanı</h3>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">İYİBİS hesabının kullanılabilir depolama durumu sisteme gönderilen form PDF'leri ve saha fotoğraflarının bulutta kapladığı yeri gösterir</p>
                                 </div>
                             </div>
                         </div>
@@ -4910,10 +4916,14 @@ function fetchWebApplicationsFromExternalSheet() {
 // Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
 
 function renderDashboardStats() {
-    var totalActive = appState.mevcut.length;
+    var totalListed = appState.mevcut.length;
     var totalDelist = appState.mevcut.filter(function (x) {
         return (x.durumu || '').trim().toUpperCase() === 'DELİST';
     }).length;
+    var totalActive = Math.max(0, totalListed - totalDelist);
+
+    var listedStatEl = document.getElementById('stat-total-listed');
+    if (listedStatEl) listedStatEl.innerText = totalListed;
     document.getElementById('stat-total-active').innerText = totalActive;
     var delistStatEl = document.getElementById('stat-total-delist');
     if (delistStatEl) delistStatEl.innerText = totalDelist;
