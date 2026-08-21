@@ -1535,6 +1535,13 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                     syncKurumDestekDetay_();
                     formData = new FormData(this);
                     payload = Object.fromEntries(formData.entries());
+
+                    // İYİBİS 5.0.16:
+                    // Saha ziyaretinde verilen destek metnini FormData yorumuna bırakma;
+                    // DOM'dan açıkça merkezi payload'a taşı.
+                    payload.ziyarette_verilenler =
+                        (document.getElementById('ziyarette_verilenler').value || '').trim();
+
                     payload.form_tipi = "saha_tespit";
                     cocuklar = [];
                     document.querySelectorAll('#cocukTbody tr').forEach(function (tr) {
