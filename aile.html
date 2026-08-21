@@ -3812,11 +3812,11 @@ function getFilteredFieldVisits_() {
 
     var q = ((searchEl && searchEl.value) || '').toLowerCase().trim();
     var stage = (stageEl && stageEl.value) || 'ALL';
-    var district = (districtEl && districtEl.value) || 'ALL';
+    var district = ((districtEl && districtEl.value) || 'ALL').toLocaleUpperCase('tr-TR');
 
     return (appState.saha || []).filter(function (x) {
-        var xStage = (x.asama || '').trim().toUpperCase();
-        var xDistrict = (x.ilce || x.bolge || '').trim().toUpperCase();
+        var xStage = (x.asama || '').trim().toLocaleUpperCase('tr-TR');
+        var xDistrict = (x.ilce || x.bolge || '').trim().toLocaleUpperCase('tr-TR');
 
         if (stage !== 'ALL' && xStage !== stage)
             return false;
