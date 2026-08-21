@@ -350,7 +350,7 @@
 
     </style>
 <style id="iyibis-responsive-modal-v223">
-/* BETA 4.2 — işlem menüsü ve modal ölçekleme */
+/*  — işlem menüsü ve modal ölçekleme */
 #familyActionMenu {
     width: min(16rem, calc(100vw - 1rem)) !important;
     max-height: min(70dvh, 30rem) !important;
@@ -512,7 +512,7 @@
 
 
 <style id="iyibis-active-horizontal-fit-v236">
-/* BETA 4.2 — YALNIZ Aktif Aileler tablosunu yatayda sayfaya sığdırır.
+/*  — YALNIZ Aktif Aileler tablosunu yatayda sayfaya sığdırır.
    Satır yüksekliği, dikey davranış, butonlar ve diğer sekmeler değiştirilmez. */
 #tab-mevcut .overflow-x-auto,
 #tab-mevcut .table-container {
@@ -656,7 +656,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
 
 <style id="iyibis-web-applications-fit-v42">
-/* BETA 4.2 — yalnız Web'den Yeni Başvurular tablosunun yatay taşmasını önler. */
+/*  — yalnız Web'den Yeni Başvurular tablosunun yatay taşmasını önler. */
 #tab-web > .bg-white.rounded-xl {
     width: 100% !important;
     max-width: 100% !important;
@@ -818,7 +818,7 @@
 
 
 <style id="iyibis-aile-login-compact-v42">
-/* BETA 4.2 — Login kartını masaüstünde daha kompakt tutar; mobilde esnek kalır. */
+/*  — Login kartını masaüstünde daha kompakt tutar; mobilde esnek kalır. */
 #accessGate .iyibis-login-card{
   width:min(100%,40rem)!important;
   max-width:40rem!important;
@@ -872,7 +872,7 @@
 </style>
 
 <style id="iyibis-mobile-tables-menu-logout-v42">
-/* ===== BETA 4.2 — Mobil tablo / sekme / logout iyileştirmeleri ===== */
+/* =====  — Mobil tablo / sekme / logout iyileştirmeleri ===== */
 
 @media (max-width: 768px) {
   /* Sayfanın kendisi yatay taşmasın */
@@ -1379,7 +1379,7 @@ header #last-sync-time {
 </style>
 
 <style id="iyibis-flat-dark-mode-v42">
-/* BETA 4.2 — Koyu modda beyazdan siyaha gradient yok.
+/*  — Koyu modda beyazdan siyaha gradient yok.
    Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
 @media (prefers-color-scheme: dark) {
   html {
@@ -1521,7 +1521,7 @@ body {
 </style>
 
 <style id="iyibis-counter-badges-contrast-v42">
-/* ===== BETA 4.2 — Sayaç balonları: açık/koyu mod kontrastı ===== */
+/* =====  — Sayaç balonları: açık/koyu mod kontrastı ===== */
 
 /* Ortak */
 [data-counter] {
@@ -1685,6 +1685,36 @@ body {
   }
 }
 </style>
+
+<style id="iyibis-501-light-mode-guard">
+/* İYİBİS 5.0.1 — Açık mod koruması.
+   Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light !important;
+    background: #f6f9fb !important;
+    background-image: none !important;
+  }
+  body {
+    background: #f6f9fb !important;
+    background-color: #f6f9fb !important;
+    background-image: none !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: dark !important; }
+}
+</style>
+
+
+<style id="iyibis-501-light-surfaces">
+@media (prefers-color-scheme: light) {
+  body.bg-slate-50 { background:#f8fafc !important; color:#0f172a !important; }
+  .bg-white { background-color:#ffffff !important; }
+  input, textarea, select { color-scheme:light !important; }
+}
+</style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -1702,10 +1732,10 @@ body {
                 <img src="gaziantep-iyilik-hareketi-logo.jpeg" alt="Gaziantep İyilik Hareketi Derneği Logosu" class="iyibis-login-logo">
                 <h2 class="iyibis-login-title">İYİBİS Aile Otomasyonu</h2>
                 <p class="iyibis-login-subtitle">Kullanıcı Girişi</p>
-                <div class="iyibis-login-version-row"><span class="iyibis-login-version">BETA 4.2</span></div>
+                
             </div>
             <form id="accessForm" class="p-6 space-y-4" autocomplete="off" action="javascript:void(0);" novalidate>
-                <div class="text-center text-[9px] text-cyan-600 font-mono -mb-1">Aile Panel Build: BETA 4.2</div>
+                
                 <div class="text-xs text-slate-600 bg-amber-50 border border-amber-200 rounded-lg p-3">
                     Bu panel kişisel veri içerir. Yalnızca tanımlı kullanıcılar erişebilir.
                 </div>
@@ -1773,7 +1803,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 /*
- * BETA 4.2 BAĞIMSIZ LOGIN BOOTSTRAP
+ *  BAĞIMSIZ LOGIN BOOTSTRAP
  * Bu kod, büyük AilePanel JavaScript'inden bağımsızdır.
  */
 (function () {
@@ -1956,7 +1986,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <div>
                         <div class="flex items-center gap-2">
                             <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Gaziantep İyilik Hareketi Aile Takip Otomasyonu</h1>
-                            <span id="app-version-badge" class="inline-flex shrink-0 items-center px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[9px] sm:text-[10px] font-bold tracking-wider">BETA 4.2</span>
+                            
                             <span class="hidden md:inline text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Merkezi Canlı Veritabanı</span>
                         </div>
                         <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -3277,7 +3307,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var DEFAULT_SHEET_ID = ''; // BETA 4.2: eski genel aile tablosu kaldırıldı.
+var DEFAULT_SHEET_ID = ''; // : eski genel aile tablosu kaldırıldı.
 var appState = window.appState = {
     sheetId: DEFAULT_SHEET_ID,
     mevcut: [],
@@ -3345,7 +3375,7 @@ function familyKey(item) {
 }
 function applyWorkflowOverlay(mevcut, red, web) {
     /*
-     * BETA 4.2:
+     * :
      * Aktif / Ret / Web listelerinde tarayıcı workflow overlay'i kullanılmaz.
      * Bu üç listenin tek otoritesi merkezi Google Sheet kaynaklarıdır.
      */
@@ -5101,9 +5131,9 @@ function openModal(id) { document.getElementById(id).classList.remove('hidden');
 function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 function clearSearch(id, cb) { document.getElementById(id).value = ''; cb(); }
 function toggleDropdown(id) { document.getElementById(id).classList.toggle('hidden'); }
-/* BETA 4.2: merkezi Apps Script katmanı için UI köprüsü - gerçek UI bloğunun sonunda */
+/* : merkezi Apps Script katmanı için UI köprüsü - gerçek UI bloğunun sonunda */
 /* ============================================================
-   BETA 4.2: MERKEZİ KATMAN AYNI SCRIPT SCOPE'UNDA
+   : MERKEZİ KATMAN AYNI SCRIPT SCOPE'UNDA
    ============================================================ */
 /* ============================================================
    MERKEZİ APPS SCRIPT KATMANI
@@ -5277,7 +5307,7 @@ function restorePersistentCentralSession_() {
 }
 
 /*
- * BETA 4.2:
+ * :
  * Ana UI state'i önceki script bloğundan window üzerinden alınır.
  * Bu blok çıplak global lexical binding'e güvenmez.
  */

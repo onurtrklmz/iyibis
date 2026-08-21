@@ -448,7 +448,7 @@
   --iyibis-text:#1e293b;
   --iyibis-muted:#64748b;
 }
-body{background:linear-gradient(180deg,#ffffff 0%,var(--iyibis-bg) 100%)!important;color:var(--iyibis-text)!important}
+body{background:var(--iyibis-bg)!important;color:var(--iyibis-text)!important}
 .app-navbar{
   background:rgba(255,255,255,.98)!important;
   border-bottom-color:var(--iyibis-red)!important;
@@ -528,6 +528,211 @@ input:focus,select:focus,textarea:focus{
   }
 }
 </style>
+
+<style id="iyibis-flat-dark-mode-v42">
+/* BETA 4.2 — Koyu modda beyazdan siyaha gradient yok.
+   Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #101214 !important;
+    background-image: none !important;
+    color-scheme: dark;
+  }
+
+  body {
+    background: #101214 !important;
+    background-color: #101214 !important;
+    background-image: none !important;
+  }
+}
+</style>
+
+<style id="iyibis-form-dark-surfaces-v42">
+@media (prefers-color-scheme: dark) {
+  body {
+    color:#e5e7eb !important;
+  }
+
+  .app-navbar {
+    background:#181a1c !important;
+    border-bottom-color:#991b1b !important;
+    box-shadow:0 4px 14px rgba(0,0,0,.25) !important;
+  }
+
+  .nav-link { color:#d1d5db !important; }
+  .nav-link:hover {
+    background:#27292c !important;
+    color:#ff7a7e !important;
+  }
+  .nav-link.active {
+    background:#991b1b !important;
+    color:#ffffff !important;
+  }
+
+  .form-card,
+  .container > form,
+  .container > .form-card {
+    background:#17191b !important;
+    border-color:#30363d !important;
+    color:#e5e7eb !important;
+    box-shadow:0 10px 28px rgba(0,0,0,.22) !important;
+  }
+
+  .form-header {
+    border-bottom-color:#374151 !important;
+  }
+
+  .header-titles h1,
+  .section-title {
+    color:#f36b6f !important;
+  }
+
+  .header-titles p,
+  .sig-hint,
+  .photo-upload-note {
+    color:#b7ada3 !important;
+  }
+
+  label {
+    color:#d7dbe0 !important;
+  }
+
+  input:not([type="hidden"]),
+  select,
+  textarea {
+    background:#17191b !important;
+    color:#e5e7eb !important;
+    border-color:#374151 !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color:#77736f !important;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color:#b4232d !important;
+    box-shadow:0 0 0 3px rgba(180,35,45,.16) !important;
+  }
+
+  table.modern-table,
+  table {
+    background:#17191b !important;
+    color:#e5e7eb !important;
+  }
+
+  table.modern-table th,
+  th {
+    background:#202326 !important;
+    color:#f36b6f !important;
+    border-color:#374151 !important;
+  }
+
+  table.modern-table td,
+  td {
+    border-color:#30363d !important;
+  }
+
+  .signature-card,
+  .signature-card-single,
+  .sig-box-card,
+  .photo-upload-panel {
+    background:#1b1e21 !important;
+    border-color:#30363d !important;
+  }
+
+  /* İmza canvas'ı mevcut kurala göre mutlaka beyaz kalır. */
+  .sig-container,
+  .sig-container canvas {
+    background:#ffffff !important;
+    background-color:#ffffff !important;
+  }
+
+  .nav-links {
+    background:#181a1c !important;
+  }
+}
+</style>
+
+<style id="iyibis-page-background-no-gradient-v42">
+html, body {
+  background-image: none !important;
+}
+body {
+  background-color: var(--iyibis-bg, #f6f8fa) !important;
+  background: var(--iyibis-bg, #f6f8fa) !important;
+}
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-image: none !important;
+    background-color: #101214 !important;
+    background: #101214 !important;
+  }
+}
+</style>
+
+<style id="iyibis-document-round-logo-v42">
+/* Belge başlığındaki büyük dernek logosu: İYİBİS ana sayfasındaki gibi dairesel kırpma */
+.doc-logo-svg {
+  width: 75px !important;
+  height: 75px !important;
+  min-width: 75px !important;
+  min-height: 75px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  overflow: hidden !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  background: #ffffff !important;
+}
+</style>
+
+<style id="iyibis-501-light-mode-guard">
+/* İYİBİS 5.0.1 — Açık mod koruması.
+   Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light !important;
+    background: #f6f9fb !important;
+    background-image: none !important;
+  }
+  body {
+    background: #f6f9fb !important;
+    background-color: #f6f9fb !important;
+    background-image: none !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: dark !important; }
+}
+</style>
+
+
+<style id="iyibis-501-light-surfaces">
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f8fafc !important;
+    --card-bg:#ffffff !important;
+    --border:#cbd5e1 !important;
+    --text:#0f172a !important;
+    --text-muted:#64748b !important;
+    --gih-dark:#0f172a !important;
+    --gih-gray-bg:#f8fafc !important;
+    --gih-border:#cbd5e1 !important;
+  }
+  .app-navbar, .nav-links, .form-card, .container,
+  .signature-card, .signature-card-single, .sig-container,
+  .table-responsive, table.modern-table, .legal-box {
+    color-scheme: light !important;
+  }
+  .app-navbar, .nav-links, .form-card { background:#ffffff !important; }
+  input, select, textarea { background:#ffffff !important; color:#0f172a !important; }
+}
+</style>
+
 </head>
 <body>
 
@@ -565,7 +770,7 @@ function toggleAppMenu() {
     <!-- Başlık ve Logo: Ayni Yardım formu yapısı -->
     <div class="form-header">
       <div class="header-logo-title">
-        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:contain;display:block;">
+        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
         <div class="header-titles">
           <h1>Gaziantep İyilik Hareketi Derneği</h1>
           <p>Saha Tespit Formu - Hane İhtiyaç İnceleme ve Saha Mülakat Kayıt Sistemi</p>
@@ -763,14 +968,10 @@ function toggleAppMenu() {
     </div>
 
     <!-- 5. Saha Notları -->
-    <div class="section-title">5. Saha Notları ve Teslim Edilen Destekler</div>
+    <div class="section-title">5. Saha Notları</div>
     <div class="form-group">
       <label>Saha Gözlem Notları</label>
       <textarea name="notlar" id="notlar" rows="3" placeholder="Ev eşyaları, acil sağlık/gıda ihtiyaçları ve genel gözlemler..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
-    </div>
-    <div class="form-group">
-      <label>Ziyarette Teslim Edilen Destekler</label>
-      <textarea name="ziyarette_verilenler" id="ziyarette_verilenler" rows="2" placeholder="Örn: 1 Adet Gıda Kolisi, Kışlık Mont..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
     </div>
 
     <!-- 6. Saha Fotoğrafları -->
@@ -873,9 +1074,8 @@ function toggleAppMenu() {
     </table>
 
     <table style="width: 100%; border-collapse: collapse; margin-bottom: 14px;">
-      <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">4. Saha Notları ve Teslim Edilen Destekler</th></tr>
+      <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">4. Saha Notları</th></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Saha Notları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfNotlar"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Verilen Destekler:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfVerilenler"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Saha Fotoğrafları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFotografBilgisi">Fotoğraf eklenmedi.</td></tr>
     </table>
 
@@ -1307,7 +1507,7 @@ function hazirlaPdfSablonu() {
     var destek = document.getElementById('destekSelect').value;
     var destekDetay = document.getElementById('destek_detay').value;
     var notlar = document.getElementById('notlar').value || "-";
-    var verilenler = document.getElementById('ziyarette_verilenler').value || "-";
+
     document.getElementById('pdfTarih').innerText = "Ziyaret / Tanzim Tarihi: " + formattedDate;
     document.getElementById('pdfIlceMahalle').innerText = "".concat(ilce, " / ").concat(mahalle, " Mah.");
     document.getElementById('pdfAdres').innerText = adres;
@@ -1321,7 +1521,7 @@ function hazirlaPdfSablonu() {
     document.getElementById('pdfFatura').innerText = (fatura === 'Var' && faturaDetay) ? "Var (".concat(faturaDetay, ")") : fatura;
     document.getElementById('pdfDestekler').innerText = (destek === 'Var' && destekDetay) ? "Var (".concat(destekDetay, ")") : destek;
     document.getElementById('pdfNotlar').innerText = notlar;
-    document.getElementById('pdfVerilenler').innerText = verilenler;
+
     var photoCountForPdf = Number((document.getElementById('photo_count') || {}).value || 0);
     var photoInfoEl = document.getElementById('pdfFotografBilgisi');
     if (photoInfoEl) {
