@@ -698,7 +698,7 @@ body {
         <!-- Alt Aksiyon Butonları -->
         <div class="actions-grid no-print">
           <button type="submit" class="action-btn submit-btn" id="submitBtn">
-            Formu Kaydet, Tabloya & Drive'a Yükle
+            Formu Gönder
           </button>
           <button type="button" class="action-btn btn-pdf" onclick="pdfAyniUret(true)">
             📄 PDF Tutanak İndir
@@ -975,7 +975,45 @@ body {
       }
     }
 
-    async function pdfAyniUret(indir = true) {
+    
+
+    /* İYİBİS — PDF her zaman açık/beyaz tema */
+    function iyibisPdfLightOnClone(clonedDoc) {
+      try {
+        clonedDoc.documentElement.style.colorScheme = 'only light';
+        clonedDoc.documentElement.setAttribute('data-iyibis-pdf-light', '1');
+        clonedDoc.querySelectorAll('style[class*="darkreader"], style[id*="darkreader"], link[class*="darkreader"], [data-darkreader-mode], [data-darkreader-scheme]').forEach(function(el){
+          if (el.tagName === 'STYLE' || el.tagName === 'LINK') el.disabled = true;
+        });
+        var s = clonedDoc.createElement('style');
+        s.id = 'iyibis-pdf-force-light';
+        s.textContent = `
+          html[data-iyibis-pdf-light], html[data-iyibis-pdf-light] body { color-scheme: only light !important; background:#fff !important; filter:none !important; }
+          html[data-iyibis-pdf-light] .form-card,
+          html[data-iyibis-pdf-light] #pdfTemplate { background:#fff !important; color:#0f172a !important; filter:none !important; }
+          html[data-iyibis-pdf-light] input,
+          html[data-iyibis-pdf-light] select,
+          html[data-iyibis-pdf-light] textarea { background:#fff !important; color:#0f172a !important; border-color:#cbd5e1 !important; filter:none !important; }
+          html[data-iyibis-pdf-light] label { color:#334155 !important; }
+          html[data-iyibis-pdf-light] table { background:#fff !important; color:#0f172a !important; }
+          html[data-iyibis-pdf-light] th { background:#f1f5f9 !important; color:#8b1d24 !important; border-color:#cbd5e1 !important; }
+          html[data-iyibis-pdf-light] td { background:#fff !important; color:#0f172a !important; border-color:#d1d5db !important; }
+          html[data-iyibis-pdf-light] .signature-card,
+          html[data-iyibis-pdf-light] .signature-card-single,
+          html[data-iyibis-pdf-light] .sig-box-card,
+          html[data-iyibis-pdf-light] .legal-box { background:#f8fafc !important; color:#334155 !important; border-color:#cbd5e1 !important; }
+          html[data-iyibis-pdf-light] .sig-container,
+          html[data-iyibis-pdf-light] canvas { background:#fff !important; filter:none !important; }
+          html[data-iyibis-pdf-light] .header-titles h1,
+          html[data-iyibis-pdf-light] .section-title { color:#8b1d24 !important; }
+          html[data-iyibis-pdf-light] .header-titles p,
+          html[data-iyibis-pdf-light] .sig-hint { color:#64748b !important; }
+        `;
+        clonedDoc.head.appendChild(s);
+      } catch (_) {}
+    }
+
+async function pdfAyniUret(indir = true) {
       const element = document.getElementById('formCardAyni');
       const kisi = document.getElementById('faydalanici_ad').value || "Faydalanici";
       const cleanName = kisi.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ]/g, '_');
@@ -984,7 +1022,7 @@ body {
         margin: [10, 12, 10, 12],
         filename: `GIH_Ayni_Yardim_${cleanName}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0, ignoreElements: el => el.classList.contains('no-print') },
+        html2canvas: { scale: 2, useCORS: true, scrollX: 0, scrollY: 0, backgroundColor: '#ffffff', onclone: iyibisPdfLightOnClone, ignoreElements: el => el.classList.contains('no-print') },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
@@ -1075,7 +1113,7 @@ body {
         console.error(err);
       } finally {
         btn.disabled = false;
-        btn.innerText = "Formu Kaydet, Tabloya & Drive'a Yükle";
+        btn.innerText = "Formu Gönder";
       }
     });
 
