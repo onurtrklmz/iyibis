@@ -2155,10 +2155,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                 <option value="DELİST">Liste Dışı</option>
                             </select>
                         </div>
-                        <button type="button" onclick="resetApprovedFamilyFilters()"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
-                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreleri Kaldır
-                        </button>
                         <div class="flex items-center gap-1">
                             <span class="text-slate-500 font-medium">Sıralama:</span>
                             <select id="sort-mevcut" onchange="renderMevcutTable()" class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none">
@@ -2168,7 +2164,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                 <option value="kids-desc">Çocuk Sayısı (Çoktan Aza)</option>
                             </select>
                         </div>
-                        <div class="ml-auto">
+                        <div class="ml-auto flex items-center gap-2">
+                            <button type="button" onclick="resetApprovedFamilyFilters()"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
+                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
+                        </button>
                             <button type="button" onclick="exportFilteredApprovedFamiliesToExcel()"
                                 class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-sm">
                             <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi İndir
@@ -2180,7 +2180,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         </label>
                     </div>
                     <div class="text-slate-500">
-                        Gösterilen: <span id="showing-count-mevcut" class="font-bold text-slate-800">0</span> aile
+                        <span id="showing-count-mevcut" class="inline-flex min-w-[54px] items-center justify-center rounded-full border-2 border-emerald-500 bg-emerald-50 px-3 py-1 text-base font-bold text-rose-500 shadow-sm">0</span>
                     </div>
                 </div>
             </div>
@@ -2251,7 +2251,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         </div>
                         <button type="button" onclick="resetRedFilters()"
                                 class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
-                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreleri Kaldır
+                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
                         </button>
                     </div>
                 </div>
@@ -2329,7 +2329,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         </div>
                         <button type="button" onclick="resetWebFilters()"
                                 class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
-                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreleri Kaldır
+                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
                         </button>
                     </div>
                 </div>
@@ -2402,8 +2402,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         </button>
                         <button type="button" onclick="resetFieldVisitFilters()"
                                 class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-semibold">
-                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreleri Kaldır
+                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
                         </button>
+                        <span id="showing-count-saha"
+                              class="inline-flex min-w-[54px] items-center justify-center rounded-full border-2 border-emerald-500 bg-emerald-50 px-3 py-1 text-base font-bold text-rose-500 shadow-sm">0</span>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -4927,6 +4929,10 @@ function renderSahaTable() {
     if (!tbody) return;
 
     var list = getFilteredFieldVisits_();
+
+    var countEl = document.getElementById('showing-count-saha');
+    if (countEl) countEl.innerText = list.length;
+
     tbody.innerHTML = '';
 
     if (!list.length) {
