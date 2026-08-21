@@ -2995,6 +2995,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             class="inline-flex items-center justify-center px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold transition">
                         <i class="fa-solid fa-user-slash mr-1.5"></i>Liste Dışı Bırak
                     </button>
+                    <button id="family-detail-approve-btn" type="button" class="hidden inline-flex items-center justify-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition"><i class="fa-solid fa-user-check mr-1.5"></i>Onay'a Al</button>
                     <button id="family-detail-ret-btn" type="button"
                             class="inline-flex items-center justify-center px-4 py-2.5 bg-red-800 hover:bg-red-900 text-white rounded-lg text-xs font-semibold transition">
                         <i class="fa-solid fa-ban mr-1.5"></i>Ret Listesine Taşı
@@ -3878,30 +3879,31 @@ document.addEventListener('click', function (e) {
 window.addEventListener('resize', closeFamilyActionMenu);
 window.addEventListener('scroll', closeFamilyActionMenu, true);
 function renderRedTable() {
-    var query = (document.getElementById('search-red').value || '').toLowerCase().trim();
-    var district = document.getElementById('filter-district-red').value;
-    var list = appState.red.filter(function (item) {
-        if (district !== 'ALL' && !(item.bolge || '').toUpperCase().includes(district))
-            return false;
-        if (query) {
-            var match = (item.ad_soyad || '').toLowerCase().includes(query) ||
-                (item.tc || '').toString().includes(query) ||
-                (item.adres || '').toLowerCase().includes(query);
-            if (!match)
-                return false;
-        }
+    var query=(document.getElementById('search-red').value||'').toLowerCase().trim();
+    var district=document.getElementById('filter-district-red').value;
+    var list=appState.red.filter(function(item){
+        if(district!=='ALL' && !(item.bolge||'').toUpperCase().includes(district)) return false;
+        if(query && !((item.ad_soyad||'').toLowerCase().includes(query)||(item.tc||'').toString().includes(query)||(item.adres||'').toLowerCase().includes(query))) return false;
         return true;
     });
-    document.getElementById('showing-count-red').innerText = list.length;
-    var tbody = document.getElementById('red-table-body');
-    tbody.innerHTML = '';
-    list.forEach(function (item) {
-        var tr = document.createElement('tr');
-        tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">".concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-slate-500 truncate max-w-xs\">").concat(item.adres || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><span class=\"font-semibold text-slate-700\">").concat(item.bolge || '-', "</span></td>\n                    <td class=\"py-3 px-3\"><div>").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\">Gelir: ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-semibold text-slate-800\">").concat(item.cocuk_sayisi || '-', "</div><div class=\"text-[10px] text-slate-500\">").concat(item.cocuk_detay || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs text-[11px] text-slate-700\">").concat(item.teslim_edilen || getFieldVisitSupportText_(item) || item.talep || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <div class=\"flex flex-col items-end gap-1.5\">\n                            <span class=\"badge-red px-2 py-0.5 rounded text-[11px] font-bold\">RET ALDI</span>\n                            <button onclick=\"moveRedToActive('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-arrow-rotate-left mr-1\"></i>Onaylı Listeye Al\n                            </button>\n                        </div>\n                    </td>\n                ");
+    document.getElementById('showing-count-red').innerText=list.length;
+    var tbody=document.getElementById('red-table-body'); tbody.innerHTML='';
+    list.forEach(function(item){
+        var tr=document.createElement('tr'); tr.className='hover:bg-slate-50/80 transition border-b border-slate-100';
+        tr.innerHTML='<td class="py-3 px-3"><button type="button" data-action="detail" class="text-left group"><div class="font-bold text-slate-900 group-hover:text-sky-700 group-hover:underline">'+(item.ad_soyad||'-')+'</div><div class="text-[11px] text-slate-400 font-mono">'+(item.tc||'-')+'</div></button></td>'+
+        '<td class="py-3 px-3"><div class="font-medium text-slate-700">'+(item.iletisim||'-')+'</div><div class="text-[11px] text-slate-500 truncate max-w-xs">'+(item.adres||'-')+'</div></td>'+
+        '<td class="py-3 px-3 whitespace-nowrap"><span class="font-semibold text-slate-700">'+(item.bolge||'-')+'</span></td>'+
+        '<td class="py-3 px-3"><div>'+(item.ev||'-')+'</div><div class="text-[11px] text-slate-500">Gelir: '+(item.gelir||'-')+'</div></td>'+
+        '<td class="py-3 px-3"><div class="font-semibold text-slate-800">'+(item.cocuk_sayisi||'-')+'</div><div class="text-[10px] text-slate-500">'+(item.cocuk_detay||'')+'</div></td>'+
+        '<td class="py-3 px-3 text-[11px] text-slate-600">'+(item.ziyaret_edenler||'-')+'</td>'+
+        '<td class="py-3 px-3 max-w-xs text-[11px] text-slate-700">'+(item.teslim_edilen||getFieldVisitSupportText_(item)||item.talep||'-')+'</td>'+
+        '<td class="py-3 px-3 text-right whitespace-nowrap"><div class="flex flex-col items-end gap-1.5"><span class="badge-red px-2 py-0.5 rounded text-[11px] font-bold">RET ALDI</span><button type="button" data-action="detail" class="px-2.5 py-1.5 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 rounded-md font-semibold text-[11px]"><i class="fa-solid fa-address-card mr-1"></i>Aile Bilgi Kartı</button><button type="button" data-action="approve" class="px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]"><i class="fa-solid fa-arrow-rotate-left mr-1"></i>Onaylı Listeye Al</button></div></td>';
+        tr.querySelectorAll('[data-action="detail"]').forEach(function(btn){ btn.addEventListener('click',function(){ viewFamilyDetail(item.id,'red'); }); });
+        var approve=tr.querySelector('[data-action="approve"]'); if(approve) approve.addEventListener('click',function(){ moveRedToActive(item.id); });
         tbody.appendChild(tr);
     });
 }
+
 function renderWebTable() {
     var query = (document.getElementById('search-web').value || '').toLowerCase().trim();
     var statusFilter = document.getElementById('filter-web-status').value;
@@ -4978,14 +4980,14 @@ function renderBirthdayList() {
         container.appendChild(card);
     });
 }
-function viewFamilyDetail(id) {
-    currentFamilyId = id;
-    var item = appState.mevcut.find(function (x) { return x.id === id; });
-    if (!item)
-        return;
+function viewFamilyDetail(id, source) {
+    currentFamilyId=id; window.currentFamilyDetailSource=source==='red'?'red':'active';
+    var item=window.currentFamilyDetailSource==='red'?appState.red.find(function(x){return x.id===id;}):appState.mevcut.find(function(x){return x.id===id;});
+    if(!item) return;
+    var isRedFamily=window.currentFamilyDetailSource==='red';
     document.getElementById('modal-family-name').innerText = item.ad_soyad || 'İsimsiz';
     document.getElementById('modal-family-subtitle').innerText = (item.tc || '-') + ' • ' + (item.iletisim || '-');
-    document.getElementById('m-durum').innerText = ((item.durumu || '').trim().toUpperCase() === 'DELİST') ? 'LİSTE DIŞI' : (item.durumu || 'STABİL');
+    document.getElementById('m-durum').innerText=isRedFamily?'RET':(((item.durumu||'').trim().toUpperCase()==='DELİST')?'LİSTE DIŞI':(item.durumu||'STABİL'));
     document.getElementById('m-metrik').innerText = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '-';
     document.getElementById('m-bolge').innerText = item.bolge || '-';
     document.getElementById('m-es-durum').innerText = item.es_durumu || '-';
@@ -4994,11 +4996,9 @@ function viewFamilyDetail(id) {
     document.getElementById('m-adres').innerText = item.adres || 'Adres girilmemiş.';
     var statusEdit = document.getElementById('m-durum-edit');
     var normalizedStatus = (item.durumu || 'STABİL').trim().toUpperCase();
-    if (statusEdit)
-        statusEdit.value = ['KRİTİK', 'TAKİP', 'STABİL'].includes(normalizedStatus) ? normalizedStatus : 'STABİL';
+    if(statusEdit){statusEdit.value=['KRİTİK','TAKİP','STABİL'].includes(normalizedStatus)?normalizedStatus:'STABİL';statusEdit.disabled=isRedFamily;}
     var metricEdit = document.getElementById('m-metrik-edit');
-    if (metricEdit)
-        metricEdit.value = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '';
+    if(metricEdit){metricEdit.value=normalizeMetricScore(item.metrik_puani)!==null?normalizeMetricScore(item.metrik_puani):'';metricEdit.disabled=isRedFamily;}
     var addressEdit = document.getElementById('m-adres-edit');
     if (addressEdit)
         addressEdit.value = item.adres || '';
@@ -5053,22 +5053,21 @@ function viewFamilyDetail(id) {
     if (assistanceBtn)
         assistanceBtn.onclick = function () { return openAssistanceModal(id); };
     var detailAssistanceBtn = document.getElementById('family-detail-assistance-btn');
-    if (detailAssistanceBtn)
-        detailAssistanceBtn.onclick = function () {
-            closeModal('detailModal');
-            openAssistanceModal(id);
-        };
-    var detailDelistBtn = document.getElementById('family-detail-delist-btn');
-    var detailRetBtn = document.getElementById('family-detail-ret-btn');
+    if(detailAssistanceBtn){detailAssistanceBtn.classList.toggle('hidden',isRedFamily);detailAssistanceBtn.onclick=function(){closeModal('detailModal');openAssistanceModal(id);};}
+    var detailDelistBtn=document.getElementById('family-detail-delist-btn');
+    var detailRetBtn=document.getElementById('family-detail-ret-btn');
+    var detailApproveBtn=document.getElementById('family-detail-approve-btn');
+    if(detailApproveBtn){detailApproveBtn.classList.toggle('hidden',!isRedFamily);detailApproveBtn.onclick=function(){closeModal('detailModal');moveRedToActive(id);};}
     if (detailRetBtn) {
         var isDelistedForRet = (item.durumu || '').trim().toUpperCase() === 'DELİST';
-        detailRetBtn.classList.toggle('hidden', isDelistedForRet);
+        detailRetBtn.classList.toggle('hidden', isRedFamily || isDelistedForRet);
         detailRetBtn.onclick = function () {
             closeModal('detailModal');
             moveActiveToRed(id);
         };
     }
     if (detailDelistBtn) {
+        detailDelistBtn.classList.toggle('hidden',isRedFamily);
         var isDelisted_1 = (item.durumu || '').trim().toUpperCase() === 'DELİST';
         detailDelistBtn.disabled = false;
         detailDelistBtn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -5198,9 +5197,9 @@ function saveNewFamily() {
 
 function enableFamilyDetailEdit() {
     var _a;
-    var item = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
-    if (!item)
-        return;
+    var item = window.currentFamilyDetailSource === 'red' ? appState.red.find(function (x) { return x.id === currentFamilyId; }) : appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
+    if (!item) return;
+    var isRedFamily=window.currentFamilyDetailSource==='red';
     document.getElementById('m-durum-edit').value = ['KRİTİK', 'TAKİP', 'STABİL'].includes((item.durumu || '').trim().toUpperCase()) ? (item.durumu || '').trim().toUpperCase() : 'STABİL';
     document.getElementById('m-metrik-edit').value = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '';
     document.getElementById('m-adres-edit').value = item.adres || '';
@@ -5209,12 +5208,14 @@ function enableFamilyDetailEdit() {
     document.getElementById('m-gelir-edit').value = item.gelir || '';
     document.getElementById('m-gider-edit').value = item.gider || '';
     document.getElementById('m-bolge-edit').value = item.bolge || '';
-    document.getElementById('m-es-durum-edit').value = item.es_durumu || '';
+    document.getElementById('m-es-durum-edit').value=item.es_durumu||'';
+    document.getElementById('m-durum-edit').disabled=isRedFamily;
+    document.getElementById('m-metrik-edit').disabled=isRedFamily;
     setFamilyDetailEditMode(true);
 }
 function cancelFamilyDetailEdit() {
     var _a;
-    var item = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
+    var item = window.currentFamilyDetailSource === 'red' ? appState.red.find(function (x) { return x.id === currentFamilyId; }) : appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
     if (item) {
         document.getElementById('m-durum-edit').value = ['KRİTİK', 'TAKİP', 'STABİL'].includes((item.durumu || '').trim().toUpperCase()) ? (item.durumu || '').trim().toUpperCase() : 'STABİL';
         document.getElementById('m-metrik-edit').value = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '';
@@ -5244,8 +5245,8 @@ function saveFamilyDetailChanges() {
                     expense = (document.getElementById('m-gider-edit').value || '').trim();
                     region = (document.getElementById('m-bolge-edit').value || '').trim();
                     spouseStatus = (document.getElementById('m-es-durum-edit').value || '').trim();
-                    status = document.getElementById('m-durum-edit').value;
-                    metricRaw = (document.getElementById('m-metrik-edit').value || '').trim();
+                    status=window.currentFamilyDetailSource==='red'?'TAKİP':document.getElementById('m-durum-edit').value;
+                    metricRaw=window.currentFamilyDetailSource==='red'?'':(document.getElementById('m-metrik-edit').value||'').trim();
                     metricNumber = metricRaw === '' ? null : Number(metricRaw.replace(',', '.'));
                     if (!['KRİTİK', 'TAKİP', 'STABİL'].includes(status))
                         return [2 /*return*/, alert('Geçersiz ihtiyaç durumu.')];
