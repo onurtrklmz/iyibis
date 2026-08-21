@@ -3241,6 +3241,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <h4 class="font-bold text-sm text-slate-800 mb-2">Kayıtlı Yardımlar</h4>
                     <div id="assistance-history" class="space-y-2 text-xs"></div>
                 </div>
+                <div id="field-visit-support-panel">
+                    <h4 class="font-bold text-sm text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-person-walking text-emerald-600"></i>Saha Ziyaretinde Verilen Destekler</h4>
+                    <div id="field-visit-support-text" class="p-3 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-900 text-xs">Kayıtlı saha desteği bulunmuyor.</div>
+                </div>
                 <div class="border-t border-slate-200 pt-4">
                     <div class="flex items-center justify-between gap-3 mb-3">
                         <div>
@@ -3762,7 +3766,7 @@ function renderMevcutTable() {
             statusBadge = "<span class=\"badge-takip px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDFE1 TAK\u0130P</span>";
         else if (durum === 'DELİST')
             statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">\u26AB L\u0130STE DI\u015EI</span>";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(normalizeMetricScore(item.metrik_puani) !== null ? '(' + normalizeMetricScore(item.metrik_puani) + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(normalizeMetricScore(item.metrik_puani) !== null ? '(' + normalizeMetricScore(item.metrik_puani) + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || getFieldVisitSupportText_(item) || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
@@ -3882,7 +3886,7 @@ function renderRedTable() {
     list.forEach(function (item) {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">".concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-slate-500 truncate max-w-xs\">").concat(item.adres || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><span class=\"font-semibold text-slate-700\">").concat(item.bolge || '-', "</span></td>\n                    <td class=\"py-3 px-3\"><div>").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\">Gelir: ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-semibold text-slate-800\">").concat(item.cocuk_sayisi || '-', "</div><div class=\"text-[10px] text-slate-500\">").concat(item.cocuk_detay || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs text-[11px] text-slate-700\">").concat(item.teslim_edilen || item.talep || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <div class=\"flex flex-col items-end gap-1.5\">\n                            <span class=\"badge-red px-2 py-0.5 rounded text-[11px] font-bold\">RET ALDI</span>\n                            <button onclick=\"moveRedToActive('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-arrow-rotate-left mr-1\"></i>Aktif Listeye Al\n                            </button>\n                        </div>\n                    </td>\n                ");
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">".concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-slate-500 truncate max-w-xs\">").concat(item.adres || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><span class=\"font-semibold text-slate-700\">").concat(item.bolge || '-', "</span></td>\n                    <td class=\"py-3 px-3\"><div>").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\">Gelir: ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-semibold text-slate-800\">").concat(item.cocuk_sayisi || '-', "</div><div class=\"text-[10px] text-slate-500\">").concat(item.cocuk_detay || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs text-[11px] text-slate-700\">").concat(item.teslim_edilen || getFieldVisitSupportText_(item) || item.talep || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <div class=\"flex flex-col items-end gap-1.5\">\n                            <span class=\"badge-red px-2 py-0.5 rounded text-[11px] font-bold\">RET ALDI</span>\n                            <button onclick=\"moveRedToActive('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-arrow-rotate-left mr-1\"></i>Aktif Listeye Al\n                            </button>\n                        </div>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
@@ -4092,6 +4096,54 @@ function moveActiveToRed(id) {
 
 // Phase 4C: eski yerel/ham uygulama kaldırıldı; merkezi sunucu sürümü aşağıda kullanılır.
 
+function getFieldVisitSupportsForFamily_(item) {
+    if (!item) return [];
+    var tc = normalizeTC(item.tc);
+    var name = normalizeName(item.ad_soyad);
+    var candidates = [];
+
+    function addValue_(value) {
+        var text = String(value || '').trim();
+        if (!text || text === '-' || /^yok$/i.test(text)) return;
+        if (candidates.indexOf(text) < 0) candidates.push(text);
+    }
+
+    // Backend yeni alanı doğrudan Aktif/Ret kaydına taşıyorsa öncelikle onu kullan.
+    addValue_(item.ziyarette_verilenler);
+    addValue_(item.saha_verilen_destekler);
+    addValue_(item.saha_ziyareti_destekleri);
+
+    // Merkezi saha kayıtlarında aynı aileyi TC; TC yoksa ad-soyad üzerinden eşleştir.
+    (appState.saha || []).forEach(function (x) {
+        var sameTc = tc && normalizeTC(x.tc) === tc;
+        var sameName = !tc && name && normalizeName(x.ad_soyad) === name;
+        if (!sameTc && !sameName) return;
+
+        addValue_(x.ziyarette_verilenler);
+        addValue_(x.saha_verilen_destekler);
+        addValue_(x.saha_ziyareti_destekleri);
+        addValue_(x.verilen_destekler);
+
+        // Eski merkezi payload yalnız saha_raporu döndürüyorsa metinden güvenli fallback.
+        var report = String(x.saha_raporu || '');
+        var m = report.match(/(?:Ziyarette\s+Teslim\s+Edilen\s+Destekler|Verilen\s+Destekler|Teslim\s+Edilen\s+Destekler)\s*[:：-]\s*([^\n|]+)/i);
+        if (m && m[1]) addValue_(m[1]);
+    });
+    return candidates;
+}
+
+function getFieldVisitSupportText_(item) {
+    var values = getFieldVisitSupportsForFamily_(item);
+    return values.length ? values.join(' • ') : '';
+}
+
+function renderFieldVisitSupport_(item) {
+    var el = document.getElementById('field-visit-support-text');
+    if (!el) return;
+    var text = getFieldVisitSupportText_(item);
+    el.innerText = text || 'Kayıtlı saha desteği bulunmuyor.';
+}
+
 function getAssistanceEntriesForFamily_(item) {
     var keys = [];
     var tc = normalizeTC(item && item.tc);
@@ -4199,13 +4251,14 @@ function renderAssistanceHistory(item) {
 }
 
 function openAssistanceModal(id) {
-    var item = appState.mevcut.find(function (x) { return x.id === id; });
+    var item = appState.mevcut.find(function (x) { return x.id === id; }) || appState.red.find(function (x) { return x.id === id; });
     if (!item)
         return;
     currentAssistanceFamilyId = id;
     document.getElementById('assistance-family-label').innerText = "".concat(item.ad_soyad || '-', " \u2022 ").concat(item.tc || 'TCKN yok');
     renderAssistanceHistory(item);
     renderHistoricalAssistanceText_(item);
+    renderFieldVisitSupport_(item);
     var rows = document.getElementById('assistance-entry-rows');
     rows.innerHTML = '';
     addAssistanceRow();
@@ -4962,7 +5015,11 @@ function viewFamilyDetail(id) {
         var hasVal = val && val !== 'nan';
         grid.innerHTML += "<div class=\"p-1 rounded text-center border ".concat(hasVal ? 'bg-amber-100 border-amber-300 font-bold' : 'bg-slate-50 border-slate-200 text-slate-400', "\"><div>").concat(m.l, "</div><div>").concat(hasVal ? val : '-', "</div></div>");
     });
-    document.getElementById('m-teslim-edilen-detay').innerText = item.teslim_edilen || 'Kayıtlı destek bulunmuyor.';
+    var fieldVisitSupport = getFieldVisitSupportText_(item);
+    var helpNotes = [];
+    if (item.teslim_edilen) helpNotes.push(item.teslim_edilen);
+    if (fieldVisitSupport) helpNotes.push('Saha ziyaretinde verilen destekler: ' + fieldVisitSupport);
+    document.getElementById('m-teslim-edilen-detay').innerText = helpNotes.length ? helpNotes.join(' • ') : 'Kayıtlı destek bulunmuyor.';
     document.getElementById('m-ziyaretciler').innerText = item.ziyaret_edenler || '-';
     document.getElementById('m-ozel-durum').innerText = item.ozel_durum || '-';
     document.getElementById('m-talep').innerText = item.talep || '-';
