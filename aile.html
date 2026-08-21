@@ -648,9 +648,9 @@
 }
 </style>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4A";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4A.1";</script>
 
-<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4A";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.0 PHASE 4A.1";</script>
   <script src="config-beta42.js"></script>
   <script src="api-client-beta42.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
@@ -5915,7 +5915,19 @@ function mapCentralAssistanceToWorkflow(payload) {
         workflowState.assistanceHistoryText[key] = workflowState.assistanceHistoryText[key] || [];
         if (workflowState.assistanceHistoryText[key].indexOf(textValue) < 0) workflowState.assistanceHistoryText[key].push(textValue);
     }
-    (payload.assistanceHistoryText || []).forEach(function(h) {
+    var historyPayload = payload.assistanceHistoryText || [];
+    if (!historyPayload.length) {
+        historyPayload = (payload.assistance || []).filter(function(a) {
+            return String(a.kaynak || '').toLocaleUpperCase('tr-TR').indexOf('YARDIM GEÇMİŞİ') >= 0;
+        }).map(function(a) {
+            var parts = [];
+            if (a.yardim_tarihi) parts.push(a.yardim_tarihi);
+            if (a.yardim_icerigi) parts.push(a.yardim_icerigi);
+            if (a.rayic_bedel) parts.push('Rayiç Bedel: ' + a.rayic_bedel);
+            return { tc:a.tc || '', ad_soyad:a.ad_soyad || '', metin:parts.join(' — ') || 'Geçmiş yardım kaydı' };
+        });
+    }
+    historyPayload.forEach(function(h) {
         var tcKey = normalizeTC(h.tc || '');
         var nameKey = h.ad_soyad ? ('NAME:' + normalizeName(h.ad_soyad)) : '';
         var textValue = h.metin || '';
