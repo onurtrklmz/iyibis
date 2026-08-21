@@ -5056,7 +5056,7 @@ function saveNewFamily() {
                         spouseStatus: (document.getElementById('new-family-spouse').value || '').trim(),
                         phone: (document.getElementById('new-family-phone').value || '').trim(),
                         house: (document.getElementById('new-family-house').value || '').trim(),
-                        income: (document.getElementById('new-family-income').value || '').trim(),
+                        income: normalizeHouseholdIncomeForSave(document.getElementById('new-family-income').value),
                         expense: (document.getElementById('new-family-expense').value || '').trim(),
                         address: (document.getElementById('new-family-address').value || '').trim()
                     };
@@ -5145,6 +5145,23 @@ function cancelFamilyDetailEdit() {
     }
     setFamilyDetailEditMode(false);
 }
+
+function normalizeHouseholdIncomeForSave(value) {
+    var s = String(value == null ? '' : value).trim();
+    if (!s)
+        return '';
+
+    // Yalnız sayısal para biçimiyse normalize et.
+    // 15000, 15.000, 15 000, 15,000 -> 15000
+    if (/^[0-9\s.,]+$/.test(s)) {
+        var digits = s.replace(/\D/g, '');
+        return digits;
+    }
+
+    // Eski serbest metinli gelir kayıtlarını (örn. "SED 9000") bozma.
+    return s;
+}
+
 function saveFamilyDetailChanges() {
     return __awaiter(this, void 0, void 0, function () {
         var item, address, phone, house, income, expense, region, spouseStatus, status, metricRaw, metricNumber, btn, payload, err_8;
@@ -5157,7 +5174,7 @@ function saveFamilyDetailChanges() {
                     address = (document.getElementById('m-adres-edit').value || '').trim();
                     phone = (document.getElementById('m-iletisim-edit').value || '').trim();
                     house = (document.getElementById('m-ev-edit').value || '').trim();
-                    income = (document.getElementById('m-gelir-edit').value || '').trim();
+                    income = normalizeHouseholdIncomeForSave(document.getElementById('m-gelir-edit').value);
                     expense = (document.getElementById('m-gider-edit').value || '').trim();
                     region = (document.getElementById('m-bolge-edit').value || '').trim();
                     spouseStatus = (document.getElementById('m-es-durum-edit').value || '').trim();
