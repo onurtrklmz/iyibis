@@ -2110,11 +2110,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </button>
                     <button id="btn-fetch-active-sheet" onclick="fetchActiveFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Aktif Aileleri Drive'dan Çek
+                        <i id="active-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Aktif Aileleri Güncelle
                     </button>
                     <button onclick="importAssistanceFromSheet()"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i class="fa-solid fa-hand-holding-heart mr-1.5"></i>Yapılan Yardımları Drive'dan Çek
+                        <i class="fa-solid fa-hand-holding-heart mr-1.5"></i>Yapılan Yardımları Güncelle
                     </button>
                 </div>
             </div>
@@ -2209,7 +2209,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                     <button id="btn-fetch-red-sheet" onclick="fetchRedFamiliesFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="red-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Ret Alanları Drive'dan Çek
+                        <i id="red-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Ret Alanları Güncelle
                     </button>
                 </div>
             </div>
@@ -2281,7 +2281,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     <button id="btn-fetch-web-sheet" onclick="fetchWebApplicationsFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
                         <i id="web-sheet-sync-icon" class="fa-solid fa-table-list mr-1.5"></i>
-                        Web'den Yeni Başvuruları Drive'dan Çek
+                        Web'den Yeni Başvuruları Güncelle
                     </button>
                 </div>
                 <div id="web-sheet-source-status" class="hidden mt-3 text-xs rounded-lg p-3"></div>
@@ -2358,7 +2358,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                     <button id="btn-fetch-field-sheet" onclick="fetchFieldReportsFromExternalSheet(true)"
                             class="inline-flex items-center justify-center px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap">
-                        <i id="field-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Saha Tespit Formunu Drive'dan Çek
+                        <i id="field-sheet-sync-icon" class="fa-solid fa-rotate mr-1.5"></i>Saha Tespit Formunu Güncelle
                     </button>
                 </div>
             </div>
@@ -2563,7 +2563,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
                         <button id="btn-refresh-all-sources" onclick="refreshAllGoogleSources(true)" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold rounded-lg shadow-sm transition">
-                            <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Tüm Tabloları Drive'dan Çek
+                            <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Tüm Tabloları Güncelle
                         </button>
                         
                         <button id="btn-download-all-tables" onclick="downloadAllSourceTables()" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg border border-emerald-800 disabled:opacity-60 disabled:cursor-wait">
@@ -3666,6 +3666,28 @@ function setStatusFilter(status) {
         activeBtn.classList.add('ring-2', 'ring-slate-900', 'shadow-sm');
     renderMevcutTable();
 }
+
+function normalizeMetricScore(value) {
+    if (value === null || value === undefined || value === '')
+        return null;
+    var raw = String(value).trim().replace(',', '.');
+    if (!raw)
+        return null;
+
+    var hadPercent = raw.includes('%');
+    raw = raw.replace('%', '').trim();
+    var n = Number(raw);
+    if (!Number.isFinite(n))
+        return null;
+
+    // Eski verilerde 0.50 / 0.55 / 0.60 biçimi kullanılmışsa 0-100 puana çevir.
+    // 60% ve 60 gibi değerler ise doğrudan 60 olarak kalır.
+    if (!hadPercent && n >= 0 && n <= 1)
+        n = n * 100;
+
+    return Math.round(n);
+}
+
 function renderMevcutTable() {
     var query = (document.getElementById('search-mevcut').value || '').toLowerCase().trim();
     var district = document.getElementById('filter-district-mevcut').value;
@@ -3690,7 +3712,7 @@ function renderMevcutTable() {
         return true;
     });
     if (sortVal === 'metric-desc') {
-        list.sort(function (a, b) { return parseFloat(b.metrik_puani || 0) - parseFloat(a.metrik_puani || 0); });
+        list.sort(function (a, b) { return (normalizeMetricScore(b.metrik_puani) || 0) - (normalizeMetricScore(a.metrik_puani) || 0); });
     }
     else if (sortVal === 'name-asc') {
         list.sort(function (a, b) { return (a.ad_soyad || '').localeCompare(b.ad_soyad || ''); });
@@ -3709,6 +3731,7 @@ function renderMevcutTable() {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
         var durum = (item.durumu || '').trim().toUpperCase();
+        var metricScore = normalizeMetricScore(item.metrik_puani);
         var statusBadge = "<span class=\"badge-stabil px-2 py-0.5 rounded text-[11px] font-bold\">STAB\u0130L</span>";
         if (durum === 'KRİTİK')
             statusBadge = "<span class=\"badge-kritik px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDD34 KR\u0130T\u0130K</span>";
@@ -3716,7 +3739,7 @@ function renderMevcutTable() {
             statusBadge = "<span class=\"badge-takip px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDFE1 TAK\u0130P</span>";
         else if (durum === 'DELİST')
             statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">\u26AB L\u0130STE DI\u015EI</span>";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(item.metrik_puani ? '(' + item.metrik_puani + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(metricScore !== null ? '(' + metricScore + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
