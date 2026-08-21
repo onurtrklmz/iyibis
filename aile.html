@@ -2146,6 +2146,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                             </select>
                         </div>
                         <div class="flex items-center gap-1">
+                            <span class="text-slate-500 font-medium">Durum:</span>
+                            <select id="filter-status-mevcut-select" onchange="setStatusFilter(this.value)" class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none">
+                                <option value="ALL">Tüm Durumlar</option>
+                                <option value="KRİTİK">Kritik</option>
+                                <option value="TAKİP">Takip</option>
+                                <option value="STABİL">Stabil</option>
+                                <option value="DELİST">Liste Dışı</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="exportFilteredApprovedFamiliesToExcel()"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-sm">
+                            <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi Excel'e İndir
+                        </button>
+                        <div class="flex items-center gap-1">
                             <span class="text-slate-500 font-medium">Sıralama:</span>
                             <select id="sort-mevcut" onchange="renderMevcutTable()" class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none">
                                 <option value="default">Varsayılan Sıra</option>
@@ -2362,14 +2376,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <h3 class="font-bold text-slate-900">Saha Bekleyen / Değerlendirilen Aileler</h3>
                         <p class="text-xs text-slate-500 mt-0.5">Başvuru → Saha → Değerlendirme → Onay / Ret</p>
                     </div>
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <input id="search-saha" oninput="renderSahaTable()" type="text" placeholder="İsim / TC ara"
+                               class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs min-w-0">
+                        <select id="filter-saha-district" onchange="renderSahaTable()" class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs">
+                            <option value="ALL">Tüm İlçeler</option>
+                            <option value="ŞAHİNBEY">Şahinbey</option>
+                            <option value="ŞEHİTKAMİL">Şehitkamil</option>
+                        </select>
                         <select id="filter-saha-stage" onchange="renderSahaTable()" class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs">
                             <option value="ALL">Tüm Aşamalar</option>
                             <option value="SAHA YAPILACAK">Saha Yapılacak</option>
                             <option value="DEĞERLENDİRMEDE">Değerlendirmede</option>
                         </select>
-                        <input id="search-saha" oninput="renderSahaTable()" type="text" placeholder="İsim / TC ara"
-                               class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs min-w-0">
+                        <button type="button" onclick="exportFilteredFieldVisitsToExcel()"
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm">
+                            <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi Excel'e İndir
+                        </button>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -3721,27 +3744,38 @@ window.addEventListener('pageshow', function() {
 
 function setStatusFilter(status) {
     appState.currentStatusFilter = status;
+
     document.querySelectorAll('.status-filter-btn').forEach(function (btn) {
         btn.classList.remove('ring-2', 'ring-slate-900', 'shadow-sm');
     });
+
     var activeBtn = document.getElementById('filter-status-' + status);
     if (activeBtn)
         activeBtn.classList.add('ring-2', 'ring-slate-900', 'shadow-sm');
+
+    var select = document.getElementById('filter-status-mevcut-select');
+    if (select && select.value !== status)
+        select.value = status;
+
     renderMevcutTable();
 }
-function renderMevcutTable() {
+
+function getFilteredApprovedFamilies_() {
     var query = (document.getElementById('search-mevcut').value || '').toLowerCase().trim();
     var district = document.getElementById('filter-district-mevcut').value;
     var sortVal = document.getElementById('sort-mevcut').value;
     var specialOnly = document.getElementById('filter-special-mevcut').checked;
+
     var list = appState.mevcut.filter(function (item) {
-        var s = (item.durumu || '').trim().toUpperCase();
-        if (appState.currentStatusFilter !== 'ALL' && s !== appState.currentStatusFilter)
+        var status = (item.durumu || '').trim().toUpperCase();
+
+        if (appState.currentStatusFilter !== 'ALL' && status !== appState.currentStatusFilter)
             return false;
         if (district !== 'ALL' && !(item.bolge || '').toUpperCase().includes(district))
             return false;
         if (specialOnly && (!item.ozel_durum || item.ozel_durum.trim() === ''))
             return false;
+
         if (query) {
             var match = (item.ad_soyad || '').toLowerCase().includes(query) ||
                 (item.tc || '').toString().includes(query) ||
@@ -3752,38 +3786,177 @@ function renderMevcutTable() {
         }
         return true;
     });
+
     if (sortVal === 'metric-desc') {
-        list.sort(function (a, b) { return (normalizeMetricScore(b.metrik_puani) || 0) - (normalizeMetricScore(a.metrik_puani) || 0); });
+        list.sort(function (a, b) {
+            return (normalizeMetricScore(b.metrik_puani) || 0) -
+                (normalizeMetricScore(a.metrik_puani) || 0);
+        });
+    } else if (sortVal === 'name-asc') {
+        list.sort(function (a, b) {
+            return (a.ad_soyad || '').localeCompare(b.ad_soyad || '', 'tr');
+        });
+    } else if (sortVal === 'kids-desc') {
+        list.sort(function (a, b) {
+            return parseInt(b.cocuk_sayisi || 0) - parseInt(a.cocuk_sayisi || 0);
+        });
     }
-    else if (sortVal === 'name-asc') {
-        list.sort(function (a, b) { return (a.ad_soyad || '').localeCompare(b.ad_soyad || ''); });
+
+    return list;
+}
+
+function getFilteredFieldVisits_() {
+    var searchEl = document.getElementById('search-saha');
+    var stageEl = document.getElementById('filter-saha-stage');
+    var districtEl = document.getElementById('filter-saha-district');
+
+    var q = ((searchEl && searchEl.value) || '').toLowerCase().trim();
+    var stage = (stageEl && stageEl.value) || 'ALL';
+    var district = (districtEl && districtEl.value) || 'ALL';
+
+    return (appState.saha || []).filter(function (x) {
+        var xStage = (x.asama || '').trim().toUpperCase();
+        var xDistrict = (x.ilce || x.bolge || '').trim().toUpperCase();
+
+        if (stage !== 'ALL' && xStage !== stage)
+            return false;
+        if (district !== 'ALL' && !xDistrict.includes(district))
+            return false;
+
+        if (q) {
+            var matches = (x.ad_soyad || '').toLowerCase().includes(q) ||
+                String(x.tc || '').includes(q) ||
+                String(x.telefon || '').toLowerCase().includes(q);
+            if (!matches)
+                return false;
+        }
+        return true;
+    });
+}
+
+function iyibisExcelDateStamp_() {
+    var d = new Date();
+    var pad = function (n) { return String(n).padStart(2, '0'); };
+    return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) +
+        '_' + pad(d.getHours()) + pad(d.getMinutes());
+}
+
+function setExcelColumnWidths_(ws, widths) {
+    ws['!cols'] = (widths || []).map(function (w) {
+        return { wch: w };
+    });
+}
+
+function exportFilteredApprovedFamiliesToExcel() {
+    if (typeof XLSX === 'undefined') {
+        alert('Excel dışa aktarma kütüphanesi yüklenemedi.');
+        return;
     }
-    else if (sortVal === 'kids-desc') {
-        list.sort(function (a, b) { return parseInt(b.cocuk_sayisi || 0) - parseInt(a.cocuk_sayisi || 0); });
+
+    var list = getFilteredApprovedFamilies_();
+    if (!list.length) {
+        alert('Seçili filtrelere uygun indirilecek aile bulunamadı.');
+        return;
     }
+
+    var rows = list.map(function (item) {
+        return {
+            'Ad Soyad': item.ad_soyad || '',
+            'TC Kimlik No': String(item.tc || ''),
+            'Durum': ((item.durumu || '').trim().toUpperCase() === 'DELİST') ? 'LİSTE DIŞI' : (item.durumu || ''),
+            'Değerlendirme Puanı': normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '',
+            'Telefon': item.iletisim || '',
+            'İlçe / Bölge': item.bolge || '',
+            'Adres': item.adres || '',
+            'Konut Durumu': item.ev || '',
+            'Gelir': item.gelir || '',
+            'Gider': item.gider || '',
+            'Eş Durumu': item.es_durumu || '',
+            'Çocuk Sayısı': item.cocuk_sayisi || '',
+            'Kız Çocuk': item.cocuk_kiz || '',
+            'Erkek Çocuk': item.cocuk_erkek || '',
+            'Özel Durum': item.ozel_durum || '',
+            'Talep': item.talep || '',
+            'Ziyaret Edenler': item.ziyaret_edenler || '',
+            'Yapılan Destekler': item.teslim_edilen || getFieldVisitSupportText_(item) || ''
+        };
+    });
+
+    var ws = XLSX.utils.json_to_sheet(rows);
+    setExcelColumnWidths_(ws, [28, 15, 16, 18, 16, 18, 42, 18, 16, 16, 18, 13, 12, 12, 34, 34, 24, 40]);
+
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Onaylı Aileler');
+    XLSX.writeFile(wb, 'IYIBIS_Onayli_Aileler_Filtreli_' + iyibisExcelDateStamp_() + '.xlsx');
+}
+
+function exportFilteredFieldVisitsToExcel() {
+    if (typeof XLSX === 'undefined') {
+        alert('Excel dışa aktarma kütüphanesi yüklenemedi.');
+        return;
+    }
+
+    var list = getFilteredFieldVisits_();
+    if (!list.length) {
+        alert('Seçili filtrelere uygun indirilecek saha kaydı bulunamadı.');
+        return;
+    }
+
+    var rows = list.map(function (x) {
+        return {
+            'Ad Soyad': x.ad_soyad || '',
+            'TC Kimlik No': String(x.tc || ''),
+            'Başvuru / Application ID': x.application_id || x.id || '',
+            'Telefon': x.telefon || '',
+            'İlçe': x.ilce || x.bolge || '',
+            'Aşama': x.asama || 'SAHA YAPILACAK',
+            'Başvuru Talebi': x.talep || '',
+            'Saha Raporu': x.saha_raporu || '',
+            'Saha Form Tarihi': x.saha_form_tarihi || x.tarih || '',
+            'SYDV Görüşü': x.sydv_gorusu || '',
+            'Ziyarette Verilen Destekler': x.ziyarette_verilenler || x.saha_verilen_destekler || ''
+        };
+    });
+
+    var ws = XLSX.utils.json_to_sheet(rows);
+    setExcelColumnWidths_(ws, [28, 15, 24, 16, 16, 18, 36, 60, 18, 20, 42]);
+
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Saha Ziyareti');
+    XLSX.writeFile(wb, 'IYIBIS_Saha_Ziyareti_Filtreli_' + iyibisExcelDateStamp_() + '.xlsx');
+}
+
+
+function renderMevcutTable() {
+    var list = getFilteredApprovedFamilies_();
+
     document.getElementById('showing-count-mevcut').innerText = list.length;
     var tbody = document.getElementById('mevcut-table-body');
     tbody.innerHTML = '';
+
     if (list.length === 0) {
-        tbody.innerHTML = "<tr><td colspan=\"9\" class=\"text-center py-8 text-slate-400\">Arama kriterlerine uygun aile bulunamad\u0131.</td></tr>";
+        tbody.innerHTML = "<tr><td colspan=\"9\" class=\"text-center py-8 text-slate-400\">Arama kriterlerine uygun aile bulunamadı.</td></tr>";
         return;
     }
+
     list.forEach(function (item) {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
         var durum = (item.durumu || '').trim().toUpperCase();
-        var statusBadge = "<span class=\"badge-stabil px-2 py-0.5 rounded text-[11px] font-bold\">STAB\u0130L</span>";
+        var statusBadge = "<span class=\"badge-stabil px-2 py-0.5 rounded text-[11px] font-bold\">STABİL</span>";
+
         if (durum === 'KRİTİK')
-            statusBadge = "<span class=\"badge-kritik px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDD34 KR\u0130T\u0130K</span>";
+            statusBadge = "<span class=\"badge-kritik px-2 py-0.5 rounded text-[11px] font-bold\">🔴 KRİTİK</span>";
         else if (durum === 'TAKİP')
-            statusBadge = "<span class=\"badge-takip px-2 py-0.5 rounded text-[11px] font-bold\">\uD83D\uDFE1 TAK\u0130P</span>";
+            statusBadge = "<span class=\"badge-takip px-2 py-0.5 rounded text-[11px] font-bold\">🟡 TAKİP</span>";
         else if (durum === 'DELİST')
-            statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">\u26AB L\u0130STE DI\u015EI</span>";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(normalizeMetricScore(item.metrik_puani) !== null ? '(' + normalizeMetricScore(item.metrik_puani) + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || getFieldVisitSupportText_(item) || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            \u0130\u015Flemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
+            statusBadge = "<span class=\"badge-delist px-2 py-0.5 rounded text-[11px] font-bold\">⚫ LİSTE DIŞI</span>";
+
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3 whitespace-nowrap\">".concat(statusBadge, " <span class=\"text-slate-500 font-mono font-semibold ml-1\">").concat(normalizeMetricScore(item.metrik_puani) !== null ? '(' + normalizeMetricScore(item.metrik_puani) + ')' : '', "</span></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">").concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-emerald-700 font-semibold\">").concat(item.bolge || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div><span class=\"text-slate-400\">Ev:</span> ").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\"><span class=\"text-slate-400\">Gelir:</span> ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><div class=\"font-bold text-slate-800\">").concat(item.cocuk_sayisi ? item.cocuk_sayisi + ' Çocuk' : '-', "</div></td>\n                    <td class=\"py-3 px-3 max-w-xs\"><div class=\"truncate text-slate-700 font-medium\">").concat(item.ozel_durum || '-', "</div><div class=\"truncate text-[10px] text-amber-700\">").concat(item.talep || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs truncate text-[11px] text-slate-600\">").concat(item.teslim_edilen || getFieldVisitSupportText_(item) || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <button type=\"button\"\n                                onclick=\"openFamilyActionMenu(event, '").concat(item.id, "')\"\n                                class=\"inline-flex items-center px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-md font-semibold text-xs transition\">\n                            İşlemler <i class=\"fa-solid fa-chevron-down ml-1.5 text-[9px]\"></i>\n                        </button>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
-var currentFamilyActionMenuId = null;
+
 function closeFamilyActionMenu() {
     var menu = document.getElementById('familyActionMenu');
     if (menu)
@@ -4695,28 +4868,39 @@ function scheduleGoogleRefreshCycle() {
 }
 var currentSahaId = window.currentSahaId = null;
 function renderSahaTable() {
-    var _a, _b;
     var tbody = document.getElementById('saha-table-body');
     if (!tbody) return;
-    var q = (((_a = document.getElementById('search-saha')) === null || _a === void 0 ? void 0 : _a.value) || '').toLowerCase();
-    var stage = ((_b = document.getElementById('filter-saha-stage')) === null || _b === void 0 ? void 0 : _b.value) || 'ALL';
-    var list = (appState.saha || []).filter(function (x) { return (stage === 'ALL' || x.asama === stage) && (!q || (x.ad_soyad || '').toLowerCase().includes(q) || String(x.tc || '').includes(q)); });
+
+    var list = getFilteredFieldVisits_();
     tbody.innerHTML = '';
+
+    if (!list.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="py-8 px-3 text-center text-slate-400 text-xs">Filtrelere uygun saha kaydı bulunamadı.</td></tr>';
+        return;
+    }
+
     list.forEach(function (x) {
         var hasReport = !!(x.saha_raporu || '').trim();
         var evaluated = x.asama === 'DEĞERLENDİRMEDE';
         var canDecide = x.asama === 'DEĞERLENDİRMEDE' || x.asama === 'SAHA YAPILACAK';
-        var pdfHtml = x.saha_pdf_file_id ? '<button type="button" data-secure-pdf-id="' + escapeAttr(x.saha_pdf_file_id) + '" class="mt-1.5 inline-flex items-center gap-1 text-rose-700 hover:text-rose-900 font-bold"><i class="fa-solid fa-file-pdf"></i>PDF\'yi Aç</button>' : '';
+
+        var pdfHtml = x.saha_pdf_file_id
+            ? "<button type=\"button\" data-secure-pdf-id=\"" + escapeAttr(x.saha_pdf_file_id) + "\" class=\"mt-1.5 inline-flex items-center gap-1 text-rose-700 hover:text-rose-900 font-bold\"><i class=\"fa-solid fa-file-pdf\"></i>PDF'yi Aç</button>"
+            : '';
+
         var tr = document.createElement('tr');
-        tr.innerHTML = '<td class="py-3 px-3"><div class="font-bold">' + escapeHtml(x.ad_soyad || '-') + '</div><div class="text-[10px] text-cyan-700 font-mono">' + escapeHtml(x.application_id || x.id || '-') + '</div><div class="text-[11px] font-mono text-slate-500">' + escapeHtml(x.tc || '-') + '</div></td>' +
-            '<td class="py-3 px-3"><div>' + escapeHtml(x.telefon || '-') + '</div><div class="text-[11px] text-emerald-700">' + escapeHtml(x.ilce || '-') + '</div></td>' +
+        tr.innerHTML =
+            '<td class="py-3 px-3"><div class="font-bold">' + escapeHtml(x.ad_soyad || '-') + '</div><div class="text-[10px] text-cyan-700 font-mono">' + escapeHtml(x.application_id || x.id || '-') + '</div><div class="text-[11px] font-mono text-slate-500">' + escapeHtml(x.tc || '-') + '</div></td>' +
+            '<td class="py-3 px-3"><div>' + escapeHtml(x.telefon || '-') + '</div><div class="text-[11px] text-emerald-700">' + escapeHtml(x.ilce || x.bolge || '-') + '</div></td>' +
             '<td class="py-3 px-3 max-w-xs text-[11px]">' + escapeHtml(x.talep || '-') + '</td>' +
             '<td class="py-3 px-3"><span class="px-2 py-1 rounded-full text-[10px] font-bold ' + (evaluated ? 'bg-indigo-100 text-indigo-700' : 'bg-amber-100 text-amber-800') + '">' + escapeHtml(x.asama || 'SAHA YAPILACAK') + '</span></td>' +
             '<td class="py-3 px-3 max-w-sm text-[11px]"><div class="line-clamp-3">' + escapeHtml(hasReport ? x.saha_raporu : 'Saha formu yok — değerlendirme yapılabilir.') + '</div>' + pdfHtml + '</td>' +
             '<td class="py-3 px-3 text-right"><button ' + (canDecide ? '' : 'disabled') + ' onclick="openSahaDecision(\'' + x.saha_id + '\')" class="px-2.5 py-1.5 rounded-md text-xs font-semibold ' + (canDecide ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-slate-100 text-slate-400') + '">' + (canDecide ? 'Değerlendir' : 'İşlem Yok') + '</button></td>';
+
         tbody.appendChild(tr);
     });
 }
+
 function fetchFieldReportsFromExternalSheet() {
     return __awaiter(this, arguments, void 0, function (showToast) {
         var icon, payload, e_1;
