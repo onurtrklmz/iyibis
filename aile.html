@@ -4113,6 +4113,15 @@ function getFieldVisitSupportsForFamily_(item) {
     addValue_(item.saha_verilen_destekler);
     addValue_(item.saha_ziyareti_destekleri);
 
+    // Geçmiş saha formları: aile SAHA ZİYARETİ kuyruğundan çıkmış olsa bile
+    // ham saha formu tablosundaki "Teslim Edilen Destekler" bilgisi korunur.
+    (appState.fieldSupportHistory || []).forEach(function (x) {
+        var sameTc = tc && normalizeTC(x.tc) === tc;
+        var sameName = name && normalizeName(x.ad_soyad) === name;
+        if (!sameTc && !sameName) return;
+        addValue_(x.verilen_destekler);
+    });
+
     // Merkezi saha kayıtlarında aynı aileyi TC; TC yoksa ad-soyad üzerinden eşleştir.
     (appState.saha || []).forEach(function (x) {
         var sameTc = tc && normalizeTC(x.tc) === tc;
@@ -5872,6 +5881,7 @@ function applyCentralPayload(payload) {
 
     appState.web = dedupeWebClient_(payload.web || []);
     appState.saha = payload.saha || [];
+    appState.fieldSupportHistory = payload.fieldSupportHistory || [];
     appState.history = payload.history || [];
     window.appState = appState;
     centralCurrentUser = window.centralCurrentUser = (payload.user || centralCurrentUser);
