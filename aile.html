@@ -2155,9 +2155,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                 <option value="DELİST">Liste Dışı</option>
                             </select>
                         </div>
-                        <button type="button" onclick="exportFilteredApprovedFamiliesToExcel()"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-sm">
-                            <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi Excel'e İndir
+                        <button type="button" onclick="resetApprovedFamilyFilters()"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
+                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreleri Kaldır
                         </button>
                         <div class="flex items-center gap-1">
                             <span class="text-slate-500 font-medium">Sıralama:</span>
@@ -2167,6 +2167,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                 <option value="name-asc">İsim (A-Z)</option>
                                 <option value="kids-desc">Çocuk Sayısı (Çoktan Aza)</option>
                             </select>
+                        </div>
+                        <div class="ml-auto">
+                            <button type="button" onclick="exportFilteredApprovedFamiliesToExcel()"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-sm">
+                            <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi Excel'e İndir
+                        </button>
                         </div>
                         <label class="flex items-center gap-1.5 cursor-pointer text-slate-600 bg-slate-50 px-2 py-1 rounded border border-slate-200">
                             <input type="checkbox" id="filter-special-mevcut" onchange="renderMevcutTable()" class="rounded text-emerald-600 focus:ring-0">
@@ -2243,6 +2249,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <div class="text-slate-500 ml-2">
                             Kayıtlı Ret Sayısı: <span id="showing-count-red" class="font-bold text-slate-800">0</span>
                         </div>
+                        <button type="button" onclick="resetRedFilters()"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
+                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreleri Kaldır
+                        </button>
                     </div>
                 </div>
             </div>
@@ -2309,13 +2319,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
                     <div class="flex flex-wrap items-center gap-1.5 text-xs">
                         <span class="font-semibold text-slate-500 mr-1">Durum:</span>
-                        <select id="filter-web-status" onchange="renderWebTable()" class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none">
-                            <option value="ALL">Tüm Başvurular</option>
-                            <option value="Beklemede">⏳ Beklemede</option>
-                            <option value="ONAY">✅ Onaylandı</option>
-                            <option value="ŞÜPHELİ">⚠️ Şüpheli</option>
-                            <option value="RET">❌ Ret Edildi</option>
-                        </select>
                         <select id="filter-web-district" onchange="renderWebTable()" class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none ml-2">
                             <option value="ALL">Tüm İlçeler</option>
                             <option value="Şahinbey">Şahinbey</option>
@@ -2324,6 +2327,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <div class="text-slate-500 ml-3">
                             Gösterilen: <span id="showing-count-web" class="font-bold text-slate-800">0</span>
                         </div>
+                        <button type="button" onclick="resetWebFilters()"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold">
+                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreleri Kaldır
+                        </button>
                     </div>
                 </div>
             </div>
@@ -2392,6 +2399,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <button type="button" onclick="exportFilteredFieldVisitsToExcel()"
                                 class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm">
                             <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi Excel'e İndir
+                        </button>
+                        <button type="button" onclick="resetFieldVisitFilters()"
+                                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-semibold">
+                            <i class="fa-solid fa-filter-circle-xmark"></i>Filtreleri Kaldır
                         </button>
                     </div>
                 </div>
@@ -3760,6 +3771,53 @@ function setStatusFilter(status) {
     renderMevcutTable();
 }
 
+
+function resetApprovedFamilyFilters() {
+    var search = document.getElementById('search-mevcut');
+    var district = document.getElementById('filter-district-mevcut');
+    var status = document.getElementById('filter-status-mevcut-select');
+    var special = document.getElementById('filter-special-mevcut');
+    var sort = document.getElementById('sort-mevcut');
+    if (search) search.value = '';
+    if (district) district.value = 'ALL';
+    if (special) special.checked = false;
+    if (sort) sort.value = 'default';
+    if (status) status.value = 'ALL';
+    appState.currentStatusFilter = 'ALL';
+    document.querySelectorAll('.status-filter-btn').forEach(function (btn) {
+        btn.classList.remove('ring-2', 'ring-slate-900', 'shadow-sm');
+    });
+    var allBtn = document.getElementById('filter-status-ALL');
+    if (allBtn) allBtn.classList.add('ring-2', 'ring-slate-900', 'shadow-sm');
+    renderMevcutTable();
+}
+
+function resetFieldVisitFilters() {
+    var search = document.getElementById('search-saha');
+    var district = document.getElementById('filter-saha-district');
+    var stage = document.getElementById('filter-saha-stage');
+    if (search) search.value = '';
+    if (district) district.value = 'ALL';
+    if (stage) stage.value = 'ALL';
+    renderSahaTable();
+}
+
+function resetRedFilters() {
+    var search = document.getElementById('search-red');
+    var district = document.getElementById('filter-district-red');
+    if (search) search.value = '';
+    if (district) district.value = 'ALL';
+    renderRedTable();
+}
+
+function resetWebFilters() {
+    var search = document.getElementById('search-web');
+    var district = document.getElementById('filter-web-district');
+    if (search) search.value = '';
+    if (district) district.value = 'ALL';
+    renderWebTable();
+}
+
 function getFilteredApprovedFamilies_() {
     var query = (document.getElementById('search-mevcut').value || '').toLowerCase().trim();
     var district = document.getElementById('filter-district-mevcut').value;
@@ -4079,11 +4137,8 @@ function renderRedTable() {
 
 function renderWebTable() {
     var query = (document.getElementById('search-web').value || '').toLowerCase().trim();
-    var statusFilter = document.getElementById('filter-web-status').value;
     var district = document.getElementById('filter-web-district').value;
     var list = dedupeWebClient_(appState.web).filter(function (item) {
-        if (statusFilter !== 'ALL' && !(item.durum || '').toUpperCase().includes(statusFilter.toUpperCase()))
-            return false;
         if (district !== 'ALL' && !(item.ilce || '').toLowerCase().includes(district.toLowerCase()))
             return false;
         if (query) {
