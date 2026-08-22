@@ -2411,17 +2411,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 </div>
 <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100 text-xs">
 <div class="flex flex-wrap items-center gap-2">
+<div class="flex flex-wrap items-center gap-2">
+<div class="flex items-center gap-1">
+<span class="text-slate-500 font-medium">Durum:</span>
+<select class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs w-[190px]" id="filter-status-mevcut" onchange="setApprovedStatusFilterFromSelect_(this.value)"><option value="ALL">Tüm Durumlar</option><option value="KRİTİK">Kritik</option><option value="TAKİP">Takip</option><option value="STABİL">Stabil</option><option value="DELİST">Liste Dışı</option></select>
+</div>
 <div class="flex items-center gap-1">
 <span class="text-slate-500 font-medium">İlçe:</span>
-<select class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs min-w-[135px]" id="filter-status-mevcut" onchange="setApprovedStatusFilterFromSelect_(this.value)"><option value="ALL">Tüm Durumlar</option><option value="KRİTİK">Kritik</option><option value="TAKİP">Takip</option><option value="STABİL">Stabil</option><option value="DELİST">Liste Dışı</option></select><select class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none" id="filter-district-mevcut" onchange="renderMevcutTable()">
-<option value="ALL">Tüm Bölgeler</option>
+<select class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-700 font-medium outline-none w-[190px]" id="filter-district-mevcut" onchange="renderMevcutTable()">
+<option value="ALL">Tüm İlçeler</option>
 <option value="ŞAHİNBEY">Şahinbey</option>
 <option value="ŞEHİTKAMİL">Şehitkamil</option>
 </select>
 </div>
+</div>
 <div class="flex items-center gap-1">
 <span class="text-slate-500 font-medium">Sıralama:</span>
-<select class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none" id="sort-mevcut" onchange="renderMevcutTable()">
+<select class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-700 font-medium outline-none w-[190px]" id="sort-mevcut" onchange="renderMevcutTable()">
 <option value="default">Varsayılan Sıra</option>
 <option value="metric-desc">Metrik Puanı (Azalan)</option>
 <option value="name-asc">İsim (A-Z)</option>
@@ -5995,6 +6001,7 @@ function viewFamilyDetail(id) {
         }
     }
     renderFamilyDocuments(item);
+    iyibisApplyFamilyDeleteVisibility_();
     openModal('detailModal');
 }
 function setFamilyDetailEditMode(editing) {
@@ -7382,7 +7389,30 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+function iyibisCanDeleteFamilyCompletely_() {
+    var current = String(centralCurrentUser || window.centralCurrentUser || '').trim().toLowerCase();
+    var state = iyibisUserManagementState || {};
+    // İYİBİS'te tek SUPER_ADMIN hesabı 'onur'dur. Kullanıcı yönetimi durumu
+    // yüklenmişse rol bilgisini de doğrula; yüklenmemişse aktif oturum kullanıcısını esas al.
+    if (state.currentUser) {
+        return current === 'onur' &&
+            String(state.currentUser || '').trim().toLowerCase() === 'onur' &&
+            state.isSuperAdmin === true &&
+            String(state.currentRole || '').trim().toUpperCase() === 'SUPER_ADMIN';
+    }
+    return current === 'onur';
+}
+
+function iyibisApplyFamilyDeleteVisibility_() {
+    var btn = document.getElementById('family-detail-delete-btn');
+    if (btn) btn.classList.toggle('hidden', !iyibisCanDeleteFamilyCompletely_());
+}
+
 async function deleteCurrentFamilyCompletely() {
+    if (!iyibisCanDeleteFamilyCompletely_()) {
+        showIyibisToast('Bu işlem yalnızca süper yönetici tarafından yapılabilir.');
+        return;
+    }
     var item = appState.mevcut.find(function(x){ return x.id === currentFamilyId; });
     if (!item) {
         showIyibisToast('Silinecek aile kaydı bulunamadı.');
@@ -7961,6 +7991,7 @@ function iyibisApplySuperAdminSettingsVisibility_() {
 function renderUserManagementPanel_() {
     var state=iyibisUserManagementState || {};
     iyibisApplySuperAdminSettingsVisibility_();
+    if (typeof iyibisApplyFamilyDeleteVisibility_ === 'function') iyibisApplyFamilyDeleteVisibility_();
     var roleText=document.getElementById('user-management-role-text');
     var manageBtn=document.getElementById('open-user-management-modal-btn');
 
