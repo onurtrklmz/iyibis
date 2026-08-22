@@ -7004,7 +7004,7 @@ function applyCentralPayload(payload) {
         last.innerText = 'Son Güncelleme: ' + now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     var statusText = document.getElementById('sync-status-text');
     if (statusText)
-        statusText.innerText = 'Merkezi Sistem Bağlı';
+        statusText.innerText = 'Canlı';
     clearCentralBusy();
 }
 window.iyibisApplyPayload = applyCentralPayload;
