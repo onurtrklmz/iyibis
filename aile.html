@@ -1710,6 +1710,18 @@ body {
     }
   }
 </style>
+
+<style id="iyibis-list-counter-badges-v5062">
+  #showing-count-mevcut,
+  #showing-count-saha,
+  #showing-count-red,
+  #showing-count-web {
+    height: 1.35rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+</style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 <!-- GİRİŞ EKRANI -->
@@ -2189,7 +2201,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         </button><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold" onclick="resetApprovedFamilyFilters()" type="button">
 <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
                         </button>
-<span class="inline-flex min-w-[54px] items-center justify-center rounded-full border-2 border-emerald-500 bg-emerald-50 px-3 py-1 text-base font-bold text-rose-500 shadow-sm" id="showing-count-mevcut">0</span>
+<span class="inline-flex min-w-[34px] items-center justify-center rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50 px-2 py-0.5 leading-none" id="showing-count-mevcut">0</span>
 </div>
 </div>
 </div>
@@ -2246,9 +2258,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <option value="ŞEHİTKAMİL">Şehitkamil</option>
 <option value="ŞAHİNBEY">Şahinbey</option>
 </select>
-<div class="text-slate-500 ml-2">
-                            Kayıtlı Ret Sayısı: <span class="font-bold text-slate-800" id="showing-count-red">0</span>
-</div>
+<div class="ml-2 flex items-center"><span class="inline-flex min-w-[34px] items-center justify-center rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700 px-2 py-0.5 leading-none" id="showing-count-red">0</span></div>
 </div>
 </div>
 </div>
@@ -2323,9 +2333,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <option value="Şahinbey">Şahinbey</option>
 <option value="Şehitkamil">Şehitkamil</option>
 </select>
-<div class="text-slate-500 ml-3">
-                            Gösterilen: <span class="font-bold text-slate-800" id="showing-count-web">0</span>
-</div>
+<div class="ml-3 flex items-center"><span class="inline-flex min-w-[34px] items-center justify-center rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50 px-2 py-0.5 leading-none" id="showing-count-web">0</span></div>
 </div>
 </div>
 </div>
@@ -2387,7 +2395,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <button class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-semibold" onclick="resetFieldVisitFilters()" type="button">
 <i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
                         </button>
-<span class="inline-flex min-w-[54px] items-center justify-center rounded-full border-2 border-emerald-500 bg-emerald-50 px-3 py-1 text-base font-bold text-rose-500 shadow-sm" id="showing-count-saha">0</span>
+<span class="inline-flex min-w-[34px] items-center justify-center rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50 px-2 py-0.5 leading-none" id="showing-count-saha">0</span>
 </div>
 </div>
 <div class="overflow-x-auto">
@@ -3882,55 +3890,89 @@ function setExcelColumnWidths_(ws,widths) {
     ws['!cols']=(widths || []).map(function(w){return {wch:w};});
 }
 
+
+function getFieldVisitSupportText_(item) {
+    if(!item) return '';
+    return String(
+        item.ziyarette_verilenler ||
+        item.saha_verilen_destekler ||
+        item.verilen_destekler ||
+        item.field_support ||
+        ''
+    ).trim();
+}
+
+
+function iyibis5063ExcelExportDiagnostic_() {
+    return {
+        xlsxLoaded: typeof XLSX!=='undefined',
+        activeExport: typeof exportFilteredApprovedFamiliesToExcel==='function',
+        fieldExport: typeof exportFilteredFieldVisitsToExcel==='function',
+        fieldSupportHelper: typeof getFieldVisitSupportText_==='function',
+        filteredActiveHelper: typeof getFilteredApprovedFamilies_==='function',
+        filteredFieldHelper: typeof getFilteredFieldVisits_==='function'
+    };
+}
+
 function exportFilteredApprovedFamiliesToExcel() {
-    if(typeof XLSX==='undefined'){
-        showIyibisToast('Excel dışa aktarma kütüphanesi yüklenemedi.');
-        return;
+    try {
+        if(typeof XLSX==='undefined'){
+            showIyibisToast('Excel dışa aktarma kütüphanesi yüklenemedi.');
+            return;
+        }
+
+        var list=getFilteredApprovedFamilies_();
+        if(!list.length){
+            showIyibisToast('Seçili filtrelere uygun indirilecek aile bulunamadı.');
+            return;
+        }
+
+        var rows=list.map(function(item){
+            var metric=normalizeMetricScore(item.metrik_puani);
+            return {
+                'Ad Soyad':item.ad_soyad || '',
+                'TC Kimlik No':String(item.tc || ''),
+                'Durum':((item.durumu || '').trim().toLocaleUpperCase('tr-TR')==='DELİST')
+                    ? 'LİSTE DIŞI'
+                    : (item.durumu || ''),
+                'Değerlendirme Puanı':metric!==null ? metric : '',
+                'Telefon':item.iletisim || '',
+                'İlçe / Bölge':item.bolge || '',
+                'Adres':item.adres || '',
+                'Konut Durumu':item.ev || '',
+                'Gelir':item.gelir || '',
+                'Gider':item.gider || '',
+                'Eş Durumu':item.es_durumu || '',
+                'Çocuk Sayısı':item.cocuk_sayisi || '',
+                'Kız Çocuk':item.cocuk_kiz || '',
+                'Erkek Çocuk':item.cocuk_erkek || '',
+                'Özel Durum':item.ozel_durum || '',
+                'Talep':item.talep || '',
+                'Ziyaret Edenler':item.ziyaret_edenler || '',
+                'Yapılan Destekler':
+                    item.teslim_edilen ||
+                    (typeof getFieldVisitSupportText_==='function' ? getFieldVisitSupportText_(item) : '') ||
+                    item.ziyarette_verilenler ||
+                    item.saha_verilen_destekler ||
+                    ''
+            };
+        });
+
+        var ws=XLSX.utils.json_to_sheet(rows);
+        setExcelColumnWidths_(ws,[28,15,16,18,16,18,42,18,16,16,18,13,12,12,34,34,24,40]);
+
+        var wb=XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb,ws,'Onaylı Aileler');
+        XLSX.writeFile(
+            wb,
+            'IYIBIS_Onayli_Aileler_Filtreli_'+iyibisExcelDateStamp_()+'.xlsx'
+        );
+
+        showIyibisToast(list.length+' filtrelenmiş aile Excel dosyasına aktarıldı.');
+    } catch(err) {
+        console.error('Filtreli aile Excel indirme hatası:',err);
+        showIyibisToast('Filtreli Excel indirilemedi: ' + (err && err.message ? err.message : err));
     }
-
-    var list=getFilteredApprovedFamilies_();
-    if(!list.length){
-        showIyibisToast('Seçili filtrelere uygun indirilecek aile bulunamadı.');
-        return;
-    }
-
-    var rows=list.map(function(item){
-        var metric=normalizeMetricScore(item.metrik_puani);
-        return {
-            'Ad Soyad':item.ad_soyad || '',
-            'TC Kimlik No':String(item.tc || ''),
-            'Durum':((item.durumu || '').trim().toLocaleUpperCase('tr-TR')==='DELİST')
-                ? 'LİSTE DIŞI'
-                : (item.durumu || ''),
-            'Değerlendirme Puanı':metric!==null ? metric : '',
-            'Telefon':item.iletisim || '',
-            'İlçe / Bölge':item.bolge || '',
-            'Adres':item.adres || '',
-            'Konut Durumu':item.ev || '',
-            'Gelir':item.gelir || '',
-            'Gider':item.gider || '',
-            'Eş Durumu':item.es_durumu || '',
-            'Çocuk Sayısı':item.cocuk_sayisi || '',
-            'Kız Çocuk':item.cocuk_kiz || '',
-            'Erkek Çocuk':item.cocuk_erkek || '',
-            'Özel Durum':item.ozel_durum || '',
-            'Talep':item.talep || '',
-            'Ziyaret Edenler':item.ziyaret_edenler || '',
-            'Yapılan Destekler':item.teslim_edilen || getFieldVisitSupportText_(item) || ''
-        };
-    });
-
-    var ws=XLSX.utils.json_to_sheet(rows);
-    setExcelColumnWidths_(ws,[28,15,16,18,16,18,42,18,16,16,18,13,12,12,34,34,24,40]);
-
-    var wb=XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb,ws,'Onaylı Aileler');
-    XLSX.writeFile(
-        wb,
-        'IYIBIS_Onayli_Aileler_Filtreli_'+iyibisExcelDateStamp_()+'.xlsx'
-    );
-
-    showIyibisToast(list.length+' filtrelenmiş aile Excel dosyasına aktarıldı.');
 }
 
 function exportFilteredFieldVisitsToExcel() {
@@ -4115,7 +4157,7 @@ function renderRedTable() {
     list.forEach(function (item) {
         var tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50/80 transition border-b border-slate-100";
-        tr.innerHTML = "\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">".concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-slate-500 truncate max-w-xs\">").concat(item.adres || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><span class=\"font-semibold text-slate-700\">").concat(item.bolge || '-', "</span></td>\n                    <td class=\"py-3 px-3\"><div>").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\">Gelir: ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-semibold text-slate-800\">").concat(item.cocuk_sayisi || '-', "</div><div class=\"text-[10px] text-slate-500\">").concat(item.cocuk_detay || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs text-[11px] text-slate-700\">").concat(item.teslim_edilen || item.talep || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <div class=\"flex flex-col items-end gap-1.5\">\n                            <span class=\"badge-red px-2 py-0.5 rounded text-[11px] font-bold\">RET ALDI</span>\n                            <button onclick=\"moveRedToActive('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-arrow-rotate-left mr-1\"></i>Aktif Listeye Al\n                            </button>\n                        </div>\n                    </td>\n                ");
+        tr.innerHTML = "\n                    <td class=\"py-3 px-3\"><div class=\"font-bold text-slate-900\">".concat(item.ad_soyad || '-', "</div><div class=\"text-[11px] text-slate-400 font-mono\">").concat(item.tc || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-medium text-slate-700\">").concat(item.iletisim || '-', "</div><div class=\"text-[11px] text-slate-500 truncate max-w-xs\">").concat(item.adres || '-', "</div></td>\n                    <td class=\"py-3 px-3 whitespace-nowrap\"><span class=\"font-semibold text-slate-700\">").concat(item.bolge || '-', "</span></td>\n                    <td class=\"py-3 px-3\"><div>").concat(item.ev || '-', "</div><div class=\"text-[11px] text-slate-500\">Gelir: ").concat(item.gelir || '-', "</div></td>\n                    <td class=\"py-3 px-3\"><div class=\"font-semibold text-slate-800\">").concat(item.cocuk_sayisi || '-', "</div><div class=\"text-[10px] text-slate-500\">").concat(item.cocuk_detay || '', "</div></td>\n                    <td class=\"py-3 px-3 text-[11px] text-slate-600\">").concat(item.ziyaret_edenler || '-', "</td>\n                    <td class=\"py-3 px-3 max-w-xs text-[11px] text-slate-700\">").concat(item.teslim_edilen || item.talep || '-', "</td>\n                    <td class=\"py-3 px-3 text-right whitespace-nowrap\">\n                        <div class=\"flex flex-col items-end gap-1.5\">\n                            <span class=\"badge-red px-2 py-0.5 rounded text-[11px] font-bold\">RET ALDI</span>\n                            <button onclick=\"viewFamilyDetail('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-address-card mr-1\"></i>Aile Bilgi Kartı\n                            </button>\n                            <button onclick=\"moveRedToActive('").concat(item.id, "')\" class=\"px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-md font-semibold text-[11px]\">\n                                <i class=\"fa-solid fa-arrow-rotate-left mr-1\"></i>Aktif Listeye Al\n                            </button>\n                        </div>\n                    </td>\n                ");
         tbody.appendChild(tr);
     });
 }
@@ -4432,7 +4474,7 @@ function renderAssistanceHistory(item) {
 }
 
 function openAssistanceModal(id) {
-    var item = appState.mevcut.find(function (x) { return x.id === id; });
+    var item = getFamilyByIdAny_(id).item;
     if (!item)
         return;
     currentAssistanceFamilyId = id;
@@ -5193,14 +5235,29 @@ function renderBirthdayList() {
         container.appendChild(card);
     });
 }
+function getFamilyByIdAny_(id) {
+    var active=(appState.mevcut || []).find(function(x){return x.id===id;});
+    if(active) return {item:active,list:'ACTIVE'};
+
+    var red=(appState.red || []).find(function(x){return x.id===id;});
+    if(red) return {item:red,list:'RED'};
+
+    return {item:null,list:''};
+}
+
 function viewFamilyDetail(id) {
     currentFamilyId = id;
-    var item = appState.mevcut.find(function (x) { return x.id === id; });
+    var familyRef = getFamilyByIdAny_(id);
+    var item = familyRef.item;
+    var isRedFamily = familyRef.list === 'RED';
     if (!item)
         return;
     document.getElementById('modal-family-name').innerText = item.ad_soyad || 'İsimsiz';
-    document.getElementById('modal-family-subtitle').innerText = (item.tc || '-') + ' • ' + (item.iletisim || '-');
-    document.getElementById('m-durum').innerText = ((item.durumu || '').trim().toUpperCase() === 'DELİST') ? 'LİSTE DIŞI' : (item.durumu || 'STABİL');
+    document.getElementById('modal-family-subtitle').innerText =
+        (item.tc || '-') + ' • ' + (item.iletisim || '-') + (isRedFamily ? ' • RET LİSTESİ' : '');
+    document.getElementById('m-durum').innerText = isRedFamily
+        ? 'RET'
+        : (((item.durumu || '').trim().toUpperCase() === 'DELİST') ? 'LİSTE DIŞI' : (item.durumu || 'STABİL'));
     document.getElementById('m-metrik').innerText = normalizeMetricScore(item.metrik_puani) !== null ? normalizeMetricScore(item.metrik_puani) : '-';
     document.getElementById('m-bolge').innerText = item.bolge || '-';
     document.getElementById('m-es-durum').innerText = item.es_durumu || '-';
@@ -5271,31 +5328,52 @@ function viewFamilyDetail(id) {
     var detailDelistBtn = document.getElementById('family-detail-delist-btn');
     var detailRetBtn = document.getElementById('family-detail-ret-btn');
     if (detailRetBtn) {
-        var isDelistedForRet = (item.durumu || '').trim().toUpperCase() === 'DELİST';
-        detailRetBtn.classList.toggle('hidden', isDelistedForRet);
-        detailRetBtn.onclick = function () {
-            closeModal('detailModal');
-            moveActiveToRed(id);
-        };
+        if (isRedFamily) {
+            detailRetBtn.classList.add('hidden');
+            detailRetBtn.onclick = null;
+        } else {
+            var isDelistedForRet = (item.durumu || '').trim().toUpperCase() === 'DELİST';
+            detailRetBtn.classList.toggle('hidden', isDelistedForRet);
+            detailRetBtn.onclick = function () {
+                closeModal('detailModal');
+                moveActiveToRed(id);
+            };
+        }
     }
+
     if (detailDelistBtn) {
-        var isDelisted_1 = (item.durumu || '').trim().toUpperCase() === 'DELİST';
         detailDelistBtn.disabled = false;
-        detailDelistBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-        detailDelistBtn.classList.toggle('bg-rose-600', !isDelisted_1);
-        detailDelistBtn.classList.toggle('hover:bg-rose-700', !isDelisted_1);
-        detailDelistBtn.classList.toggle('bg-emerald-600', isDelisted_1);
-        detailDelistBtn.classList.toggle('hover:bg-emerald-700', isDelisted_1);
-        detailDelistBtn.innerHTML = isDelisted_1
-            ? '<i class="fa-solid fa-user-check mr-1.5"></i>Aktif Listeye Al'
-            : '<i class="fa-solid fa-user-slash mr-1.5"></i>Liste Dışı Bırak';
-        detailDelistBtn.onclick = function () {
-            closeModal('detailModal');
-            if (isDelisted_1)
-                reactivateDelistedFamily(id);
-            else
-                delistFamily(id);
-        };
+        detailDelistBtn.classList.remove(
+            'opacity-50','cursor-not-allowed',
+            'bg-rose-600','hover:bg-rose-700',
+            'bg-emerald-600','hover:bg-emerald-700'
+        );
+
+        if (isRedFamily) {
+            detailDelistBtn.classList.add('bg-emerald-600','hover:bg-emerald-700');
+            detailDelistBtn.innerHTML =
+                '<i class="fa-solid fa-user-check mr-1.5"></i>Onaylı Listeye Al';
+            detailDelistBtn.onclick = function () {
+                closeModal('detailModal');
+                moveRedToActive(id);
+            };
+        } else {
+            var isDelisted_1 = (item.durumu || '').trim().toUpperCase() === 'DELİST';
+            detailDelistBtn.classList.toggle('bg-rose-600', !isDelisted_1);
+            detailDelistBtn.classList.toggle('hover:bg-rose-700', !isDelisted_1);
+            detailDelistBtn.classList.toggle('bg-emerald-600', isDelisted_1);
+            detailDelistBtn.classList.toggle('hover:bg-emerald-700', isDelisted_1);
+            detailDelistBtn.innerHTML = isDelisted_1
+                ? '<i class="fa-solid fa-user-check mr-1.5"></i>Aktif Listeye Al'
+                : '<i class="fa-solid fa-user-slash mr-1.5"></i>Liste Dışı Bırak';
+            detailDelistBtn.onclick = function () {
+                closeModal('detailModal');
+                if (isDelisted_1)
+                    reactivateDelistedFamily(id);
+                else
+                    delistFamily(id);
+            };
+        }
     }
     renderFamilyDocuments(item);
     openModal('detailModal');
@@ -5408,7 +5486,8 @@ function saveNewFamily() {
 
 function enableFamilyDetailEdit() {
     var _a;
-    var item = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
+    var familyRef = getFamilyByIdAny_(currentFamilyId);
+    var item = familyRef.item;
     if (!item)
         return;
     document.getElementById('m-durum-edit').value = ['KRİTİK', 'TAKİP', 'STABİL'].includes((item.durumu || '').trim().toUpperCase()) ? (item.durumu || '').trim().toUpperCase() : 'STABİL';
@@ -5461,7 +5540,7 @@ function saveFamilyDetailChanges() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    item = appState.mevcut.find(function (x) { return x.id === currentFamilyId; });
+                    item = getFamilyByIdAny_(currentFamilyId).item;
                     if (!item)
                         return [2 /*return*/];
                     address = (document.getElementById('m-adres-edit').value || '').trim();
