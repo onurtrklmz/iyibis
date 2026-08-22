@@ -648,7 +648,7 @@
 }
 </style>
 
-<script>window.IYIBIS_WEB_BUILD="5.0 FINAL";</script>
+<script>window.IYIBIS_WEB_BUILD="5.0.45";</script>
   <script src="config-beta42.js"></script>
   <script src="api-client-beta42.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
@@ -6933,13 +6933,13 @@ function renderIssueTicketPanel_() {
         var adminActions='';
         if(s.isSuperAdmin) {
             adminActions=
-                '<button onclick="openIssueTicket(\\''+escapeHtml(t.id)+'\\')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-[11px] font-semibold rounded-md">Oku</button>'+
+                '<button onclick="openIssueTicket(\''+escapeHtml(t.id)+'\')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-[11px] font-semibold rounded-md">Oku</button>'+
                 (String(t.status||'').toLocaleUpperCase('tr-TR')!=='ÇÖZÜLDÜ'
-                    ? '<button onclick="resolveIssueTicket(\\''+escapeHtml(t.id)+'\\')" class="px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11px] font-semibold rounded-md">Çözüldü</button>'
+                    ? '<button onclick="resolveIssueTicket(\''+escapeHtml(t.id)+'\')" class="px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11px] font-semibold rounded-md">Çözüldü</button>'
                     : '')+
-                '<button onclick="deleteIssueTicket(\\''+escapeHtml(t.id)+'\\')" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-[11px] font-semibold rounded-md">Sil</button>';
+                '<button onclick="deleteIssueTicket(\''+escapeHtml(t.id)+'\')" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-[11px] font-semibold rounded-md">Sil</button>';
         } else {
-            adminActions='<button onclick="openIssueTicket(\\''+escapeHtml(t.id)+'\\')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-[11px] font-semibold rounded-md">Oku</button>';
+            adminActions='<button onclick="openIssueTicket(\''+escapeHtml(t.id)+'\')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-[11px] font-semibold rounded-md">Oku</button>';
         }
 
         return '<div class="p-3 border border-slate-200 rounded-xl bg-white">'+
@@ -7116,9 +7116,9 @@ function renderUserManagementPanel_() {
         var adminButtons='';
         if (state.isSuperAdmin) {
             adminButtons =
-                '<button onclick="promptAdminResetPassword(\\''+escapeHtml(u.username)+'\\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200">Şifre Değiştir</button>' +
+                '<button onclick="promptAdminResetPassword(\''+escapeHtml(u.username)+'\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200">Şifre Değiştir</button>' +
                 (!isOnur
-                    ? '<button onclick="removeUserFromPanel(\\''+escapeHtml(u.username)+'\\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200">Kullanıcıyı Sil</button>'
+                    ? '<button onclick="removeUserFromPanel(\''+escapeHtml(u.username)+'\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200">Kullanıcıyı Sil</button>'
                     : '');
         }
 
