@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
-  <base target="_top">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ayni Yardım Teslim Formu - İYİBİS - Gaziantep İyilik Hareketi Derneği</title>
-  <!-- PDF Oluşturma Kütüphanesi -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <style>
+<base target="_top"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ayni Yardım Teslim Formu - İYİBİS - Gaziantep İyilik Hareketi Derneği</title>
+<!-- PDF Oluşturma Kütüphanesi -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
     :root {
       --gih-red: #8b1d24;
       --gih-red-dark: #681117;
@@ -142,14 +143,11 @@
       color: #8b1d24 !important;
     }
 </style>
-
 <script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
-
 <script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
-  <script src="config-beta42.js"></script>
-  <script src="api-client-beta42.js"></script>
-  <link rel="icon" type="image/png" href="favicon.png">
-
+<script src="config-beta42.js"></script>
+<script src="api-client-beta42.js"></script>
+<link href="favicon.png" rel="icon" type="image/png"/>
 <style id="iyibis-signature-light-surface-v42">
 /* İmza alanı sistem/tarayıcı koyu modundan bağımsız olarak daima kağıt gibi beyaz kalır. */
 .sig-container,
@@ -170,8 +168,6 @@
   mix-blend-mode: normal !important;
 }
 </style>
-
-
 <style id="iyibis-form-navbar-round-logo-v42">
 /* Tepe bardaki dernek logosu tüm temalarda yuvarlak görünür. */
 .app-navbar .nav-logo-svg {
@@ -188,7 +184,6 @@
   -webkit-clip-path: circle(50%) !important;
 }
 </style>
-
 <style id="iyibis-brand-theme-v42">
 :root{
   --gih-red:#991b1b!important;
@@ -235,7 +230,6 @@ input:focus,select:focus,textarea:focus{
   .nav-links{background:#fff!important;border-bottom-color:var(--iyibis-red)!important}
 }
 </style>
-
 <style id="iyibis-flat-dark-mode-v42">
 /* BETA 4.2 — Koyu modda beyazdan siyaha gradient yok.
    Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
@@ -253,7 +247,6 @@ input:focus,select:focus,textarea:focus{
   }
 }
 </style>
-
 <style id="iyibis-form-dark-surfaces-v42">
 @media (prefers-color-scheme: dark) {
   body {
@@ -362,7 +355,6 @@ input:focus,select:focus,textarea:focus{
   }
 }
 </style>
-
 <style id="iyibis-page-background-no-gradient-v42">
 html, body {
   background-image: none !important;
@@ -379,7 +371,6 @@ body {
   }
 }
 </style>
-
 <style id="iyibis-ayni-mobile-date-fullwidth-v42">
 @media (max-width: 768px) {
   .form-header {
@@ -409,7 +400,6 @@ body {
   }
 }
 </style>
-
 <style id="iyibis-document-round-logo-v42">
 /* Belge başlığındaki büyük dernek logosu: İYİBİS ana sayfasındaki gibi dairesel kırpma */
 .doc-logo-svg {
@@ -426,7 +416,6 @@ body {
   background: #ffffff !important;
 }
 </style>
-
 <style id="iyibis-501-light-mode-guard">
 /* İYİBİS 5.0.1 — Açık mod koruması.
    Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
@@ -446,8 +435,6 @@ body {
   html { color-scheme: dark !important; }
 }
 </style>
-
-
 <style id="iyibis-501-light-surfaces">
 @media (prefers-color-scheme: light) {
   :root {
@@ -469,7 +456,6 @@ body {
   input, select, textarea { background:#ffffff !important; color:#0f172a !important; }
 }
 </style>
-
 <style id="iyibis-segmented-birthdate">
 
     .segmented-date-input {
@@ -543,27 +529,25 @@ body {
 </style>
 </head>
 <body>
-
-  <header class="app-navbar no-print">
-    <div class="nav-inner">
-      <a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-brand">
-        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="40" height="40" class="nav-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:40px;height:40px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
-        <div class="nav-brand-text">
-          <span class="brand-title">Gaziantep İyilik Hareketi</span>
-          <span class="brand-sub">Saha Otomasyonu</span>
-        </div>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menüyü Aç/Kapat" onclick="toggleAppMenu()">☰</button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-link">🏠 Ana Panel</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('saha-tespit', event)" class="nav-link">📋 Saha Tespit</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('ayni-yardim', event)" class="nav-link active">📦 Ayni Yardım</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('yayin-izni', event)" class="nav-link">📸 Yayın İzni</a></li>
-      
-        <li><a href="#" onclick="return navigateIyibisApp('portal', event)" class="nav-link iyibis-standard-link">➜ İYİBİS</a></li></ul>
-    </div>
-  </header>
-  <script>
+<header class="app-navbar no-print">
+<div class="nav-inner">
+<a class="nav-brand" href="#" onclick="return navigateIyibisApp('saha', event)">
+<img alt="Gaziantep İyilik Hareketi Derneği Logosu" class="nav-logo-svg" height="40" src="gaziantep-iyilik-hareketi-logo.jpeg" style="width:40px;height:40px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;" width="40"/>
+<div class="nav-brand-text">
+<span class="brand-title">Gaziantep İyilik Hareketi</span>
+<span class="brand-sub">Saha Otomasyonu</span>
+</div>
+</a>
+<button aria-label="Menüyü Aç/Kapat" class="nav-toggle" id="navToggle" onclick="toggleAppMenu()">☰</button>
+<ul class="nav-links" id="navLinks">
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('saha', event)">🏠 Ana Panel</a></li>
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('saha-tespit', event)">📋 Saha Tespit</a></li>
+<li><a class="nav-link active" href="#" onclick="return navigateIyibisApp('ayni-yardim', event)">📦 Ayni Yardım</a></li>
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('yayin-izni', event)">📸 Yayın İzni</a></li>
+<li><a class="nav-link iyibis-standard-link" href="#" onclick="return navigateIyibisApp('portal', event)">➜ İYİBİS</a></li></ul>
+</div>
+</header>
+<script>
     function toggleAppMenu() {
       const navLinks = document.getElementById('navLinks');
       const navToggle = document.getElementById('navToggle');
@@ -571,149 +555,128 @@ body {
       navToggle.innerText = navLinks.classList.contains('show') ? '✕' : '☰';
     }
   </script>
-
-  <div class="container">
-    <div class="form-card" id="formCardAyni">
-      <form id="ayniForm" autocomplete="off">
-        <!-- Başlık ve Logo -->
-        <div class="form-header">
-          <div class="header-logo-title">
-            <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
-            <div class="header-titles">
-              <h1>Gaziantep İyilik Hareketi Derneği</h1>
-              <p>Ayni Yardım Teslim ve Tesellüm Tutanağı</p>
-            </div>
-          </div>
-          <div class="header-date-box">
-            <label>Tanzim Tarihi:</label>
-            <div class="native-date-box">
-              <input type="date" id="form-date" name="tarih" required
-                     onclick="this.showPicker && this.showPicker()"
-                     aria-label="Tanzim Tarihi">
-            </div>
-          </div>
-        </div>
-
-        <!-- 1. Faydalanıcı Bilgileri -->
-        <div class="section-title">1. Teslim Alan (Faydalanıcı / Aile Temsilcisi)</div>
-        <div class="grid">
-          <div class="form-group">
-            <label>Adı Soyadı *</label>
-            <input type="text" id="faydalanici_ad" name="faydalanici_ad" required placeholder="Faydalanıcı Adı Soyadı" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="form-group">
-            <label>T.C. Kimlik / Yabancı Kimlik No *</label>
-            <input type="text" id="faydalanici_tc" name="faydalanici_tc" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="form-group">
-            <label>Doğum Tarihi</label>
-            <div class="native-date-box">
-              <div class="segmented-date-input" id="faydalanici_dogum_ui" role="group" aria-label="Doğum Tarihi">
-                <input type="text" id="faydalanici_dogum_gun" class="date-segment date-day"
-                       inputmode="numeric" maxlength="2" placeholder="GG"
-                       aria-label="Doğum günü" autocomplete="off">
-                <span class="date-separator">.</span>
-                <input type="text" id="faydalanici_dogum_ay" class="date-segment date-month"
-                       inputmode="numeric" maxlength="2" placeholder="AA"
-                       aria-label="Doğum ayı" autocomplete="off">
-                <span class="date-separator">.</span>
-                <input type="text" id="faydalanici_dogum_yil" class="date-segment date-year"
-                       inputmode="numeric" maxlength="4" placeholder="YYYY"
-                       aria-label="Doğum yılı" autocomplete="off">
-              </div>
-              <input type="hidden" id="faydalanici_dogum" name="faydalanici_dogum">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Telefon Numarası *</label>
-            <input type="tel" id="faydalanici_tel" name="faydalanici_tel" required placeholder="05XX XXX XX XX" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="form-group full-width">
-            <label>İkametgah Adresi *</label>
-            <input type="text" id="faydalanici_adres" name="faydalanici_adres" required placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-        </div>
-
-        <!-- 2. Teslim Edilen Yardım İçeriği -->
-        <div class="section-title">2. Teslim Edilen Yardım ve Malzeme İçeriği</div>
-        <div class="table-responsive">
-          <table class="modern-table" id="items-table">
-            <thead>
-              <tr>
-                <th style="width: 8%; text-align: center;">SIRA</th>
-                <th style="width: 48%;">MALZEME / YARDIM CİNSİ</th>
-                <th style="width: 20%;">MİKTAR / ADET</th>
-                <th style="width: 18%;">RAYİÇ BEDEL (TL)</th>
-                <th style="width: 6%; text-align: center;" class="no-print">SİL</th>
-              </tr>
-            </thead>
-            <tbody id="items-tbody"></tbody>
-          </table>
-        </div>
-
-        <div class="no-print">
-          <button type="button" class="btn-add-row" onclick="addRow()">➕ Yeni Malzeme Satırı Ekle</button>
-        </div>
-
-        <!-- 3. Tutanak ve İmzalar -->
-        <div class="section-title">3. Teslim ve Tesellüm İmzaları</div>
-        <div class="signatures-flex-wrap">
-          <div class="signature-card">
-            <h4>Teslim Eden (GİH Görevlisi)</h4>
-            <div class="form-group">
-              <label>Görevli İsim Soyisim: *</label>
-              <input type="text" id="gorevli_ad" name="gorevli_ad" required placeholder="GİH Saha Temsilcisi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-            </div>
-            <label style="margin-top: 6px; display: block;">İmza / Paraf:</label>
-            <div class="sig-container">
-              <canvas id="sig-eden"></canvas>
-            </div>
-            <div class="sig-tools no-print">
-              <span class="sig-hint">Parmak veya kalemle imzalayınız</span>
-              <button type="button" class="btn-sig-clear" onclick="clearSig('sig-eden')">Temizle</button>
-            </div>
-          </div>
-
-          <div class="signature-card">
-            <h4>Teslim Alan (Faydalanıcı)</h4>
-            <div class="form-group">
-              <label>Faydalanıcı İsim Soyisim:</label>
-              <input type="text" id="alan_ad" name="alan_ad" placeholder="Teslim Alan Adı Soyadı" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-            </div>
-            <label style="margin-top: 6px; display: block;">İmza / Paraf:</label>
-            <div class="sig-container">
-              <canvas id="sig-alan"></canvas>
-            </div>
-            <div class="sig-tools no-print">
-              <span class="sig-hint">Parmak veya kalemle imzalayınız</span>
-              <button type="button" class="btn-sig-clear" onclick="clearSig('sig-alan')">Temizle</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Alt Aksiyon Butonları -->
-        <div class="actions-grid no-print">
-          <button type="submit" class="action-btn submit-btn" id="submitBtn">
+<div class="container">
+<div class="form-card" id="formCardAyni">
+<form autocomplete="off" id="ayniForm">
+<!-- Başlık ve Logo -->
+<div class="form-header">
+<div class="header-logo-title">
+<img alt="Gaziantep İyilik Hareketi Derneği Logosu" class="doc-logo-svg" height="75" src="gaziantep-iyilik-hareketi-logo.jpeg" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;" width="75"/>
+<div class="header-titles">
+<h1>Gaziantep İyilik Hareketi Derneği</h1>
+<p>Ayni Yardım Teslim ve Tesellüm Tutanağı</p>
+</div>
+</div>
+<div class="header-date-box">
+<label>Tanzim Tarihi:</label>
+<div class="native-date-box">
+<input aria-label="Tanzim Tarihi" id="form-date" name="tarih" onclick="this.showPicker &amp;&amp; this.showPicker()" required="" type="date"/>
+</div>
+</div>
+</div>
+<!-- 1. Faydalanıcı Bilgileri -->
+<div class="section-title">1. Teslim Alan (Faydalanıcı / Aile Temsilcisi)</div>
+<div class="grid">
+<div class="form-group">
+<label>Adı Soyadı *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="faydalanici_ad" name="faydalanici_ad" placeholder="Faydalanıcı Adı Soyadı" required="" spellcheck="false" type="text"/>
+</div>
+<div class="form-group">
+<label>T.C. Kimlik / Yabancı Kimlik No *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="faydalanici_tc" inputmode="numeric" maxlength="11" name="faydalanici_tc" pattern="[0-9]{11}" placeholder="11 Haneli Kimlik No" required="" spellcheck="false" type="text"/>
+</div>
+<div class="form-group">
+<label>Doğum Tarihi</label>
+<div class="native-date-box">
+<div aria-label="Doğum Tarihi" class="segmented-date-input" id="faydalanici_dogum_ui" role="group">
+<input aria-label="Doğum günü" autocapitalize="off" autocomplete="off" autocorrect="off" class="date-segment date-day" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="faydalanici_dogum_gun" inputmode="numeric" maxlength="2" placeholder="GG" spellcheck="false" type="text"/>
+<span class="date-separator">.</span>
+<input aria-label="Doğum ayı" autocapitalize="off" autocomplete="off" autocorrect="off" class="date-segment date-month" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="faydalanici_dogum_ay" inputmode="numeric" maxlength="2" placeholder="AA" spellcheck="false" type="text"/>
+<span class="date-separator">.</span>
+<input aria-label="Doğum yılı" autocapitalize="off" autocomplete="off" autocorrect="off" class="date-segment date-year" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="faydalanici_dogum_yil" inputmode="numeric" maxlength="4" placeholder="YYYY" spellcheck="false" type="text"/>
+</div>
+<input id="faydalanici_dogum" name="faydalanici_dogum" type="hidden"/>
+</div>
+</div>
+<div class="form-group">
+<label>Telefon Numarası *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="faydalanici_tel" name="faydalanici_tel" placeholder="05XX XXX XX XX" required="" spellcheck="false" type="tel"/>
+</div>
+<div class="form-group full-width">
+<label>İkametgah Adresi *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="faydalanici_adres" name="faydalanici_adres" placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl" required="" spellcheck="false" type="text"/>
+</div>
+</div>
+<!-- 2. Teslim Edilen Yardım İçeriği -->
+<div class="section-title">2. Teslim Edilen Yardım ve Malzeme İçeriği</div>
+<div class="table-responsive">
+<table class="modern-table" id="items-table">
+<thead>
+<tr>
+<th style="width: 8%; text-align: center;">SIRA</th>
+<th style="width: 48%;">MALZEME / YARDIM CİNSİ</th>
+<th style="width: 20%;">MİKTAR / ADET</th>
+<th style="width: 18%;">RAYİÇ BEDEL (TL)</th>
+<th class="no-print" style="width: 6%; text-align: center;">SİL</th>
+</tr>
+</thead>
+<tbody id="items-tbody"></tbody>
+</table>
+</div>
+<div class="no-print">
+<button class="btn-add-row" onclick="addRow()" type="button">➕ Yeni Malzeme Satırı Ekle</button>
+</div>
+<!-- 3. Tutanak ve İmzalar -->
+<div class="section-title">3. Teslim ve Tesellüm İmzaları</div>
+<div class="signatures-flex-wrap">
+<div class="signature-card">
+<h4>Teslim Eden (GİH Görevlisi)</h4>
+<div class="form-group">
+<label>Görevli İsim Soyisim: *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="gorevli_ad" name="gorevli_ad" placeholder="GİH Saha Temsilcisi" required="" spellcheck="false" type="text"/>
+</div>
+<label style="margin-top: 6px; display: block;">İmza / Paraf:</label>
+<div class="sig-container">
+<canvas id="sig-eden"></canvas>
+</div>
+<div class="sig-tools no-print">
+<span class="sig-hint">Parmak veya kalemle imzalayınız</span>
+<button class="btn-sig-clear" onclick="clearSig('sig-eden')" type="button">Temizle</button>
+</div>
+</div>
+<div class="signature-card">
+<h4>Teslim Alan (Faydalanıcı)</h4>
+<div class="form-group">
+<label>Faydalanıcı İsim Soyisim:</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="alan_ad" name="alan_ad" placeholder="Teslim Alan Adı Soyadı" spellcheck="false" type="text"/>
+</div>
+<label style="margin-top: 6px; display: block;">İmza / Paraf:</label>
+<div class="sig-container">
+<canvas id="sig-alan"></canvas>
+</div>
+<div class="sig-tools no-print">
+<span class="sig-hint">Parmak veya kalemle imzalayınız</span>
+<button class="btn-sig-clear" onclick="clearSig('sig-alan')" type="button">Temizle</button>
+</div>
+</div>
+</div>
+<!-- Alt Aksiyon Butonları -->
+<div class="actions-grid no-print">
+<button class="action-btn submit-btn" id="submitBtn" type="submit">
             Formu Gönder
           </button>
-          <button type="button" class="action-btn btn-pdf" onclick="pdfAyniUret(true)">
+<button class="action-btn btn-pdf" onclick="pdfAyniUret(true)" type="button">
             📄 PDF Tutanak İndir
           </button>
-          <button type="button" class="action-btn btn-reset" onclick="resetForm()">
+<button class="action-btn btn-reset" onclick="resetForm()" type="button">
             🔄 Yeni Kayıt
           </button>
-        </div>
-
-        <div id="status-msg"></div>
-      </form>
-    </div>
-  </div>
-
-  <script>
+</div>
+<div id="status-msg"></div>
+</form>
+</div>
+</div>
+<script>
     const SCRIPT_URL = ""; // İYİBİS BETA 4.2: google.script.run kullanılıyor.
 
     let sigEdenData = null;
@@ -1276,7 +1239,6 @@ function iyibisPdfCanvasOptions_(element, sourceElementId, normalOptions) {
     return false;
   }
 </script>
-
 <script id="iyibis-signature-darkmode-fix-v42">
 (function() {
   function makeSignatureCanvasLight_(canvas) {
@@ -1343,8 +1305,6 @@ function iyibisPdfCanvasOptions_(element, sourceElementId, normalOptions) {
   });
 })();
 </script>
-
-
 <script id="iyibis-ayni-today-date-safety-v42">
 (function() {
   function ensureToday_() {
@@ -1359,6 +1319,86 @@ function iyibisPdfCanvasOptions_(element, sourceElementId, normalOptions) {
   } else {
     ensureToday_();
   }
+})();
+</script>
+
+<script id="iyibis-no-autofill-v51">
+(function () {
+  /*
+   * İYİBİS 5.1 — Form geçmişi / otomatik doldurma koruması
+   * Backend name/id alanlarını değiştirmez.
+   * Statik ve sonradan JS ile oluşturulan girişleri kapsar.
+   */
+  function iyibisDisableAutofillForField_(el) {
+    if (!el || !el.setAttribute) return;
+
+    var tag = String(el.tagName || '').toUpperCase();
+    var type = String(el.getAttribute('type') || '').toLowerCase();
+
+    if (tag === 'TEXTAREA' ||
+        (tag === 'INPUT' &&
+         ['text','tel','number','email','search','url'].indexOf(type || 'text') >= 0)) {
+      el.setAttribute('autocomplete', 'off');
+      el.setAttribute('autocorrect', 'off');
+      el.setAttribute('autocapitalize', 'off');
+      el.setAttribute('spellcheck', 'false');
+
+      // Yaygın parola yöneticileri / form doldurucular için ipuçları.
+      el.setAttribute('data-lpignore', 'true');
+      el.setAttribute('data-1p-ignore', 'true');
+      el.setAttribute('data-form-type', 'other');
+    }
+  }
+
+  function iyibisDisableAutofill_() {
+    document.querySelectorAll('form').forEach(function(form) {
+      form.setAttribute('autocomplete', 'off');
+    });
+
+    document.querySelectorAll('input, textarea').forEach(
+      iyibisDisableAutofillForField_
+    );
+  }
+
+  // Sayfa ilk kurulurken uygula.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iyibisDisableAutofill_);
+  } else {
+    iyibisDisableAutofill_();
+  }
+
+  // Dinamik eklenen çocuk/malzeme/fatura/borç/destek satırlarını da yakala.
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(node) {
+        if (!node || node.nodeType !== 1) return;
+        iyibisDisableAutofillForField_(node);
+        if (node.querySelectorAll) {
+          node.querySelectorAll('input, textarea').forEach(
+            iyibisDisableAutofillForField_
+          );
+        }
+      });
+    });
+  });
+
+  function iyibisStartNoAutofillObserver_() {
+    if (!document.body) return;
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iyibisStartNoAutofillObserver_);
+  } else {
+    iyibisStartNoAutofillObserver_();
+  }
+
+  // Bazı tarayıcılar odak anında autocomplete değerini tekrar yorumlar.
+  document.addEventListener('focusin', function(ev) {
+    iyibisDisableAutofillForField_(ev.target);
+  }, true);
+
+  window.iyibisDisableAutofill_ = iyibisDisableAutofill_;
 })();
 </script>
 

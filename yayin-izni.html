@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
-  <base target="_top">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video, Fotoğraf Yayın İzin Formu - İYİBİS - Gaziantep İyilik Hareketi Derneği</title>
-  <!-- PDF Oluşturma Kütüphanesi -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <style>
+<base target="_top"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Video, Fotoğraf Yayın İzin Formu - İYİBİS - Gaziantep İyilik Hareketi Derneği</title>
+<!-- PDF Oluşturma Kütüphanesi -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
     :root {
       --gih-red: #8b1d24;
       --gih-red-dark: #681117;
@@ -432,14 +433,11 @@
       color: #8b1d24 !important;
     }
 </style>
-
 <script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
-
 <script>window.IYIBIS_WEB_BUILD="BETA 4.2";</script>
-  <script src="config-beta42.js"></script>
-  <script src="api-client-beta42.js"></script>
-  <link rel="icon" type="image/png" href="favicon.png">
-
+<script src="config-beta42.js"></script>
+<script src="api-client-beta42.js"></script>
+<link href="favicon.png" rel="icon" type="image/png"/>
 <style id="iyibis-signature-light-surface-v42">
 /* İmza alanı sistem/tarayıcı koyu modundan bağımsız olarak daima kağıt gibi beyaz kalır. */
 .sig-container,
@@ -460,8 +458,6 @@
   mix-blend-mode: normal !important;
 }
 </style>
-
-
 <style id="iyibis-form-navbar-round-logo-v42">
 /* Tepe bardaki dernek logosu tüm temalarda yuvarlak görünür. */
 .app-navbar .nav-logo-svg {
@@ -478,7 +474,6 @@
   -webkit-clip-path: circle(50%) !important;
 }
 </style>
-
 <style id="iyibis-brand-theme-v42">
 :root{
   --gih-red:#991b1b!important;
@@ -525,7 +520,6 @@ input:focus,select:focus,textarea:focus{
   .nav-links{background:#fff!important;border-bottom-color:var(--iyibis-red)!important}
 }
 </style>
-
 <style id="iyibis-flat-dark-mode-v42">
 /* BETA 4.2 — Koyu modda beyazdan siyaha gradient yok.
    Sayfa zemini tek, düz koyu yüzey olarak sabitlenir. */
@@ -543,7 +537,6 @@ input:focus,select:focus,textarea:focus{
   }
 }
 </style>
-
 <style id="iyibis-form-dark-surfaces-v42">
 @media (prefers-color-scheme: dark) {
   body {
@@ -652,7 +645,6 @@ input:focus,select:focus,textarea:focus{
   }
 }
 </style>
-
 <style id="iyibis-page-background-no-gradient-v42">
 html, body {
   background-image: none !important;
@@ -669,7 +661,6 @@ body {
   }
 }
 </style>
-
 <style id="iyibis-document-round-logo-v42">
 /* Belge başlığındaki büyük dernek logosu: İYİBİS ana sayfasındaki gibi dairesel kırpma */
 .doc-logo-svg {
@@ -686,13 +677,11 @@ body {
   background: #ffffff !important;
 }
 </style>
-
 <style id="iyibis-yayin-titlecase-v42">
 .header-titles h1 {
   text-transform: none !important;
 }
 </style>
-
 <style id="iyibis-501-light-mode-guard">
 /* İYİBİS 5.0.1 — Açık mod koruması.
    Açık renk şeması: beyaz/açık zemin. Koyu renk şeması: mevcut koyu tema. */
@@ -712,8 +701,6 @@ body {
   html { color-scheme: dark !important; }
 }
 </style>
-
-
 <style id="iyibis-501-light-surfaces">
 @media (prefers-color-scheme: light) {
   :root {
@@ -735,30 +722,27 @@ body {
   input, select, textarea { background:#ffffff !important; color:#0f172a !important; }
 }
 </style>
-
 </head>
 <body>
-
-  <header class="app-navbar no-print">
-    <div class="nav-inner">
-      <a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-brand">
-        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="40" height="40" class="nav-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:40px;height:40px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
-        <div class="nav-brand-text">
-          <span class="brand-title">Gaziantep İyilik Hareketi</span>
-          <span class="brand-sub">Saha Otomasyonu</span>
-        </div>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menüyü Aç/Kapat" onclick="toggleAppMenu()">☰</button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-link">🏠 Ana Panel</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('saha-tespit', event)" class="nav-link">📋 Saha Tespit</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('ayni-yardim', event)" class="nav-link">📦 Ayni Yardım</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('yayin-izni', event)" class="nav-link active">📸 Yayın İzni</a></li>
-      
-        <li><a href="#" onclick="return navigateIyibisApp('portal', event)" class="nav-link iyibis-standard-link">➜ İYİBİS</a></li></ul>
-    </div>
-  </header>
-  <script>
+<header class="app-navbar no-print">
+<div class="nav-inner">
+<a class="nav-brand" href="#" onclick="return navigateIyibisApp('saha', event)">
+<img alt="Gaziantep İyilik Hareketi Derneği Logosu" class="nav-logo-svg" height="40" src="gaziantep-iyilik-hareketi-logo.jpeg" style="width:40px;height:40px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;" width="40"/>
+<div class="nav-brand-text">
+<span class="brand-title">Gaziantep İyilik Hareketi</span>
+<span class="brand-sub">Saha Otomasyonu</span>
+</div>
+</a>
+<button aria-label="Menüyü Aç/Kapat" class="nav-toggle" id="navToggle" onclick="toggleAppMenu()">☰</button>
+<ul class="nav-links" id="navLinks">
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('saha', event)">🏠 Ana Panel</a></li>
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('saha-tespit', event)">📋 Saha Tespit</a></li>
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('ayni-yardim', event)">📦 Ayni Yardım</a></li>
+<li><a class="nav-link active" href="#" onclick="return navigateIyibisApp('yayin-izni', event)">📸 Yayın İzni</a></li>
+<li><a class="nav-link iyibis-standard-link" href="#" onclick="return navigateIyibisApp('portal', event)">➜ İYİBİS</a></li></ul>
+</div>
+</header>
+<script>
     function toggleAppMenu() {
       const navLinks = document.getElementById('navLinks');
       const navToggle = document.getElementById('navToggle');
@@ -766,118 +750,98 @@ body {
       navToggle.innerText = navLinks.classList.contains('show') ? '✕' : '☰';
     }
   </script>
-
-  <div class="container">
-    <div class="form-card" id="formCardYayin">
-      <form id="yayinForm" autocomplete="off">
-        <!-- Başlık ve Dernek Logosu -->
-        <div class="form-header">
-          <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
-          <div class="header-titles">
-            <h1>Gaziantep İyilik Hareketi Derneği</h1>
-            <p>Video, Görüntü ve Fotoğraf Yayın İzni / Muvafakatname</p>
-          </div>
-        </div>
-
-        <!-- 1. Aydınlatma ve Onay Metni -->
-        <div class="section-title">1. Açık Rıza ve Yayın İzni Beyanı</div>
-        <div class="legal-box">
-          <p>Bu yayın iznini imzalayarak <strong>Gaziantep İyilik Hareketi Derneği</strong>’ne herhangi bir ortamdaki içeriği lisanslama, kullanma ve yayınlama izni veriyorum. Ayrıca içeriğin diğer görseller, metin, grafikler, film, ses ve ses-görüntü çalışmaları ile birleştirilebileceğini ve makine öğrenimi algoritmaları yapay zeka ve diğer teknolojiler ile geliştirmek ve iyileştirmek için değiştirileceğini ve kullanılabileceğini kabul ediyorum. Biyometrik verilerin yukarıdaki amaçlar için Gaziantep İyilik Hareketi Derneği tarafından kullanılabileceğini kabul ediyorum ve Biyometrik Verilerimle ilgili her türlü yasal haktan ve yasaktan gönüllü olarak ve bilerek feragat ediyorum.</p>
-
-          <p>Yürürlükte bulunan kanunlar tarafından aksi geçerli kılınmadıkça içerikle ilgili hiçbir hakkım olmadığını, ek ödeme veya başka bir tazminat alma hakkım olmadığını, Gaziantep İyilik Hareketi Derneği’nden herhangi bir nedenle talepte bulunmayacağımı, bu iznin varislerim ve vekillerim için de bağlayıcı olduğunu kabul ve beyan ediyorum. Bu iznin dünya çapında ve kalıcı olarak, geçerli yasalarla tutarlı olduğunu ve Türkiye yasaları tarafından geri alınamaz olduğunu kabul ediyorum. Gönüllü olarak belirttiğim etnik kökenlerimin, cinsiyetimin bu izinde yer almasını kabul ediyorum.</p>
-
-          <p>İletişim bilgilerimin kamuya açık hale getirilemeyeceğini ancak gerektiğinde içeriğin lisanslanması ile ilgili olarak isim ve iletişim bilgilerimin kullanılabileceğini anlıyorum. (Örn. İddiaları mahkemede savunmak için). Açıklayıcı metin ve anahtar kelimeler de dahil olmak üzere, içeriğin dünya genelinde halka açık hale getirilebileceğini ve Gaziantep İyilik Hareketi Derneği tarafından gizlilik politikası kapsamında depolanabileceğini, erişilebileceğini ve kullanılabileceği farklı veri koruma/gizlilik yasalarına sahip ülkelere aktarılabileceğini kabul ediyorum. Özet kategori verileri de dahil olmak üzere, tanımlayıcı metin ve anahtar kelimeler lisanslamada kullanılabilir.</p>
-
-          <p>Belirli veri gizliliği yasalarının benim için geçerli olduğu ölçüde, içeriği lisanslayan Gaziantep İyilik Hareketi Derneği ile iletişime geçerek özel kategori verilerinin kullanımına ilişkin durumu istediğim zaman geri çekebileceğimi anlıyorum (bu tür veriler, iznim ile halka açık hale getirilmediği sürece). Fotoğrafçı/Film Yapımcısı ve onların doğrudan atananları veri denetleyicileridir ve iletişim bilgilerinin bana sağlandığını ve veri gizliliği sorguları için onlarla nasıl iletişime geçeceğimi bildiğimi kabul ediyorum.</p>
-
-          <p>En az 18 yaşında olduğumu ve bu yayın iznini imzalamak için tam yetkiye sahip olduğumu beyan ve taahhüt ederim. (18 yaşından küçük çocuğun velisi ya da video-fotoğraf çekilenin vasisi ise) Modelin yasal vasisi/velisi olduğumu ve çekime ve içeriğindeki tüm hakların onayını ve yayın iznini vermek için tam yasal yetkiye sahip olduğumu garanti ve beyan ederim.</p>
-
-          <p><strong>Depolama Süresi:</strong> Geçerli veri koruma yasalarına tabi olarak Gaziantep İyilik Hareketi Derneği içeriği, bu yayın iznini ve biyometrik veriler dahil olmak üzere ilgili verileri bu yayın izninde açıklanan amaçları yerine getirmek için gerekli olduğu sürece saklayabileceğini kabul ediyorum.</p>
-        </div>
-
-        <!-- 2. Kişi Bilgileri -->
-        <div class="section-title">2. İzin Veren ve Veli/Vasi Bilgileri</div>
-        <div class="grid">
-          <div class="form-group full-width">
-            <label>Yayın İzni Sahibi</label>
-            <input type="text" value="Gaziantep İyilik Hareketi Derneği" readonly autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="form-group">
-            <label>Yayın İzni Veren Adı Soyadı *</label>
-            <input type="text" id="yayin_ad" name="yayin_ad" required placeholder="Ad Soyad" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="form-group">
-            <label>Yayın İzni Veren T.C. Kimlik No *</label>
-            <input type="text" id="yayin_tc" name="yayin_tc" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli T.C. Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="section-note-banner">
+<div class="container">
+<div class="form-card" id="formCardYayin">
+<form autocomplete="off" id="yayinForm">
+<!-- Başlık ve Dernek Logosu -->
+<div class="form-header">
+<img alt="Gaziantep İyilik Hareketi Derneği Logosu" class="doc-logo-svg" height="75" src="gaziantep-iyilik-hareketi-logo.jpeg" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;" width="75"/>
+<div class="header-titles">
+<h1>Gaziantep İyilik Hareketi Derneği</h1>
+<p>Video, Görüntü ve Fotoğraf Yayın İzni / Muvafakatname</p>
+</div>
+</div>
+<!-- 1. Aydınlatma ve Onay Metni -->
+<div class="section-title">1. Açık Rıza ve Yayın İzni Beyanı</div>
+<div class="legal-box">
+<p>Bu yayın iznini imzalayarak <strong>Gaziantep İyilik Hareketi Derneği</strong>’ne herhangi bir ortamdaki içeriği lisanslama, kullanma ve yayınlama izni veriyorum. Ayrıca içeriğin diğer görseller, metin, grafikler, film, ses ve ses-görüntü çalışmaları ile birleştirilebileceğini ve makine öğrenimi algoritmaları yapay zeka ve diğer teknolojiler ile geliştirmek ve iyileştirmek için değiştirileceğini ve kullanılabileceğini kabul ediyorum. Biyometrik verilerin yukarıdaki amaçlar için Gaziantep İyilik Hareketi Derneği tarafından kullanılabileceğini kabul ediyorum ve Biyometrik Verilerimle ilgili her türlü yasal haktan ve yasaktan gönüllü olarak ve bilerek feragat ediyorum.</p>
+<p>Yürürlükte bulunan kanunlar tarafından aksi geçerli kılınmadıkça içerikle ilgili hiçbir hakkım olmadığını, ek ödeme veya başka bir tazminat alma hakkım olmadığını, Gaziantep İyilik Hareketi Derneği’nden herhangi bir nedenle talepte bulunmayacağımı, bu iznin varislerim ve vekillerim için de bağlayıcı olduğunu kabul ve beyan ediyorum. Bu iznin dünya çapında ve kalıcı olarak, geçerli yasalarla tutarlı olduğunu ve Türkiye yasaları tarafından geri alınamaz olduğunu kabul ediyorum. Gönüllü olarak belirttiğim etnik kökenlerimin, cinsiyetimin bu izinde yer almasını kabul ediyorum.</p>
+<p>İletişim bilgilerimin kamuya açık hale getirilemeyeceğini ancak gerektiğinde içeriğin lisanslanması ile ilgili olarak isim ve iletişim bilgilerimin kullanılabileceğini anlıyorum. (Örn. İddiaları mahkemede savunmak için). Açıklayıcı metin ve anahtar kelimeler de dahil olmak üzere, içeriğin dünya genelinde halka açık hale getirilebileceğini ve Gaziantep İyilik Hareketi Derneği tarafından gizlilik politikası kapsamında depolanabileceğini, erişilebileceğini ve kullanılabileceği farklı veri koruma/gizlilik yasalarına sahip ülkelere aktarılabileceğini kabul ediyorum. Özet kategori verileri de dahil olmak üzere, tanımlayıcı metin ve anahtar kelimeler lisanslamada kullanılabilir.</p>
+<p>Belirli veri gizliliği yasalarının benim için geçerli olduğu ölçüde, içeriği lisanslayan Gaziantep İyilik Hareketi Derneği ile iletişime geçerek özel kategori verilerinin kullanımına ilişkin durumu istediğim zaman geri çekebileceğimi anlıyorum (bu tür veriler, iznim ile halka açık hale getirilmediği sürece). Fotoğrafçı/Film Yapımcısı ve onların doğrudan atananları veri denetleyicileridir ve iletişim bilgilerinin bana sağlandığını ve veri gizliliği sorguları için onlarla nasıl iletişime geçeceğimi bildiğimi kabul ediyorum.</p>
+<p>En az 18 yaşında olduğumu ve bu yayın iznini imzalamak için tam yetkiye sahip olduğumu beyan ve taahhüt ederim. (18 yaşından küçük çocuğun velisi ya da video-fotoğraf çekilenin vasisi ise) Modelin yasal vasisi/velisi olduğumu ve çekime ve içeriğindeki tüm hakların onayını ve yayın iznini vermek için tam yasal yetkiye sahip olduğumu garanti ve beyan ederim.</p>
+<p><strong>Depolama Süresi:</strong> Geçerli veri koruma yasalarına tabi olarak Gaziantep İyilik Hareketi Derneği içeriği, bu yayın iznini ve biyometrik veriler dahil olmak üzere ilgili verileri bu yayın izninde açıklanan amaçları yerine getirmek için gerekli olduğu sürece saklayabileceğini kabul ediyorum.</p>
+</div>
+<!-- 2. Kişi Bilgileri -->
+<div class="section-title">2. İzin Veren ve Veli/Vasi Bilgileri</div>
+<div class="grid">
+<div class="form-group full-width">
+<label>Yayın İzni Sahibi</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" readonly="" spellcheck="false" type="text" value="Gaziantep İyilik Hareketi Derneği"/>
+</div>
+<div class="form-group">
+<label>Yayın İzni Veren Adı Soyadı *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="yayin_ad" name="yayin_ad" placeholder="Ad Soyad" required="" spellcheck="false" type="text"/>
+</div>
+<div class="form-group">
+<label>Yayın İzni Veren T.C. Kimlik No *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="yayin_tc" inputmode="numeric" maxlength="11" name="yayin_tc" pattern="[0-9]{11}" placeholder="11 Haneli T.C. Kimlik No" required="" spellcheck="false" type="text"/>
+</div>
+<div class="section-note-banner">
             ⚠️ Model 18 yaşından küçük / engelli ya da vesayet altında ise aşağıdaki veli/vasi alanını doldurunuz:
           </div>
-
-          <div class="form-group">
-            <label>Yayın İzni Veren Veli/Vasi Adı Soyadı</label>
-            <input type="text" id="veli_ad" name="veli_ad" placeholder="Veli / Vasi Adı Soyadı" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="form-group">
-            <label>Yayın İzni Veren Veli/Vasi T.C. Kimlik No</label>
-            <input type="text" id="veli_tc" name="veli_tc" maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="Veli / Vasi T.C. Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-        </div>
-
-        <!-- 3. İletişim ve İmza -->
-        <div class="section-title">3. İletişim Bilgileri ve İmza</div>
-        <div class="grid">
-          <div class="form-group full-width">
-            <label>İkametgah Adresi *</label>
-            <input type="text" id="yayin_adres" name="yayin_adres" required placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="form-group">
-            <label>Telefon / GSM No *</label>
-            <input type="tel" id="yayin_gsm" name="yayin_gsm" required placeholder="05XX XXX XX XX" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-          </div>
-
-          <div class="form-group">
-            <label>📅 Tarih * (Tıklayıp takvimden seçebilirsiniz)</label>
-            <input type="date" id="form-date" name="form_date" required onclick="this.showPicker && this.showPicker()">
-          </div>
-        </div>
-
-        <!-- İmza Kutusu -->
-        <div class="signature-card-single">
-          <label style="font-weight: 700; color: #8b1d24;">Yayın İzni Veren / Veli / Vasi İmzası *</label>
-          <div class="sig-container">
-            <canvas id="sig-yayin"></canvas>
-          </div>
-          <div class="sig-tools no-print">
-            <span class="sig-hint">Parmak veya dokunmatik kalem ile imzalayınız</span>
-            <button type="button" class="btn-sig-clear" onclick="clearSig()">Temizle</button>
-          </div>
-        </div>
-
-        <!-- Alt Aksiyon Butonları -->
-        <div class="actions-grid no-print">
-          <button type="submit" class="action-btn submit-btn" id="submitBtn">
+<div class="form-group">
+<label>Yayın İzni Veren Veli/Vasi Adı Soyadı</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="veli_ad" name="veli_ad" placeholder="Veli / Vasi Adı Soyadı" spellcheck="false" type="text"/>
+</div>
+<div class="form-group">
+<label>Yayın İzni Veren Veli/Vasi T.C. Kimlik No</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="veli_tc" inputmode="numeric" maxlength="11" name="veli_tc" pattern="[0-9]{11}" placeholder="Veli / Vasi T.C. Kimlik No" spellcheck="false" type="text"/>
+</div>
+</div>
+<!-- 3. İletişim ve İmza -->
+<div class="section-title">3. İletişim Bilgileri ve İmza</div>
+<div class="grid">
+<div class="form-group full-width">
+<label>İkametgah Adresi *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="yayin_adres" name="yayin_adres" placeholder="Mahalle, Cadde/Sokak, Bina No, Kapı No, İlçe/İl" required="" spellcheck="false" type="text"/>
+</div>
+<div class="form-group">
+<label>Telefon / GSM No *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="yayin_gsm" name="yayin_gsm" placeholder="05XX XXX XX XX" required="" spellcheck="false" type="tel"/>
+</div>
+<div class="form-group">
+<label>📅 Tarih *</label>
+<input id="form-date" name="form_date" onclick="this.showPicker &amp;&amp; this.showPicker()" required="" type="date"/>
+</div>
+</div>
+<!-- İmza Kutusu -->
+<div class="signature-card-single">
+<label style="font-weight: 700; color: #8b1d24;">Yayın İzni Veren / Veli / Vasi İmzası *</label>
+<div class="sig-container">
+<canvas id="sig-yayin"></canvas>
+</div>
+<div class="sig-tools no-print">
+<span class="sig-hint">Parmak veya dokunmatik kalem ile imzalayınız</span>
+<button class="btn-sig-clear" onclick="clearSig()" type="button">Temizle</button>
+</div>
+</div>
+<!-- Alt Aksiyon Butonları -->
+<div class="actions-grid no-print">
+<button class="action-btn submit-btn" id="submitBtn" type="submit">
             Formu Gönder
           </button>
-          <button type="button" class="action-btn btn-pdf" onclick="pdfYayinUret(true)">
+<button class="action-btn btn-pdf" onclick="pdfYayinUret(true)" type="button">
             📄 PDF Tutanak İndir
           </button>
-          <button type="button" class="action-btn btn-reset" onclick="resetForm()">
+<button class="action-btn btn-reset" onclick="resetForm()" type="button">
             🔄 Formu Temizle
           </button>
-        </div>
-
-        <div id="status-msg"></div>
-      </form>
-    </div>
-  </div>
-
-  <script>
+</div>
+<div id="status-msg"></div>
+</form>
+</div>
+</div>
+<script>
     const SCRIPT_URL = ""; // İYİBİS BETA 4.2: google.script.run kullanılıyor.
 
     let yayinImzaData = null;
@@ -1236,7 +1200,6 @@ function iyibisPdfCanvasOptions_(element, sourceElementId, normalOptions) {
     return false;
   }
 </script>
-
 <script id="iyibis-signature-darkmode-fix-v42">
 (function() {
   function makeSignatureCanvasLight_(canvas) {
@@ -1301,6 +1264,86 @@ function iyibisPdfCanvasOptions_(element, sourceElementId, normalOptions) {
       });
     }, 0);
   });
+})();
+</script>
+
+<script id="iyibis-no-autofill-v51">
+(function () {
+  /*
+   * İYİBİS 5.1 — Form geçmişi / otomatik doldurma koruması
+   * Backend name/id alanlarını değiştirmez.
+   * Statik ve sonradan JS ile oluşturulan girişleri kapsar.
+   */
+  function iyibisDisableAutofillForField_(el) {
+    if (!el || !el.setAttribute) return;
+
+    var tag = String(el.tagName || '').toUpperCase();
+    var type = String(el.getAttribute('type') || '').toLowerCase();
+
+    if (tag === 'TEXTAREA' ||
+        (tag === 'INPUT' &&
+         ['text','tel','number','email','search','url'].indexOf(type || 'text') >= 0)) {
+      el.setAttribute('autocomplete', 'off');
+      el.setAttribute('autocorrect', 'off');
+      el.setAttribute('autocapitalize', 'off');
+      el.setAttribute('spellcheck', 'false');
+
+      // Yaygın parola yöneticileri / form doldurucular için ipuçları.
+      el.setAttribute('data-lpignore', 'true');
+      el.setAttribute('data-1p-ignore', 'true');
+      el.setAttribute('data-form-type', 'other');
+    }
+  }
+
+  function iyibisDisableAutofill_() {
+    document.querySelectorAll('form').forEach(function(form) {
+      form.setAttribute('autocomplete', 'off');
+    });
+
+    document.querySelectorAll('input, textarea').forEach(
+      iyibisDisableAutofillForField_
+    );
+  }
+
+  // Sayfa ilk kurulurken uygula.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iyibisDisableAutofill_);
+  } else {
+    iyibisDisableAutofill_();
+  }
+
+  // Dinamik eklenen çocuk/malzeme/fatura/borç/destek satırlarını da yakala.
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(node) {
+        if (!node || node.nodeType !== 1) return;
+        iyibisDisableAutofillForField_(node);
+        if (node.querySelectorAll) {
+          node.querySelectorAll('input, textarea').forEach(
+            iyibisDisableAutofillForField_
+          );
+        }
+      });
+    });
+  });
+
+  function iyibisStartNoAutofillObserver_() {
+    if (!document.body) return;
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iyibisStartNoAutofillObserver_);
+  } else {
+    iyibisStartNoAutofillObserver_();
+  }
+
+  // Bazı tarayıcılar odak anında autocomplete değerini tekrar yorumlar.
+  document.addEventListener('focusin', function(ev) {
+    iyibisDisableAutofillForField_(ev.target);
+  }, true);
+
+  window.iyibisDisableAutofill_ = iyibisDisableAutofill_;
 })();
 </script>
 

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
-  <base target="_top">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saha Tespit Formu - İYİBİS - Gaziantep İyilik Hareketi Derneği</title>
-  <!-- PDF Oluşturma Kütüphanesi -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <style>
+<base target="_top"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saha Tespit Formu - İYİBİS - Gaziantep İyilik Hareketi Derneği</title>
+<!-- PDF Oluşturma Kütüphanesi -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
     /* --- TEPE MENÜ & MOBİL HAMBURGER STİLLERİ --- */
     :root {
       --gih-red: #8b1d24;
@@ -387,12 +388,10 @@
     }
 
 </style>
-
 <script>window.IYIBIS_WEB_BUILD="5.0 FINAL";</script>
-  <script src="config-beta42.js"></script>
-  <script src="api-client-beta42.js"></script>
-  <link rel="icon" type="image/png" href="favicon.png">
-
+<script src="config-beta42.js"></script>
+<script src="api-client-beta42.js"></script>
+<link href="favicon.png" rel="icon" type="image/png"/>
 <style id="iyibis-signature-light-surface-v42">
 /* İmza alanı sistem/tarayıcı koyu modundan bağımsız olarak daima kağıt gibi beyaz kalır. */
 .sig-container,
@@ -413,8 +412,6 @@
   mix-blend-mode: normal !important;
 }
 </style>
-
-
 <style id="iyibis-form-navbar-round-logo-v42">
 /* Tepe bardaki dernek logosu tüm temalarda yuvarlak görünür. */
 .app-navbar .nav-logo-svg {
@@ -431,7 +428,6 @@
   -webkit-clip-path: circle(50%) !important;
 }
 </style>
-
 <style id="iyibis-brand-theme-v42">
 :root{
   --gih-red:#991b1b!important;
@@ -478,7 +474,6 @@ input:focus,select:focus,textarea:focus{
   .nav-links{background:#fff!important;border-bottom-color:var(--iyibis-red)!important}
 }
 </style>
-
 <style id="iyibis-saha-ayni-header-exact-v42">
 /* Ayni Yardım formunun üst başlık yapısı birebir uygulanmıştır. */
 .form-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 18px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -540,27 +535,25 @@ input:focus,select:focus,textarea:focus{
 </style>
 </head>
 <body>
-
-  <header class="app-navbar no-print">
-    <div class="nav-inner">
-      <a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-brand">
-        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="40" height="40" class="nav-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:40px;height:40px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
-        <div class="nav-brand-text">
-          <span class="brand-title">Gaziantep İyilik Hareketi</span>
-          <span class="brand-sub">Saha Otomasyonu</span>
-        </div>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menüyü Aç/Kapat" onclick="toggleAppMenu()">☰</button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#" onclick="return navigateIyibisApp('saha', event)" class="nav-link">🏠 Ana Panel</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('saha-tespit', event)" class="nav-link active">📋 Saha Tespit</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('ayni-yardim', event)" class="nav-link">📦 Ayni Yardım</a></li>
-        <li><a href="#" onclick="return navigateIyibisApp('yayin-izni', event)" class="nav-link">📸 Yayın İzni</a></li>
-      
-        <li><a href="#" onclick="return navigateIyibisApp('portal', event)" class="nav-link iyibis-standard-link">➜ İYİBİS</a></li></ul>
-    </div>
-  </header>
-  <script>
+<header class="app-navbar no-print">
+<div class="nav-inner">
+<a class="nav-brand" href="#" onclick="return navigateIyibisApp('saha', event)">
+<img alt="Gaziantep İyilik Hareketi Derneği Logosu" class="nav-logo-svg" height="40" src="gaziantep-iyilik-hareketi-logo.jpeg" style="width:40px;height:40px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;" width="40"/>
+<div class="nav-brand-text">
+<span class="brand-title">Gaziantep İyilik Hareketi</span>
+<span class="brand-sub">Saha Otomasyonu</span>
+</div>
+</a>
+<button aria-label="Menüyü Aç/Kapat" class="nav-toggle" id="navToggle" onclick="toggleAppMenu()">☰</button>
+<ul class="nav-links" id="navLinks">
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('saha', event)">🏠 Ana Panel</a></li>
+<li><a class="nav-link active" href="#" onclick="return navigateIyibisApp('saha-tespit', event)">📋 Saha Tespit</a></li>
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('ayni-yardim', event)">📦 Ayni Yardım</a></li>
+<li><a class="nav-link" href="#" onclick="return navigateIyibisApp('yayin-izni', event)">📸 Yayın İzni</a></li>
+<li><a class="nav-link iyibis-standard-link" href="#" onclick="return navigateIyibisApp('portal', event)">➜ İYİBİS</a></li></ul>
+</div>
+</header>
+<script>
 function toggleAppMenu() {
     var navLinks = document.getElementById('navLinks');
     var navToggle = document.getElementById('navToggle');
@@ -569,365 +562,328 @@ function toggleAppMenu() {
 }
 
 </script>
-
 <div class="container">
-  <form id="sahaForm" autocomplete="off">
-    <!-- Başlık ve Logo: Ayni Yardım formu yapısı -->
-    <div class="form-header">
-      <div class="header-logo-title">
-        <img src="gaziantep-iyilik-hareketi-logo.jpeg" width="75" height="75" class="doc-logo-svg" alt="Gaziantep İyilik Hareketi Derneği Logosu" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;">
-        <div class="header-titles">
-          <h1>Gaziantep İyilik Hareketi Derneği</h1>
-          <p>Saha Tespit Formu - Hane İhtiyaç İnceleme ve Saha Mülakat Kayıt Sistemi</p>
-        </div>
-      </div>
-      <div class="header-date-box">
-        <label>Tanzim Tarihi:</label>
-        <div class="native-date-box">
-          <input type="date" name="ziyaret_tarihi" id="ziyaret_tarihi" required
-                 onclick="this.showPicker && this.showPicker()"
-                 aria-label="Tanzim Tarihi">
-        </div>
-      </div>
-    </div>
-    <!-- 1. Ziyaret Tarihi, Konum ve İletişim Bilgileri -->
-    <div class="section-title">1. Ziyaret Tarihi, Konum, Adres ve İletişim Bilgileri</div>
-    
-    <div class="form-group saha-gps-full">
-      <div class="gps-box">
-        <div class="gps-header">
-          <label style="color:#166534; font-weight:700; margin:0;">📍 Hane GPS Konumu:</label>
-          <button type="button" class="btn-gps" onclick="konumAl()">📍 Konumumu Al</button>
-        </div>
-        <div id="gpsStatus" class="gps-status">Henüz konum alınmadı. Butona basarak alabilirsiniz.</div>
-        <input type="hidden" name="gps_koordinat" id="gpsKoordinat">
-        <input type="hidden" name="gps_link" id="gpsLink">
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="form-group">
-        <label>İlçe *</label>
-        <select name="ilce" id="ilceSelect" required>
-          <option value="">-- İlçe Seçiniz --</option>
-          <option value="Şahinbey">Şahinbey</option>
-          <option value="Şehitkamil">Şehitkamil</option>
-          <option value="Nizip">Nizip</option>
-          <option value="İslahiye">İslahiye</option>
-          <option value="Nurdağı">Nurdağı</option>
-          <option value="Oğuzeli">Oğuzeli</option>
-          <option value="Araban">Araban</option>
-          <option value="Yavuzeli">Yavuzeli</option>
-          <option value="Karkamış">Karkamış</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Mahalle *</label>
-        <div class="autocomplete-wrapper">
-          <input type="text" id="mahalleInput" name="mahalle" placeholder="Önce ilçe seçiniz..." autocomplete="off" readonly required>
-          <ul id="suggestionsList" class="suggestions-list"></ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Sokak, Daire, Kapı No (Açık Adres) *</label>
-      <input type="text" name="acik_adres" id="acik_adres" required placeholder="Örn: 10023 Nolu Sok. No: 8 D: 2" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-    </div>
-
-    <div class="grid">
-      <div class="form-group">
-        <label>Görüşülen Aile İletişim Kişisi (Ad Soyad) *</label>
-        <input type="text" name="iletisim_kisi" id="iletisim_kisi" required placeholder="Görüşülen hane temsilcisi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-
-      <div class="form-group">
-        <label>Görüşülen Kişinin Yaşı</label>
-        <input type="number" name="iletisim_kisi_yas" id="iletisim_kisi_yas" min="15" max="120" placeholder="Örn: 42" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="form-group">
-        <label>Görüşülen Kişi T.C. Kimlik No *</label>
-        <input type="text" name="tc_kimlik" id="tc_kimlik" required maxlength="11" pattern="[0-9]{11}" inputmode="numeric" placeholder="11 Haneli T.C. Kimlik No" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-
-      <div class="form-group">
-        <label>Telefon Numarası *</label>
-        <input type="tel" name="telefon" id="telefon" required placeholder="05XX XXX XX XX" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="form-group">
-        <label>Evde Yaşayan Toplam Kişi Sayısı (Hane Halkı)</label>
-        <input type="text" name="kisi_sayisi" id="kisi_sayisi" inputmode="numeric" pattern="[0-9]*" placeholder="Örn: 5" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-    </div>
-
-    <!-- 2. Ebeveyn Durumu ve Hane Bireyleri -->
-    <div class="section-title">2. Ebeveyn Durumu ve Hane Bireyleri</div>
-    
-    <div class="parent-card">
-      <div class="parent-card-header">Anne Durumu</div>
-      <div class="parent-options">
-        <label><input type="radio" name="anne_durum" value="Sağ (Hanede Yaşıyor)" checked> Sağ (Hanede)</label>
-        <label><input type="radio" name="anne_durum" value="Sağ (Ayrı / Terk)"> Sağ (Ayrı / Terk)</label>
-        <label><input type="radio" name="anne_durum" value="Vefat Etmiş (Ölü)"> Vefat Etmiş (Ölü)</label>
-        <label><input type="radio" name="anne_durum" value="Cezaevinde"> Cezaevinde</label>
-      </div>
-    </div>
-
-    <div class="parent-card">
-      <div class="parent-card-header">Baba Durumu</div>
-      <div class="parent-options">
-        <label><input type="radio" name="baba_durum" value="Sağ (Hanede Yaşıyor)" checked> Sağ (Hanede)</label>
-        <label><input type="radio" name="baba_durum" value="Sağ (Ayrı / Terk)"> Sağ (Ayrı / Terk)</label>
-        <label><input type="radio" name="baba_durum" value="Vefat Etmiş (Ölü)"> Vefat Etmiş (Ölü)</label>
-        <label><input type="radio" name="baba_durum" value="Cezaevinde"> Cezaevinde</label>
-      </div>
-    </div>
-
-    <label style="margin-top: 10px; display: block; font-weight: 600;">Evde Yaşayan Diğer Bireyler:</label>
-    <div class="checkbox-grid">
-      <div class="checkbox-card">
-        <label><input type="checkbox" name="birey_kiz_cocuk" id="birey_kiz_cocuk" value="Var"> Kız Çocuk</label>
-      </div>
-      <div class="checkbox-card">
-        <label><input type="checkbox" name="birey_erkek_cocuk" id="birey_erkek_cocuk" value="Var"> Erkek Çocuk</label>
-      </div>
-      <div class="checkbox-card">
-        <label><input type="checkbox" id="chkBuyukanne" name="birey_buyukanne" value="Var"> Büyükanne</label>
-        <input type="number" id="buyukanne_yas" name="buyukanne_yas" class="age-input" placeholder="Yaş" disabled autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-      <div class="checkbox-card">
-        <label><input type="checkbox" id="chkBuyukbaba" name="birey_buyukbaba" value="Var"> Büyükbaba</label>
-        <input type="number" id="buyukbaba_yas" name="buyukbaba_yas" class="age-input" placeholder="Yaş" disabled autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-    </div>
-
-    <!-- 3. Çocuk Bilgileri -->
-    <div class="section-title">3. Çocuk Bilgileri (Giyim & İhtiyaç)</div>
-    <div class="table-container">
-      <table id="cocukTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Yaş</th>
-            <th>Cinsiyet</th>
-            <th>Ayakkabı No</th>
-            <th>Kıyafet Bedeni</th>
-            <th>İşlem</th>
-          </tr>
-        </thead>
-        <tbody id="cocukTbody"></tbody>
-      </table>
-    </div>
-    <button type="button" class="btn-add" onclick="cocukSatirEkle()">+ Çocuk Ekle</button>
-
-    <!-- 4. Sosyo-Ekonomik Durum -->
-    <div class="section-title">4. Sosyo-Ekonomik ve Mülkiyet Durumu</div>
-    <div class="grid">
-      <div class="form-group">
-        <label>Hane Geliri (Aylık)</label>
-        <input type="number" name="hane_geliri" id="hane_geliri" min="0" step="1" placeholder="Örn: 25000" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-    </div>
-    <div class="grid">
-      <div class="form-group">
-        <label>Ev Mülkiyet Durumu</label>
-        <select name="mulkiyet" id="mulkiyetSelect">
-          <option value="Kendi Mülkü">Kendi Mülkü</option>
-          <option value="Kira">Kira</option>
-          <option value="Akraba Yanı / Diğer">Akraba Yanı / Diğer</option>
-        </select>
-      </div>
-      <div class="form-group" id="kiraBedelDiv" style="display:none;">
-        <label>Aylık Kira Bedeli (TL)</label>
-        <input type="number" name="kira_bedeli" id="kira_bedeli" placeholder="Örn: 5000" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="form-group">
-        <label>Ödenmemiş Fatura &amp; Borç var mı?</label>
-        <select name="fatura_durumu" id="faturaSelect">
-          <option value="Yok">Yok</option>
-          <option value="Var">Var</option>
-        </select>
-      </div>
-      <div class="form-group" id="faturaDetayDiv" style="display:none;">
-        <label>Fatura &amp; Borç Detayları</label>
-        <div id="faturaBorclarList" class="multi-entry-list"></div>
-        <button type="button" class="btn-add" onclick="faturaBorcuEkle()">+ Fatura &amp; Borç Ekle</button>
-        <input type="hidden" name="fatura_detay" id="fatura_detay" value="">
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="form-group">
-        <label>Diğer Kurumlardan Alınan Destekler (STK / Devlet)</label>
-        <select name="destek_durumu" id="destekSelect">
-          <option value="Yok">Yok</option>
-          <option value="Var">Var</option>
-        </select>
-      </div>
-      <div class="form-group" id="destekDetayDiv" style="display:none;">
-        <label>Alınan Destekler</label>
-        <div id="digerDesteklerList" class="multi-entry-list"></div>
-        <button type="button" class="btn-add" onclick="digerDestekEkle()">+ Destek Ekle</button>
-        <input type="hidden" name="destek_detay" id="destek_detay" value="">
-      </div>
-    </div>
-
-    <!-- 5. Saha Notları -->
-    <div class="section-title">5. Saha Notları ve Teslim Edilen Destekler</div>
-    <div class="form-group">
-      <label>Saha Gözlem Notları</label>
-      <textarea name="notlar" id="notlar" rows="3" placeholder="Ev eşyaları, acil sağlık/gıda ihtiyaçları ve genel gözlemler..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
-    </div>
-    <div class="form-group">
-      <label>Ziyarette Teslim Edilen Destekler</label>
-      <textarea name="ziyarette_verilenler" id="ziyarette_verilenler" rows="2" placeholder="Örn: 1 Adet Gıda Kolisi, Kışlık Mont..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
-    </div>
-
-    <!-- 6. Saha Fotoğrafları -->
-    <div class="section-title">6. Saha Fotoğrafları</div>
-    <div class="photo-upload-panel">
-      <div class="photo-upload-head">
-        <div>
-          <div class="photo-upload-title">Ziyarete Ait Fotoğraflar</div>
-          <div class="photo-upload-note">
+<form autocomplete="off" id="sahaForm">
+<!-- Başlık ve Logo: Ayni Yardım formu yapısı -->
+<div class="form-header">
+<div class="header-logo-title">
+<img alt="Gaziantep İyilik Hareketi Derneği Logosu" class="doc-logo-svg" height="75" src="gaziantep-iyilik-hareketi-logo.jpeg" style="width:75px;height:75px;object-fit:cover;object-position:center;display:block;border-radius:50%;background:#fff;" width="75"/>
+<div class="header-titles">
+<h1>Gaziantep İyilik Hareketi Derneği</h1>
+<p>Saha Tespit Formu - Hane İhtiyaç İnceleme ve Saha Mülakat Kayıt Sistemi</p>
+</div>
+</div>
+<div class="header-date-box">
+<label>Tanzim Tarihi:</label>
+<div class="native-date-box">
+<input aria-label="Tanzim Tarihi" id="ziyaret_tarihi" name="ziyaret_tarihi" onclick="this.showPicker &amp;&amp; this.showPicker()" required="" type="date"/>
+</div>
+</div>
+</div>
+<!-- 1. Ziyaret Tarihi, Konum ve İletişim Bilgileri -->
+<div class="section-title">1. Ziyaret Tarihi, Konum, Adres ve İletişim Bilgileri</div>
+<div class="form-group saha-gps-full">
+<div class="gps-box">
+<div class="gps-header">
+<label style="color:#166534; font-weight:700; margin:0;">📍 Hane GPS Konumu:</label>
+<button class="btn-gps" onclick="konumAl()" type="button">📍 Konumumu Al</button>
+</div>
+<div class="gps-status" id="gpsStatus">Henüz konum alınmadı. Butona basarak alabilirsiniz.</div>
+<input id="gpsKoordinat" name="gps_koordinat" type="hidden"/>
+<input id="gpsLink" name="gps_link" type="hidden"/>
+</div>
+</div>
+<div class="grid">
+<div class="form-group">
+<label>İlçe *</label>
+<select id="ilceSelect" name="ilce" required="">
+<option value="">-- İlçe Seçiniz --</option>
+<option value="Şahinbey">Şahinbey</option>
+<option value="Şehitkamil">Şehitkamil</option>
+<option value="Nizip">Nizip</option>
+<option value="İslahiye">İslahiye</option>
+<option value="Nurdağı">Nurdağı</option>
+<option value="Oğuzeli">Oğuzeli</option>
+<option value="Araban">Araban</option>
+<option value="Yavuzeli">Yavuzeli</option>
+<option value="Karkamış">Karkamış</option>
+</select>
+</div>
+<div class="form-group">
+<label>Mahalle *</label>
+<div class="autocomplete-wrapper">
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="mahalleInput" name="mahalle" placeholder="Önce ilçe seçiniz..." readonly="" required="" spellcheck="false" type="text"/>
+<ul class="suggestions-list" id="suggestionsList"></ul>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label>Sokak, Daire, Kapı No (Açık Adres) *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="acik_adres" name="acik_adres" placeholder="Örn: 10023 Nolu Sok. No: 8 D: 2" required="" spellcheck="false" type="text"/>
+</div>
+<div class="grid">
+<div class="form-group">
+<label>Görüşülen Aile İletişim Kişisi (Ad Soyad) *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="iletisim_kisi" name="iletisim_kisi" placeholder="Görüşülen hane temsilcisi" required="" spellcheck="false" type="text"/>
+</div>
+<div class="form-group">
+<label>Görüşülen Kişinin Yaşı</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="iletisim_kisi_yas" max="120" min="15" name="iletisim_kisi_yas" placeholder="Örn: 42" spellcheck="false" type="number"/>
+</div>
+</div>
+<div class="grid">
+<div class="form-group">
+<label>Görüşülen Kişi T.C. Kimlik No *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="tc_kimlik" inputmode="numeric" maxlength="11" name="tc_kimlik" pattern="[0-9]{11}" placeholder="11 Haneli T.C. Kimlik No" required="" spellcheck="false" type="text"/>
+</div>
+<div class="form-group">
+<label>Telefon Numarası *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="telefon" name="telefon" placeholder="05XX XXX XX XX" required="" spellcheck="false" type="tel"/>
+</div>
+</div>
+<div class="grid">
+<div class="form-group">
+<label>Evde Yaşayan Toplam Kişi Sayısı (Hane Halkı)</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="kisi_sayisi" inputmode="numeric" name="kisi_sayisi" pattern="[0-9]*" placeholder="Örn: 5" spellcheck="false" type="text"/>
+</div>
+</div>
+<!-- 2. Ebeveyn Durumu ve Hane Bireyleri -->
+<div class="section-title">2. Ebeveyn Durumu ve Hane Bireyleri</div>
+<div class="parent-card">
+<div class="parent-card-header">Anne Durumu</div>
+<div class="parent-options">
+<label><input checked="" name="anne_durum" type="radio" value="Sağ (Hanede Yaşıyor)"/> Sağ (Hanede)</label>
+<label><input name="anne_durum" type="radio" value="Sağ (Ayrı / Terk)"/> Sağ (Ayrı / Terk)</label>
+<label><input name="anne_durum" type="radio" value="Vefat Etmiş (Ölü)"/> Vefat Etmiş (Ölü)</label>
+<label><input name="anne_durum" type="radio" value="Cezaevinde"/> Cezaevinde</label>
+</div>
+</div>
+<div class="parent-card">
+<div class="parent-card-header">Baba Durumu</div>
+<div class="parent-options">
+<label><input checked="" name="baba_durum" type="radio" value="Sağ (Hanede Yaşıyor)"/> Sağ (Hanede)</label>
+<label><input name="baba_durum" type="radio" value="Sağ (Ayrı / Terk)"/> Sağ (Ayrı / Terk)</label>
+<label><input name="baba_durum" type="radio" value="Vefat Etmiş (Ölü)"/> Vefat Etmiş (Ölü)</label>
+<label><input name="baba_durum" type="radio" value="Cezaevinde"/> Cezaevinde</label>
+</div>
+</div>
+<label style="margin-top: 10px; display: block; font-weight: 600;">Evde Yaşayan Diğer Bireyler:</label>
+<div class="checkbox-grid">
+<div class="checkbox-card">
+<label><input id="birey_kiz_cocuk" name="birey_kiz_cocuk" type="checkbox" value="Var"/> Kız Çocuk</label>
+</div>
+<div class="checkbox-card">
+<label><input id="birey_erkek_cocuk" name="birey_erkek_cocuk" type="checkbox" value="Var"/> Erkek Çocuk</label>
+</div>
+<div class="checkbox-card">
+<label><input id="chkBuyukanne" name="birey_buyukanne" type="checkbox" value="Var"/> Büyükanne</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" class="age-input" data-1p-ignore="true" data-form-type="other" data-lpignore="true" disabled="" id="buyukanne_yas" name="buyukanne_yas" placeholder="Yaş" spellcheck="false" type="number"/>
+</div>
+<div class="checkbox-card">
+<label><input id="chkBuyukbaba" name="birey_buyukbaba" type="checkbox" value="Var"/> Büyükbaba</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" class="age-input" data-1p-ignore="true" data-form-type="other" data-lpignore="true" disabled="" id="buyukbaba_yas" name="buyukbaba_yas" placeholder="Yaş" spellcheck="false" type="number"/>
+</div>
+</div>
+<!-- 3. Çocuk Bilgileri -->
+<div class="section-title">3. Çocuk Bilgileri (Giyim &amp; İhtiyaç)</div>
+<div class="table-container">
+<table id="cocukTable">
+<thead>
+<tr>
+<th>#</th>
+<th>Yaş</th>
+<th>Cinsiyet</th>
+<th>Ayakkabı No</th>
+<th>Kıyafet Bedeni</th>
+<th>İşlem</th>
+</tr>
+</thead>
+<tbody id="cocukTbody"></tbody>
+</table>
+</div>
+<button class="btn-add" onclick="cocukSatirEkle()" type="button">+ Çocuk Ekle</button>
+<!-- 4. Sosyo-Ekonomik Durum -->
+<div class="section-title">4. Sosyo-Ekonomik ve Mülkiyet Durumu</div>
+<div class="grid">
+<div class="form-group">
+<label>Hane Geliri (Aylık)</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="hane_geliri" min="0" name="hane_geliri" placeholder="Örn: 25000" spellcheck="false" step="1" type="number"/>
+</div>
+</div>
+<div class="grid">
+<div class="form-group">
+<label>Ev Mülkiyet Durumu</label>
+<select id="mulkiyetSelect" name="mulkiyet">
+<option value="Kendi Mülkü">Kendi Mülkü</option>
+<option value="Kira">Kira</option>
+<option value="Akraba Yanı / Diğer">Akraba Yanı / Diğer</option>
+</select>
+</div>
+<div class="form-group" id="kiraBedelDiv" style="display:none;">
+<label>Aylık Kira Bedeli (TL)</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="kira_bedeli" name="kira_bedeli" placeholder="Örn: 5000" spellcheck="false" type="number"/>
+</div>
+</div>
+<div class="grid">
+<div class="form-group">
+<label>Ödenmemiş Fatura &amp; Borç var mı?</label>
+<select id="faturaSelect" name="fatura_durumu">
+<option value="Yok">Yok</option>
+<option value="Var">Var</option>
+</select>
+</div>
+<div class="form-group" id="faturaDetayDiv" style="display:none;">
+<label>Fatura &amp; Borç Detayları</label>
+<div class="multi-entry-list" id="faturaBorclarList"></div>
+<button class="btn-add" onclick="faturaBorcuEkle()" type="button">+ Fatura &amp; Borç Ekle</button>
+<input id="fatura_detay" name="fatura_detay" type="hidden" value=""/>
+</div>
+</div>
+<div class="grid">
+<div class="form-group">
+<label>Diğer Kurumlardan Alınan Destekler (STK / Devlet)</label>
+<select id="destekSelect" name="destek_durumu">
+<option value="Yok">Yok</option>
+<option value="Var">Var</option>
+</select>
+</div>
+<div class="form-group" id="destekDetayDiv" style="display:none;">
+<label>Alınan Destekler</label>
+<div class="multi-entry-list" id="digerDesteklerList"></div>
+<button class="btn-add" onclick="digerDestekEkle()" type="button">+ Destek Ekle</button>
+<input id="destek_detay" name="destek_detay" type="hidden" value=""/>
+</div>
+</div>
+<!-- 5. Saha Notları -->
+<div class="section-title">5. Saha Notları ve Teslim Edilen Destekler</div>
+<div class="form-group">
+<label>Saha Gözlem Notları</label>
+<textarea autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="notlar" name="notlar" placeholder="Ev eşyaları, acil sağlık/gıda ihtiyaçları ve genel gözlemler..." rows="3" spellcheck="false"></textarea>
+</div>
+<div class="form-group">
+<label>Ziyarette Teslim Edilen Destekler</label>
+<textarea autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="ziyarette_verilenler" name="ziyarette_verilenler" placeholder="Örn: 1 Adet Gıda Kolisi, Kışlık Mont..." rows="2" spellcheck="false"></textarea>
+</div>
+<!-- 6. Saha Fotoğrafları -->
+<div class="section-title">6. Saha Fotoğrafları</div>
+<div class="photo-upload-panel">
+<div class="photo-upload-head">
+<div>
+<div class="photo-upload-title">Ziyarete Ait Fotoğraflar</div>
+<div class="photo-upload-note">
             En fazla 3 fotoğraf yüklenebilir. Fotoğraflar cihazınızda otomatik olarak küçültülür ve sıkıştırılır;
             sisteme ham yüksek çözünürlüklü dosya gönderilmez.
           </div>
-        </div>
-        <div id="photoCountBadge" style="font-size:.75rem;font-weight:800;color:#8b1d24;white-space:nowrap;">0 / 3</div>
-      </div>
-
-      <input id="sahaPhotoInput" class="photo-upload-input" type="file" accept="image/*" multiple>
-      <input id="photo_payload_json" name="photo_payload_json" type="hidden" value="">
-      <input id="photo_count" name="photo_count" type="hidden" value="0">
-
-      <div id="photoUploadStatus" class="photo-upload-status">Henüz fotoğraf seçilmedi.</div>
-      <div id="photoPreviewGrid" class="photo-preview-grid"></div>
-    </div>
-
-    <!-- 7. İmzalar -->
-    <div class="section-title">7. Tutanak ve İmzalar</div>
-    <div class="signatures-flex-wrap">
-      <div class="sig-box-card">
-        <div class="form-group">
-          <label>Aile Adına (İsim Soyisim)</label>
-          <input type="text" name="aile_ad_soyad" id="aile_ad_soyad" placeholder="İmzalayan Aile Bireyi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-        </div>
-        <label style="margin-top: 4px; display: block;">Aile İmzası</label>
-        <div class="sig-container">
-          <canvas id="sigAile"></canvas>
-          <button type="button" class="sig-clear" onclick="clearSig('sigAile')">Temizle</button>
-        </div>
-      </div>
-
-      <div class="sig-box-card">
-        <div class="form-group">
-          <label>GİH Görevlisi (İsim Soyisim) *</label>
-          <input type="text" name="gih_ad_soyad" id="gih_ad_soyad" required placeholder="GİH Saha Temsilcisi" autocomplete="new-password" autocapitalize="off" spellcheck="false">
-        </div>
-        <label style="margin-top: 4px; display: block;">Görevli İmzası</label>
-        <div class="sig-container">
-          <canvas id="sigGih"></canvas>
-          <button type="button" class="sig-clear" onclick="clearSig('sigGih')">Temizle</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Aksiyon Butonları -->
-    <div class="actions-grid">
-      <button type="submit" class="submit-btn" id="submitBtn">Formu Gönder</button>
-      <button type="button" class="pdf-btn" onclick="pdfTutanakUret(true)">📄 PDF Tutanak İndir</button>
-      <button type="button" class="reset-btn" onclick="formuSifirla()">🔄 Yeni Kayıt</button>
-    </div>
-    <div id="status-msg"></div>
-  </form>
 </div>
-
+<div id="photoCountBadge" style="font-size:.75rem;font-weight:800;color:#8b1d24;white-space:nowrap;">0 / 3</div>
+</div>
+<input accept="image/*" class="photo-upload-input" id="sahaPhotoInput" multiple="" type="file"/>
+<input id="photo_payload_json" name="photo_payload_json" type="hidden" value=""/>
+<input id="photo_count" name="photo_count" type="hidden" value="0"/>
+<div class="photo-upload-status" id="photoUploadStatus">Henüz fotoğraf seçilmedi.</div>
+<div class="photo-preview-grid" id="photoPreviewGrid"></div>
+</div>
+<!-- 7. İmzalar -->
+<div class="section-title">7. Tutanak ve İmzalar</div>
+<div class="signatures-flex-wrap">
+<div class="sig-box-card">
+<div class="form-group">
+<label>Aile Adına (İsim Soyisim)</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="aile_ad_soyad" name="aile_ad_soyad" placeholder="İmzalayan Aile Bireyi" spellcheck="false" type="text"/>
+</div>
+<label style="margin-top: 4px; display: block;">Aile İmzası</label>
+<div class="sig-container">
+<canvas id="sigAile"></canvas>
+<button class="sig-clear" onclick="clearSig('sigAile')" type="button">Temizle</button>
+</div>
+</div>
+<div class="sig-box-card">
+<div class="form-group">
+<label>GİH Görevlisi (İsim Soyisim) *</label>
+<input autocapitalize="off" autocomplete="off" autocorrect="off" data-1p-ignore="true" data-form-type="other" data-lpignore="true" id="gih_ad_soyad" name="gih_ad_soyad" placeholder="GİH Saha Temsilcisi" required="" spellcheck="false" type="text"/>
+</div>
+<label style="margin-top: 4px; display: block;">Görevli İmzası</label>
+<div class="sig-container">
+<canvas id="sigGih"></canvas>
+<button class="sig-clear" onclick="clearSig('sigGih')" type="button">Temizle</button>
+</div>
+</div>
+</div>
+<!-- Aksiyon Butonları -->
+<div class="actions-grid">
+<button class="submit-btn" id="submitBtn" type="submit">Formu Gönder</button>
+<button class="pdf-btn" onclick="pdfTutanakUret(true)" type="button">📄 PDF Tutanak İndir</button>
+<button class="reset-btn" onclick="formuSifirla()" type="button">🔄 Yeni Kayıt</button>
+</div>
+<div id="status-msg"></div>
+</form>
+</div>
 <!-- EKRAN DIŞI PDF TUTANAK ŞABLONU -->
 <div id="pdfWrapper" style="position: fixed; left: -9999px; top: 0; width: 750px; background: #ffffff; z-index: -999;">
-  <div id="pdfTemplate" style="padding: 24px; font-family: Arial, sans-serif; color: #111827; font-size: 12px; line-height: 1.4; background: #ffffff;">
-    <div style="text-align: center; border-bottom: 2px solid #8b1d24; padding-bottom: 8px; margin-bottom: 12px;">
-      <h2 style="font-size: 16px; color: #8b1d24; margin: 0; text-transform: uppercase;">Gaziantep İyilik Hareketi Derneği</h2>
-      <h3 style="font-size: 13px; margin: 3px 0 0 0; color: #374151;">Saha Tespit ve Hane İnceleme Tutanağı</h3>
-      <div style="font-size: 11px; color: #8b1d24; font-weight: bold; margin-top: 3px;" id="pdfTarih"></div>
-    </div>
-
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
-      <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">1. Hane ve İletişim Bilgileri</th></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>İlçe / Mahalle:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfIlceMahalle"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Açık Adres:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfAdres"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>İletişim Kişisi (Yaş):</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfKisiTel"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>T.C. Kimlik / Tel:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfTcKimlik"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Hane Kişi Sayısı:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfKisiSayisi"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>GPS Konumu:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfGps"></td></tr>
-    </table>
-
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
-      <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">2. Hane Yapısı ve Sosyo-Ekonomik Durum</th></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Anne / Baba Durumu:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfEbeveyn"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Evde Yaşayanlar:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfBireyler"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Hane Geliri (Aylık):</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfHaneGeliri"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Mülkiyet / Kira:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfMulkiyet"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Ödenmemiş Fatura &amp; Borç:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFatura"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Diğer Destekler:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfDestekler"></td></tr>
-    </table>
-
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;" id="pdfCocukTable">
-      <tr style="background: #f1f5f9;"><th colspan="4" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">3. Çocuk Bilgileri ve İhtiyaçları</th></tr>
-      <tr style="background: #fafafa; font-size: 10px;">
-        <th style="border: 1px solid #d1d5db; padding: 4px;">Yaş</th>
-        <th style="border: 1px solid #d1d5db; padding: 4px;">Cinsiyet</th>
-        <th style="border: 1px solid #d1d5db; padding: 4px;">Ayakkabı No</th>
-        <th style="border: 1px solid #d1d5db; padding: 4px;">Kıyafet Bedeni</th>
-      </tr>
-      <tbody id="pdfCocukTbody"></tbody>
-    </table>
-
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 14px;">
-      <tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">4. Saha Notları ve Teslim Edilen Destekler</th></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Saha Notları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfNotlar"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Verilen Destekler:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfVerilenler"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Saha Fotoğrafları:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFotografBilgisi">Fotoğraf eklenmedi.</td></tr>
-    </table>
-
-    <div id="pdfFotografBolumu" style="display:none; margin: 8px 0 12px; page-break-inside: avoid;">
-      <div style="font-weight:700; color:#8b1d24; margin-bottom:6px;">Saha Fotoğrafları</div>
-      <div id="pdfFotografGrid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;"></div>
-    </div>
-
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
-    </table>
-
-    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-      <div style="width: 46%; text-align: center; border: 1px solid #d1d5db; padding: 6px; border-radius: 4px; min-height: 85px;">
-        <div style="font-weight: bold; font-size: 11px;">Aile Temsilcisi</div>
-        <div id="pdfAileAd" style="font-size: 10px; margin-bottom: 4px;"></div>
-        <div style="height: 50px; display: flex; align-items: center; justify-content: center;">
-          <img id="pdfSigAileImg" style="max-height: 50px; max-width: 100%; display: none;">
-        </div>
-      </div>
-      <div style="width: 46%; text-align: center; border: 1px solid #d1d5db; padding: 6px; border-radius: 4px; min-height: 85px;">
-        <div style="font-weight: bold; font-size: 11px;">GİH Saha Yetkilisi</div>
-        <div id="pdfGihAd" style="font-size: 10px; margin-bottom: 4px;"></div>
-        <div style="height: 50px; display: flex; align-items: center; justify-content: center;">
-          <img id="pdfSigGihImg" style="max-height: 50px; max-width: 100%; display: none;">
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="pdfTemplate" style="padding: 24px; font-family: Arial, sans-serif; color: #111827; font-size: 12px; line-height: 1.4; background: #ffffff;">
+<div style="text-align: center; border-bottom: 2px solid #8b1d24; padding-bottom: 8px; margin-bottom: 12px;">
+<h2 style="font-size: 16px; color: #8b1d24; margin: 0; text-transform: uppercase;">Gaziantep İyilik Hareketi Derneği</h2>
+<h3 style="font-size: 13px; margin: 3px 0 0 0; color: #374151;">Saha Tespit ve Hane İnceleme Tutanağı</h3>
+<div id="pdfTarih" style="font-size: 11px; color: #8b1d24; font-weight: bold; margin-top: 3px;"></div>
 </div>
-
-
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
+<tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">1. Hane ve İletişim Bilgileri</th></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>İlçe / Mahalle:</strong></td><td id="pdfIlceMahalle" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Açık Adres:</strong></td><td id="pdfAdres" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>İletişim Kişisi (Yaş):</strong></td><td id="pdfKisiTel" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>T.C. Kimlik / Tel:</strong></td><td id="pdfTcKimlik" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Hane Kişi Sayısı:</strong></td><td id="pdfKisiSayisi" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>GPS Konumu:</strong></td><td id="pdfGps" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+</table>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
+<tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">2. Hane Yapısı ve Sosyo-Ekonomik Durum</th></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Anne / Baba Durumu:</strong></td><td id="pdfEbeveyn" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Evde Yaşayanlar:</strong></td><td id="pdfBireyler" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Hane Geliri (Aylık):</strong></td><td id="pdfHaneGeliri" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Mülkiyet / Kira:</strong></td><td id="pdfMulkiyet" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Ödenmemiş Fatura &amp; Borç:</strong></td><td id="pdfFatura" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Diğer Destekler:</strong></td><td id="pdfDestekler" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+</table>
+<table id="pdfCocukTable" style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
+<tr style="background: #f1f5f9;"><th colspan="4" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">3. Çocuk Bilgileri ve İhtiyaçları</th></tr>
+<tr style="background: #fafafa; font-size: 10px;">
+<th style="border: 1px solid #d1d5db; padding: 4px;">Yaş</th>
+<th style="border: 1px solid #d1d5db; padding: 4px;">Cinsiyet</th>
+<th style="border: 1px solid #d1d5db; padding: 4px;">Ayakkabı No</th>
+<th style="border: 1px solid #d1d5db; padding: 4px;">Kıyafet Bedeni</th>
+</tr>
+<tbody id="pdfCocukTbody"></tbody>
+</table>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 14px;">
+<tr style="background: #f1f5f9;"><th colspan="2" style="border: 1px solid #d1d5db; padding: 5px; text-align: left; font-size: 11px; color: #8b1d24;">4. Saha Notları ve Teslim Edilen Destekler</th></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px; width: 32%;"><strong>Saha Notları:</strong></td><td id="pdfNotlar" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Verilen Destekler:</strong></td><td id="pdfVerilenler" style="border: 1px solid #d1d5db; padding: 4px 6px;"></td></tr>
+<tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Saha Fotoğrafları:</strong></td><td id="pdfFotografBilgisi" style="border: 1px solid #d1d5db; padding: 4px 6px;">Fotoğraf eklenmedi.</td></tr>
+</table>
+<div id="pdfFotografBolumu" style="display:none; margin: 8px 0 12px; page-break-inside: avoid;">
+<div style="font-weight:700; color:#8b1d24; margin-bottom:6px;">Saha Fotoğrafları</div>
+<div id="pdfFotografGrid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;"></div>
+</div>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
+</table>
+<div style="display: flex; justify-content: space-between; margin-top: 10px;">
+<div style="width: 46%; text-align: center; border: 1px solid #d1d5db; padding: 6px; border-radius: 4px; min-height: 85px;">
+<div style="font-weight: bold; font-size: 11px;">Aile Temsilcisi</div>
+<div id="pdfAileAd" style="font-size: 10px; margin-bottom: 4px;"></div>
+<div style="height: 50px; display: flex; align-items: center; justify-content: center;">
+<img id="pdfSigAileImg" style="max-height: 50px; max-width: 100%; display: none;"/>
+</div>
+</div>
+<div style="width: 46%; text-align: center; border: 1px solid #d1d5db; padding: 6px; border-radius: 4px; min-height: 85px;">
+<div style="font-weight: bold; font-size: 11px;">GİH Saha Yetkilisi</div>
+<div id="pdfGihAd" style="font-size: 10px; margin-bottom: 4px;"></div>
+<div style="height: 50px; display: flex; align-items: center; justify-content: center;">
+<img id="pdfSigGihImg" style="max-height: 50px; max-width: 100%; display: none;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
 <script>
 (function () {
     function sahaMahalleFallbackKur() {
@@ -959,7 +915,6 @@ function toggleAppMenu() {
 })();
 
 </script>
-
 <script>
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -2118,8 +2073,6 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
   }
 
 </script>
-
-
 <script id="iyibis-signature-darkmode-fix-v42">
 (function() {
   function makeSignatureCanvasLight_(canvas) {
@@ -2184,6 +2137,86 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
       });
     }, 0);
   });
+})();
+</script>
+
+<script id="iyibis-no-autofill-v51">
+(function () {
+  /*
+   * İYİBİS 5.1 — Form geçmişi / otomatik doldurma koruması
+   * Backend name/id alanlarını değiştirmez.
+   * Statik ve sonradan JS ile oluşturulan girişleri kapsar.
+   */
+  function iyibisDisableAutofillForField_(el) {
+    if (!el || !el.setAttribute) return;
+
+    var tag = String(el.tagName || '').toUpperCase();
+    var type = String(el.getAttribute('type') || '').toLowerCase();
+
+    if (tag === 'TEXTAREA' ||
+        (tag === 'INPUT' &&
+         ['text','tel','number','email','search','url'].indexOf(type || 'text') >= 0)) {
+      el.setAttribute('autocomplete', 'off');
+      el.setAttribute('autocorrect', 'off');
+      el.setAttribute('autocapitalize', 'off');
+      el.setAttribute('spellcheck', 'false');
+
+      // Yaygın parola yöneticileri / form doldurucular için ipuçları.
+      el.setAttribute('data-lpignore', 'true');
+      el.setAttribute('data-1p-ignore', 'true');
+      el.setAttribute('data-form-type', 'other');
+    }
+  }
+
+  function iyibisDisableAutofill_() {
+    document.querySelectorAll('form').forEach(function(form) {
+      form.setAttribute('autocomplete', 'off');
+    });
+
+    document.querySelectorAll('input, textarea').forEach(
+      iyibisDisableAutofillForField_
+    );
+  }
+
+  // Sayfa ilk kurulurken uygula.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iyibisDisableAutofill_);
+  } else {
+    iyibisDisableAutofill_();
+  }
+
+  // Dinamik eklenen çocuk/malzeme/fatura/borç/destek satırlarını da yakala.
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(node) {
+        if (!node || node.nodeType !== 1) return;
+        iyibisDisableAutofillForField_(node);
+        if (node.querySelectorAll) {
+          node.querySelectorAll('input, textarea').forEach(
+            iyibisDisableAutofillForField_
+          );
+        }
+      });
+    });
+  });
+
+  function iyibisStartNoAutofillObserver_() {
+    if (!document.body) return;
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iyibisStartNoAutofillObserver_);
+  } else {
+    iyibisStartNoAutofillObserver_();
+  }
+
+  // Bazı tarayıcılar odak anında autocomplete değerini tekrar yorumlar.
+  document.addEventListener('focusin', function(ev) {
+    iyibisDisableAutofillForField_(ev.target);
+  }, true);
+
+  window.iyibisDisableAutofill_ = iyibisDisableAutofill_;
 })();
 </script>
 
