@@ -2519,8 +2519,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                     <i class="fa-brands fa-google-drive"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-sm font-bold text-slate-800">Google Drive Depolama</h3>
-                                    <p class="text-[11px] text-slate-500 mt-0.5">İYİBİS hesabının kullanılabilir depolama durumu</p>
+                                    <h3 class="text-sm font-bold text-slate-800">Kullanılabilir Depolama Alanı</h3>
+                                    <p class="text-[11px] text-slate-500 mt-0.5">İYİBİS hesabının kullanılabilir depolama durumu sisteme gönderilen form PDF&#39;leri ve saha fotoğraflarının bulutta kapladığı yeri gösterir</p>
                                 </div>
                             </div>
                         </div>
@@ -2556,37 +2556,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 </div>
 
 
+
 <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-4">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div>
             <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-users-gear text-indigo-600"></i>Kullanıcı &amp; Şifre Yönetimi
             </h3>
-            <p id="user-management-role-text" class="text-xs text-slate-500 mt-1">Kullanıcı yetkileri yükleniyor...</p>
+            <p id="user-management-role-text" class="text-xs text-slate-500 mt-1">Yetki bilgisi yükleniyor...</p>
         </div>
-        <button onclick="loadUserManagementPanel()" class="inline-flex items-center justify-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200">
-            <i class="fa-solid fa-rotate mr-1.5"></i>Yenile
-        </button>
+        <div class="flex flex-wrap gap-2">
+            <button onclick="openOwnPasswordModal()" class="inline-flex items-center justify-center px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg">
+                <i class="fa-solid fa-key mr-1.5"></i>Şifremi Güncelle
+            </button>
+            <button id="user-management-refresh-btn" onclick="loadUserManagementPanel()" class="hidden inline-flex items-center justify-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200">
+                <i class="fa-solid fa-rotate mr-1.5"></i>Yenile
+            </button>
+        </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <h4 class="text-xs font-bold text-slate-800 mb-3"><i class="fa-solid fa-key mr-1.5 text-emerald-600"></i>Kendi Şifremi Değiştir</h4>
-            <div class="space-y-2">
-                <input id="own-current-password" type="password" autocomplete="current-password" placeholder="Mevcut şifre"
-                       class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
-                <input id="own-new-password" type="password" autocomplete="new-password" placeholder="Yeni şifre (en az 8 karakter, harf + rakam)"
-                       class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
-                <input id="own-new-password-confirm" type="password" autocomplete="new-password" placeholder="Yeni şifre tekrar"
-                       class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
-                <button onclick="changeOwnPasswordFromPanel()" class="w-full px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg">
-                    Şifremi Güncelle
-                </button>
-            </div>
-        </div>
-
-        <div id="super-admin-user-tools" class="hidden rounded-xl border border-indigo-200 bg-indigo-50/50 p-4">
-            <h4 class="text-xs font-bold text-indigo-900 mb-3"><i class="fa-solid fa-user-shield mr-1.5"></i>Süper Yönetici Araçları</h4>
+    <div id="super-admin-user-section" class="hidden mt-4">
+        <div class="rounded-xl border border-indigo-200 bg-indigo-50/50 p-4 mb-4">
+            <h4 class="text-xs font-bold text-indigo-900 mb-3">
+                <i class="fa-solid fa-user-shield mr-1.5"></i>Süper Yönetici Araçları
+            </h4>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <input id="new-admin-username" type="text" autocapitalize="none" spellcheck="false" placeholder="Yeni kullanıcı adı"
                        class="px-3 py-2 bg-white border border-indigo-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-400">
@@ -2597,16 +2590,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 </button>
             </div>
         </div>
-    </div>
 
-    <div class="mt-4">
-        <div class="text-xs font-bold text-slate-700 mb-2">Tanımlı Kullanıcılar</div>
-        <div id="user-management-list" class="space-y-2">
-            <div class="text-xs text-slate-400 py-3">Kullanıcı listesi yükleniyor...</div>
+        <div>
+            <div class="text-xs font-bold text-slate-700 mb-2">Tanımlı Kullanıcılar</div>
+            <div id="user-management-list" class="space-y-2">
+                <div class="text-xs text-slate-400 py-3">Kullanıcı listesi yükleniyor...</div>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- Şifre değişiklik modalı -->
+<div id="passwordManagementModal" class="hidden fixed inset-0 z-[85] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-4 bg-slate-900 text-white">
+            <div>
+                <div id="password-modal-subtitle" class="text-[11px] text-slate-300">Şifre Yönetimi</div>
+                <h3 id="password-modal-title" class="font-bold text-sm">Şifremi Güncelle</h3>
+            </div>
+            <button onclick="closePasswordManagementModal()" class="w-8 h-8 rounded-full hover:bg-white/10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="p-5 space-y-3">
+            <div id="password-current-row">
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">Mevcut Şifre</label>
+                <input id="password-modal-current" type="password" autocomplete="current-password"
+                       class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">Yeni Şifre</label>
+                <input id="password-modal-new" type="password" autocomplete="new-password"
+                       placeholder="En az 8 karakter, harf + rakam"
+                       class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">Yeni Şifre Tekrar</label>
+                <input id="password-modal-confirm" type="password" autocomplete="new-password"
+                       class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500">
+            </div>
+            <button id="password-modal-save-btn" onclick="submitPasswordManagementModal()"
+                    class="w-full px-3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg">
+                Şifreyi Güncelle
+            </button>
+        </div>
+    </div>
+</div>
 
 <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-4">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
@@ -2654,7 +2683,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     </div>
 
     <div id="ticket-list" class="space-y-2">
-        <div class="text-xs text-slate-400 py-4 text-center">Kayıtlar yükleniyor...</div>
+        <div class="text-xs text-slate-400 py-4 text-center">Sorun &amp; öneri kaydı yok.</div>
     </div>
 </div>
 
@@ -6966,11 +6995,22 @@ function renderIssueTicketPanel_() {
 }
 
 async function loadIssueTicketPanel() {
+    var list=document.getElementById('ticket-list');
+    if(list) list.innerHTML='<div class="text-xs text-slate-400 py-4 text-center">Kayıtlar kontrol ediliyor...</div>';
     try {
         var data=await gsGetIssueTickets(centralSessionToken);
-        iyibisIssueTicketState=data || {};
+        iyibisIssueTicketState=data || {
+            currentUser:'',
+            currentRole:'',
+            isSuperAdmin:false,
+            tickets:[],
+            counts:{total:0,open:0,resolved:0}
+        };
         renderIssueTicketPanel_();
     } catch(err) {
+        if(list) {
+            list.innerHTML='<div class="text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-lg p-3">Sorun &amp; öneri kayıtları alınamadı: '+escapeHtml(serverFailure(err))+'</div>';
+        }
         showIyibisToast('Sorun & Öneri kayıtları alınamadı: ' + serverFailure(err));
     }
 }
@@ -7078,6 +7118,8 @@ function deleteOpenedTicket() {
 
 document.addEventListener('keydown',function(e){
     if(e.key==='Escape') {
+        var passwordModal=document.getElementById('passwordManagementModal');
+        if(passwordModal && !passwordModal.classList.contains('hidden')) closePasswordManagementModal();
         var modal=document.getElementById('ticketDetailModal');
         if(modal && !modal.classList.contains('hidden')) closeTicketDetailModal();
     }
@@ -7089,20 +7131,27 @@ var iyibisUserManagementState = { currentUser:'', currentRole:'', isSuperAdmin:f
 function renderUserManagementPanel_() {
     var state=iyibisUserManagementState || {};
     var roleText=document.getElementById('user-management-role-text');
+    var superSection=document.getElementById('super-admin-user-section');
+    var refreshBtn=document.getElementById('user-management-refresh-btn');
+
     if (roleText) {
         roleText.innerText = state.isSuperAdmin
-            ? 'Oturum: ' + state.currentUser + ' · Süper Yönetici'
-            : 'Oturum: ' + state.currentUser + ' · Yönetici · Yalnızca kendi şifrenizi değiştirebilirsiniz.';
+            ? 'Oturum: ' + (state.currentUser || 'onur') + ' · Süper Yönetici'
+            : 'Yönetici hesabı · Kendi şifrenizi bu panelden güncelleyebilirsiniz.';
     }
 
-    var superTools=document.getElementById('super-admin-user-tools');
-    if (superTools) superTools.classList.toggle('hidden', !state.isSuperAdmin);
+    if (superSection) superSection.classList.toggle('hidden', !state.isSuperAdmin);
+    if (refreshBtn) refreshBtn.classList.toggle('hidden', !state.isSuperAdmin);
+
+    // Normal yöneticiler kullanıcı listesini ne arayüzde görür ne de API'den alır.
+    if (!state.isSuperAdmin) return;
 
     var list=document.getElementById('user-management-list');
     if (!list) return;
-    var users=state.users || [];
+    var users=Array.isArray(state.users) ? state.users : [];
+
     if (!users.length) {
-        list.innerHTML='<div class="text-xs text-slate-400 py-3">Tanımlı kullanıcı bulunamadı.</div>';
+        list.innerHTML='<div class="text-xs text-slate-400 py-3 border border-dashed border-slate-200 rounded-lg text-center">Tanımlı kullanıcı bulunamadı.</div>';
         return;
     }
 
@@ -7113,63 +7162,33 @@ function renderUserManagementPanel_() {
             ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 text-indigo-800 border border-indigo-200">Süper Yönetici</span>'
             : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">Yönetici</span>';
 
-        var adminButtons='';
-        if (state.isSuperAdmin) {
-            adminButtons =
-                '<button onclick="promptAdminResetPassword(\''+escapeHtml(u.username)+'\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200">Şifre Değiştir</button>' +
-                (!isOnur
-                    ? '<button onclick="removeUserFromPanel(\''+escapeHtml(u.username)+'\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200">Kullanıcıyı Sil</button>'
-                    : '');
-        }
-
         return '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-white border border-slate-200 rounded-lg">' +
             '<div><div class="flex items-center gap-2"><span class="text-xs font-bold text-slate-800">'+escapeHtml(u.username)+'</span>'+badge+(isSelf?' <span class="text-[10px] text-emerald-600 font-semibold">(siz)</span>':'')+'</div>' +
             '<div class="text-[10px] text-slate-400 mt-1">Şifre son değişim: '+escapeHtml(u.passwordUpdatedAt || 'kayıt yok')+'</div></div>' +
-            '<div class="flex flex-wrap gap-2">'+adminButtons+'</div></div>';
+            '<div class="flex flex-wrap gap-2">' +
+                '<button onclick="openAdminPasswordModal(\''+escapeHtml(u.username)+'\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200">Şifre Değiştir</button>' +
+                (!isOnur ? '<button onclick="removeUserFromPanel(\''+escapeHtml(u.username)+'\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200">Kullanıcıyı Sil</button>' : '') +
+            '</div></div>';
     }).join('');
 }
 
 async function loadUserManagementPanel() {
+    var list=document.getElementById('user-management-list');
     try {
         var data=await gsGetUserManagement(centralSessionToken);
-        iyibisUserManagementState=data || {};
+        iyibisUserManagementState=data || {currentUser:'',currentRole:'',isSuperAdmin:false,users:[]};
         renderUserManagementPanel_();
     } catch(err) {
+        if (list) {
+            list.innerHTML='<div class="text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-lg p-3">Kullanıcı listesi alınamadı: '+escapeHtml(serverFailure(err))+'</div>';
+        }
+        var roleText=document.getElementById('user-management-role-text');
+        if(roleText) roleText.innerText='Kullanıcı yetkileri alınamadı.';
         showIyibisToast('Kullanıcı bilgileri alınamadı: ' + serverFailure(err));
     }
 }
 
-async function changeOwnPasswordFromPanel() {
-    var current=document.getElementById('own-current-password');
-    var next=document.getElementById('own-new-password');
-    var confirm=document.getElementById('own-new-password-confirm');
-    var a=current ? current.value : '';
-    var b=next ? next.value : '';
-    var c=confirm ? confirm.value : '';
 
-    if (!a || !b || !c) {
-        showIyibisToast('Şifre alanlarının tamamını doldurun.');
-        return;
-    }
-    if (b!==c) {
-        showIyibisToast('Yeni şifreler birbiriyle eşleşmiyor.');
-        return;
-    }
-
-    try {
-        setCentralBusy('Şifreniz güncelleniyor...');
-        await gsChangeOwnPassword(centralSessionToken,a,b);
-        if(current) current.value='';
-        if(next) next.value='';
-        if(confirm) confirm.value='';
-        showIyibisToast('Şifreniz başarıyla güncellendi.');
-        await loadUserManagementPanel();
-    } catch(err) {
-        showIyibisToast('Şifre değiştirilemedi: ' + serverFailure(err));
-    } finally {
-        clearCentralBusy();
-    }
-}
 
 async function addUserFromPanel() {
     if (!iyibisUserManagementState.isSuperAdmin) return;
@@ -7213,21 +7232,81 @@ async function removeUserFromPanel(username) {
     }
 }
 
-async function promptAdminResetPassword(username) {
-    if (!iyibisUserManagementState.isSuperAdmin) return;
-    var password=prompt(username + ' için yeni şifreyi girin.\\nEn az 8 karakter, en az bir harf ve bir rakam:');
-    if (password===null) return;
-    var confirmPassword=prompt('Yeni şifreyi tekrar girin:');
-    if (confirmPassword===null) return;
-    if (password!==confirmPassword) {
-        showIyibisToast('Şifreler eşleşmiyor.');
+var iyibisPasswordModalMode='own';
+var iyibisPasswordModalTarget='';
+
+function iyibisClearPasswordModal_() {
+    ['password-modal-current','password-modal-new','password-modal-confirm'].forEach(function(id){
+        var el=document.getElementById(id);
+        if(el) el.value='';
+    });
+}
+
+function openOwnPasswordModal() {
+    iyibisPasswordModalMode='own';
+    iyibisPasswordModalTarget=iyibisUserManagementState.currentUser || '';
+    iyibisClearPasswordModal_();
+
+    var modal=document.getElementById('passwordManagementModal');
+    var title=document.getElementById('password-modal-title');
+    var subtitle=document.getElementById('password-modal-subtitle');
+    var currentRow=document.getElementById('password-current-row');
+    if(title) title.innerText='Şifremi Güncelle';
+    if(subtitle) subtitle.innerText='Kendi hesabınız';
+    if(currentRow) currentRow.classList.remove('hidden');
+    if(modal) modal.classList.remove('hidden');
+}
+
+function openAdminPasswordModal(username) {
+    if(!iyibisUserManagementState.isSuperAdmin) return;
+    iyibisPasswordModalMode='admin';
+    iyibisPasswordModalTarget=username;
+    iyibisClearPasswordModal_();
+
+    var modal=document.getElementById('passwordManagementModal');
+    var title=document.getElementById('password-modal-title');
+    var subtitle=document.getElementById('password-modal-subtitle');
+    var currentRow=document.getElementById('password-current-row');
+    if(title) title.innerText='Kullanıcı Şifresini Değiştir';
+    if(subtitle) subtitle.innerText=username;
+    if(currentRow) currentRow.classList.add('hidden');
+    if(modal) modal.classList.remove('hidden');
+}
+
+function closePasswordManagementModal() {
+    var modal=document.getElementById('passwordManagementModal');
+    if(modal) modal.classList.add('hidden');
+    iyibisClearPasswordModal_();
+    iyibisPasswordModalTarget='';
+}
+
+async function submitPasswordManagementModal() {
+    var current=document.getElementById('password-modal-current');
+    var next=document.getElementById('password-modal-new');
+    var confirm=document.getElementById('password-modal-confirm');
+    var a=current ? current.value : '';
+    var b=next ? next.value : '';
+    var c=confirm ? confirm.value : '';
+
+    if(!b || !c || (iyibisPasswordModalMode==='own' && !a)) {
+        showIyibisToast('Gerekli şifre alanlarını doldurun.');
+        return;
+    }
+    if(b!==c) {
+        showIyibisToast('Yeni şifreler birbiriyle eşleşmiyor.');
         return;
     }
 
     try {
-        setCentralBusy('Kullanıcı şifresi güncelleniyor...');
-        await gsAdminResetPassword(centralSessionToken,username,password);
-        showIyibisToast(username + ' kullanıcısının şifresi güncellendi.');
+        setCentralBusy('Şifre güncelleniyor...');
+        if(iyibisPasswordModalMode==='own') {
+            await gsChangeOwnPassword(centralSessionToken,a,b);
+            showIyibisToast('Şifreniz başarıyla güncellendi.');
+        } else {
+            await gsAdminResetPassword(centralSessionToken,iyibisPasswordModalTarget,b);
+            showIyibisToast(iyibisPasswordModalTarget + ' kullanıcısının şifresi güncellendi.');
+        }
+        closePasswordManagementModal();
         await loadUserManagementPanel();
     } catch(err) {
         showIyibisToast('Şifre güncellenemedi: ' + serverFailure(err));
