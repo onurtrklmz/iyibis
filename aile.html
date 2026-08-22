@@ -1940,6 +1940,32 @@ body {
 }
 </style>
 
+
+<style id="iyibis-v51-mobile-search-menu-offset-fix">
+  /*
+   * Mobilde arama sonuçları hamburger sekme menüsünün altında kalmasın.
+   * Arama alanı header içinde kalır; sonuç paneli ise hamburger bloğunun
+   * hemen altından başlayacak şekilde aşağı kaydırılır.
+   */
+  @media (max-width: 768px) {
+    #global-family-search-wrap {
+      z-index: 95 !important;
+    }
+
+    #global-family-search-results {
+      /* Arama kutusunun altından değil, mobil hamburger bloğunun altından başla. */
+      top: calc(100% + 4.15rem) !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      max-height: calc(100vh - 12.5rem) !important;
+      box-sizing: border-box !important;
+      z-index: 120 !important;
+    }
+  }
+</style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 <!-- GİRİŞ EKRANI -->
