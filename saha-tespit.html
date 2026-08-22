@@ -531,6 +531,13 @@ input:focus,select:focus,textarea:focus{
   }
 }
 </style>
+<style id="iyibis-saha-multi-entry-v51">
+.multi-entry-list{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.multi-entry-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.multi-entry-row input{min-width:0}
+.multi-entry-remove{border:0;border-radius:6px;padding:9px 10px;background:#dc2626;color:#fff;cursor:pointer;font-size:.78rem;font-weight:700;white-space:nowrap}
+.multi-entry-remove:hover{background:#b91c1c}
+</style>
 </head>
 <body>
 
@@ -745,21 +752,23 @@ function toggleAppMenu() {
 
     <div class="grid">
       <div class="form-group">
-        <label>Ödenmemiş Fatura Var mı?</label>
+        <label>Ödenmemiş Fatura &amp; Borç var mı?</label>
         <select name="fatura_durumu" id="faturaSelect">
           <option value="Yok">Yok</option>
           <option value="Var">Var</option>
         </select>
       </div>
       <div class="form-group" id="faturaDetayDiv" style="display:none;">
-        <label>Fatura Türü ve Bedeli</label>
-        <input type="text" name="fatura_detay" id="fatura_detay" placeholder="Örn: Elektrik (1.400 TL), Su (600 TL)" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+        <label>Fatura &amp; Borç Detayları</label>
+        <div id="faturaBorclarList" class="multi-entry-list"></div>
+        <button type="button" class="btn-add" onclick="faturaBorcuEkle()">+ Fatura &amp; Borç Ekle</button>
+        <input type="hidden" name="fatura_detay" id="fatura_detay" value="">
       </div>
     </div>
 
     <div class="grid">
       <div class="form-group">
-        <label>Diğer Kurumlardan Alınan Destek (STK / Devlet)</label>
+        <label>Diğer Kurumlardan Alınan Destekler (STK / Devlet)</label>
         <select name="destek_durumu" id="destekSelect">
           <option value="Yok">Yok</option>
           <option value="Var">Var</option>
@@ -767,7 +776,9 @@ function toggleAppMenu() {
       </div>
       <div class="form-group" id="destekDetayDiv" style="display:none;">
         <label>Alınan Destekler</label>
-        <input type="text" name="destek_detay" id="destek_detay" placeholder="Örn: Kaymakamlık Şartlı Eğitim" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+        <div id="digerDesteklerList" class="multi-entry-list"></div>
+        <button type="button" class="btn-add" onclick="digerDestekEkle()">+ Destek Ekle</button>
+        <input type="hidden" name="destek_detay" id="destek_detay" value="">
       </div>
     </div>
 
@@ -867,7 +878,7 @@ function toggleAppMenu() {
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Evde Yaşayanlar:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfBireyler"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Hane Geliri (Aylık):</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfHaneGeliri"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Mülkiyet / Kira:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfMulkiyet"></td></tr>
-      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Gecikmiş Fatura:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFatura"></td></tr>
+      <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Ödenmemiş Fatura &amp; Borç:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfFatura"></td></tr>
       <tr><td style="border: 1px solid #d1d5db; padding: 4px 6px;"><strong>Diğer Destekler:</strong></td><td style="border: 1px solid #d1d5db; padding: 4px 6px;" id="pdfDestekler"></td></tr>
     </table>
 
@@ -1178,12 +1189,89 @@ document.getElementById('chkBuyukbaba').addEventListener('change', function () {
 document.getElementById('mulkiyetSelect').addEventListener('change', function () {
     document.getElementById('kiraBedelDiv').style.display = (this.value === 'Kira') ? 'block' : 'none';
 });
-document.getElementById('faturaSelect').addEventListener('change', function () {
-    document.getElementById('faturaDetayDiv').style.display = (this.value === 'Var') ? 'block' : 'none';
-});
-document.getElementById('destekSelect').addEventListener('change', function () {
-    document.getElementById('destekDetayDiv').style.display = (this.value === 'Var') ? 'block' : 'none';
-});
+function iyibisMultiEntryAdd_(listId, cls, placeholder, ensureFn) {
+    var list=document.getElementById(listId);
+    if(!list) return;
+    var row=document.createElement('div');
+    row.className='multi-entry-row';
+    var input=document.createElement('input');
+    input.type='text';
+    input.className=cls;
+    input.placeholder=placeholder;
+    input.autocomplete='off';
+    input.spellcheck=false;
+    input.addEventListener('input',iyibisMultiEntrySync_);
+    var del=document.createElement('button');
+    del.type='button';
+    del.className='multi-entry-remove';
+    del.textContent='Sil';
+    del.onclick=function(){
+        row.remove();
+        iyibisMultiEntrySync_();
+        if(typeof ensureFn==='function') ensureFn();
+    };
+    row.appendChild(input);
+    row.appendChild(del);
+    list.appendChild(row);
+    input.focus();
+}
+function faturaBorcuEkle(){
+    iyibisMultiEntryAdd_(
+        'faturaBorclarList','fatura-borc-item',
+        'Örn: Elektrik faturası - 1.400 TL / Kredi borcu - 5.000 TL',
+        function(){
+            if(document.getElementById('faturaSelect').value==='Var' &&
+               !document.querySelector('.fatura-borc-item')) faturaBorcuEkle();
+        }
+    );
+}
+window.faturaBorcuEkle=faturaBorcuEkle;
+
+function digerDestekEkle(){
+    iyibisMultiEntryAdd_(
+        'digerDesteklerList','diger-destek-item',
+        'Örn: Kaymakamlık - Şartlı Eğitim / Belediye - Gıda Desteği',
+        function(){
+            if(document.getElementById('destekSelect').value==='Var' &&
+               !document.querySelector('.diger-destek-item')) digerDestekEkle();
+        }
+    );
+}
+window.digerDestekEkle=digerDestekEkle;
+
+function iyibisMultiEntryValues_(selector){
+    return Array.prototype.slice.call(document.querySelectorAll(selector))
+        .map(function(el){return String(el.value||'').trim();})
+        .filter(Boolean);
+}
+function iyibisMultiEntrySync_(){
+    var f=document.getElementById('fatura_detay');
+    var d=document.getElementById('destek_detay');
+    if(f) f.value=iyibisMultiEntryValues_('.fatura-borc-item').join(' | ');
+    if(d) d.value=iyibisMultiEntryValues_('.diger-destek-item').join(' | ');
+}
+function iyibisFaturaPanel_(){
+    var sel=document.getElementById('faturaSelect');
+    var div=document.getElementById('faturaDetayDiv');
+    var list=document.getElementById('faturaBorclarList');
+    if(!sel||!div||!list) return;
+    var on=sel.value==='Var';
+    div.style.display=on?'block':'none';
+    if(on&&!list.querySelector('.fatura-borc-item')) faturaBorcuEkle();
+    if(!on){list.innerHTML='';document.getElementById('fatura_detay').value='';}
+}
+function iyibisDestekPanel_(){
+    var sel=document.getElementById('destekSelect');
+    var div=document.getElementById('destekDetayDiv');
+    var list=document.getElementById('digerDesteklerList');
+    if(!sel||!div||!list) return;
+    var on=sel.value==='Var';
+    div.style.display=on?'block':'none';
+    if(on&&!list.querySelector('.diger-destek-item')) digerDestekEkle();
+    if(!on){list.innerHTML='';document.getElementById('destek_detay').value='';}
+}
+document.getElementById('faturaSelect').addEventListener('change',iyibisFaturaPanel_);
+document.getElementById('destekSelect').addEventListener('change',iyibisDestekPanel_);
 var cocukSayac = 0;
 function cocukSatirEkle() {
     cocukSayac++;
@@ -1284,6 +1372,8 @@ function setToday() {
 window.addEventListener('load', function () {
     setToday();
     ilceMahalleBaglantisiniKur();
+    iyibisFaturaPanel_();
+    iyibisDestekPanel_();
     canvases.forEach(function (id) { setupCanvas(id); });
 });
 window.addEventListener('resize', function () {
@@ -1303,11 +1393,20 @@ function formuSifirla() {
         aktifMahalleler = [];
         seciliOneriIndex = -1;
         document.getElementById('status-msg').style.display = 'none';
+        var fList=document.getElementById('faturaBorclarList');
+        var dList=document.getElementById('digerDesteklerList');
+        if(fList) fList.innerHTML='';
+        if(dList) dList.innerHTML='';
+        document.getElementById('fatura_detay').value='';
+        document.getElementById('destek_detay').value='';
+        iyibisFaturaPanel_();
+        iyibisDestekPanel_();
         setToday();
     }
 }
 function hazirlaPdfSablonu() {
     var _a, _b;
+    iyibisMultiEntrySync_();
     var zTarihVal = document.getElementById('ziyaret_tarihi').value;
     var formattedDate = zTarihVal ? new Date(zTarihVal).toLocaleDateString('tr-TR') : new Date().toLocaleDateString('tr-TR');
     var ilce = document.getElementById('ilceSelect').value || "-";
@@ -1691,6 +1790,7 @@ document.getElementById('sahaForm').addEventListener('submit', function (e) {
                     btn.disabled = true;
                     btn.innerText = "Yükleniyor...";
                     msg.style.display = "none";
+                    iyibisMultiEntrySync_();
                     formData = new FormData(this);
                     payload = Object.fromEntries(formData.entries());
                     payload.form_tipi = "saha_tespit";
