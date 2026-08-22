@@ -1720,6 +1720,35 @@ body {
     flex-shrink: 0;
   }
 </style>
+
+<style id="iyibis-global-family-search-v5070">
+  #global-family-search-wrap {
+    position:relative;
+    z-index:60;
+  }
+
+  #global-family-search-results {
+    scrollbar-width:thin;
+  }
+
+  @media (max-width:639px) {
+    #global-family-search-wrap {
+      padding-top:0.45rem;
+      padding-bottom:0.55rem;
+    }
+
+    #global-family-search {
+      font-size:16px !important; /* iOS otomatik zoom'u engeller */
+    }
+
+    #global-family-search-results {
+      max-height:min(58vh,420px);
+      left:0;
+      right:0;
+    }
+  }
+</style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 <!-- GİRİŞ EKRANI -->
@@ -2129,7 +2158,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <i class="fa-solid fa-gear text-cyan-400"></i>
 <span>Sistem &amp; Ayarlar</span>
 </button>
-</div>
+</div><div class="relative w-full pt-2 pb-2" id="global-family-search-wrap"><div class="relative w-full"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i><input autocomplete="off" class="w-full min-w-0 pl-9 pr-10 py-2.5 rounded-xl border border-slate-700 bg-slate-900/80 text-slate-100 placeholder:text-slate-400 text-sm outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 shadow-inner" id="global-family-search" oninput="iyibisRenderGlobalFamilySearch_()" onkeydown="iyibisGlobalSearchKeydown_(event)" placeholder="Tüm aileleri ara" type="search"/><button aria-label="Aramayı temizle" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700" id="global-family-search-clear" onclick="iyibisClearGlobalFamilySearch_()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="hidden absolute left-0 right-0 top-full mt-1 z-[80] max-h-[420px] overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl text-slate-800" id="global-family-search-results"></div></div>
 </div>
 </header>
 <!-- MAIN CONTENT CONTAINER -->
@@ -5337,6 +5366,277 @@ function renderBirthdayList() {
         container.appendChild(card);
     });
 }
+
+// ============================================================================
+// İYİBİS 5.0.70 — GENEL AİLE ARAMA
+// Merkezi payload içindeki Aktif / Ret / Web / Saha kayıtlarını tek aramada bulur.
+// ============================================================================
+
+function iyibisGlobalSearchNormalize_(value) {
+    return String(value || '')
+        .toLocaleUpperCase('tr-TR')
+        .replace(/[ÇĞİÖŞÜ]/g, function(c){
+            return ({'Ç':'C','Ğ':'G','İ':'I','Ö':'O','Ş':'S','Ü':'U'}[c]);
+        })
+        .replace(/\s+/g,' ')
+        .trim();
+}
+
+function iyibisGlobalSearchDigits_(value) {
+    return String(value || '').replace(/\D/g,'');
+}
+
+function iyibisGlobalFamilyKey_(item) {
+    var tc=iyibisGlobalSearchDigits_(item && item.tc);
+    if(tc) return 'TC:'+tc;
+
+    var phone=iyibisGlobalSearchDigits_(
+        item && (item.iletisim || item.telefon)
+    );
+    if(phone) {
+        if(phone.length===12 && phone.indexOf('90')===0) phone=phone.slice(2);
+        if(phone.length===11 && phone.charAt(0)==='0') phone=phone.slice(1);
+        return 'TEL:'+phone;
+    }
+
+    var name=iyibisGlobalSearchNormalize_(item && item.ad_soyad);
+    return name ? 'NAME:'+name : '';
+}
+
+function iyibisGlobalSearchStatus_(source,item) {
+    if(source==='ACTIVE') {
+        var status=String(item && item.durumu || '').trim().toLocaleUpperCase('tr-TR');
+        if(status==='DELİST') {
+            return {
+                code:'DELIST',
+                label:'Liste Dışı',
+                badge:'bg-rose-100 text-rose-700 border-rose-200',
+                priority:50,
+                canOpenCard:true
+            };
+        }
+        return {
+            code:'ACTIVE',
+            label:'Onaylı',
+            badge:'bg-emerald-100 text-emerald-700 border-emerald-200',
+            priority:60,
+            canOpenCard:true
+        };
+    }
+
+    if(source==='RED') {
+        return {
+            code:'RED',
+            label:'Ret',
+            badge:'bg-rose-100 text-rose-700 border-rose-200',
+            priority:55,
+            canOpenCard:true
+        };
+    }
+
+    if(source==='FIELD') {
+        return {
+            code:'FIELD',
+            label:'Saha Ziyareti',
+            badge:'bg-amber-100 text-amber-800 border-amber-200',
+            priority:30,
+            canOpenCard:false
+        };
+    }
+
+    return {
+        code:'WEB',
+        label:'Yeni Başvuru',
+        badge:'bg-sky-100 text-sky-700 border-sky-200',
+        priority:20,
+        canOpenCard:false
+    };
+}
+
+function iyibisBuildGlobalFamilySearchIndex_() {
+    var byKey={};
+
+    function add(source,item) {
+        if(!item) return;
+
+        var key=iyibisGlobalFamilyKey_(item);
+        if(!key) {
+            key='ROW:'+source+':'+String(item.id || item.saha_id || item.application_id || Math.random());
+        }
+
+        var status=iyibisGlobalSearchStatus_(source,item);
+        var candidate={
+            key:key,
+            source:source,
+            item:item,
+            status:status,
+            name:item.ad_soyad || '',
+            tc:item.tc || '',
+            phone:item.iletisim || item.telefon || '',
+            district:item.bolge || item.ilce || '',
+            address:item.adres || '',
+            searchable:iyibisGlobalSearchNormalize_([
+                item.ad_soyad || '',
+                item.tc || '',
+                item.iletisim || item.telefon || '',
+                item.bolge || item.ilce || '',
+                item.adres || ''
+            ].join(' '))
+        };
+
+        // Aynı kişi farklı listelerde görünüyorsa en anlamlı/kararlı konumu göster.
+        if(!byKey[key] || candidate.status.priority > byKey[key].status.priority) {
+            byKey[key]=candidate;
+        }
+    }
+
+    (appState.mevcut || []).forEach(function(x){add('ACTIVE',x);});
+    (appState.red || []).forEach(function(x){add('RED',x);});
+    (appState.saha || []).forEach(function(x){add('FIELD',x);});
+    (appState.web || []).forEach(function(x){add('WEB',x);});
+
+    return Object.keys(byKey).map(function(k){return byKey[k];});
+}
+
+function iyibisRenderGlobalFamilySearch_() {
+    var input=document.getElementById('global-family-search');
+    var results=document.getElementById('global-family-search-results');
+    var clear=document.getElementById('global-family-search-clear');
+
+    if(!input || !results) return;
+
+    var raw=String(input.value || '').trim();
+    var q=iyibisGlobalSearchNormalize_(raw);
+    var digits=iyibisGlobalSearchDigits_(raw);
+
+    if(clear) {
+        clear.classList.toggle('hidden', !raw);
+        clear.classList.toggle('flex', !!raw);
+    }
+
+    if(raw.length<2) {
+        results.classList.add('hidden');
+        results.innerHTML='';
+        return;
+    }
+
+    var list=iyibisBuildGlobalFamilySearchIndex_().filter(function(rec){
+        if(q && rec.searchable.indexOf(q)>=0) return true;
+        if(digits) {
+            if(iyibisGlobalSearchDigits_(rec.tc).indexOf(digits)>=0) return true;
+            if(iyibisGlobalSearchDigits_(rec.phone).indexOf(digits)>=0) return true;
+        }
+        return false;
+    });
+
+    list.sort(function(a,b){
+        var nameA=iyibisGlobalSearchNormalize_(a.name);
+        var nameB=iyibisGlobalSearchNormalize_(b.name);
+
+        var aq=nameA.indexOf(q)===0 ? 0 : 1;
+        var bq=nameB.indexOf(q)===0 ? 0 : 1;
+        if(aq!==bq) return aq-bq;
+
+        if(a.status.priority!==b.status.priority) {
+            return b.status.priority-a.status.priority;
+        }
+
+        return nameA.localeCompare(nameB,'tr');
+    });
+
+    if(!list.length) {
+        results.innerHTML=
+            '<div class="px-4 py-5 text-center text-sm text-slate-500">'+
+            '<i class="fa-solid fa-magnifying-glass mr-1.5"></i>'+
+            'Eşleşen aile bulunamadı.'+
+            '</div>';
+        results.classList.remove('hidden');
+        return;
+    }
+
+    var shown=list.slice(0,30);
+    results.innerHTML=shown.map(function(rec){
+        var item=rec.item;
+        var cardButton='';
+
+        if(rec.status.canOpenCard && item.id) {
+            cardButton=
+                '<button type="button" '+
+                'onclick="viewFamilyDetail(\''+escapeAttr(item.id)+'\');iyibisCloseGlobalFamilySearch_();" '+
+                'class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg '+
+                'bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold">'+
+                '<i class="fa-solid fa-address-card"></i>Aile Bilgi Kartı</button>';
+        }
+
+        return ''+
+        '<div class="px-3 py-2.5 border-b border-slate-100 last:border-b-0 hover:bg-slate-50">'+
+            '<div class="flex flex-col sm:flex-row sm:items-center gap-2">'+
+                '<div class="min-w-0 flex-1">'+
+                    '<div class="flex flex-wrap items-center gap-2">'+
+                        '<div class="font-bold text-sm text-slate-900 break-words">'+
+                            escapeHtml(rec.name || 'İsimsiz')+
+                        '</div>'+
+                        '<span class="inline-flex items-center px-2 py-0.5 rounded-full border text-[10px] font-bold '+rec.status.badge+'">'+
+                            escapeHtml(rec.status.label)+
+                        '</span>'+
+                    '</div>'+
+                    '<div class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500">'+
+                        '<span><i class="fa-regular fa-id-card mr-1"></i>'+escapeHtml(rec.tc || 'TC bilgisi yok')+'</span>'+
+                        '<span><i class="fa-solid fa-phone mr-1"></i>'+escapeHtml(rec.phone || 'Telefon bilgisi yok')+'</span>'+
+                        (rec.district ? '<span><i class="fa-solid fa-location-dot mr-1"></i>'+escapeHtml(rec.district)+'</span>' : '')+
+                    '</div>'+
+                '</div>'+
+                cardButton+
+            '</div>'+
+        '</div>';
+    }).join('')+
+    (list.length>shown.length
+        ? '<div class="px-3 py-2 text-center text-[11px] text-slate-500 bg-slate-50">'+
+          'İlk '+shown.length+' sonuç gösteriliyor. Aramayı daraltabilirsiniz.</div>'
+        : '');
+
+    results.classList.remove('hidden');
+}
+
+function iyibisClearGlobalFamilySearch_() {
+    var input=document.getElementById('global-family-search');
+    var results=document.getElementById('global-family-search-results');
+    var clear=document.getElementById('global-family-search-clear');
+
+    if(input) {
+        input.value='';
+        input.focus();
+    }
+    if(results) {
+        results.classList.add('hidden');
+        results.innerHTML='';
+    }
+    if(clear) {
+        clear.classList.add('hidden');
+        clear.classList.remove('flex');
+    }
+}
+
+function iyibisCloseGlobalFamilySearch_() {
+    var results=document.getElementById('global-family-search-results');
+    if(results) results.classList.add('hidden');
+}
+
+function iyibisGlobalSearchKeydown_(ev) {
+    if(!ev) return;
+    if(ev.key==='Escape') {
+        ev.preventDefault();
+        iyibisClearGlobalFamilySearch_();
+    }
+}
+
+document.addEventListener('click',function(ev){
+    var wrap=document.getElementById('global-family-search-wrap');
+    if(!wrap || wrap.contains(ev.target)) return;
+    iyibisCloseGlobalFamilySearch_();
+});
+
+
 function getFamilyByIdAny_(id) {
     var active=(appState.mevcut || []).find(function(x){return x.id===id;});
     if(active) return {item:active,list:'ACTIVE'};
