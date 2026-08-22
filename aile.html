@@ -1777,16 +1777,20 @@ body {
     }
   }
 </style>
+<style id="iyibis-v5075-tabs-visibility-fix">
+  /* 5.0.75 — masaüstü/mobil sekme kapları birbirini dışlar; çift katman yok */
 
-
-<style id="iyibis-v5073-tabs-layout-fix">
-  /* 5.0.73 — Sekme alanı tek katman: pembe zemin + ortalanmış iç sekme rayı */
-  #desktopTabNav,
-  #mobileTabMenuWrap {
+  /* Masaüstü: yalnız desktop nav görünür */
+  #desktopTabNav {
+    display: flex !important;
     width: 100%;
     box-sizing: border-box;
-    background: rgba(255, 241, 242, .97);
-    border: 1px solid rgba(254, 205, 211, .95);
+    align-items: flex-end;
+    justify-content: center;
+    padding: .55rem 0 0 0;
+    margin: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
     border-top-left-radius: 1rem !important;
@@ -1794,15 +1798,15 @@ body {
     overflow: hidden;
   }
 
-  #desktopTabNav {
-    padding: .55rem 0 0 0;
-    margin: 0;
-  }
-
   #desktopTabNavInner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: .35rem;
     width: max-content;
     max-width: 100%;
     margin: 0 auto;
+    padding: 0 .75rem;
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
@@ -1818,6 +1822,7 @@ body {
 
   #desktopTabNav .tab-btn {
     flex: 0 0 auto;
+    background: transparent !important;
     border-top-left-radius: .9rem !important;
     border-top-right-radius: .9rem !important;
     border-bottom-left-radius: 0 !important;
@@ -1829,55 +1834,51 @@ body {
   #desktopTabNav .tab-btn[aria-selected="true"] {
     position: relative;
     z-index: 2;
+    background: #fff1f2 !important;
     border-bottom-color: transparent !important;
   }
 
+  /* Masaüstünde mobil sekme kabı kesinlikle görünmez. */
   #mobileTabMenuWrap {
-    padding: .5rem .45rem 0 .45rem;
-  }
-
-  @media (min-width: 640px) {
-    #desktopTabNavInner {
-      justify-content: center;
-    }
+    display: none !important;
   }
 
   @media (max-width: 639px) {
+    /* Mobilde tam tersi: yalnız mobil menü görünür. */
     #desktopTabNav {
       display: none !important;
+    }
+
+    #mobileTabMenuWrap {
+      display: block !important;
+      width: 100%;
+      box-sizing: border-box;
+      padding: .5rem .45rem 0 .45rem;
+      margin: 0;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-top-left-radius: 1rem !important;
+      border-top-right-radius: 1rem !important;
+      overflow: hidden;
     }
   }
 </style>
 
-
-<style id="iyibis-v5074-white-tabs-pink-active">
-  /* 5.0.74 — Sekme zemini içerik alanı gibi beyaz; yalnız aktif sekme pembe */
-  #desktopTabNav,
-  #mobileTabMenuWrap {
-    background: #ffffff !important;
-    border-color: #e2e8f0 !important;
-  }
-
-  #desktopTabNav .tab-btn {
-    background: transparent !important;
-  }
-
+<style id="iyibis-v5076-active-tab-pink">
   #desktopTabNav .tab-btn.active,
-  #desktopTabNav .tab-btn[aria-selected="true"] {
-    background: #fff1f2 !important;
+  #desktopTabNav .tab-btn[aria-selected="true"],
+  #desktopTabNav .tab-btn.border-emerald-400 {
+    background: #ffe4e6 !important;
   }
 
-  /* Aktif sekmenin alt içerikle birleşen görünümünü koru. */
-  #desktopTabNav .tab-btn.active,
-  #desktopTabNav .tab-btn[aria-selected="true"] {
-    border-bottom-color: transparent !important;
+  #desktopTabNav .tab-btn.active:hover,
+  #desktopTabNav .tab-btn[aria-selected="true"]:hover {
+    background: #fecdd3 !important;
   }
 
-  @media (max-width: 639px) {
-    #mobileTabMenuWrap {
-      background: #ffffff !important;
-    }
-  }
+  /* Alt seçili çizgi mevcut emerald rengiyle aynen kalır. */
 </style>
 
 </head>
@@ -2261,32 +2262,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 </div>
 </div>
 <div class="flex w-full items-end justify-center" id="desktopTabNav">
-
-
-
-
-
-
-<div class="flex items-end justify-center gap-1 sm:gap-2 mx-auto px-2 sm:px-3 overflow-x-auto custom-scroll" id="desktopTabNavInner"><button class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-mevcut" onclick="switchTab('tab-mevcut')">
+<div class="flex items-end justify-center gap-1 sm:gap-2 mx-auto px-2 sm:px-3 overflow-x-auto custom-scroll" id="desktopTabNavInner"><button aria-selected="true" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap active" id="nav-tab-mevcut" onclick="switchTab('tab-mevcut')">
 <i class="fa-solid fa-users text-emerald-400"></i>
 <span>Aktif Aileler</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50" data-counter="badge-count-mevcut">0</span>
-</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-red" onclick="switchTab('tab-red')">
+</button><button aria-selected="false" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-red" onclick="switchTab('tab-red')">
 <i class="fa-solid fa-ban text-rose-400"></i>
 <span>Ret Listesi</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700" data-counter="badge-count-red">0</span>
-</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-web" onclick="switchTab('tab-web')">
+</button><button aria-selected="false" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-web" onclick="switchTab('tab-web')">
 <i class="fa-solid fa-globe text-sky-400"></i>
 <span>Web Yeni Başvurular</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50" data-counter="badge-count-web">0</span>
-</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-saha" onclick="switchTab('tab-saha')">
+</button><button aria-selected="false" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-saha" onclick="switchTab('tab-saha')">
 <i class="fa-solid fa-person-walking-arrow-right text-amber-400"></i>
 <span>Saha Ziyareti</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50" data-counter="badge-count-saha">0</span>
-</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-stats" onclick="switchTab('tab-stats')">
+</button><button aria-selected="false" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-stats" onclick="switchTab('tab-stats')">
 <i class="fa-solid fa-chart-pie text-indigo-400"></i>
 <span>İstatistik Veriler</span>
-</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-system" onclick="switchTab('tab-system')">
+</button><button aria-selected="false" class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-system" onclick="switchTab('tab-system')">
 <i class="fa-solid fa-gear text-cyan-400"></i>
 <span>Sistem &amp; Ayarlar</span>
 </button></div></div>
@@ -3830,14 +3825,16 @@ function switchTab(tabId) {
     if(targetTab) targetTab.classList.remove('hidden');
 
     document.querySelectorAll('.tab-btn').forEach(function (btn) {
-        btn.classList.remove('border-emerald-400', 'text-white');
+        btn.classList.remove('border-emerald-400', 'text-white', 'active');
         btn.classList.add('border-transparent', 'text-slate-400');
+        btn.setAttribute('aria-selected', 'false');
     });
 
     var activeBtn = document.getElementById('nav-' + tabId);
     if (activeBtn) {
-        activeBtn.classList.add('border-emerald-400', 'text-white');
+        activeBtn.classList.add('border-emerald-400', 'text-white', 'active');
         activeBtn.classList.remove('border-transparent', 'text-slate-400');
+        activeBtn.setAttribute('aria-selected', 'true');
     }
 
     if (tabId === 'tab-stats') {
