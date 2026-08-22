@@ -642,7 +642,7 @@
     }
 }
 </style>
-<script>window.IYIBIS_WEB_BUILD="5.1";</script>
+<script>window.IYIBIS_WEB_BUILD="BETA 5.1";</script>
 <script src="config-beta42.js"></script>
 <script src="api-client-beta42.js"></script>
 <link href="favicon.png" rel="icon" type="image/png"/>
@@ -1777,10 +1777,34 @@ body {
     }
   }
 </style>
-<style id="iyibis-v5075-tabs-visibility-fix">
-  /* 5.0.75 — masaüstü/mobil sekme kapları birbirini dışlar; çift katman yok */
+<style id="iyibis-v5076-active-tab-pink">
+  #desktopTabNav .tab-btn.active,
+  #desktopTabNav .tab-btn[aria-selected="true"],
+  #desktopTabNav .tab-btn.border-emerald-400 {
+    background: #ffe4e6 !important;
+  }
 
-  /* Masaüstü: yalnız desktop nav görünür */
+  #desktopTabNav .tab-btn.active:hover,
+  #desktopTabNav .tab-btn[aria-selected="true"]:hover {
+    background: #fecdd3 !important;
+  }
+
+  /* Alt seçili çizgi mevcut emerald rengiyle aynen kalır. */
+</style>
+<style id="iyibis-v5077-stable-active-tab">
+  #desktopTabNav .tab-btn[aria-selected="true"],
+  #desktopTabNav .tab-btn.active {
+    background-color: #ffe4e6 !important;
+  }
+
+  #desktopTabNav .tab-btn[aria-selected="false"]:not(.active) {
+    background-color: transparent !important;
+  }
+</style>
+<meta content="5.1" name="iyibis-release"/>
+<style id="iyibis-v51-mobile-tabs-fix">
+  /* İYİBİS 5.1 — masaüstü/mobil sekme görünürlüğü ve hamburger paneli */
+
   #desktopTabNav {
     display: flex !important;
     width: 100%;
@@ -1834,64 +1858,88 @@ body {
   #desktopTabNav .tab-btn[aria-selected="true"] {
     position: relative;
     z-index: 2;
-    background: #fff1f2 !important;
-    border-bottom-color: transparent !important;
+    background: #ffe4e6 !important;
   }
 
-  /* Masaüstünde mobil sekme kabı kesinlikle görünmez. */
   #mobileTabMenuWrap {
     display: none !important;
   }
 
-  @media (max-width: 639px) {
-    /* Mobilde tam tersi: yalnız mobil menü görünür. */
+  /* Tüm mevcut mobil header kurallarıyla aynı breakpoint: 768px */
+  @media (max-width: 768px) {
     #desktopTabNav {
       display: none !important;
     }
 
     #mobileTabMenuWrap {
       display: block !important;
-      width: 100%;
+      position: relative !important;
+      width: 100% !important;
       box-sizing: border-box;
-      padding: .5rem .45rem 0 .45rem;
-      margin: 0;
+      padding: .5rem .45rem .25rem .45rem;
+      margin: .15rem 0 0 !important;
       background: #ffffff !important;
       border: 1px solid #e2e8f0 !important;
       border-bottom-left-radius: 0 !important;
       border-bottom-right-radius: 0 !important;
       border-top-left-radius: 1rem !important;
       border-top-right-radius: 1rem !important;
-      overflow: hidden;
+
+      /* Açılan absolute menünün kesilmesini engelle */
+      overflow: visible !important;
+      z-index: 70;
+    }
+
+    #mobileTabMenuButton {
+      display: inline-flex !important;
+      position: relative !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      z-index: 76 !important;
+    }
+
+    #mobileTabMenuPanel {
+      z-index: 90 !important;
+    }
+
+    #mobileTabMenuPanel:not(.hidden) {
+      display: block !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    #mobileTabMenuWrap,
+    #mobileTabMenuButton,
+    #mobileTabMenuPanel {
+      display: none !important;
     }
   }
 </style>
-<style id="iyibis-v5076-active-tab-pink">
-  #desktopTabNav .tab-btn.active,
-  #desktopTabNav .tab-btn[aria-selected="true"],
-  #desktopTabNav .tab-btn.border-emerald-400 {
-    background: #ffe4e6 !important;
+
+<style id="iyibis-v51-beta-badge-green">
+  #accessGate .iyibis-login-version {
+    background: #dcfce7 !important;
+    color: #15803d !important;
+    border: 1px solid #86efac !important;
+    box-shadow: 0 1px 2px rgba(22,101,52,.08);
   }
 
-  #desktopTabNav .tab-btn.active:hover,
-  #desktopTabNav .tab-btn[aria-selected="true"]:hover {
-    background: #fecdd3 !important;
-  }
-
-  /* Alt seçili çizgi mevcut emerald rengiyle aynen kalır. */
-</style>
-
-<style id="iyibis-v5077-stable-active-tab">
-  #desktopTabNav .tab-btn[aria-selected="true"],
-  #desktopTabNav .tab-btn.active {
-    background-color: #ffe4e6 !important;
-  }
-
-  #desktopTabNav .tab-btn[aria-selected="false"]:not(.active) {
-    background-color: transparent !important;
+  #app-version-badge {
+    /* Otomasyon üst barındaki mevcut tasarım korunur; yalnız metin BETA 5.1 olur. */
+    white-space: nowrap;
   }
 </style>
 
-<meta name="iyibis-release" content="5.1"/>
+
+<style id="iyibis-v51-login-beta-badge-size-fix">
+#accessGate .iyibis-login-version{
+  padding:.2rem .55rem !important;
+  font-size:.65rem !important;
+  line-height:1rem !important;
+  border-radius:9999px !important;
+}
+</style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 <!-- GİRİŞ EKRANI -->
@@ -1905,10 +1953,10 @@ body {
 <img alt="Gaziantep İyilik Hareketi Derneği Logosu" class="iyibis-login-logo" src="gaziantep-iyilik-hareketi-logo.jpeg"/>
 <h2 class="iyibis-login-title">İYİBİS Aile Otomasyonu</h2>
 <p class="iyibis-login-subtitle">Kullanıcı Girişi</p>
-<div class="iyibis-login-version-row"><span class="iyibis-login-version">5.1</span></div>
+<div class="iyibis-login-version-row"><span class="iyibis-login-version">BETA 5.1</span></div>
 </div>
 <form action="javascript:void(0);" autocomplete="off" class="p-6 space-y-4" id="accessForm" novalidate="">
-<div class="text-center text-[9px] text-cyan-600 font-mono -mb-1">Aile Panel Build: 5.1</div>
+<div class="text-center text-[9px] text-cyan-600 font-mono -mb-1">Aile Panel Build: BETA 5.1</div>
 <div class="text-xs text-slate-600 bg-amber-50 border border-amber-200 rounded-lg p-3">
                     Bu panel kişisel veri içerir. Yalnızca tanımlı kullanıcılar erişebilir.
                 </div>
@@ -2209,7 +2257,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <div>
 <div class="flex items-center gap-2">
 <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Gaziantep İyilik Hareketi Aile Otomasyonu</h1>
-<span class="inline-flex shrink-0 items-center px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[9px] sm:text-[10px] font-bold tracking-wider" id="app-version-badge">5.1</span>
+<span class="inline-flex shrink-0 items-center px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[9px] sm:text-[10px] font-bold tracking-wider" id="app-version-badge">BETA 5.1</span>
 </div>
 <div class="flex items-center gap-2 text-xs text-slate-400">
 <span class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium" id="sync-status-pill">
