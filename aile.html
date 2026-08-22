@@ -1980,7 +1980,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         <div class="flex items-center gap-2">
                             <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Gaziantep İyilik Hareketi Aile Otomasyonu</h1>
                             <span id="app-version-badge" class="inline-flex shrink-0 items-center px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[9px] sm:text-[10px] font-bold tracking-wider">BETA</span>
-                            <span class="hidden md:inline text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Merkezi Canlı Veritabanı</span>
                         </div>
                         <div class="flex items-center gap-2 text-xs text-slate-400">
                             <span id="sync-status-pill" class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
@@ -2556,19 +2555,146 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 </div>
 
+
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-4">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+        <div>
+            <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-users-gear text-indigo-600"></i>Kullanıcı &amp; Şifre Yönetimi
+            </h3>
+            <p id="user-management-role-text" class="text-xs text-slate-500 mt-1">Kullanıcı yetkileri yükleniyor...</p>
+        </div>
+        <button onclick="loadUserManagementPanel()" class="inline-flex items-center justify-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200">
+            <i class="fa-solid fa-rotate mr-1.5"></i>Yenile
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <h4 class="text-xs font-bold text-slate-800 mb-3"><i class="fa-solid fa-key mr-1.5 text-emerald-600"></i>Kendi Şifremi Değiştir</h4>
+            <div class="space-y-2">
+                <input id="own-current-password" type="password" autocomplete="current-password" placeholder="Mevcut şifre"
+                       class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
+                <input id="own-new-password" type="password" autocomplete="new-password" placeholder="Yeni şifre (en az 8 karakter, harf + rakam)"
+                       class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
+                <input id="own-new-password-confirm" type="password" autocomplete="new-password" placeholder="Yeni şifre tekrar"
+                       class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
+                <button onclick="changeOwnPasswordFromPanel()" class="w-full px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg">
+                    Şifremi Güncelle
+                </button>
+            </div>
+        </div>
+
+        <div id="super-admin-user-tools" class="hidden rounded-xl border border-indigo-200 bg-indigo-50/50 p-4">
+            <h4 class="text-xs font-bold text-indigo-900 mb-3"><i class="fa-solid fa-user-shield mr-1.5"></i>Süper Yönetici Araçları</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <input id="new-admin-username" type="text" autocapitalize="none" spellcheck="false" placeholder="Yeni kullanıcı adı"
+                       class="px-3 py-2 bg-white border border-indigo-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-400">
+                <input id="new-admin-password" type="password" autocomplete="new-password" placeholder="Geçici şifre"
+                       class="px-3 py-2 bg-white border border-indigo-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-400">
+                <button onclick="addUserFromPanel()" class="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg">
+                    <i class="fa-solid fa-user-plus mr-1"></i>Kullanıcı Ekle
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="text-xs font-bold text-slate-700 mb-2">Tanımlı Kullanıcılar</div>
+        <div id="user-management-list" class="space-y-2">
+            <div class="text-xs text-slate-400 py-3">Kullanıcı listesi yükleniyor...</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-4">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+        <div>
+            <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-ticket text-amber-600"></i>Sorun &amp; Öneri
+            </h3>
+            <p id="ticket-panel-subtitle" class="text-xs text-slate-500 mt-1">
+                Aile ve Saha Otomasyonu ile ilgili sorunları veya geliştirme önerilerini yönetin.
+            </p>
+        </div>
+        <button onclick="loadIssueTicketPanel()" class="inline-flex items-center justify-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200">
+            <i class="fa-solid fa-rotate mr-1.5"></i>Yenile
+        </button>
+    </div>
+
+    <!-- Normal yöneticiler için ticket oluşturma -->
+    <div id="ticket-create-area" class="hidden rounded-xl border border-amber-200 bg-amber-50/50 p-4 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-3">
+            <div>
+                <label for="ticket-category" class="block text-xs font-bold text-slate-700 mb-1.5">Kategori</label>
+                <select id="ticket-category" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-amber-500">
+                    <option value="SORUN">Sorun</option>
+                    <option value="ÖNERİ">Öneri</option>
+                </select>
+            </div>
+            <div>
+                <label for="ticket-description" class="block text-xs font-bold text-slate-700 mb-1.5">Açıklama</label>
+                <textarea id="ticket-description" rows="5" maxlength="5000"
+                          placeholder="Sorunu veya geliştirme önerinizi ayrıntılı biçimde yazın..."
+                          class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none resize-y focus:ring-2 focus:ring-amber-500"></textarea>
+            </div>
+        </div>
+        <div class="flex justify-end mt-3">
+            <button onclick="submitIssueTicket()" class="inline-flex items-center px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg shadow-sm">
+                <i class="fa-solid fa-paper-plane mr-1.5"></i>Gönder
+            </button>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-3 text-[11px]">
+        <span class="px-2 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">Toplam: <b id="ticket-count-total">0</b></span>
+        <span class="px-2 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">Açık: <b id="ticket-count-open">0</b></span>
+        <span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">Çözüldü: <b id="ticket-count-resolved">0</b></span>
+    </div>
+
+    <div id="ticket-list" class="space-y-2">
+        <div class="text-xs text-slate-400 py-4 text-center">Kayıtlar yükleniyor...</div>
+    </div>
+</div>
+
+<!-- Ticket okuma modalı -->
+<div id="ticketDetailModal" class="hidden fixed inset-0 z-[80] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-4 bg-slate-900 text-white">
+            <div>
+                <div class="text-xs text-slate-300" id="ticket-detail-id">Ticket</div>
+                <h3 class="font-bold text-sm" id="ticket-detail-title">Sorun / Öneri</h3>
+            </div>
+            <button onclick="closeTicketDetailModal()" class="w-8 h-8 rounded-full hover:bg-white/10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="p-5">
+            <div class="flex flex-wrap gap-2 text-[11px] mb-4" id="ticket-detail-meta"></div>
+            <div id="ticket-detail-description" class="whitespace-pre-wrap text-sm leading-relaxed text-slate-800 bg-slate-50 border border-slate-200 rounded-xl p-4 min-h-[140px]"></div>
+            <div id="ticket-detail-admin-actions" class="hidden flex flex-wrap justify-end gap-2 mt-4">
+                <button id="ticket-detail-resolve-btn" onclick="resolveOpenedTicket()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg">
+                    <i class="fa-solid fa-circle-check mr-1"></i>Çözüldü
+                </button>
+                <button onclick="deleteOpenedTicket()" class="px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-lg">
+                    <i class="fa-solid fa-trash mr-1"></i>Sil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-bold text-sm text-slate-900">Veri &amp; Entegrasyon Araçları</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Senkronizasyon, yedekleme ve harici yardım verisi işlemleri</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Merkezi veritabanı yedekleme ve veri dışa aktarma araçları</p>
                     </div>
                 <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
-                        <button id="btn-refresh-all-sources" onclick="refreshAllGoogleSources(true)" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold rounded-lg shadow-sm transition">
-                            <i id="all-sources-sync-icon" class="fa-solid fa-arrows-rotate mr-1.5"></i>Merkezi Veri + Yedekleri Güncelle
-                        </button>
                         
                         <button id="btn-download-all-tables" onclick="downloadAllSourceTables()" class="col-span-2 sm:col-auto inline-flex items-center justify-center px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg border border-emerald-800 disabled:opacity-60 disabled:cursor-wait">
-                            <span id="download-all-label"><i class="fa-solid fa-file-excel mr-1.5"></i>Tüm Tabloların Güncel Halini İndir</span>
+                            <span id="download-all-label"><i class="fa-solid fa-file-excel mr-1.5"></i>Merkezi Veritabanını İndir</span>
                             <span id="download-all-loading" class="hidden inline-flex items-center gap-1.5"><span class="inline-block w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>Hazırlanıyor...</span>
                         </button>
                         <button onclick="downloadSourceTable('active')" class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700"><i class="fa-solid fa-house mr-1.5 text-emerald-400"></i>Aktif Aileler</button>
@@ -2585,7 +2711,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     </div>
                 </div>
                 <div id="assistance-import-status" class="hidden mt-3 text-xs rounded-lg p-3"></div>
-                <div class="mt-3 text-[11px] text-slate-500 bg-slate-50 border border-slate-200 rounded-lg p-3"><b>Not:</b> Excel düğmeleri bağlı Google E-Tablo kaynaklarının güncel halini indirir. Panel JSON yedeği yalnız tarayıcıda o anda bulunan panel durumunu saklar; Google Sheets dosyalarının gerçek yedeği değildir.</div>
+                <div class="mt-3 text-[11px] text-slate-500 bg-slate-50 border border-slate-200 rounded-lg p-3"><b>Not:</b> Merkezi Veritabanını İndir düğmesi İYİBİS merkezi veritabanındaki bütün sekmeleri tek Excel çalışma kitabı olarak indirir. Tekil Excel düğmeleri yalnız ilgili tabloyu indirir.</div>
             </div>
         </div>
 
@@ -3747,6 +3873,8 @@ function switchTab(tabId) {
     }
     if (tabId === 'tab-stats') {
         renderDashboardStats();
+    if (document.getElementById('user-management-list')) loadUserManagementPanel();
+    if (document.getElementById('ticket-list')) loadIssueTicketPanel();
         renderBirthdayList();
     }
 }
@@ -4639,7 +4767,7 @@ function updateAllSourcesLastCheckTime() {
         hour: '2-digit', minute: '2-digit', second: '2-digit',
         hour12: false
     }).format(now);
-    el.innerText = 'Merkezi Veri / Yedekler Son Güncelleme: ' + formatted + ' (GMT+3)';
+    el.innerText = 'Son Güncelleme: ' + formatted + ' (GMT+3)';
 }
 function refreshAllGoogleSources() {
     return __awaiter(this, arguments, void 0, function (showToast) {
@@ -5353,7 +5481,62 @@ function safeExcelSheetName_(name) { return String(name || 'Tablo').replace(/[\/
 function safeDownloadFileName_(name) { return String(name || 'tablo').toLocaleLowerCase('tr-TR').replace(/[çÇ]/g,'c').replace(/[ğĞ]/g,'g').replace(/[ıİ]/g,'i').replace(/[öÖ]/g,'o').replace(/[şŞ]/g,'s').replace(/[üÜ]/g,'u').replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,''); }
 function workbookFromServerTables_(tables) { var wb = XLSX.utils.book_new(); (tables || []).forEach(function(table) { var ws = XLSX.utils.aoa_to_sheet(table.values || []); XLSX.utils.book_append_sheet(wb, ws, safeExcelSheetName_(table.label || table.sheetName)); }); return wb; }
 function downloadSourceTable(key) { return __awaiter(this, void 0, void 0, function () { var payload, table, wb, err; return __generator(this, function (_a) { switch (_a.label) { case 0: setCentralBusy('Güncel tablo hazırlanıyor...'); _a.label = 1; case 1: _a.trys.push([1, 3, , 4]); return [4 /*yield*/, gsExportConfiguredTables(centralSessionToken, [key])]; case 2: payload = _a.sent(); table = payload && payload.tables && payload.tables[0]; if (!table) throw new Error('Tablo verisi alınamadı.'); wb = workbookFromServerTables_([table]); XLSX.writeFile(wb, safeDownloadFileName_(table.label) + '_guncel.xlsx'); clearCentralBusy(); return [3 /*break*/, 4]; case 3: err = _a.sent(); clearCentralBusy(); alert('Tablo indirilemedi: ' + serverFailure(err)); return [3 /*break*/, 4]; case 4: return [2 /*return*/]; } }); }); }
-function downloadAllSourceTables() { return __awaiter(this, void 0, void 0, function () { var btn, label, loading, payload, wb, err; return __generator(this, function (_a) { switch (_a.label) { case 0: btn = document.getElementById('btn-download-all-tables'); label = document.getElementById('download-all-label'); loading = document.getElementById('download-all-loading'); if (btn) btn.disabled = true; if (label) label.classList.add('hidden'); if (loading) loading.classList.remove('hidden'); setCentralBusy('Altı kaynak tablonun güncel hali hazırlanıyor...'); _a.label = 1; case 1: _a.trys.push([1, 3, 4, 5]); return [4 /*yield*/, gsExportConfiguredTables(centralSessionToken, ['active','red','web','field','pendingfield','assistance'])]; case 2: payload = _a.sent(); wb = workbookFromServerTables_((payload && payload.tables) || []); XLSX.writeFile(wb, 'IYIBIS_Tum_Tablolar_Guncel.xlsx'); clearCentralBusy(); return [3 /*break*/, 5]; case 3: err = _a.sent(); clearCentralBusy(); alert('Tablolar indirilemedi: ' + serverFailure(err)); return [3 /*break*/, 5]; case 4: if (btn) btn.disabled = false; if (label) label.classList.remove('hidden'); if (loading) loading.classList.add('hidden'); return [7 /*endfinally*/]; case 5: return [2 /*return*/]; } }); }); }
+function iyibisBase64ToBlob_(base64, mimeType) {
+    var binary = atob(String(base64 || ''));
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return new Blob([bytes], { type: mimeType || 'application/octet-stream' });
+}
+
+function downloadAllSourceTables() {
+    return __awaiter(this, void 0, void 0, function () {
+        var btn, label, loading, payload, blob, url, a, err;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    btn = document.getElementById('btn-download-all-tables');
+                    label = document.getElementById('download-all-label');
+                    loading = document.getElementById('download-all-loading');
+                    if (btn) btn.disabled = true;
+                    if (label) label.classList.add('hidden');
+                    if (loading) loading.classList.remove('hidden');
+                    setCentralBusy('Merkezi veritabanı dosyası hazırlanıyor...');
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, 4, 5]);
+                    return [4 /*yield*/, gsDownloadCentralDatabase(centralSessionToken)];
+                case 2:
+                    payload = _a.sent();
+                    if (!payload || payload.ok === false || !payload.base64)
+                        throw new Error((payload && payload.error) || 'Merkezi veritabanı dosyası oluşturulamadı.');
+                    blob = iyibisBase64ToBlob_(payload.base64, payload.mimeType);
+                    url = URL.createObjectURL(blob);
+                    a = document.createElement('a');
+                    a.href = url;
+                    a.download = payload.fileName || 'IYIBIS_Merkezi_Veritabani.xlsx';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+                    clearCentralBusy();
+                    showIyibisToast('Merkezi veritabanı indirildi! ' + iyibisFormatDateTime());
+                    return [3 /*break*/, 5];
+                case 3:
+                    err = _a.sent();
+                    clearCentralBusy();
+                    showIyibisToast('Merkezi veritabanı indirilemedi: ' + serverFailure(err));
+                    return [3 /*break*/, 5];
+                case 4:
+                    if (btn) btn.disabled = false;
+                    if (label) label.classList.remove('hidden');
+                    if (loading) loading.classList.add('hidden');
+                    return [7 /*endfinally*/];
+                case 5: return [2 /*return*/];
+            }
+        });
+    });
+}
+
 function exportJSON() {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
     var a = document.createElement('a');
@@ -5732,10 +5915,45 @@ function gsExportConfiguredTables(token, keys) {
     return serverCall('exportConfiguredTablesServer', token, keys);
 }
 
+function gsDownloadCentralDatabase(token) {
+    return serverCall('downloadCentralDatabaseServer', token);
+}
+
 
 function gsSaveConfig(token, cfg) {
     return serverCall('saveCentralConfig', token, cfg);
 }
+
+function gsGetUserManagement(token) {
+    return serverCall('getUserManagementServer', token);
+}
+function gsAddUser(token, username, password) {
+    return serverCall('addUserServer', token, username, password);
+}
+function gsRemoveUser(token, username) {
+    return serverCall('removeUserServer', token, username);
+}
+function gsAdminResetPassword(token, username, newPassword) {
+    return serverCall('adminResetUserPasswordServer', token, username, newPassword);
+}
+function gsChangeOwnPassword(token, currentPassword, newPassword) {
+    return serverCall('changeOwnPasswordServer', token, currentPassword, newPassword);
+}
+
+function gsGetIssueTickets(token) {
+    return serverCall('getIssueTicketsServer', token);
+}
+function gsCreateIssueTicket(token, category, description) {
+    return serverCall('createIssueTicketServer', token, category, description);
+}
+function gsResolveIssueTicket(token, ticketId) {
+    return serverCall('resolveIssueTicketServer', token, ticketId);
+}
+function gsDeleteIssueTicket(token, ticketId) {
+    return serverCall('deleteIssueTicketServer', token, ticketId);
+}
+
+
 
 var iyibisBusyButton = null;
 var iyibisBusyButtonHtml = '';
@@ -6652,6 +6870,373 @@ function importAssistanceFromSheet() {
     });
 }
 
+
+
+var iyibisIssueTicketState = {
+    currentUser:'',
+    currentRole:'',
+    isSuperAdmin:false,
+    tickets:[],
+    counts:{total:0,open:0,resolved:0}
+};
+var iyibisOpenedTicketId = '';
+
+function iyibisTicketStatusBadge_(status) {
+    var s=String(status||'AÇIK').toLocaleUpperCase('tr-TR');
+    if (s==='ÇÖZÜLDÜ') {
+        return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200"><i class="fa-solid fa-circle-check"></i>Çözüldü</span>';
+    }
+    return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200"><i class="fa-regular fa-clock"></i>Açık</span>';
+}
+
+function iyibisTicketCategoryBadge_(category) {
+    var c=String(category||'').toLocaleUpperCase('tr-TR');
+    return c==='ÖNERİ'
+        ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-50 text-sky-800 border border-sky-200">Öneri</span>'
+        : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-800 border border-rose-200">Sorun</span>';
+}
+
+function renderIssueTicketPanel_() {
+    var s=iyibisIssueTicketState || {};
+    var createArea=document.getElementById('ticket-create-area');
+    if(createArea) createArea.classList.toggle('hidden', !!s.isSuperAdmin);
+
+    var subtitle=document.getElementById('ticket-panel-subtitle');
+    if(subtitle) {
+        subtitle.innerText=s.isSuperAdmin
+            ? 'Yöneticilerden gelen sorun ve geliştirme önerilerini yönetin.'
+            : 'Aile ve Saha Otomasyonu ile ilgili sorun veya geliştirme önerisi gönderin; durumunu buradan takip edin.';
+    }
+
+    var counts=s.counts || {};
+    var total=document.getElementById('ticket-count-total');
+    var open=document.getElementById('ticket-count-open');
+    var resolved=document.getElementById('ticket-count-resolved');
+    if(total) total.innerText=Number(counts.total||0);
+    if(open) open.innerText=Number(counts.open||0);
+    if(resolved) resolved.innerText=Number(counts.resolved||0);
+
+    var list=document.getElementById('ticket-list');
+    if(!list) return;
+    var tickets=s.tickets || [];
+    if(!tickets.length) {
+        list.innerHTML='<div class="text-xs text-slate-400 py-5 text-center border border-dashed border-slate-200 rounded-xl">'+
+            (s.isSuperAdmin ? 'Henüz yöneticilerden gönderilmiş sorun veya öneri yok.' : 'Henüz gönderdiğiniz bir sorun veya öneri yok.')+
+            '</div>';
+        return;
+    }
+
+    list.innerHTML=tickets.map(function(t){
+        var shortText=String(t.description||'');
+        if(shortText.length>125) shortText=shortText.slice(0,125)+'…';
+
+        var adminActions='';
+        if(s.isSuperAdmin) {
+            adminActions=
+                '<button onclick="openIssueTicket(\\''+escapeHtml(t.id)+'\\')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-[11px] font-semibold rounded-md">Oku</button>'+
+                (String(t.status||'').toLocaleUpperCase('tr-TR')!=='ÇÖZÜLDÜ'
+                    ? '<button onclick="resolveIssueTicket(\\''+escapeHtml(t.id)+'\\')" class="px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11px] font-semibold rounded-md">Çözüldü</button>'
+                    : '')+
+                '<button onclick="deleteIssueTicket(\\''+escapeHtml(t.id)+'\\')" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-[11px] font-semibold rounded-md">Sil</button>';
+        } else {
+            adminActions='<button onclick="openIssueTicket(\\''+escapeHtml(t.id)+'\\')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-[11px] font-semibold rounded-md">Oku</button>';
+        }
+
+        return '<div class="p-3 border border-slate-200 rounded-xl bg-white">'+
+            '<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">'+
+                '<div class="min-w-0 flex-1">'+
+                    '<div class="flex flex-wrap items-center gap-2 mb-1">'+
+                        iyibisTicketCategoryBadge_(t.category)+
+                        iyibisTicketStatusBadge_(t.status)+
+                        '<span class="text-[10px] text-slate-400">'+escapeHtml(t.id||'')+'</span>'+
+                    '</div>'+
+                    '<div class="text-xs font-semibold text-slate-800">'+
+                        (s.isSuperAdmin ? 'Gönderen: '+escapeHtml(t.createdBy||'')+' · ' : '')+
+                        escapeHtml(t.createdAt||'')+
+                    '</div>'+
+                    '<div class="text-xs text-slate-600 mt-1 leading-relaxed">'+escapeHtml(shortText)+'</div>'+
+                    (String(t.status||'').toLocaleUpperCase('tr-TR')==='ÇÖZÜLDÜ'
+                        ? '<div class="text-[10px] text-emerald-700 mt-2"><i class="fa-solid fa-circle-check mr-1"></i>Çözüldü'+(t.resolvedAt?' · '+escapeHtml(t.resolvedAt):'')+'</div>'
+                        : '')+
+                '</div>'+
+                '<div class="flex flex-wrap gap-2 shrink-0">'+adminActions+'</div>'+
+            '</div>'+
+        '</div>';
+    }).join('');
+}
+
+async function loadIssueTicketPanel() {
+    try {
+        var data=await gsGetIssueTickets(centralSessionToken);
+        iyibisIssueTicketState=data || {};
+        renderIssueTicketPanel_();
+    } catch(err) {
+        showIyibisToast('Sorun & Öneri kayıtları alınamadı: ' + serverFailure(err));
+    }
+}
+
+async function submitIssueTicket() {
+    if(iyibisIssueTicketState.isSuperAdmin) return;
+    var categoryEl=document.getElementById('ticket-category');
+    var descriptionEl=document.getElementById('ticket-description');
+    var category=categoryEl ? categoryEl.value : 'SORUN';
+    var description=descriptionEl ? String(descriptionEl.value||'').trim() : '';
+
+    if(description.length<10) {
+        showIyibisToast('Açıklama en az 10 karakter olmalıdır.');
+        return;
+    }
+
+    try {
+        setCentralBusy('Sorun / öneri gönderiliyor...');
+        var data=await gsCreateIssueTicket(centralSessionToken,category,description);
+        iyibisIssueTicketState=data;
+        if(descriptionEl) descriptionEl.value='';
+        renderIssueTicketPanel_();
+        showIyibisToast('Bildiriminiz sistem yöneticisine gönderildi.');
+    } catch(err) {
+        showIyibisToast('Bildirim gönderilemedi: ' + serverFailure(err));
+    } finally {
+        clearCentralBusy();
+    }
+}
+
+function openIssueTicket(ticketId) {
+    var tickets=(iyibisIssueTicketState && iyibisIssueTicketState.tickets) || [];
+    var ticket=tickets.find(function(x){return x.id===ticketId;});
+    if(!ticket) return;
+
+    iyibisOpenedTicketId=ticketId;
+    var modal=document.getElementById('ticketDetailModal');
+    var id=document.getElementById('ticket-detail-id');
+    var title=document.getElementById('ticket-detail-title');
+    var meta=document.getElementById('ticket-detail-meta');
+    var desc=document.getElementById('ticket-detail-description');
+    var actions=document.getElementById('ticket-detail-admin-actions');
+    var resolveBtn=document.getElementById('ticket-detail-resolve-btn');
+
+    if(id) id.innerText=ticket.id||'';
+    if(title) title.innerText=(ticket.category==='ÖNERİ'?'Öneri':'Sorun')+' Bildirimi';
+    if(meta) {
+        meta.innerHTML=
+            iyibisTicketCategoryBadge_(ticket.category)+
+            iyibisTicketStatusBadge_(ticket.status)+
+            '<span class="px-2 py-0.5 text-slate-500">Gönderen: <b>'+escapeHtml(ticket.createdBy||'')+'</b></span>'+
+            '<span class="px-2 py-0.5 text-slate-500">'+escapeHtml(ticket.createdAt||'')+'</span>';
+    }
+    if(desc) desc.innerText=ticket.description||'';
+    if(actions) actions.classList.toggle('hidden', !iyibisIssueTicketState.isSuperAdmin);
+    if(resolveBtn) resolveBtn.classList.toggle('hidden', String(ticket.status||'').toLocaleUpperCase('tr-TR')==='ÇÖZÜLDÜ');
+    if(modal) modal.classList.remove('hidden');
+}
+
+function closeTicketDetailModal() {
+    iyibisOpenedTicketId='';
+    var modal=document.getElementById('ticketDetailModal');
+    if(modal) modal.classList.add('hidden');
+}
+
+async function resolveIssueTicket(ticketId) {
+    if(!iyibisIssueTicketState.isSuperAdmin) return;
+    try {
+        setCentralBusy('Ticket çözüldü olarak işaretleniyor...');
+        var data=await gsResolveIssueTicket(centralSessionToken,ticketId);
+        iyibisIssueTicketState=data;
+        renderIssueTicketPanel_();
+        showIyibisToast('Ticket çözüldü olarak işaretlendi.');
+        if(iyibisOpenedTicketId===ticketId) openIssueTicket(ticketId);
+    } catch(err) {
+        showIyibisToast('Ticket güncellenemedi: '+serverFailure(err));
+    } finally {
+        clearCentralBusy();
+    }
+}
+
+async function deleteIssueTicket(ticketId) {
+    if(!iyibisIssueTicketState.isSuperAdmin) return;
+    if(!confirm('Bu ticket kaydını kalıcı olarak silmek istiyor musunuz?')) return;
+    try {
+        setCentralBusy('Ticket siliniyor...');
+        var data=await gsDeleteIssueTicket(centralSessionToken,ticketId);
+        iyibisIssueTicketState=data;
+        renderIssueTicketPanel_();
+        if(iyibisOpenedTicketId===ticketId) closeTicketDetailModal();
+        showIyibisToast('Ticket silindi.');
+    } catch(err) {
+        showIyibisToast('Ticket silinemedi: '+serverFailure(err));
+    } finally {
+        clearCentralBusy();
+    }
+}
+
+function resolveOpenedTicket() {
+    if(iyibisOpenedTicketId) resolveIssueTicket(iyibisOpenedTicketId);
+}
+function deleteOpenedTicket() {
+    if(iyibisOpenedTicketId) deleteIssueTicket(iyibisOpenedTicketId);
+}
+
+document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') {
+        var modal=document.getElementById('ticketDetailModal');
+        if(modal && !modal.classList.contains('hidden')) closeTicketDetailModal();
+    }
+});
+
+
+var iyibisUserManagementState = { currentUser:'', currentRole:'', isSuperAdmin:false, users:[] };
+
+function renderUserManagementPanel_() {
+    var state=iyibisUserManagementState || {};
+    var roleText=document.getElementById('user-management-role-text');
+    if (roleText) {
+        roleText.innerText = state.isSuperAdmin
+            ? 'Oturum: ' + state.currentUser + ' · Süper Yönetici'
+            : 'Oturum: ' + state.currentUser + ' · Yönetici · Yalnızca kendi şifrenizi değiştirebilirsiniz.';
+    }
+
+    var superTools=document.getElementById('super-admin-user-tools');
+    if (superTools) superTools.classList.toggle('hidden', !state.isSuperAdmin);
+
+    var list=document.getElementById('user-management-list');
+    if (!list) return;
+    var users=state.users || [];
+    if (!users.length) {
+        list.innerHTML='<div class="text-xs text-slate-400 py-3">Tanımlı kullanıcı bulunamadı.</div>';
+        return;
+    }
+
+    list.innerHTML=users.map(function(u) {
+        var isSelf=u.username===state.currentUser;
+        var isOnur=u.username==='onur';
+        var badge=u.role==='SUPER_ADMIN'
+            ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 text-indigo-800 border border-indigo-200">Süper Yönetici</span>'
+            : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">Yönetici</span>';
+
+        var adminButtons='';
+        if (state.isSuperAdmin) {
+            adminButtons =
+                '<button onclick="promptAdminResetPassword(\\''+escapeHtml(u.username)+'\\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200">Şifre Değiştir</button>' +
+                (!isOnur
+                    ? '<button onclick="removeUserFromPanel(\\''+escapeHtml(u.username)+'\\')" class="px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200">Kullanıcıyı Sil</button>'
+                    : '');
+        }
+
+        return '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-white border border-slate-200 rounded-lg">' +
+            '<div><div class="flex items-center gap-2"><span class="text-xs font-bold text-slate-800">'+escapeHtml(u.username)+'</span>'+badge+(isSelf?' <span class="text-[10px] text-emerald-600 font-semibold">(siz)</span>':'')+'</div>' +
+            '<div class="text-[10px] text-slate-400 mt-1">Şifre son değişim: '+escapeHtml(u.passwordUpdatedAt || 'kayıt yok')+'</div></div>' +
+            '<div class="flex flex-wrap gap-2">'+adminButtons+'</div></div>';
+    }).join('');
+}
+
+async function loadUserManagementPanel() {
+    try {
+        var data=await gsGetUserManagement(centralSessionToken);
+        iyibisUserManagementState=data || {};
+        renderUserManagementPanel_();
+    } catch(err) {
+        showIyibisToast('Kullanıcı bilgileri alınamadı: ' + serverFailure(err));
+    }
+}
+
+async function changeOwnPasswordFromPanel() {
+    var current=document.getElementById('own-current-password');
+    var next=document.getElementById('own-new-password');
+    var confirm=document.getElementById('own-new-password-confirm');
+    var a=current ? current.value : '';
+    var b=next ? next.value : '';
+    var c=confirm ? confirm.value : '';
+
+    if (!a || !b || !c) {
+        showIyibisToast('Şifre alanlarının tamamını doldurun.');
+        return;
+    }
+    if (b!==c) {
+        showIyibisToast('Yeni şifreler birbiriyle eşleşmiyor.');
+        return;
+    }
+
+    try {
+        setCentralBusy('Şifreniz güncelleniyor...');
+        await gsChangeOwnPassword(centralSessionToken,a,b);
+        if(current) current.value='';
+        if(next) next.value='';
+        if(confirm) confirm.value='';
+        showIyibisToast('Şifreniz başarıyla güncellendi.');
+        await loadUserManagementPanel();
+    } catch(err) {
+        showIyibisToast('Şifre değiştirilemedi: ' + serverFailure(err));
+    } finally {
+        clearCentralBusy();
+    }
+}
+
+async function addUserFromPanel() {
+    if (!iyibisUserManagementState.isSuperAdmin) return;
+    var userEl=document.getElementById('new-admin-username');
+    var passEl=document.getElementById('new-admin-password');
+    var username=userEl ? String(userEl.value||'').trim().toLowerCase() : '';
+    var password=passEl ? passEl.value : '';
+    if (!username || !password) {
+        showIyibisToast('Yeni kullanıcı adı ve geçici şifre girin.');
+        return;
+    }
+
+    try {
+        setCentralBusy('Kullanıcı ekleniyor...');
+        var data=await gsAddUser(centralSessionToken,username,password);
+        iyibisUserManagementState=data;
+        if(userEl) userEl.value='';
+        if(passEl) passEl.value='';
+        renderUserManagementPanel_();
+        showIyibisToast(username + ' kullanıcısı eklendi.');
+    } catch(err) {
+        showIyibisToast('Kullanıcı eklenemedi: ' + serverFailure(err));
+    } finally {
+        clearCentralBusy();
+    }
+}
+
+async function removeUserFromPanel(username) {
+    if (!iyibisUserManagementState.isSuperAdmin) return;
+    if (!confirm(username + ' kullanıcısını sistemden tamamen kaldırmak istiyor musunuz?')) return;
+    try {
+        setCentralBusy('Kullanıcı kaldırılıyor...');
+        var data=await gsRemoveUser(centralSessionToken,username);
+        iyibisUserManagementState=data;
+        renderUserManagementPanel_();
+        showIyibisToast(username + ' kullanıcısı kaldırıldı.');
+    } catch(err) {
+        showIyibisToast('Kullanıcı kaldırılamadı: ' + serverFailure(err));
+    } finally {
+        clearCentralBusy();
+    }
+}
+
+async function promptAdminResetPassword(username) {
+    if (!iyibisUserManagementState.isSuperAdmin) return;
+    var password=prompt(username + ' için yeni şifreyi girin.\\nEn az 8 karakter, en az bir harf ve bir rakam:');
+    if (password===null) return;
+    var confirmPassword=prompt('Yeni şifreyi tekrar girin:');
+    if (confirmPassword===null) return;
+    if (password!==confirmPassword) {
+        showIyibisToast('Şifreler eşleşmiyor.');
+        return;
+    }
+
+    try {
+        setCentralBusy('Kullanıcı şifresi güncelleniyor...');
+        await gsAdminResetPassword(centralSessionToken,username,password);
+        showIyibisToast(username + ' kullanıcısının şifresi güncellendi.');
+        await loadUserManagementPanel();
+    } catch(err) {
+        showIyibisToast('Şifre güncellenemedi: ' + serverFailure(err));
+    } finally {
+        clearCentralBusy();
+    }
+}
+
+
 function openSheetConfigModal() {
     return __awaiter(this, void 0, void 0, function () {
         var cfg, err_18, btn, label, loading;
@@ -7049,3 +7634,4 @@ document.addEventListener('keydown', closeTopIyibisOverlayOnEscape_, true);
 
 </body>
 </html>
+<script>setTimeout(function(){ if(window.centralSessionToken) loadUserManagementPanel(); }, 3000);</script>
