@@ -2622,7 +2622,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     </div>
 </div>
 
-<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-4">
+<div id="super-admin-data-tools-card" class="hidden bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-4">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
             <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
@@ -7177,8 +7177,19 @@ document.addEventListener('keydown',function(e){
 
 var iyibisUserManagementState = { currentUser:'', currentRole:'', isSuperAdmin:false, users:[] };
 
+
+function iyibisApplySuperAdminSettingsVisibility_() {
+    var card=document.getElementById('super-admin-data-tools-card');
+    if(!card) return;
+    var state=iyibisUserManagementState || {};
+    var current=String(state.currentUser || centralCurrentUser || '').trim().toLowerCase();
+    var isSuper=state.isSuperAdmin===true && current==='onur';
+    card.classList.toggle('hidden', !isSuper);
+}
+
 function renderUserManagementPanel_() {
     var state=iyibisUserManagementState || {};
+    iyibisApplySuperAdminSettingsVisibility_();
     var roleText=document.getElementById('user-management-role-text');
     var manageBtn=document.getElementById('open-user-management-modal-btn');
 
