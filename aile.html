@@ -1778,27 +1778,42 @@ body {
   }
 </style>
 
-<style id="iyibis-v5072-tabs-downward">
-  /* 5.0.72 — Sekmeler üstten yuvarlak, alttan keskin ve içerik alanına bağlı */
+
+<style id="iyibis-v5073-tabs-layout-fix">
+  /* 5.0.73 — Sekme alanı tek katman: pembe zemin + ortalanmış iç sekme rayı */
   #desktopTabNav,
   #mobileTabMenuWrap {
     width: 100%;
+    box-sizing: border-box;
     background: rgba(255, 241, 242, .97);
     border: 1px solid rgba(254, 205, 211, .95);
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
     border-top-left-radius: 1rem !important;
     border-top-right-radius: 1rem !important;
-    box-sizing: border-box;
+    overflow: hidden;
   }
 
   #desktopTabNav {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: .35rem;
-    margin-left: auto;
-    margin-right: auto;
+    padding: .55rem 0 0 0;
+    margin: 0;
+  }
+
+  #desktopTabNavInner {
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #desktopTabNavInner::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   #desktopTabNav .tab-btn {
@@ -1810,7 +1825,6 @@ body {
     margin-bottom: -1px;
   }
 
-  /* Aktif tab alttaki içerikle birleşsin. */
   #desktopTabNav .tab-btn.active,
   #desktopTabNav .tab-btn[aria-selected="true"] {
     position: relative;
@@ -1818,21 +1832,19 @@ body {
     border-bottom-color: transparent !important;
   }
 
+  #mobileTabMenuWrap {
+    padding: .5rem .45rem 0 .45rem;
+  }
+
   @media (min-width: 640px) {
-    #desktopTabNav {
-      padding-left: 1rem;
-      padding-right: 1rem;
+    #desktopTabNavInner {
+      justify-content: center;
     }
   }
 
   @media (max-width: 639px) {
-    #mobileTabMenuWrap {
-      padding-left: .45rem;
-      padding-right: .45rem;
-    }
-
     #desktopTabNav {
-      justify-content: flex-start;
+      display: none !important;
     }
   }
 </style>
@@ -2181,7 +2193,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 </div>
 </div>
 <!-- TABS NAVIGATION -->
-<div class="relative w-full pt-2 pb-3 border-t border-slate-800/80" id="global-family-search-wrap"><div class="relative w-full"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i><input autocomplete="off" class="w-full min-w-0 pl-9 pr-10 py-2.5 rounded-xl border border-slate-700 bg-slate-900/80 text-slate-100 placeholder:text-slate-400 text-sm outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 shadow-inner" id="global-family-search" oninput="iyibisRenderGlobalFamilySearch_()" onkeydown="iyibisGlobalSearchKeydown_(event)" placeholder="Tüm aileleri ara" type="search"/><button aria-label="Aramayı temizle" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700" id="global-family-search-clear" onclick="iyibisClearGlobalFamilySearch_()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="hidden absolute left-0 right-0 top-full mt-1 z-[80] max-h-[420px] overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl text-slate-800" id="global-family-search-results"></div></div><div class="relative w-full pt-2 pb-0 bg-rose-50/95 border border-rose-100 rounded-t-2xl rounded-b-none" id="mobileTabMenuWrap">
+<div class="relative w-full pt-2 pb-3 border-t border-slate-800/80" id="global-family-search-wrap"><div class="relative w-full"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i><input autocomplete="off" class="w-full min-w-0 pl-9 pr-10 py-2.5 rounded-xl border border-slate-700 bg-slate-900/80 text-slate-100 placeholder:text-slate-400 text-sm outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 shadow-inner" id="global-family-search" oninput="iyibisRenderGlobalFamilySearch_()" onkeydown="iyibisGlobalSearchKeydown_(event)" placeholder="Tüm aileleri ara" type="search"/><button aria-label="Aramayı temizle" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700" id="global-family-search-clear" onclick="iyibisClearGlobalFamilySearch_()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="hidden absolute left-0 right-0 top-full mt-1 z-[80] max-h-[420px] overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl text-slate-800" id="global-family-search-results"></div></div><div class="relative w-full" id="mobileTabMenuWrap">
 <button aria-controls="mobileTabMenuPanel" aria-expanded="false" class="hidden items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold border border-slate-700 shadow-sm" id="mobileTabMenuButton" onclick="toggleMobileTabMenu()" type="button">
 <i class="fa-solid fa-bars" id="mobileTabMenuIcon"></i>
 <span>Menü</span>
@@ -2217,36 +2229,36 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 </button>
 </div>
 </div>
-<div class="flex w-full items-end justify-center gap-1 sm:gap-2 px-2 sm:px-4 pt-2 pb-0 bg-rose-50/95 border border-rose-100 rounded-t-2xl rounded-b-none overflow-x-auto custom-scroll" id="desktopTabNav">
-<button class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-mevcut" onclick="switchTab('tab-mevcut')">
+<div class="flex w-full items-end justify-center" id="desktopTabNav">
+
+
+
+
+
+
+<div class="flex items-end justify-center gap-1 sm:gap-2 mx-auto px-2 sm:px-3 overflow-x-auto custom-scroll" id="desktopTabNavInner"><button class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-mevcut" onclick="switchTab('tab-mevcut')">
 <i class="fa-solid fa-users text-emerald-400"></i>
 <span>Aktif Aileler</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50" data-counter="badge-count-mevcut">0</span>
-</button>
-<button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-red" onclick="switchTab('tab-red')">
+</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-red" onclick="switchTab('tab-red')">
 <i class="fa-solid fa-ban text-rose-400"></i>
 <span>Ret Listesi</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-slate-800 text-rose-300 text-xs font-bold border border-slate-700" data-counter="badge-count-red">0</span>
-</button>
-<button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-web" onclick="switchTab('tab-web')">
+</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-web" onclick="switchTab('tab-web')">
 <i class="fa-solid fa-globe text-sky-400"></i>
 <span>Web Yeni Başvurular</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50" data-counter="badge-count-web">0</span>
-</button>
-<button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-saha" onclick="switchTab('tab-saha')">
+</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-saha" onclick="switchTab('tab-saha')">
 <i class="fa-solid fa-person-walking-arrow-right text-amber-400"></i>
 <span>Saha Ziyareti</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-amber-900/50 text-amber-300 text-xs font-bold border border-amber-700/50" data-counter="badge-count-saha">0</span>
-</button>
-<button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-stats" onclick="switchTab('tab-stats')">
+</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-stats" onclick="switchTab('tab-stats')">
 <i class="fa-solid fa-chart-pie text-indigo-400"></i>
 <span>İstatistik Veriler</span>
-</button>
-<button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-system" onclick="switchTab('tab-system')">
+</button><button class="tab-btn py-2.5 px-3 border-b-2 border-transparent font-medium text-slate-400 hover:text-slate-200 text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap" id="nav-tab-system" onclick="switchTab('tab-system')">
 <i class="fa-solid fa-gear text-cyan-400"></i>
 <span>Sistem &amp; Ayarlar</span>
-</button>
-</div>
+</button></div></div>
 </div>
 </header>
 <!-- MAIN CONTENT CONTAINER -->
