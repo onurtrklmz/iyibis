@@ -1849,6 +1849,37 @@ body {
   }
 </style>
 
+
+<style id="iyibis-v5074-white-tabs-pink-active">
+  /* 5.0.74 — Sekme zemini içerik alanı gibi beyaz; yalnız aktif sekme pembe */
+  #desktopTabNav,
+  #mobileTabMenuWrap {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+  }
+
+  #desktopTabNav .tab-btn {
+    background: transparent !important;
+  }
+
+  #desktopTabNav .tab-btn.active,
+  #desktopTabNav .tab-btn[aria-selected="true"] {
+    background: #fff1f2 !important;
+  }
+
+  /* Aktif sekmenin alt içerikle birleşen görünümünü koru. */
+  #desktopTabNav .tab-btn.active,
+  #desktopTabNav .tab-btn[aria-selected="true"] {
+    border-bottom-color: transparent !important;
+  }
+
+  @media (max-width: 639px) {
+    #mobileTabMenuWrap {
+      background: #ffffff !important;
+    }
+  }
+</style>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 <!-- GİRİŞ EKRANI -->
