@@ -2333,6 +2333,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <option value="Şahinbey">Şahinbey</option>
 <option value="Şehitkamil">Şehitkamil</option>
 </select>
+<select class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none ml-2" id="sort-web-date" onchange="renderWebTable()">
+<option value="DESC">Sırala: Yeniden Eskiye</option>
+<option value="ASC">Sırala: Eskiden Yeniye</option>
+</select>
 <div class="ml-3 flex items-center"><span class="inline-flex min-w-[34px] items-center justify-center rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50 px-2 py-0.5 leading-none" id="showing-count-web">0</span></div>
 </div>
 </div>
@@ -4161,10 +4165,66 @@ function renderRedTable() {
         tbody.appendChild(tr);
     });
 }
+
+function iyibisParseWebApplicationDate_(value) {
+    var s=String(value || '').trim();
+    if(!s || s.toLocaleLowerCase('tr-TR')==='bilgi yok') return null;
+
+    // ISO / tarayıcının doğal okuyabildiği tarih biçimleri.
+    var nativeDate=new Date(s);
+    if(!isNaN(nativeDate.getTime())) return nativeDate.getTime();
+
+    // dd.MM.yyyy HH:mm[:ss] / dd/MM/yyyy / dd-MM-yyyy
+    var m=s.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+    if(m) {
+        var d=new Date(
+            Number(m[3]),
+            Number(m[2])-1,
+            Number(m[1]),
+            Number(m[4] || 0),
+            Number(m[5] || 0),
+            Number(m[6] || 0)
+        );
+        return isNaN(d.getTime()) ? null : d.getTime();
+    }
+
+    // Google/ABD biçimi: M/D/YYYY HH:mm:ss
+    var us=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+    if(us) {
+        var du=new Date(
+            Number(us[3]),
+            Number(us[1])-1,
+            Number(us[2]),
+            Number(us[4] || 0),
+            Number(us[5] || 0),
+            Number(us[6] || 0)
+        );
+        return isNaN(du.getTime()) ? null : du.getTime();
+    }
+
+    return null;
+}
+
+function iyibisSortWebApplicationsByDate_(list, direction) {
+    direction=(direction || 'DESC').toUpperCase();
+    return (list || []).slice().sort(function(a,b){
+        var ta=iyibisParseWebApplicationDate_(a && a.tarih);
+        var tb=iyibisParseWebApplicationDate_(b && b.tarih);
+
+        // Tarihi bilinmeyen kayıtlar her iki sıralamada da en alta gider.
+        if(ta===null && tb===null) return 0;
+        if(ta===null) return 1;
+        if(tb===null) return -1;
+
+        return direction==='ASC' ? (ta-tb) : (tb-ta);
+    });
+}
+
 function renderWebTable() {
     var query = (document.getElementById('search-web').value || '').toLowerCase().trim();
     var statusFilter = document.getElementById('filter-web-status').value;
     var district = document.getElementById('filter-web-district').value;
+    var sortDirection = (document.getElementById('sort-web-date') || {}).value || 'DESC';
     var list = dedupeWebClient_(appState.web).filter(function (item) {
         if (statusFilter !== 'ALL' && !(item.durum || '').toUpperCase().includes(statusFilter.toUpperCase()))
             return false;
@@ -4179,6 +4239,7 @@ function renderWebTable() {
         }
         return true;
     });
+    list = iyibisSortWebApplicationsByDate_(list, sortDirection);
     document.getElementById('showing-count-web').innerText = list.length;
     var tbody = document.getElementById('web-table-body');
     tbody.innerHTML = '';
