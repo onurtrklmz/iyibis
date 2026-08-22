@@ -1672,6 +1672,44 @@ body {
     #tab-system button { max-width: 100%; }
   }
 </style>
+<style id="iyibis-minor-ui-v5056">
+  #settings-top-grid > div { width:100%; min-width:0; }
+  #showing-count-mevcut { flex-shrink:0; }
+  @media (min-width:1280px) {
+    #settings-top-grid.xl\:grid-cols-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    #settings-top-grid.xl\:grid-cols-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  }
+</style>
+<style id="iyibis-settings-layout-v5058">
+  #settings-top-grid {
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    gap:1rem;
+    align-items:stretch;
+  }
+  #settings-top-grid > * {
+    width:100%;
+    min-width:0;
+  }
+
+  @media (min-width:768px) {
+    #settings-top-grid[data-layout="normal"] {
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    #settings-top-grid[data-layout="super"] {
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+  }
+
+  @media (min-width:1280px) {
+    #settings-top-grid[data-layout="normal"] {
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    #settings-top-grid[data-layout="super"] {
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+  }
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 <!-- GİRİŞ EKRANI -->
@@ -1960,6 +1998,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         passwordField.addEventListener('keydown', iyibisLoginEnterHandler_, true);
     }
 
+
+    function iyibisLoginEnterKeypressFallback_(ev) {
+        if(!ev || ev.key!=='Enter' || ev.isComposing) return;
+        if(btn && btn.disabled) return;
+        ev.preventDefault();
+        bootstrapLogin();
+    }
+    if(usernameField) usernameField.addEventListener('keypress',iyibisLoginEnterKeypressFallback_,true);
+    if(passwordField) passwordField.addEventListener('keypress',iyibisLoginEnterKeypressFallback_,true);
+
     window.iyibisBootstrapLogin = bootstrapLogin;
     window.IYIBIS_LOGIN_BOOTSTRAP_READY = true;
 })();
@@ -1987,8 +2035,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <span id="sync-status-text">Bağlantı Hazır</span>
 </span>
 <span class="text-slate-600">•</span>
-<span class="text-[11px] text-slate-400" id="last-sync-time">5 Tablo Son Güncelleme: Henüz yapılmadı</span>
-<button class="inline-flex items-center justify-center gap-1.5 px-2 py-1 bg-violet-600 hover:bg-violet-500 text-white text-[10px] font-semibold rounded-md border border-violet-500/60 transition" id="btn-top-refresh-all" onclick="refreshAllGoogleSources(true)" title="Tüm Google tablolarını güncelle" type="button">
+<span class="text-[11px] text-slate-400" id="last-sync-time">Son Güncelleme: Henüz yapılmadı</span>
+<button class="inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-emerald-300 bg-emerald-100 hover:bg-emerald-200 text-[10px] font-bold text-emerald-800 transition shadow-sm whitespace-nowrap" id="btn-top-refresh-all" onclick="refreshAllGoogleSources(true)" title="Merkezi veriyi yenile ve yedekleri güncelle" type="button">
 <i class="fa-solid fa-arrows-rotate" id="top-refresh-all-icon"></i>
 <span class="top-refresh-label">Tümünü Güncelle</span>
 </button>
@@ -2084,7 +2132,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
 <i class="fa-solid fa-database text-emerald-600"></i>Aktif Aileler Veri Kaynağı
                         </h3>
-<p class="text-xs text-slate-500 mt-1">Aktif aile listesini ayrı Google E-Tablo dosyasından yeniler.</p>
+<p class="text-xs text-slate-500 mt-1">Onaylanan aile kayıtları İYİBİS merkezi veritabanından anlık olarak görüntülenir. Durum, iletişim ve aile bilgileri burada merkezi kayıt üzerinden yönetilir.</p>
 </div>
 <button class="inline-flex items-center justify-center px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold rounded-lg shadow-sm transition whitespace-nowrap" id="btn-new-family" onclick="openNewFamilyModal()" type="button">
 <i class="fa-solid fa-user-plus mr-1.5"></i>Yeni Aile Ekle
@@ -2115,7 +2163,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <div class="flex flex-wrap items-center gap-2">
 <div class="flex items-center gap-1">
 <span class="text-slate-500 font-medium">İlçe:</span>
-<select class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none" id="filter-district-mevcut" onchange="renderMevcutTable()">
+<select class="p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs min-w-[135px]" id="filter-status-mevcut" onchange="setApprovedStatusFilterFromSelect_(this.value)"><option value="ALL">Tüm Durumlar</option><option value="KRİTİK">Kritik</option><option value="TAKİP">Takip</option><option value="STABİL">Stabil</option><option value="DELİST">Liste Dışı</option></select><select class="bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-slate-700 font-medium outline-none" id="filter-district-mevcut" onchange="renderMevcutTable()">
 <option value="ALL">Tüm Bölgeler</option>
 <option value="ŞAHİNBEY">Şahinbey</option>
 <option value="ŞEHİTKAMİL">Şehitkamil</option>
@@ -2136,15 +2184,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 </label>
 </div>
 <div class="ml-auto flex flex-wrap items-center gap-2">
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold" onclick="resetApprovedFamilyFilters()" type="button">
-<i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
-                        </button>
 <button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-sm" onclick="exportFilteredApprovedFamiliesToExcel()" type="button">
 <i class="fa-solid fa-file-excel"></i>Filtrelenen Veriyi İndir
+                        </button><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold" onclick="resetApprovedFamilyFilters()" type="button">
+<i class="fa-solid fa-filter-circle-xmark"></i>Filtreyi Sil
                         </button>
-<span class="text-slate-500">
-                            Gösterilen: <span class="font-bold text-slate-800" id="showing-count-mevcut">0</span> aile
-                        </span>
+<span class="inline-flex min-w-[54px] items-center justify-center rounded-full border-2 border-emerald-500 bg-emerald-50 px-3 py-1 text-base font-bold text-rose-500 shadow-sm" id="showing-count-mevcut">0</span>
 </div>
 </div>
 </div>
@@ -2179,7 +2224,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
 <i class="fa-solid fa-database text-rose-600"></i>Ret Listesi Veri Kaynağı
                         </h3>
-<p class="text-xs text-slate-500 mt-1">Ret listesini ayrı Google E-Tablo dosyasından yeniler.</p>
+<p class="text-xs text-slate-500 mt-1">Ret listesine alınan aileler İYİBİS merkezi veritabanından görüntülenir. Ret ve tekrar onay işlemleri merkezi kayıt üzerinde tutulur ve işlem geçmişi sistem tarafından korunur.</p>
 </div>
 </div>
 </div>
@@ -2467,7 +2512,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <p class="text-xs text-slate-500 mt-1">Merkezi veritabanı, kullanıcı yönetimi, depolama ve sistem bildirimleri.</p>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch mb-4" id="settings-top-grid"><div class="w-full max-w-none bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-5 h-full min-w-0 overflow-hidden border-t-4 border-t-emerald-500" id="drive-storage-card">
+<div class="grid gap-4 items-stretch mb-4" data-layout="normal" id="settings-top-grid"><div class="w-full max-w-none bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-5 h-full min-w-0 overflow-hidden border-t-4 border-t-emerald-500" id="drive-storage-card">
 <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 flex-wrap">
 <div class="min-w-0">
 <div class="flex items-center gap-2 flex-wrap">
@@ -2551,8 +2596,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <button class="hidden inline-flex items-center justify-center px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg shadow-sm max-w-full whitespace-normal break-words w-full sm:w-auto" id="ticket-new-button" onclick="openNewIssueTicketModal()">
 <i class="fa-solid fa-plus mr-1.5"></i>Yeni Sorun / Öneri
             </button>
-<button class="inline-flex items-center justify-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200 max-w-full whitespace-normal break-words w-full sm:w-auto" onclick="loadIssueTicketPanel()">
-<i class="fa-solid fa-rotate mr-1.5"></i>Yenile
+<button class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-emerald-300 bg-emerald-100 hover:bg-emerald-200 text-xs font-bold text-emerald-800 transition shadow-sm max-w-full whitespace-normal break-words" onclick="loadIssueTicketPanel()">
+<i class="fa-solid fa-rotate"></i>Yenile
             </button>
 </div>
 </div>
@@ -3643,7 +3688,9 @@ function switchTab(tabId) {
     // Sistem & Ayarlar açıldığında rol, kullanıcı yönetimi ve ticket kayıtlarını taze yükle.
     if (tabId === 'tab-system') {
         var dataToolsCard=document.getElementById('super-admin-data-tools-card');
+        var settingsGrid=document.getElementById('settings-top-grid');
         if(dataToolsCard) dataToolsCard.classList.add('hidden');
+        if(settingsGrid) settingsGrid.setAttribute('data-layout','normal');
         loadUserManagementPanel();
         loadIssueTicketPanel();
     }
@@ -3677,6 +3724,9 @@ window.addEventListener('pageshow', function() {
 });
 
 function setStatusFilter(status) {
+    var statusSelect=document.getElementById('filter-status-mevcut');
+    if(statusSelect) statusSelect.value=arguments[0] || 'ALL';
+
     appState.currentStatusFilter = status;
     document.querySelectorAll('.status-filter-btn').forEach(function (btn) {
         btn.classList.remove('ring-2', 'ring-slate-900', 'shadow-sm');
@@ -3692,13 +3742,29 @@ function setStatusFilter(status) {
 // Aktif Aileler ve Saha Ziyareti için ekrandaki filtrelenmiş listeyi Excel'e aktarır.
 // ============================================================================
 
+
+function setApprovedStatusFilterFromSelect_(value) {
+    appState.currentStatusFilter = value || 'ALL';
+
+    // Eski durum kartı/butonları varsa görsel durumlarını da eşitle.
+    document.querySelectorAll('.status-filter-btn').forEach(function(btn){
+        btn.classList.remove('ring-2','ring-slate-900','shadow-sm');
+    });
+    var oldBtn=document.getElementById('filter-status-' + appState.currentStatusFilter);
+    if(oldBtn) oldBtn.classList.add('ring-2','ring-slate-900','shadow-sm');
+
+    renderMevcutTable();
+}
+
 function resetApprovedFamilyFilters() {
     var search=document.getElementById('search-mevcut');
+    var status=document.getElementById('filter-status-mevcut');
     var district=document.getElementById('filter-district-mevcut');
     var special=document.getElementById('filter-special-mevcut');
     var sort=document.getElementById('sort-mevcut');
 
     if(search) search.value='';
+    if(status) status.value='ALL';
     if(district) district.value='ALL';
     if(special) special.checked=false;
     if(sort) sort.value='default';
@@ -4743,7 +4809,7 @@ function refreshAllGoogleSources() {
                     topIcon = document.getElementById('top-refresh-all-icon');
                     if (icon) icon.classList.add('fa-spin');
                     if (topIcon) topIcon.classList.add('fa-spin');
-                    if (showToast) setCentralBusy('Merkezi Veri ve Yedekler Güncelleniyor...');
+                    if (showToast) setCentralBusy('Merkezi veriler yenileniyor, yedekler eşitleniyor...');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, 4, 5]);
@@ -4753,12 +4819,12 @@ function refreshAllGoogleSources() {
                     applyCentralPayload(result);
                     updateAllSourcesLastCheckTime();
                     if (showToast)
-                        showIyibisToast('Merkezi Veri ve Yedek Tablolar Güncellendi! ' + iyibisFormatDateTime());
+                        showIyibisToast('Merkezi veriler yenilendi, yedekler eşitlendi! ' + iyibisFormatDateTime());
                     return [3 /*break*/, 5];
                 case 3:
                     err_5 = _a.sent();
                     if (showToast)
-                        alert('Toplu yenileme başarısız: ' + serverFailure(err_5));
+                        showIyibisToast('Toplu yenileme başarısız: ' + serverFailure(err_5));
                     return [3 /*break*/, 5];
                 case 4:
                     if (icon) icon.classList.remove('fa-spin');
@@ -7114,7 +7180,7 @@ var iyibisUserManagementState = { currentUser:'', currentRole:'', isSuperAdmin:f
 
 function iyibisApplySuperAdminSettingsVisibility_() {
     var card=document.getElementById('super-admin-data-tools-card');
-    if(!card) return;
+    var grid=document.getElementById('settings-top-grid');
 
     var state=iyibisUserManagementState || {};
     var current=String(state.currentUser || centralCurrentUser || '').trim().toLowerCase();
@@ -7124,7 +7190,10 @@ function iyibisApplySuperAdminSettingsVisibility_() {
         state.isSuperAdmin===true &&
         role==='SUPER_ADMIN';
 
-    card.classList.toggle('hidden', !allowed);
+    if(card) card.classList.toggle('hidden', !allowed);
+
+    // CSS grid bunu masaüstünde 2 veya 3 eşit kolona dönüştürür.
+    if(grid) grid.setAttribute('data-layout', allowed ? 'super' : 'normal');
 }
 
 function renderUserManagementPanel_() {
