@@ -2647,31 +2647,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 Aile ve Saha Otomasyonu ile ilgili sorunları veya geliştirme önerilerini yönetin.
             </p>
         </div>
-        <button onclick="loadIssueTicketPanel()" class="inline-flex items-center justify-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200">
-            <i class="fa-solid fa-rotate mr-1.5"></i>Yenile
-        </button>
-    </div>
-
-    <!-- Normal yöneticiler için ticket oluşturma -->
-    <div id="ticket-create-area" class="hidden rounded-xl border border-amber-200 bg-amber-50/50 p-4 mb-4">
-        <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-3">
-            <div>
-                <label for="ticket-category" class="block text-xs font-bold text-slate-700 mb-1.5">Kategori</label>
-                <select id="ticket-category" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-amber-500">
-                    <option value="SORUN">Sorun</option>
-                    <option value="ÖNERİ">Öneri</option>
-                </select>
-            </div>
-            <div>
-                <label for="ticket-description" class="block text-xs font-bold text-slate-700 mb-1.5">Açıklama</label>
-                <textarea id="ticket-description" rows="5" maxlength="5000"
-                          placeholder="Sorunu veya geliştirme önerinizi ayrıntılı biçimde yazın..."
-                          class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs outline-none resize-y focus:ring-2 focus:ring-amber-500"></textarea>
-            </div>
-        </div>
-        <div class="flex justify-end mt-3">
-            <button onclick="submitIssueTicket()" class="inline-flex items-center px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg shadow-sm">
-                <i class="fa-solid fa-paper-plane mr-1.5"></i>Gönder
+        <div class="flex flex-wrap gap-2">
+            <button id="ticket-new-button" onclick="openNewIssueTicketModal()" class="hidden inline-flex items-center justify-center px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg shadow-sm">
+                <i class="fa-solid fa-plus mr-1.5"></i>Yeni Sorun / Öneri
+            </button>
+            <button onclick="loadIssueTicketPanel()" class="inline-flex items-center justify-center px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200">
+                <i class="fa-solid fa-rotate mr-1.5"></i>Yenile
             </button>
         </div>
     </div>
@@ -2684,6 +2665,44 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
     <div id="ticket-list" class="space-y-2">
         <div class="text-xs text-slate-400 py-4 text-center">Sorun &amp; öneri kaydı yok.</div>
+    </div>
+</div>
+
+
+<!-- Normal yöneticiler için yeni Sorun / Öneri modalı -->
+<div id="newIssueTicketModal" class="hidden fixed inset-0 z-[79] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-4 bg-slate-900 text-white">
+            <div>
+                <div class="text-[11px] text-slate-300">Yeni Ticket</div>
+                <h3 class="font-bold text-sm">Sorun / Öneri Gönder</h3>
+            </div>
+            <button onclick="closeNewIssueTicketModal()" class="w-8 h-8 rounded-full hover:bg-white/10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="p-5 space-y-4">
+            <div>
+                <label for="ticket-category" class="block text-xs font-bold text-slate-700 mb-1.5">Kategori</label>
+                <select id="ticket-category" class="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-amber-500">
+                    <option value="SORUN">Sorun</option>
+                    <option value="ÖNERİ">Öneri</option>
+                </select>
+            </div>
+            <div>
+                <label for="ticket-description" class="block text-xs font-bold text-slate-700 mb-1.5">Açıklama</label>
+                <textarea id="ticket-description" rows="7" maxlength="5000"
+                          placeholder="Karşılaştığınız sorunu veya geliştirme önerinizi ayrıntılı biçimde yazın..."
+                          class="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-lg text-sm outline-none resize-y focus:ring-2 focus:ring-amber-500"></textarea>
+                <div class="text-[10px] text-slate-400 mt-1">En az 10, en fazla 5000 karakter.</div>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button onclick="closeNewIssueTicketModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-200">Vazgeç</button>
+                <button onclick="submitIssueTicket()" class="inline-flex items-center px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg shadow-sm">
+                    <i class="fa-solid fa-paper-plane mr-1.5"></i>Gönder
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -3890,21 +3909,29 @@ function updateBadges() {
 }
 function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(function (el) { return el.classList.add('hidden'); });
-    document.getElementById(tabId).classList.remove('hidden');
+    var targetTab=document.getElementById(tabId);
+    if(targetTab) targetTab.classList.remove('hidden');
+
     document.querySelectorAll('.tab-btn').forEach(function (btn) {
         btn.classList.remove('border-emerald-400', 'text-white');
         btn.classList.add('border-transparent', 'text-slate-400');
     });
+
     var activeBtn = document.getElementById('nav-' + tabId);
     if (activeBtn) {
         activeBtn.classList.add('border-emerald-400', 'text-white');
         activeBtn.classList.remove('border-transparent', 'text-slate-400');
     }
+
     if (tabId === 'tab-stats') {
         renderDashboardStats();
-    if (document.getElementById('user-management-list')) loadUserManagementPanel();
-    if (document.getElementById('ticket-list')) loadIssueTicketPanel();
         renderBirthdayList();
+    }
+
+    // Sistem & Ayarlar açıldığında rol, kullanıcı yönetimi ve ticket kayıtlarını taze yükle.
+    if (tabId === 'tab-system') {
+        loadUserManagementPanel();
+        loadIssueTicketPanel();
     }
 }
 
@@ -6302,6 +6329,21 @@ function initCentralAccessGate() {
     var usernameInput = document.getElementById('accessUsername');
     var passwordInput = document.getElementById('accessPassword');
     var error = document.getElementById('accessError');
+
+    // Enter kullanıcı adı veya şifre alanındayken Giriş Yap ile aynı işlemi yapar.
+    [usernameInput, passwordInput].forEach(function(input) {
+        if (!input) return;
+        input.addEventListener('keydown', function(e) {
+            if (e.key !== 'Enter') return;
+            e.preventDefault();
+            if (form && typeof form.requestSubmit === 'function') {
+                form.requestSubmit();
+            } else if (form) {
+                form.dispatchEvent(new Event('submit', { bubbles:true, cancelable:true }));
+            }
+        });
+    });
+
     // Eski localStorage veritabanı artık kaynak değildir.
     workflowState = { processedWeb: {}, redToActive: {}, delisted: {}, assistance: {}, assistanceHistoryText: {}, documents: {} };
     form.addEventListener('submit', function (e) {
@@ -6339,6 +6381,9 @@ function initCentralAccessGate() {
                         document.getElementById('accessGate').classList.add('hidden');
                         scheduleGoogleRefreshCycle();
                         startIdleSessionGuard_();
+                        // Rol/ticket state önceden yüklenir; Sistem & Ayarlar açıldığında buton doğru görünür.
+                        loadUserManagementPanel();
+                        loadIssueTicketPanel();
                         return [3 /*break*/, 5];
                     case 4:
                         err_10 = _a.sent();
@@ -6927,8 +6972,8 @@ function iyibisTicketCategoryBadge_(category) {
 
 function renderIssueTicketPanel_() {
     var s=iyibisIssueTicketState || {};
-    var createArea=document.getElementById('ticket-create-area');
-    if(createArea) createArea.classList.toggle('hidden', !!s.isSuperAdmin);
+    var newButton=document.getElementById('ticket-new-button');
+    if(newButton) newButton.classList.toggle('hidden', !!s.isSuperAdmin);
 
     var subtitle=document.getElementById('ticket-panel-subtitle');
     if(subtitle) {
@@ -7015,6 +7060,22 @@ async function loadIssueTicketPanel() {
     }
 }
 
+function openNewIssueTicketModal() {
+    if(iyibisIssueTicketState && iyibisIssueTicketState.isSuperAdmin) return;
+    var modal=document.getElementById('newIssueTicketModal');
+    var category=document.getElementById('ticket-category');
+    var description=document.getElementById('ticket-description');
+    if(category) category.value='SORUN';
+    if(description) description.value='';
+    if(modal) modal.classList.remove('hidden');
+    setTimeout(function(){ if(description) description.focus(); },50);
+}
+
+function closeNewIssueTicketModal() {
+    var modal=document.getElementById('newIssueTicketModal');
+    if(modal) modal.classList.add('hidden');
+}
+
 async function submitIssueTicket() {
     if(iyibisIssueTicketState.isSuperAdmin) return;
     var categoryEl=document.getElementById('ticket-category');
@@ -7032,6 +7093,7 @@ async function submitIssueTicket() {
         var data=await gsCreateIssueTicket(centralSessionToken,category,description);
         iyibisIssueTicketState=data;
         if(descriptionEl) descriptionEl.value='';
+        closeNewIssueTicketModal();
         renderIssueTicketPanel_();
         showIyibisToast('Bildiriminiz sistem yöneticisine gönderildi.');
     } catch(err) {
@@ -7118,6 +7180,8 @@ function deleteOpenedTicket() {
 
 document.addEventListener('keydown',function(e){
     if(e.key==='Escape') {
+        var newTicketModal=document.getElementById('newIssueTicketModal');
+        if(newTicketModal && !newTicketModal.classList.contains('hidden')) closeNewIssueTicketModal();
         var passwordModal=document.getElementById('passwordManagementModal');
         if(passwordModal && !passwordModal.classList.contains('hidden')) closePasswordManagementModal();
         var modal=document.getElementById('ticketDetailModal');
