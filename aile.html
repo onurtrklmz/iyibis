@@ -1710,7 +1710,6 @@ body {
     }
   }
 </style>
-
 <style id="iyibis-list-counter-badges-v5062">
   #showing-count-mevcut,
   #showing-count-saha,
@@ -1721,7 +1720,6 @@ body {
     flex-shrink: 0;
   }
 </style>
-
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 <!-- GİRİŞ EKRANI -->
@@ -2319,24 +2317,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 <i class="fa-solid fa-xmark text-xs"></i>
 </button>
 </div>
-<div class="flex flex-wrap items-center gap-1.5 text-xs">
+<div class="flex flex-wrap items-center gap-1.5 text-xs gap-2">
 <span class="font-semibold text-slate-500 mr-1">Durum:</span>
-<select class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none" id="filter-web-status" onchange="renderWebTable()">
-<option value="ALL">Tüm Başvurular</option>
-<option value="Beklemede">⏳ Beklemede</option>
-<option value="ONAY">✅ Onaylandı</option>
-<option value="ŞÜPHELİ">⚠️ Şüpheli</option>
-<option value="RET">❌ Ret Edildi</option>
-</select>
 <select class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none ml-2" id="filter-web-district" onchange="renderWebTable()">
 <option value="ALL">Tüm İlçeler</option>
 <option value="Şahinbey">Şahinbey</option>
 <option value="Şehitkamil">Şehitkamil</option>
 </select>
-<select class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none ml-2" id="sort-web-date" onchange="renderWebTable()">
-<option value="DESC">Sırala: Yeniden Eskiye</option>
-<option value="ASC">Sırala: Eskiden Yeniye</option>
-</select>
+<select class="bg-slate-50 border border-slate-200 rounded-md py-1.5 px-2.5 text-slate-700 font-medium outline-none ml-2" id="sort-web-date" onchange="renderWebTable()"><option value="DESC">Sırala: Yeniden Eskiye</option><option value="ASC">Sırala: Eskiden Yeniye</option></select>
 <div class="ml-3 flex items-center"><span class="inline-flex min-w-[34px] items-center justify-center rounded-full bg-sky-900/60 text-sky-300 text-xs font-bold border border-sky-700/50 px-2 py-0.5 leading-none" id="showing-count-web">0</span></div>
 </div>
 </div>
@@ -4259,6 +4247,8 @@ function iyibis5067WebDateSortDiagnostic_() {
     };
 }
 
+// Web başvuru ID'leri kronolojik kaynak olarak kullanılmaz; CSV/import geçmişinde
+// ID biçimi veya eklenme sırası değişebileceği için sıralama gerçek başvuru tarihine göre yapılır.
 function iyibisSortWebApplicationsByDate_(list, direction) {
     direction=(direction || 'DESC').toUpperCase();
     return (list || []).slice().sort(function(a,b){
@@ -4276,12 +4266,9 @@ function iyibisSortWebApplicationsByDate_(list, direction) {
 
 function renderWebTable() {
     var query = (document.getElementById('search-web').value || '').toLowerCase().trim();
-    var statusFilter = document.getElementById('filter-web-status').value;
     var district = document.getElementById('filter-web-district').value;
     var sortDirection = (document.getElementById('sort-web-date') || {}).value || 'DESC';
     var list = dedupeWebClient_(appState.web).filter(function (item) {
-        if (statusFilter !== 'ALL' && !(item.durum || '').toUpperCase().includes(statusFilter.toUpperCase()))
-            return false;
         if (district !== 'ALL' && !(item.ilce || '').toLowerCase().includes(district.toLowerCase()))
             return false;
         if (query) {
