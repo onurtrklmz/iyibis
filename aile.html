@@ -1865,7 +1865,6 @@ body {
     }
   }
 </style>
-
 <style id="iyibis-v5076-active-tab-pink">
   #desktopTabNav .tab-btn.active,
   #desktopTabNav .tab-btn[aria-selected="true"],
@@ -1879,6 +1878,17 @@ body {
   }
 
   /* Alt seçili çizgi mevcut emerald rengiyle aynen kalır. */
+</style>
+
+<style id="iyibis-v5077-stable-active-tab">
+  #desktopTabNav .tab-btn[aria-selected="true"],
+  #desktopTabNav .tab-btn.active {
+    background-color: #ffe4e6 !important;
+  }
+
+  #desktopTabNav .tab-btn[aria-selected="false"]:not(.active) {
+    background-color: transparent !important;
+  }
 </style>
 
 </head>
@@ -2262,7 +2272,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 </div>
 </div>
 <div class="flex w-full items-end justify-center" id="desktopTabNav">
-<div class="flex items-end justify-center gap-1 sm:gap-2 mx-auto px-2 sm:px-3 overflow-x-auto custom-scroll" id="desktopTabNavInner"><button aria-selected="true" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap active" id="nav-tab-mevcut" onclick="switchTab('tab-mevcut')">
+<div class="flex items-end justify-center gap-1 sm:gap-2 mx-auto px-2 sm:px-3 overflow-x-auto custom-scroll" id="desktopTabNavInner"><button aria-selected="true" class="tab-btn py-2.5 px-3 border-b-2 border-emerald-400 font-semibold text-white text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap active" id="nav-tab-mevcut" onclick="switchTab('tab-mevcut')" style="background-color:#ffe4e6 !important;">
 <i class="fa-solid fa-users text-emerald-400"></i>
 <span>Aktif Aileler</span>
 <span class="ml-1 px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 text-xs font-bold border border-emerald-700/50" data-counter="badge-count-mevcut">0</span>
@@ -3828,6 +3838,8 @@ function switchTab(tabId) {
         btn.classList.remove('border-emerald-400', 'text-white', 'active');
         btn.classList.add('border-transparent', 'text-slate-400');
         btn.setAttribute('aria-selected', 'false');
+        // Aktif pembe arka planı yalnız seçili sekmede tutulur.
+        btn.style.removeProperty('background-color');
     });
 
     var activeBtn = document.getElementById('nav-' + tabId);
@@ -3835,6 +3847,8 @@ function switchTab(tabId) {
         activeBtn.classList.add('border-emerald-400', 'text-white', 'active');
         activeBtn.classList.remove('border-transparent', 'text-slate-400');
         activeBtn.setAttribute('aria-selected', 'true');
+        // CSS çakışmalarından etkilenmemesi için aktif sekmeye doğrudan bağla.
+        activeBtn.style.setProperty('background-color', '#ffe4e6', 'important');
     }
 
     if (tabId === 'tab-stats') {
@@ -6302,7 +6316,7 @@ function startIdleSessionGuard_() {
             var now = Date.now();
             if (now - iyibisLastActivityWrite < 5000) return;
             iyibisLastActivityWrite = now;
-            localStorage.setItem(CENTRAL_ACTIVITY_KEY, String(now));
+            recordCentralActivity_();
         };
 
         ['pointerdown','keydown','touchstart','scroll'].forEach(function(evt) {
@@ -6403,12 +6417,76 @@ function restorePersistentCentralSession_() {
 }
 
 
+
+function iyibis5077SessionAudit() {
+    var localToken=localStorage.getItem(CENTRAL_SESSION_KEY) || '';
+    var sessionToken=sessionStorage.getItem(CENTRAL_SESSION_KEY) || '';
+    var last=Number(localStorage.getItem(CENTRAL_ACTIVITY_KEY) || '0');
+    var ageMs=last ? Date.now()-last : null;
+
+    var result={
+        release:'IYIBIS 5.0.77 SESSION + ACTIVE TAB FIX',
+        ok:
+            CENTRAL_IDLE_TIMEOUT_MS===15*60*1000 &&
+            typeof restorePersistentCentralSession_==='function' &&
+            typeof iyibisBootstrapPersistentSession_==='function',
+        idleTimeoutMinutes:CENTRAL_IDLE_TIMEOUT_MS/60000,
+        frontendTokenPresent:!!centralSessionToken,
+        localStorageTokenPresent:!!localToken,
+        sessionStorageTokenPresent:!!sessionToken,
+        lastActivityAgeSeconds:ageMs===null ? null : Math.floor(ageMs/1000),
+        idleExpired:isCentralIdleExpired_(),
+        restoreBootInstalled:true,
+        backendExpectedSessionHours:4,
+        activeTab:
+            (document.querySelector('.tab-btn[aria-selected="true"]') || {}).id || ''
+    };
+
+    console.log(result);
+    return result;
+}
+
 /*
  * 5.0 FINAL — GLOBAL BACKEND BRIDGE
  * Login bootstrap kendi IIFE scope'unda bir serverCall tanımlar.
  * Panelin geri kalanı ise global gs* wrapper'larından çağrı yapar.
  * Bu global köprü iki scope'u kalıcı olarak birbirine bağlar.
  */
+function iyibisBootstrapPersistentSession_() {
+    // Aynı sayfa yaşam döngüsünde restore yalnız bir kez başlasın.
+    if (window.__iyibisPersistentRestoreStarted) return;
+    window.__iyibisPersistentRestoreStarted = true;
+
+    // Token yoksa normal login ekranında kal.
+    if (!centralSessionToken) return;
+
+    // 15 dakikalık idle süresi dolmuşsa eski oturumu geri getirme.
+    if (isCentralIdleExpired_()) {
+        expireCentralSessionForIdle_();
+        return;
+    }
+
+    restorePersistentCentralSession_();
+}
+
+// Sayfa yenilendiğinde localStorage'daki geçerli oturumu otomatik geri getir.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(iyibisBootstrapPersistentSession_, 0);
+    }, { once: true });
+} else {
+    setTimeout(iyibisBootstrapPersistentSession_, 0);
+}
+
+// BFCache / geri-ileri navigasyonunda da geçerli token varsa paneli doğrula.
+window.addEventListener('pageshow', function(ev) {
+    if (ev && ev.persisted && centralSessionToken && !isCentralIdleExpired_()) {
+        window.__iyibisPersistentRestoreStarted = false;
+        setTimeout(iyibisBootstrapPersistentSession_, 0);
+    }
+});
+
+
 function serverCall(method) {
     var args = Array.prototype.slice.call(arguments, 1);
 
